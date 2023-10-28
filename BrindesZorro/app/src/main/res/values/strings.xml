@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BrindesZorro</string>
+    <string name="etUserNameInvalido">Formato Invalido</string>
+    <string name="etPasswordTextError">Password Invalida</string>
+    <string name="txtUserName">User Name</string>
+    <string name="txtPassword">Password</string>
+    <string name="btn_registar">REGISTAR</string>
+    <string name="txtLogin">ENTRAR</string>
+</resources>
