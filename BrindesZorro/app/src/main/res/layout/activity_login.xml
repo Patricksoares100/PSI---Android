@@ -26,6 +26,7 @@
         android:id="@+id/etUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="exemplo@gmail.com"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="48dp" />

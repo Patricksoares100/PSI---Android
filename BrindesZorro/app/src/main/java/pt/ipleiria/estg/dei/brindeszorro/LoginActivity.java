@@ -53,4 +53,12 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         return password.length()>4;
     }
+
+    public void onClickableTextClick(View view) {
+
+    }
+
+    public void btn_register(View view) {
+
+    }
 }
