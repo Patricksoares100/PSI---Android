@@ -6,4 +6,6 @@
     <string name="txtPassword">Password</string>
     <string name="btn_registar">REGISTAR</string>
     <string name="txtLogin">ENTRAR</string>
+    <string name="loginInputEmail">a@a.a</string>
+    <string name="loginInputPassword">12345678</string>
 </resources>
