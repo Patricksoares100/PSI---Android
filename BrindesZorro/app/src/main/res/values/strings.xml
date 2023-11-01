@@ -18,4 +18,13 @@
     <string name="textViewCodPostal">Codigo Postal:</string>
     <string name="textViewLocalidade">Localidade:</string>
     <string name="exemploEmail">exemplo@gmail.com</string>
+    <string name="hintdescriptionLocalidade">Leiria</string>
+    <string name="hintNomeBrindeszorro">Brindes Zorro</string>
+    <string name="hintEmailBrindesZorro">brindes@zorro.pt</string>
+    <string name="hintTelefone">987654321</string>
+    <string name="hintMorada">Campus 2 – Morro do Lena</string>
+    <string name="hintCodPostal">2411-901</string>
+    <string name="textCancelar">Cancelar</string>
+    <string name="textConfirmar">Confirmar</string>
+    <string name="descriptionLogo">Imagem com logo da empresa</string>
 </resources>
