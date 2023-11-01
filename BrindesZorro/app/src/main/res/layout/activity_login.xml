@@ -29,7 +29,8 @@
         android:text="exemplo@gmail.com"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:text="@string/loginInputEmail" />
 
     <TextView
         android:id="@+id/tvPassword"
@@ -44,7 +45,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:text="@string/loginInputPassword" />
 
     <Button
         android:id="@+id/btnLogin"
