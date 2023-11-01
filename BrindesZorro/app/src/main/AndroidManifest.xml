@@ -12,11 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BrindesZorro"
         tools:targetApi="31">
-
+        <activity
+            android:name=".FaturasActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

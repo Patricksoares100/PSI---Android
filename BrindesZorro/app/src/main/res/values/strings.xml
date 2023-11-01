@@ -8,4 +8,6 @@
     <string name="txtLogin">ENTRAR</string>
     <string name="loginInputEmail">a@a.a</string>
     <string name="loginInputPassword">12345678</string>
+    <string name="tv_valorFatura">Valor da Fatura</string>
+    <string name="tv_data_fatura">Data de Emissão:</string>
 </resources>
