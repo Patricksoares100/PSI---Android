@@ -26,11 +26,10 @@
         android:id="@+id/etUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="exemplo@gmail.com"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:text="@string/loginInputEmail" />
+        android:text="@string/exemploEmail" />
 
     <TextView
         android:id="@+id/tvPassword"

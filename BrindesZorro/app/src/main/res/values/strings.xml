@@ -10,4 +10,12 @@
     <string name="loginInputPassword">12345678</string>
     <string name="tv_valorFatura">Valor da Fatura</string>
     <string name="tv_data_fatura">Data de Emissão:</string>
+    <string name="tvPedirEmail">Email:</string>
+    <string name="tvInsiraNome">Nome completo:</string>
+    <string name="tvInsiraTelefone">Telefone:</string>
+    <string name="textViewInsiraNIF">Insira o seu NIF:</string>
+    <string name="textViewMorada">Insira a sua Morada:</string>
+    <string name="textViewCodPostal">Codigo Postal:</string>
+    <string name="textViewLocalidade">Localidade:</string>
+    <string name="exemploEmail">exemplo@gmail.com</string>
 </resources>
