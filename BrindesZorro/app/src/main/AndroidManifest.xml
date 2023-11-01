@@ -16,6 +16,9 @@
             android:name=".EditarDadosPessoaisActivity"
             android:exported="false" />
         <activity
+            android:name=".ListaArtigosActivity"
+            android:exported="false" />
+        <activity
             android:name=".FaturasActivity"
             android:exported="false" />
         <activity
