@@ -33,14 +33,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_margin="16dp"
                 android:text="@string/tv_data_fatura"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvTextDataFatura2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:gravity="center|left" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:src="@android:drawable/ic_menu_view" />
 
         </LinearLayout>
 
@@ -48,12 +57,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvValorFatura2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:gravity="center"
                 android:text="@string/tv_valorFatura"
                 android:textStyle="bold" />
@@ -62,15 +73,14 @@
                 android:id="@+id/tvTextValor1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center|left" />
+                android:gravity="center_vertical" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="51dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
     </LinearLayout>
 

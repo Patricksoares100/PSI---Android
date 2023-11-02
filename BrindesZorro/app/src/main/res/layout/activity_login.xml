@@ -29,6 +29,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
+        android:layout_margin="16dp"
         android:text="@string/exemploEmail" />
 
     <TextView
@@ -45,6 +46,7 @@
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
+        android:layout_margin="16dp"
         android:text="@string/loginInputPassword" />
 
     <Button
@@ -52,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickLogin"
+        android:layout_margin="16dp"
         android:text="@string/txtLogin" />
 
     <TextView
@@ -61,6 +64,7 @@
         android:clickable="true"
         android:onClick="onClickableTextClick"
         android:text="Forget Password?"
+        android:layout_margin="16dp"
         android:textStyle="bold"/>
 
     <FrameLayout
