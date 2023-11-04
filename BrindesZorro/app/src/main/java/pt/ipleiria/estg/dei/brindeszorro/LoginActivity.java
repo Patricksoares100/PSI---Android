@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity {
         etUserName = findViewById(R.id.etUserName);
         etPassword = findViewById(R.id.etPassword);
 
+
+
     }
 
     public void onClickLogin(View view) {
@@ -35,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             etPassword.setError(getString(R.string.etPasswordTextError));
             return;
         }
-        Intent intent = new Intent(this, FaturasActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

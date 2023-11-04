@@ -27,7 +27,16 @@
     <string name="textCancelar">Cancelar</string>
     <string name="textConfirmar">Confirmar</string>
     <string name="descriptionLogo">Imagem com logo da empresa</string>
+    <string name="ndOpen">open\n</string>
+    <string name="ndClose">close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_estadoFatura">Estado da Fatura</string>
+    <string name="nav_Home">Home</string>
+    <string name="nav_carrinho">Carrinho de Compras</string>
+    <string name="nav_favoritos">Favoritos</string>
+    <string name="nav_Servidor">Servidor</string>
+    <string name="nav_Faturas">Faturas</string>
+    <string name="nav_Pessoal">Área Pessoal</string>
+    <string name="nav_avaliacoes">Avaliações</string>/>
 </resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior ="single"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <item
+            android:id="@+id/navHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_action_name"
+            android:title="@string/nav_Home" />
+        <item
+            android:id="@+id/navCarrinho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/carrinho_compras_icon"
+            android:title="@string/nav_carrinho" />
+
+        <item
+            android:id="@+id/navFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/favoritos_icon"
+            android:title="@string/nav_favoritos" />
+
+        <item
+            android:id="@+id/navFaturas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="@string/nav_Faturas" />
+
+
+        <item
+            android:id="@+id/navServidor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/nav_Servidor" />
+
+        <item
+            android:id="@+id/navPessoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="@string/nav_Pessoal" />
+
+        <item
+            android:id="@+id/navAvaliacoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/checkbox_on_background"
+            android:title="@string/nav_avaliacoes" />
+</group>
+
+</menu>
