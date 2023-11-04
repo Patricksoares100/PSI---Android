@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     android:orientation="vertical"
+    android:background="@drawable/fundo"
     tools:context=".EditarDadosPessoaisActivity">
 
     <ImageView
@@ -13,12 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="142dp"
         android:contentDescription="@string/descriptionLogo"
-        app:srcCompat="@drawable/ipleiria" />
+        app:srcCompat="@drawable/removidofundo" />
 
     <TextView
         android:id="@+id/textUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/tvInsiraNome"
         android:textStyle="bold" />
 
@@ -26,6 +28,8 @@
         android:id="@+id/editTextUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/hintNomeBrindeszorro"
         android:inputType="text" />
@@ -34,6 +38,8 @@
         android:id="@+id/textViewEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/tvPedirEmail"
         android:textStyle="bold" />
 
@@ -41,6 +47,8 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/hintEmailBrindesZorro"
         android:inputType="textPassword" />
@@ -49,6 +57,8 @@
         android:id="@+id/textViewTelefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/tvInsiraTelefone"
         android:textStyle="bold" />
 
@@ -56,6 +66,8 @@
         android:id="@+id/editTextTelefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/hintTelefone"
         android:inputType="phone" />
@@ -64,6 +76,8 @@
         android:id="@+id/textViewNIF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/textViewInsiraNIF"
         android:textStyle="bold" />
 
@@ -71,6 +85,8 @@
         android:id="@+id/editTextNIF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/hintTelefone"
         android:inputType="number" />
@@ -80,12 +96,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/textViewMorada"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextMultiLineMorada"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/hintMorada"
@@ -95,6 +115,8 @@
         android:id="@+id/textViewCodPostal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/textViewCodPostal"
         android:textStyle="bold" />
 
@@ -102,6 +124,8 @@
         android:id="@+id/editTextCodPostal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/hintCodPostal"
         android:inputType="textPostalAddress" />
@@ -110,6 +134,8 @@
         android:id="@+id/textViewLocalidade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/textViewLocalidade"
         android:textStyle="bold" />
 
@@ -118,6 +144,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/hintdescriptionLocalidade"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/hintdescriptionLocalidade"
         android:inputType="text" />
@@ -125,6 +153,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal">
 
         <Button
