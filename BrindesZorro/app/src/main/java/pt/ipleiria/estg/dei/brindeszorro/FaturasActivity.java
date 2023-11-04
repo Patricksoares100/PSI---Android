@@ -11,7 +11,6 @@ import android.widget.TextView;
 public class FaturasActivity extends AppCompatActivity {
 
 
-    private TextView tvTextDataFatura,tvTextValor;
 
 
     @Override
