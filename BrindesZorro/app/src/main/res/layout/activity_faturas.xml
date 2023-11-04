@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/fundo"
     tools:context=".FaturasActivity">
 
 
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="142dp"
             android:contentDescription="@string/descriptionLogo"
-            app:srcCompat="@drawable/ipleiria" />
+            app:srcCompat="@drawable/logosemfundo" />
 
         <LinearLayout
             android:layout_width="match_parent"
