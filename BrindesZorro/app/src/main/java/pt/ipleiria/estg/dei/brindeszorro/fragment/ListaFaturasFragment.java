@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import pt.ipleiria.estg.dei.brindeszorro.ListaFaturasAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaFaturasAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;

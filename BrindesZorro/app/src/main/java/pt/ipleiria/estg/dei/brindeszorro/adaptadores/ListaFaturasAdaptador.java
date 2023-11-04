@@ -1,4 +1,4 @@
-package pt.ipleiria.estg.dei.brindeszorro;
+package pt.ipleiria.estg.dei.brindeszorro.adaptadores;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 
 public class ListaFaturasAdaptador extends BaseAdapter {

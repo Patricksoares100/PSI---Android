@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (item.getItemId() == R.id.navFaturas) {
             setTitle(item.getTitle());
+            Intent NavFaturas = new Intent(this, FaturasActivity.class);
+            startActivity(NavFaturas);
 
         } else if (item.getItemId() == R.id.navServidor) {
             setTitle(item.getTitle());
@@ -96,8 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
             if (fragment != null)
-            fragmentManager.beginTransaction().replace(R.id.contentFragment,
-                    fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item
 
         return true; // Retorna true para indicar que o evento de seleção foi tratado com sucesso

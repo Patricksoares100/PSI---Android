@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="onClickableTextClick"
+        android:onClick="onClickPassword"
         android:text="Forget Password?"
         android:layout_margin="16dp"
         android:textStyle="bold"/>

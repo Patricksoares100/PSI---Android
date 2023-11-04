@@ -55,11 +55,14 @@ public class LoginActivity extends AppCompatActivity {
         return password.length()>4;
     }
 
-    public void onClickableTextClick(View view) {
 
-    }
 
     public void btn_register(View view) {
 
+    }
+
+    public void onClickPassword(View view) {
+        Intent ForgetPassword = new Intent(this, RecuperarPassword.class);
+        startActivity(ForgetPassword);
     }
 }

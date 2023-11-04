@@ -16,14 +16,14 @@
         app:srcCompat="@drawable/ipleiria" />
 
     <TextView
-        android:id="@+id/textViewNome"
+        android:id="@+id/textUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tvInsiraNome"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextNome"
+        android:id="@+id/editTextUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -38,7 +38,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -132,7 +132,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textCancelar" />
+            android:text="@string/textCancelar"
+            android:onClick="Canceler"/>
 
         <Button
             android:id="@+id/buttonConfirmar"
