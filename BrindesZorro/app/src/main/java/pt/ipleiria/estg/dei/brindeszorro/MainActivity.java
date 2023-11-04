@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.ListFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFaturasFragment;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,15 +73,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Este método é chamado quando um item de menu da vista de navegação é selecionado
         Fragment fragment = null;
         if (item.getItemId()==R.id.navHome){
-            System.out.println("-->Nav Estatico"); // Imprime no console quando "Nav Estatico" é selecionado
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navCarrinho) {
-            System.out.println("-->Nav Dinamico"); // Imprime no console quando "Nav Dinamico" é selecionado
-            //fragment = new DinamicoFragment();
+            setTitle(item.getTitle());
+        } else if (item.getItemId() == R.id.navFavoritos) {
+            setTitle(item.getTitle());
+
+        } else if (item.getItemId() == R.id.navFaturas) {
+            setTitle(item.getTitle());
+
+        } else if (item.getItemId() == R.id.navServidor) {
+            setTitle(item.getTitle());
+
+        } else if (item.getItemId() == R.id.navPessoal) {
+            setTitle(item.getTitle());
+            Intent EditarDadosPessoais = new Intent(this, EditarDadosPessoaisActivity.class);
+            startActivity(EditarDadosPessoais);
+
+        } else if (item.getItemId() == R.id.navAvaliacoes) {
             setTitle(item.getTitle());
         }
 
-        if (fragment != null)
+
+            if (fragment != null)
             fragmentManager.beginTransaction().replace(R.id.contentFragment,
                     fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item
@@ -87,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    //nao percebi bem o porque de ter criado isto depois do alt + enter mas caso contrario dava erro e nao rodava
+    //sei que tem ligação com a linha 52   navigationView.setNavigationItemSelectedListener(this); por causa do this
+
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
     }

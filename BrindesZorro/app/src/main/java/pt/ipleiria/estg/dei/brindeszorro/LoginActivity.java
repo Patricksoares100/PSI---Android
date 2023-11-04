@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
 
 
-
     }
 
     public void onClickLogin(View view) {
