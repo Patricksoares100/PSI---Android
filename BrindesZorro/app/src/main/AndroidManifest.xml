@@ -19,14 +19,14 @@
             android:name=".ListaArtigosActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".FaturasActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false"
             android:launchMode="singleTop" />
         <activity
-            android:name=".FaturasActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.brindeszorro;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String email;
     private EditText etPassword, etEmail;
+
+    private FragmentManager fragmentManager;
 
 
     @Override

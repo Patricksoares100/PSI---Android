@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
             etPassword.setError(getString(R.string.etPasswordTextError));
             return;
         }
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, FaturasActivity.class);
         startActivity(intent);
         finish();
     }
