@@ -33,6 +33,8 @@ public class ListaFaturasFragment extends Fragment {
 
         lvFaturas = view.findViewById(R.id.lvFaturas);
         faturas = SingletonGestorLoja.getInstance().getFaturas();
+        //
+        System.out.println("--->"+ faturas);
         lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
         return view;
     }

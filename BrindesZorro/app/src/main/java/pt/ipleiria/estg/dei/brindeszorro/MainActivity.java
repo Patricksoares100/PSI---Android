@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawerLayout); // Obtém a gaveta (drawer)
         navigationView = findViewById(R.id.navView); // Obtém a vista de navegação (navigation view)
 
+        System.out.println("--> Olá");
 
         // Configura o ActionBarDrawerToggle para abrir e fechar a gaveta
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.ndOpen, R.string.ndClose);
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
         if (item.getItemId()==R.id.navHome){
             setTitle(item.getTitle());
+
         } else if (item.getItemId() == R.id.navCarrinho) {
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navFavoritos) {
@@ -81,8 +83,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (item.getItemId() == R.id.navFaturas) {
             setTitle(item.getTitle());
-            Intent NavFaturas = new Intent(this, FaturasActivity.class);
-            startActivity(NavFaturas);
+            fragment = new ListaFaturasFragment();
+            setTitle(item.getTitle());
+            //Intent NavFaturas = new Intent(this, FaturasActivity.class);
+            //startActivity(NavFaturas);
 
         } else if (item.getItemId() == R.id.navServidor) {
             setTitle(item.getTitle());

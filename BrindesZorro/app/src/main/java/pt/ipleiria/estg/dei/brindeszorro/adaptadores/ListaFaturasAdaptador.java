@@ -73,9 +73,9 @@ public class ListaFaturasAdaptador extends BaseAdapter {
         }
 
         public void update(Fatura fatura) {
-            tvId.setText(fatura.getId());
-            tvValor.setText(fatura.getValorFatura());
-            tvEstado.setText(fatura.getEstado());
+            tvId.setText(""+fatura.getId());
+            tvValor.setText(""+fatura.getValorFatura());
+            tvEstado.setText(""+fatura.getEstado());
         }
     }
 }
