@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle(item.getTitle());
 
         } else if (item.getItemId() == R.id.navCarrinho) {
+            Intent ArtigosLoja = new Intent(this, ArtigosActivity.class);
+            startActivity(ArtigosLoja);
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navFavoritos) {
             setTitle(item.getTitle());
@@ -85,9 +87,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle(item.getTitle());
             fragment = new ListaFaturasFragment();
             setTitle(item.getTitle());
-            //Intent NavFaturas = new Intent(this, FaturasActivity.class);
-            //startActivity(NavFaturas);
-
         } else if (item.getItemId() == R.id.navServidor) {
             setTitle(item.getTitle());
 
@@ -99,20 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (item.getItemId() == R.id.navAvaliacoes) {
             setTitle(item.getTitle());
         }
-
-
-            if (fragment != null)
-            fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
+        if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item
 
         return true; // Retorna true para indicar que o evento de seleção foi tratado com sucesso
     }
 
-    @Override
-    //nao percebi bem o porque de ter criado isto depois do alt + enter mas caso contrario dava erro e nao rodava
-    //sei que tem ligação com a linha 52   navigationView.setNavigationItemSelectedListener(this); por causa do this
-
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
-    }
 }

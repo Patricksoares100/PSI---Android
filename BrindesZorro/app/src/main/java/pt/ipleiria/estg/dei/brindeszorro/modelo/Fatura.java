@@ -8,6 +8,7 @@ public class Fatura {
     private int valorFatura; // Agora é um int
     private String estado;
 
+
     public Fatura(int id, int valorFatura, String estado) {
         this.id = id;
         //this.data = data;
