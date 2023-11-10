@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new ListaFaturasFragment();
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navServidor) {
+            Intent EditarServidor = new Intent(this, ServidorActivity.class);
+            startActivity(EditarServidor);
             setTitle(item.getTitle());
 
         } else if (item.getItemId() == R.id.navPessoal) {

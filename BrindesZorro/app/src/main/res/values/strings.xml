@@ -48,5 +48,14 @@
     <string name="tv_valorEuros">€</string>
     <string name="tv_Qtd">Qtd.</string>
     <string name="tv_ValorT">Valor Total</string>
-    <string name="tv_AdcCar">Adicionar ao carrinho</string>/>
+    <string name="tv_AdcCar">Adicionar ao carrinho</string>
+    <string name="tv_servidorNome">Servidor</string>
+    <string name="tv_portaTitulo">Porta:</string>
+    <string name="tv_ipTitulo" />
+    <string name="tv_tituloIp">IP:</string>
+    <string name="hint_porta">Insira o nº da Porta</string>
+    <string name="hint_ip">Insira o IP</string>
+    <string name="tv_dominioTitulo">Domínio</string>
+    <string name="hint_dominio">Insira o Domínio</string>
+    <string name="btn_Confirmar">Confirmar</string>/>
 </resources>

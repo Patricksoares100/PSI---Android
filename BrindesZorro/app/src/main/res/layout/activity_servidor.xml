@@ -4,23 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/fundo"
-    tools:context=".EditarDadosPessoaisActivity">
+    tools:context=".ServidorActivity"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageViewLogo"
         android:layout_width="match_parent"
         android:layout_height="142dp"
         android:contentDescription="@string/descriptionLogo"
-        app:srcCompat="@drawable/logosemfundo" />
+        app:srcCompat="@drawable/conection" />
+
+    <TextView
+        android:id="@+id/tvServidor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/tv_servidorNome"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/tvInsiraUser"
+        android:text="@string/tv_portaTitulo"
         android:textStyle="bold" />
 
     <EditText
@@ -29,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:ems="10"
-        android:hint="@string/hint_userName"
+        android:hint="@string/hint_porta"
         android:inputType="text" />
 
     <TextView
@@ -37,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/tvPedirEmail"
+        android:text="@string/tv_tituloIp"
         android:textStyle="bold" />
 
     <EditText
@@ -46,7 +55,24 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:ems="10"
-        android:hint="@string/hint_userEmail" />
+        android:hint="@string/hint_ip" />
+
+    <TextView
+        android:id="@+id/textUserName2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/tv_dominioTitulo"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextPorta2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:ems="10"
+        android:hint="@string/hint_dominio"
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,19 +81,12 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="Canceler"
-            android:text="@string/textCancelar" />
-
-        <Button
             android:id="@+id/buttonConfirmar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="@string/textRecuperar" />
+            android:text="@string/btn_Confirmar" />
     </LinearLayout>
 
 </LinearLayout>
