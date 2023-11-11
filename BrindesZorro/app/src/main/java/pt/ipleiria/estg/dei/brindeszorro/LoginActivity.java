@@ -58,7 +58,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void btn_register(View view) {
-
+        Intent RegistarCliente = new Intent(this, RegistarClienteActivity.class);
+        startActivity(RegistarCliente);
     }
 
     public void onClickPassword(View view) {

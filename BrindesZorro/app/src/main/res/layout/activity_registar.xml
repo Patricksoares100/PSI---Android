@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fundo"
+    tools:context=".RegistarClienteActivity">
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:contentDescription="@string/descriptionLogo"
+        app:srcCompat="@drawable/welcome" />
+
+    <TextView
+        android:id="@+id/textUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/tvInsiraNome"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextPorta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hintNomeBrindeszorro"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/tvPedirEmail"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hintEmailBrindesZorro"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textViewTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/tvInsiraTelefone"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hintTelefone"
+        android:inputType="phone" />
+
+    <TextView
+        android:id="@+id/textViewNIF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/textViewInsiraNIF"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextNIF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hintTelefone"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textViewMorada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/textViewMorada"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextMultiLineMorada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/hintMorada"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/textViewCodPostal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/textViewCodPostal"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextCodPostal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:ems="10"
+        android:hint="@string/hintCodPostal"
+        android:inputType="textPostalAddress" />
+
+    <TextView
+        android:id="@+id/textViewLocalidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/textViewLocalidade"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextLocalidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/hintdescriptionLocalidade"
+        android:ems="10"
+        android:hint="@string/hintdescriptionLocalidade"
+        android:inputType="text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textCancelar"
+            android:onClick="Canceler"/>
+
+        <Button
+            android:id="@+id/buttonConfirmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textConfirmar" />
+    </LinearLayout>
+
+</LinearLayout>
