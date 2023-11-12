@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.brindeszorro.adaptadores;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +66,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
 
 
         public ViewHolderLista(View view) {
-            tvId = view.findViewById(R.id.tvIdFatura);
+            tvId = view.findViewById(R.id.tvDataEmissao);
             tvValor = view.findViewById(R.id.tvValorFatura);
             tvEstado = view.findViewById(R.id.tvEstadoFatura);
         }

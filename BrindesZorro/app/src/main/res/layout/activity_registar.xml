@@ -24,12 +24,27 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextPorta"
+        android:id="@+id/editTextNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/hintNomeBrindeszorro"
         android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textViewPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/txtPassword"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/textViewEmail"
@@ -40,7 +55,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextIP"
+        android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
