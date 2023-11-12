@@ -13,9 +13,12 @@
         android:theme="@style/Theme.BrindesZorro"
         tools:targetApi="31">
         <activity
-            android:name=".RegistarClienteActivity"
-            android:launchMode="singleTop"
+            android:name=".HomeActivity"
             android:exported="false" />
+        <activity
+            android:name=".RegistarClienteActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ServidorActivity"
             android:exported="false" />

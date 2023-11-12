@@ -11,24 +11,24 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etUserName, etPassword;
+    private EditText etEmail, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        etUserName = findViewById(R.id.etUserName);
+        etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
 
     }
 
     public void onClickLogin(View view) {
-        String email = etUserName.getText().toString();
+        String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
-        if(!isUserNamelValido(email)){
-            etUserName.setError(getString(R.string.etUserNameInvalido));
+        if(!isEmailValido(email)){
+            etEmail.setError(getString(R.string.etFormatoInvalido));
             return;
         }
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    public boolean isUserNamelValido(String email) {
+    public boolean isEmailValido(String email) {
         if (email == null)
             return false;
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
