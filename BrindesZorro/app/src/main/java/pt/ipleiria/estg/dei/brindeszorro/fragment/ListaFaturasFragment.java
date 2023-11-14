@@ -28,13 +28,9 @@ public class ListaFaturasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_lista_faturas, container, false);
-
-        lvFaturas = view.findViewById(R.id.lvFaturas);
+        View view = inflater.inflate(R.layout.activity_home, container, false);
+        lvFaturas = view.findViewById(R.id.lvHome); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
         faturas = SingletonGestorLoja.getInstance().getFaturas();
-        //
-        System.out.println("--->"+ faturas);
         lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
         return view;
     }
