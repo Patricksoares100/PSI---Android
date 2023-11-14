@@ -3,7 +3,7 @@
     <string name="etFormatoInvalido">Formato Invalido</string>
     <string name="etPasswordTextError">Password Invalida</string>
     <string name="txtUserName">User Name</string>
-    <string name="txtPassword">Password</string>
+    <string name="txtPassword">Password:</string>
     <string name="btn_registar">REGISTAR</string>
     <string name="txtLogin">ENTRAR</string>
     <string name="loginInputEmail">a@a.a</string>
@@ -57,5 +57,8 @@
     <string name="hint_ip">Insira o IP</string>
     <string name="tv_dominioTitulo">Domínio</string>
     <string name="hint_dominio">Insira o Domínio</string>
-    <string name="btn_Confirmar">Confirmar</string>/>
+    <string name="btn_Confirmar">Confirmar</string>
+    <string name="tvNomeRegistar">Nome Completo:</string>
+    <string name="txtNomeRegistar">Nome</string>
+    <string name="txtEmailRegistar">Email:</string>/>
 </resources>

@@ -9,14 +9,14 @@
     tools:context=".EditarDadosPessoaisActivity">
 
     <ImageView
-        android:id="@+id/imageViewLogo"
+        android:id="@+id/ivServidor"
         android:layout_width="match_parent"
         android:layout_height="142dp"
         android:contentDescription="@string/descriptionLogo"
         app:srcCompat="@drawable/removidofundo" />
 
     <TextView
-        android:id="@+id/textUserName"
+        android:id="@+id/tvPortoServidor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -25,7 +25,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextNome"
+        android:id="@+id/etPortoServidor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -36,7 +36,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/textViewEmail"
+        android:id="@+id/tvIpServidor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -45,7 +45,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/etIpServidor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -56,7 +56,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/textViewTelefone"
+        android:id="@+id/tvTelefoneRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -65,7 +65,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextTelefone"
+        android:id="@+id/etTelefoneRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -76,7 +76,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/textViewNIF"
+        android:id="@+id/tvNifRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -85,7 +85,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextNIF"
+        android:id="@+id/etNifRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -96,7 +96,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/textViewMorada"
+        android:id="@+id/tvMoradaRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/textViewMorada"
@@ -105,7 +105,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextMultiLineMorada"
+        android:id="@+id/etMoradaRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -117,7 +117,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/textViewCodPostal"
+        android:id="@+id/tvCodigoPostalRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -126,7 +126,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextCodPostal"
+        android:id="@+id/etCodigoPostalRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -137,7 +137,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/textViewLocalidade"
+        android:id="@+id/tvLocalidadeRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -146,7 +146,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextLocalidade"
+        android:id="@+id/etLocalidadeRegistar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -164,7 +164,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonCancelar"
+            android:id="@+id/buttonCancelarRegistar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -172,7 +172,7 @@
             android:onClick="Canceler"/>
 
         <Button
-            android:id="@+id/buttonConfirmar"
+            android:id="@+id/buttonConfirmarServidor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
