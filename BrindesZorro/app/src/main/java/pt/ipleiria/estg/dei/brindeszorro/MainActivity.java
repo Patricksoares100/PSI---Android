@@ -76,18 +76,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
         if (item.getItemId()==R.id.navHome){
             Intent home = new Intent(this, HomeActivity.class);
-           
             startActivity(home);
-
-
         } else if (item.getItemId() == R.id.navCarrinho) {
-            Intent artigosLoja = new Intent(this, ArtigosActivity.class);
-            setTitle(item.getTitle());
+            Intent artigosLoja = new Intent(this, CarrinhoActivity.class);
             startActivity(artigosLoja);
-
         } else if (item.getItemId() == R.id.navFavoritos) {
             setTitle(item.getTitle());
-
         } else if (item.getItemId() == R.id.navFaturas) {
             setTitle(item.getTitle());
             fragment = new ListaFaturasFragment();

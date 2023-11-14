@@ -48,7 +48,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvValorTitulo"
+                    android:id="@+id/idValorTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
@@ -57,7 +57,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvDataEmissao"
+                    android:id="@+id/idValorTotalQuantia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -79,7 +79,7 @@
                     android:gravity="center">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/floatingActionButton"
+                        android:id="@+id/idFloatMenos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
@@ -109,7 +109,7 @@
                     </LinearLayout>
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/floatingActionButton2"
+                        android:id="@+id/idFloatMais"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"

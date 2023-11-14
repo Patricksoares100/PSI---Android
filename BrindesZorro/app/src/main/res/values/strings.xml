@@ -58,7 +58,18 @@
     <string name="tv_dominioTitulo">Domínio</string>
     <string name="hint_dominio">Insira o Domínio</string>
     <string name="btn_Confirmar">Confirmar</string>
-    <string name="tvNomeRegistar">Nome Completo:</string>
-    <string name="txtNomeRegistar">Nome</string>
+    <string name="txtNomeArtigo">Nome Artigo</string>
+    <string name="idValorTotalCarrinho">Valor Total</string>
+    <string name="txtValorUnitarioCarrinho">Valor Unitario</string>
+    <string name="txtPrecoValorCarrinho">€</string>
+    <string name="txtQtd">Qtd.</string>
+    <string name="txtNumeroQtd" />
+    <string name="txtPrecoTotalArtigo">€</string>
+    <string name="txtValorTotalArtigoCarrinho">"Valor total "</string>
+    <string name="txtButtonMenosArtigoCarrinho">-</string>
+    <string name="txtButtonMaisArtigoCarrinho">+</string>/>
     <string name="txtEmailRegistar">Email:</string>/>
+    <string name="txtNomeRegistar">Nome</string>
+    <string name="tvNomeRegistar">Nome Completo:</string>
+    <string name="btn_Confirmar">Confirmar</string>
 </resources>

@@ -66,7 +66,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
 
 
         public ViewHolderLista(View view) {
-            tvId = view.findViewById(R.id.tvDataEmissao);
+            tvId = view.findViewById(R.id.idValorTotalQuantia);
             tvValor = view.findViewById(R.id.tvValorFatura);
             tvEstado = view.findViewById(R.id.tvEstadoFatura);
         }
