@@ -2,7 +2,7 @@
     <string name="app_name">BrindesZorro</string>
     <string name="etFormatoInvalido">Formato Invalido</string>
     <string name="etPasswordTextError">Password Invalida</string>
-    <string name="txtUserName">User Name</string>
+    <string name="txtUserName">User Name:</string>
     <string name="txtPassword">Password:</string>
     <string name="btn_registar">REGISTAR</string>
     <string name="txtLogin">ENTRAR</string>
@@ -71,4 +71,10 @@
     <string name="txtEmailRegistar">Email:</string>/>
     <string name="txtNomeRegistar">Nome</string>
     <string name="tvNomeRegistar">Nome Completo:</string>
+    <string name="txtNomeRegistar">Nome</string>
+    <string name="txtEmailRegistar">Email:</string>
+    <string name="txtQuantidadeArtigo">Quantidade:</string>
+    <string name="txtValorArtigo">"Valor: € "</string>
+    <string name="txtNomeArtigo">Artigo:</string>
+    <string name="txtReferenciaArtigo">Referencia:</string>/>
 </resources>

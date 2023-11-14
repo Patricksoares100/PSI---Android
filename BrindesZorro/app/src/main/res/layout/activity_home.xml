@@ -11,7 +11,7 @@
     tools:context=".HomeActivity">
 
     <ImageView
-        android:id="@+id/imageViewHome"
+        android:id="@+id/ivLogoHome"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:contentDescription="@string/descriptionLogo"

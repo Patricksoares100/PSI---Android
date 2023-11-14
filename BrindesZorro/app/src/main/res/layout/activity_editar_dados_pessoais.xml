@@ -9,14 +9,14 @@
     tools:context=".EditarDadosPessoaisActivity">
 
     <ImageView
-        android:id="@+id/ivServidor"
+        android:id="@+id/ivLogoEditDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="142dp"
         android:contentDescription="@string/descriptionLogo"
         app:srcCompat="@drawable/removidofundo" />
 
     <TextView
-        android:id="@+id/tvPortoServidor"
+        android:id="@+id/tvNomeEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -25,7 +25,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etPortoServidor"
+        android:id="@+id/etNomeEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -36,7 +36,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/tvIpServidor"
+        android:id="@+id/tvEmailEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -45,18 +45,18 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etIpServidor"
+        android:id="@+id/etEmailEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/hintEmailBrindesZorro"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/tvTelefoneRegistar"
+        android:id="@+id/tvTelefoneEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -65,7 +65,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etTelefoneRegistar"
+        android:id="@+id/etTelefoneEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -76,7 +76,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/tvNifRegistar"
+        android:id="@+id/tvNifEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -85,7 +85,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etNifRegistar"
+        android:id="@+id/etNifEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -96,28 +96,27 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/tvMoradaRegistar"
+        android:id="@+id/tvMoradaEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/textViewMorada"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:text="@string/textViewMorada"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etMoradaRegistar"
+        android:id="@+id/etMoradaEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:ems="10"
-        android:gravity="start|top"
         android:hint="@string/hintMorada"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/tvCodigoPostalRegistar"
+        android:id="@+id/tvCodigoPostalEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -126,7 +125,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etCodigoPostalRegistar"
+        android:id="@+id/etCodigoPostalEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -137,7 +136,7 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/tvLocalidadeRegistar"
+        android:id="@+id/tvLocalidadeEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -146,7 +145,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etLocalidadeRegistar"
+        android:id="@+id/etLocalidadeEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -161,18 +160,18 @@
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonCancelarRegistar"
+            android:id="@+id/buttonCancelarEditarDadosPessoais"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textCancelar"
-            android:onClick="Canceler"/>
+            android:text="@string/textCancelar" />
 
         <Button
-            android:id="@+id/buttonConfirmarServidor"
+            android:id="@+id/buttonConfirmarEditarDadosPessoais"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

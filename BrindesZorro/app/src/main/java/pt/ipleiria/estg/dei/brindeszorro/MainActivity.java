@@ -9,17 +9,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.ListFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -99,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (item.getItemId() == R.id.navAvaliacoes) {
             setTitle(item.getTitle());
+            Intent editarDadosPessoais = new Intent(this, ArtigosActivity.class);
+            startActivity(editarDadosPessoais);
         }
         if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item

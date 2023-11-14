@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
+    android:layout_margin="8dp"
     android:orientation="horizontal"
-    android:background="@drawable/fundo"
     tools:context=".ListaArtigosActivity">
 
     <LinearLayout
@@ -20,6 +19,7 @@
             android:id="@+id/ivArtigo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
             android:layout_weight="0.3"
             app:srcCompat="@drawable/caneca" />
 
@@ -34,20 +34,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvReferenciaArtigo"
+                    android:id="@+id/tvReferenciaArtigoTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0"
-                    android:text="Referencia:"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:text="@string/txtReferenciaArtigo"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvReferenciaArtigo2"
+                    android:id="@+id/tvReferenciaArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -63,17 +63,17 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvNomeArtigo"
+                    android:id="@+id/tvNomeArtigoTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0"
-                    android:text="Artigo:"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:text="@string/txtNomeArtigo"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNomeArtigo2"
+                    android:id="@+id/tvNomeArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -87,19 +87,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvValorArtigoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:text="@string/txtValorArtigo"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvValorArtigo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0"
-                    android:text="Valor: € "
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:id="@+id/tvValoArtigo2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -111,42 +111,48 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvQuantidadeArtigo"
+                    android:id="@+id/tvQuantidadeArtigoTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0"
-                    android:text="Quantidade:"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:text="@string/txtQuantidadeArtigo"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/btnMenos"
+                    android:id="@+id/buttonMenosArtigo"
                     android:layout_width="50dp"
-                    android:layout_height="25dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:includeFontPadding="false"
                     android:text="-"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvQuantidade"
+                    android:id="@+id/tvQuantidadeArtigo"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:text="0"
                     android:textAlignment="center" />
 
                 <Button
-                    android:id="@+id/btnMais"
+                    android:id="@+id/buttonMaisArtigo"
                     android:layout_width="50dp"
-                    android:layout_height="25dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="+" />
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="+"
+                    android:textSize="14sp" />
 
 
                 <!--<TextView
@@ -162,7 +168,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -172,8 +178,7 @@
                     android:layout_weight="1"
                     android:src="@drawable/carrinho_compras_icon">
                     <!--android:clickable="true"
-                        android:onClick="onClickAddCarrinhoCompras"--> >
-                </ImageView>
+                        android:onClick="onClickAddCarrinhoCompras"--> ></ImageView>
 
 
                 <Space
@@ -186,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/favoritos_icon" >
+                    android:src="@drawable/favoritos_icon">
                     <!--android:clickable="true"
                         android:onClick="onClickAddFavoritos"--> >
                 </ImageView>
