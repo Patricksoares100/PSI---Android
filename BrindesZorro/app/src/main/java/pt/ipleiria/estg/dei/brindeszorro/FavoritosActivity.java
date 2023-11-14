@@ -1,14 +1,18 @@
 package pt.ipleiria.estg.dei.brindeszorro;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
-public class ListaArtigosActivity extends AppCompatActivity {
+public class FavoritosActivity extends AppCompatActivity {
+
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_artigos);
+        setContentView(R.layout.activity_favoritos);
+
     }
 }

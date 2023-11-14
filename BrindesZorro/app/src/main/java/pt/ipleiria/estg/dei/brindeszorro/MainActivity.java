@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (item.getItemId() == R.id.navAvaliacoes) {
             setTitle(item.getTitle());
-            Intent editarDadosPessoais = new Intent(this, ArtigosActivity.class);
+            Intent editarDadosPessoais = new Intent(this, FavoritosActivity.class);
             startActivity(editarDadosPessoais);
         }
         if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();

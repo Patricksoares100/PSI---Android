@@ -27,7 +27,7 @@
             android:name=".ServidorActivity"
             android:exported="false" />
         <activity
-            android:name=".ArtigosActivity"
+            android:name=".FavoritosActivity"
             android:exported="false" />
         <activity
             android:name=".RecuperarPassword"
@@ -36,7 +36,7 @@
             android:name=".EditarDadosPessoaisActivity"
             android:exported="false" />
         <activity
-            android:name=".ListaArtigosActivity"
+            android:name=".ArtigosActivity"
             android:exported="false" />
         <activity
             android:name=".FaturasActivity"

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
-import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 
 public class ListaArtigosAdaptador extends BaseAdapter {
 
@@ -49,7 +48,7 @@ public class ListaArtigosAdaptador extends BaseAdapter {
         if (inflater == null)
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); // autorização a variacvel
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.activity_artigos, null);
+            convertView = inflater.inflate(R.layout.activity_favoritos, null);
         }
         ViewHolderLista viewHolderLista = (ListaArtigosAdaptador.ViewHolderLista) convertView.getTag();
         if (viewHolderLista ==null){
