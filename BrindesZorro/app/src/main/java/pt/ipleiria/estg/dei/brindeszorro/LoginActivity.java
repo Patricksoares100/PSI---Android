@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickPassword(View view) {
-        Intent ForgetPassword = new Intent(this, RecuperarPassword.class);
+        Intent ForgetPassword = new Intent(this, RecuperarPasswordActivity.class);
         startActivity(ForgetPassword);
     }
 }

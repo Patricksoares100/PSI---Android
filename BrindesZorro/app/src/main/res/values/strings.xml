@@ -76,5 +76,10 @@
     <string name="txtQuantidadeArtigo">Quantidade:</string>
     <string name="txtValorArtigo">"Valor: € "</string>
     <string name="txtNomeArtigo">Artigo:</string>
-    <string name="txtReferenciaArtigo">Referencia:</string>/>
+    <string name="txtReferenciaArtigo">Referencia:</string>
+    <string name="txtPasswordAtual">Insira a sua Password:</string>
+    <string name="alterarPasswordInput">12345678</string>
+    <string name="txtNovaPassword">Insira a nova Password:</string>
+    <string name="novaPasswordInput">12345678</string>
+    <string name="tvConfirmarPassword">Confirme a nova Password:</string>/>
 </resources>
