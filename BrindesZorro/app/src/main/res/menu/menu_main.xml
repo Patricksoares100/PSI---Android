@@ -12,27 +12,27 @@
             android:id="@+id/navHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_action_name"
+            android:icon="@drawable/ic_action_home"
             android:title="@string/nav_Home" />
         <item
             android:id="@+id/navCarrinho"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/carrinho_compras_icon"
+            android:icon="@drawable/ic_action_carrinho"
             android:title="@string/nav_carrinho" />
 
         <item
             android:id="@+id/navFavoritos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/favoritos_icon"
+            android:icon="@drawable/ic_action_favorito"
             android:title="@string/nav_favoritos" />
 
         <item
             android:id="@+id/navFaturas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:icon="@drawable/ic_action_faturas"
             android:title="@string/nav_Faturas" />
 
 
@@ -40,21 +40,21 @@
             android:id="@+id/navServidor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/ic_menu_manage"
+            android:icon="@drawable/ic_action_servidor"
             android:title="@string/nav_Servidor" />
 
         <item
             android:id="@+id/navPessoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/ic_menu_myplaces"
+            android:icon="@drawable/ic_action_pessoal"
             android:title="@string/nav_Pessoal" />
 
         <item
             android:id="@+id/navAvaliacoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/checkbox_on_background"
+            android:icon="@drawable/ic_action_avaliacoes"
             android:title="@string/nav_avaliacoes" />
     </group>
 
