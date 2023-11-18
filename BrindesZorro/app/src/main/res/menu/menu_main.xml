@@ -37,11 +37,11 @@
 
 
         <item
-            android:id="@+id/navServidor"
+            android:id="@+id/navAvaliacoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/ic_menu_manage"
-            android:title="@string/nav_Servidor" />
+            android:icon="@android:drawable/checkbox_on_background"
+            android:title="@string/nav_avaliacoes" />
 
         <item
             android:id="@+id/navPessoal"
@@ -49,13 +49,25 @@
             android:layout_height="wrap_content"
             android:icon="@android:drawable/ic_menu_myplaces"
             android:title="@string/nav_Pessoal" />
-
         <item
-            android:id="@+id/navAvaliacoes"
+            android:id="@+id/navAlterarPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/checkbox_on_background"
-            android:title="@string/nav_avaliacoes" />
+            android:icon="@drawable/ic_password_foreground"
+            android:title="@string/navAlterarPassword" />
+        <item
+            android:id="@+id/navLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_logout_foreground"
+            android:title="@string/navLogout" />
+        <item
+            android:id="@+id/navServidor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/nav_Servidor" />
+
     </group>
 
 </menu>

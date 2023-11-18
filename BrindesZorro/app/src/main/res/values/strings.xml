@@ -58,7 +58,6 @@
     <string name="tv_dominioTitulo">Domínio</string>
     <string name="hint_dominio">Insira o Domínio</string>
     <string name="btn_Confirmar">Confirmar</string>
-    <string name="txtNomeArtigo">Nome Artigo</string>
     <string name="idValorTotalCarrinho">Valor Total</string>
     <string name="txtValorUnitarioCarrinho">Valor Unitario</string>
     <string name="txtPrecoValorCarrinho">€</string>
@@ -69,8 +68,6 @@
     <string name="txtButtonMenosArtigoCarrinho">-</string>
     <string name="txtButtonMaisArtigoCarrinho">+</string>/>
     <string name="tvNomeRegistar">Nome Completo:</string>
-    <string name="txtNomeRegistar">Nome</string>
-    <string name="txtEmailRegistar">Email:</string>
     <string name="txtQuantidadeArtigo">Quantidade:</string>
     <string name="txtValorArtigo">"Valor: € "</string>
     <string name="txtReferenciaArtigo">Referencia:</string>
@@ -79,6 +76,9 @@
     <string name="txtNovaPassword">Insira a nova Password:</string>
     <string name="novaPasswordInput">12345678</string>
     <string name="tvConfirmarPassword">Confirme a nova Password:</string>
+    <string name="navAlterarDados">Alterar Dados</string>
+    <string name="navAlterarPassword">Alterar Password</string>
+    <string name="navLogout">Logout</string>/>
     <string name="txtPesquisarMenu">Pesquisar</string>
     <string name="tv_idFatura">Numero da Fatura</string>/>
 </resources>
