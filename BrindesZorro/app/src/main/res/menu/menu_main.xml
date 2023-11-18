@@ -37,7 +37,7 @@
 
 
         <item
-            android:id="@+id/navAvaliacoes"
+            android:id="@+id/navServidor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_action_servidor"
@@ -50,10 +50,10 @@
             android:icon="@drawable/ic_action_pessoal"
             android:title="@string/nav_Pessoal" />
         <item
-            android:id="@+id/navAlterarPassword"
+            android:id="@+id/navAvaliacoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/checkbox_on_background"
+            android:icon="@drawable/ic_action_avaliacoes"
             android:title="@string/nav_avaliacoes" />
     </group>
 

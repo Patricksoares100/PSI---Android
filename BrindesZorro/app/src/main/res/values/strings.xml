@@ -80,5 +80,6 @@
     <string name="navAlterarPassword">Alterar Password</string>
     <string name="navLogout">Logout</string>/>
     <string name="txtPesquisarMenu">Pesquisar</string>
-    <string name="tv_idFatura">Numero da Fatura</string>/>
+    <string name="tv_idFatura">Numero da Fatura</string>
+    <string name="txtEmailRegistar">Email:</string>/>
 </resources>

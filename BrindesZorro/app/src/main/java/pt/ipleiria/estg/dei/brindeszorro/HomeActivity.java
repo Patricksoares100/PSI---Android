@@ -17,10 +17,5 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = findViewById(R.id.toolBar); // Configura a barra de ferramentas (toolbar)
-        setSupportActionBar(toolbar); // Define a barra de ferramentas como a barra de apoio da atividade
-        drawer = findViewById(R.id.drawerLayout); // Obtém a gaveta (drawer)
-        navigationView = findViewById(R.id.navView); // Obtém a vista de navegação (navigation view)
-
     }
 }

@@ -34,9 +34,9 @@ public class ListaFaturasFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_home, container, false);
+        View view = inflater.inflate(R.layout.activity_main, container, false);
         setHasOptionsMenu(true); // vai chamar o menu
-        lvFaturas = view.findViewById(R.id.lvHome); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
+        lvFaturas = view.findViewById(R.id.lvMain); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
         faturas = SingletonGestorLoja.getInstance().getFaturas();
         lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
         return view;

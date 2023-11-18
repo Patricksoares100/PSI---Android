@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.ndOpen, R.string.ndClose);
         toggle.syncState(); // Sincroniza o estado do ActionBarDrawerToggle
         drawer.addDrawerListener(toggle); // Adiciona o ActionBarDrawerToggle à gaveta
+        drawer.closeDrawer(GravityCompat.START); // Adiciona esta linha para fechar a gaveta no início
+
 
         navigationView.setNavigationItemSelectedListener(this); // Define a atividade atual como o ouvinte de eventos de navegação
         fragmentManager = getSupportFragmentManager();
@@ -70,29 +72,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Este método é chamado quando um item de menu da vista de navegação é selecionado
         Fragment fragment = null;
         if (item.getItemId()==R.id.navHome){
-            Intent home = new Intent(this, HomeActivity.class);
+            Intent home = new Intent(this, MainActivity.class);
             startActivity(home);
         } else if (item.getItemId() == R.id.navCarrinho) {
             Intent artigosLoja = new Intent(this, CarrinhoActivity.class);
             startActivity(artigosLoja);
         } else if (item.getItemId() == R.id.navFavoritos) {
             setTitle(item.getTitle());
-        } else if (item.getItemId() == R.id.navFaturas) {
-            setTitle(item.getTitle());
+        } else if (item.getItemId() == R.id.navFaturas) {;
             fragment = new ListaFaturasFragment();
             setTitle(item.getTitle());
         } else if (item.getItemId() == R.id.navServidor) {
             setTitle(item.getTitle());
             Intent editarServidor = new Intent(this, ServidorActivity.class);
             startActivity(editarServidor);
-
-
         } else if (item.getItemId() == R.id.navPessoal) {
             setTitle(item.getTitle());
             Intent editarDadosPessoais = new Intent(this, EditarDadosPessoaisActivity.class);
             startActivity(editarDadosPessoais);
 
-        } else if (item.getItemId() == R.id.navAvaliacoes) {
+        } else if (item.getItemId() == R.id.navFavoritos) {
             setTitle(item.getTitle());
             Intent editarDadosPessoais = new Intent(this, FavoritosActivity.class);
             startActivity(editarDadosPessoais);
