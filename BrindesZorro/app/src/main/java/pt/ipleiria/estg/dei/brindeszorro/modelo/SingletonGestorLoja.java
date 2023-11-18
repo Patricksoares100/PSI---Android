@@ -26,7 +26,7 @@ public class SingletonGestorLoja {
 
         faturas.add(new Fatura(1,35,"paga"));
         faturas.add(new Fatura(2,40,"paga"));
-        faturas.add(new Fatura(3,50,"paga"));
+        faturas.add(new Fatura(3,50,"não paga"));
         faturas.add(new Fatura(4,60,"paga"));
 
     }

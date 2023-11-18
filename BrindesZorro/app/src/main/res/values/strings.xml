@@ -68,18 +68,17 @@
     <string name="txtValorTotalArtigoCarrinho">"Valor total "</string>
     <string name="txtButtonMenosArtigoCarrinho">-</string>
     <string name="txtButtonMaisArtigoCarrinho">+</string>/>
-    <string name="txtEmailRegistar">Email:</string>/>
-    <string name="txtNomeRegistar">Nome</string>
     <string name="tvNomeRegistar">Nome Completo:</string>
     <string name="txtNomeRegistar">Nome</string>
     <string name="txtEmailRegistar">Email:</string>
     <string name="txtQuantidadeArtigo">Quantidade:</string>
     <string name="txtValorArtigo">"Valor: € "</string>
-    <string name="txtNomeArtigo">Artigo:</string>
     <string name="txtReferenciaArtigo">Referencia:</string>
     <string name="txtPasswordAtual">Insira a sua Password:</string>
     <string name="alterarPasswordInput">12345678</string>
     <string name="txtNovaPassword">Insira a nova Password:</string>
     <string name="novaPasswordInput">12345678</string>
-    <string name="tvConfirmarPassword">Confirme a nova Password:</string>/>
+    <string name="tvConfirmarPassword">Confirme a nova Password:</string>
+    <string name="txtPesquisarMenu">Pesquisar</string>
+    <string name="tv_idFatura">Numero da Fatura</string>/>
 </resources>
