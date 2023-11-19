@@ -13,12 +13,16 @@
         android:theme="@style/Theme.BrindesZorro"
         tools:targetApi="31">
         <activity
+            android:name=".FavoritosActivity"
+            android:exported="false" />
+        <activity
             android:name=".CarrinhoActivity"
             android:exported="false" />
         <activity
             android:name=".FaturaActivity"
             android:exported="false" />
-        <activity android:name=".ConfirmarActivity"
+        <activity
+            android:name=".ConfirmarActivity"
             android:exported="false" />
         <activity
             android:name=".DetalhesArtigoActivity"
@@ -33,9 +37,6 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".ServidorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FavoritosActivity"
             android:exported="false" />
         <activity
             android:name=".RecuperarPasswordActivity"

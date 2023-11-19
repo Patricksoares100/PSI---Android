@@ -92,5 +92,7 @@
     <string name="ivLogoCarrinho">Csrrinho Compras</string>
     <string name="buttonLimparCarrinho">Limpar Carrinho</string>
     <string name="buttonConcluirCompra">Conclcuir Compra</string>
-    <string name="txtValorTotalCarrinho">Valor Total: €</string>/>
+    <string name="txtValorTotalCarrinho">Valor Total: €</string>
+    <string name="buttonLimparFavoritos">Limpar Favoritos</string>
+    <string name="buttonAdicionarTodosCarrinho">Adicionar todos ao Carrinho</string>/>
 </resources>

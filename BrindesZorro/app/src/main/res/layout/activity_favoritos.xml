@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FavoritosActivity">
+
+    <ImageView
+        android:id="@+id/ivLogoFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:contentDescription="@string/nav_favoritos"
+        app:srcCompat="@drawable/favoritos_icon" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <ListView
+        android:id="@+id/lvFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="480dp" />
+
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonLimparFavoritos"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/buttonLimparFavoritos"
+            tools:ignore="TextSizeCheck" />
+
+        <Button
+            android:id="@+id/buttonAdicionarTodosCarrinho"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/buttonAdicionarTodosCarrinho" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButtonPerfilFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_Pessoal"
+            android:src="@drawable/ic_action_pessoal" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCarrinhoFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_carrinho"
+            android:src="@drawable/ic_action_carrinho" />
+
+        <ImageButton
+            android:id="@+id/imageButtonFavoritosFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_favoritos"
+            android:src="@drawable/ic_action_favorito"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+</LinearLayout>

@@ -19,6 +19,7 @@ import android.widget.EditText;
 import com.google.android.material.navigation.NavigationView;
 
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFaturasFragment;
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFavoritosFragment;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,31 +72,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Este método é chamado quando um item de menu da vista de navegação é selecionado
         Fragment fragment = null;
-        if (item.getItemId()==R.id.navHome){
+
+        if (item.getItemId() == R.id.navHome){
             Intent home = new Intent(this, HomeActivity.class);
             startActivity(home);
+            setTitle(item.getTitle());
+
         } else if (item.getItemId() == R.id.navCarrinho) {
             Intent artigosLoja = new Intent(this, CarrinhoActivity.class);
             startActivity(artigosLoja);
+
         } else if (item.getItemId() == R.id.navFavoritos) {
+            fragment = new ListaFavoritosFragment();
             setTitle(item.getTitle());
+
         } else if (item.getItemId() == R.id.navFaturas) {;
             fragment = new ListaFaturasFragment();
             setTitle(item.getTitle());
+
         } else if (item.getItemId() == R.id.navServidor) {
             setTitle(item.getTitle());
             Intent editarServidor = new Intent(this, ServidorActivity.class);
             startActivity(editarServidor);
+
         } else if (item.getItemId() == R.id.navPessoal) {
             setTitle(item.getTitle());
             Intent editarDadosPessoais = new Intent(this, EditarDadosPessoaisActivity.class);
             startActivity(editarDadosPessoais);
 
-        } else if (item.getItemId() == R.id.navFavoritos) {
+        } /*else if (item.getItemId() == R.id.navFavoritos) {
             setTitle(item.getTitle());
             Intent editarDadosPessoais = new Intent(this, FavoritosActivity.class);
             startActivity(editarDadosPessoais);
-        }
+        }*/
+
         if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item
 
