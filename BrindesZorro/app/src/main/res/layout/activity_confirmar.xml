@@ -10,19 +10,29 @@
     <TextView
         android:id="@+id/textViewConfirmarDados"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txtConfirmarDados" />
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="@string/txtConfirmarDados"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewUsernameConfirmar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txtUserName" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/txtUserName"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
@@ -32,12 +42,19 @@
         android:id="@+id/textViewTelefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tvInsiraTelefone" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/tvInsiraTelefone"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="phone"
         android:minHeight="48dp" />
@@ -46,12 +63,19 @@
         android:id="@+id/textViewNifconfirmar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txtNif" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/txtNif"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextPhone2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="phone"
         android:minHeight="48dp" />
@@ -60,12 +84,19 @@
         android:id="@+id/textViewMoradaConfirmar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txtMorada" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/txtMorada"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
@@ -75,12 +106,19 @@
         android:id="@+id/textViewCodPostalConfirmar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/textViewCodPostal" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/textViewCodPostal"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextTextPostalAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="textPostalAddress"
         android:minHeight="48dp" />
@@ -89,12 +127,19 @@
         android:id="@+id/textViewLocalidadeConfirmar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/textViewLocalidade" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/textViewLocalidade"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextText4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
@@ -102,25 +147,27 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="162dp">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <RadioButton
             android:id="@+id/radioButtonMBWay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:checked="true"
             android:text="@string/txtMBWay" />
 
         <RadioButton
             android:id="@+id/radioButtonMultibanco"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:text="@string/txtMultibanco" />
 
         <RadioButton
             android:id="@+id/radioButtonTransferencia"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:text="@string/txtTransferencia" />
     </RadioGroup>
 
@@ -128,6 +175,8 @@
         android:id="@+id/buttonConfirmarConfirmacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/btn_Confirmar" />
 
     <View
