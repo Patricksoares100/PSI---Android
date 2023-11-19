@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetalhesArtigoActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewNomeArtigo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/ivDetalhes"
+                android:layout_width="match_parent"
+                android:layout_height="261dp"
+                android:src="@drawable/brindes" />
+
+            <TextView
+                android:id="@+id/textViewValorUnitarioArtigo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewFornecedorArtigo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="TextView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imageButtonMenosArtigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_menos_foreground" />
+
+                <TextView
+                    android:id="@+id/textViewQuantidadeArtigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonMaisArtigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_add_foreground" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewValorTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="TextView" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

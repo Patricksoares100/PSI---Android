@@ -34,27 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvReferenciaArtigoTitulo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0"
-                    android:text="@string/txtReferenciaArtigo"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvReferenciaArtigo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,12 +106,12 @@
                 <Button
                     android:id="@+id/buttonMenosArtigo"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:layout_height="48dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:text="-"
+                    android:text="@string/txtMenos"
                     android:textSize="14sp" />
 
                 <TextView
@@ -146,12 +126,12 @@
                 <Button
                     android:id="@+id/buttonMaisArtigo"
                     android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:layout_height="48dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:text="+"
+                    android:text="@string/txtButtonMaisArtigoCarrinho"
                     android:textSize="14sp" />
 
 
@@ -171,30 +151,25 @@
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/ivCarrinhoCompras"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/carrinho_compras_icon">
-                    <!--android:clickable="true"
-                        android:onClick="onClickAddCarrinhoCompras"--> ></ImageView>
 
+                <ImageButton
+                    android:id="@+id/imageButtonCarrinhoArtigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_carrinho" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <ImageView
-                    android:id="@+id/ivFavoritos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:id="@+id/imageButtonFavoritoArtigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:src="@drawable/favoritos_icon">
-                    <!--android:clickable="true"
-                        android:onClick="onClickAddFavoritos"--> >
-                </ImageView>
+                    android:src="@drawable/ic_action_favorito" />
 
             </LinearLayout>
 

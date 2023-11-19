@@ -43,7 +43,7 @@
     <string name="hint_userName">Insira o seu User Name</string>
     <string name="hint_userEmail">Insira o seu Email</string>
     <string name="textRecuperar">Recuperar</string>
-    <string name="tv_TituloNomeArtigo">Nome Artigo</string>
+    <string name="tv_TituloNomeArtigo">Artigo:</string>
     <string name="tv_ValorTitulo">Valor Unitário</string>
     <string name="tv_valorEuros">€</string>
     <string name="tv_Qtd">Qtd.</string>
@@ -81,5 +81,6 @@
     <string name="navLogout">Logout</string>/>
     <string name="txtPesquisarMenu">Pesquisar</string>
     <string name="tv_idFatura">Numero da Fatura</string>
-    <string name="txtEmailRegistar">Email:</string>/>
+    <string name="txtEmailRegistar">Email:</string>
+    <string name="txtMenos">-</string>/>
 </resources>

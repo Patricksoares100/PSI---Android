@@ -9,6 +9,6 @@ public class ArtigosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artigos);
+        setContentView(R.layout.item_lista_artigos);
     }
 }

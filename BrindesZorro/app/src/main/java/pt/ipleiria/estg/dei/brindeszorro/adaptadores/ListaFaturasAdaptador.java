@@ -49,7 +49,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
         if (inflater == null)
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); // autorização a variacvel
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.activity_faturas, null);
+            convertView = inflater.inflate(R.layout.item_lista_faturas, null);
         }
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
         if (viewHolderLista ==null){
