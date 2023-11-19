@@ -82,5 +82,11 @@
     <string name="txtPesquisarMenu">Pesquisar</string>
     <string name="tv_idFatura">Numero da Fatura</string>
     <string name="txtEmailRegistar">Email:</string>
-    <string name="txtMenos">-</string>/>
+    <string name="txtMenos">-</string>
+    <string name="txtConfirmarDados">Confime os seus dados:</string>
+    <string name="txtNif">NIF:</string>
+    <string name="txtMorada">Morada:</string>
+    <string name="txtMBWay">MB Way</string>
+    <string name="txtMultibanco">Multibanco</string>
+    <string name="txtTransferencia">Transferência</string>/>
 </resources>

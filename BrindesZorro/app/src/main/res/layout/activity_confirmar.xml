@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ConfirmarActivity">
+
+    <TextView
+        android:id="@+id/textViewConfirmarDados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtConfirmarDados" />
+
+    <TextView
+        android:id="@+id/textViewUsernameConfirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtUserName" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/textViewTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tvInsiraTelefone" />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/textViewNifconfirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtNif" />
+
+    <EditText
+        android:id="@+id/editTextPhone2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/textViewMoradaConfirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtMorada" />
+
+    <EditText
+        android:id="@+id/editTextText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/textViewCodPostalConfirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewCodPostal" />
+
+    <EditText
+        android:id="@+id/editTextTextPostalAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/textViewLocalidadeConfirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewLocalidade" />
+
+    <EditText
+        android:id="@+id/editTextText4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="Name" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="162dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonMBWay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/txtMBWay" />
+
+        <RadioButton
+            android:id="@+id/radioButtonMultibanco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtMultibanco" />
+
+        <RadioButton
+            android:id="@+id/radioButtonTransferencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtTransferencia" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonConfirmarConfirmacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_Confirmar" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButtonPerfilConfirmacao"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_Pessoal"
+            android:src="@drawable/ic_action_pessoal" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCarrinhoConfirmarcao"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_carrinho"
+            android:src="@drawable/ic_action_carrinho" />
+
+        <ImageButton
+            android:id="@+id/imageButtonFavoritoConfirmacao"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_favoritos"
+            android:src="@drawable/ic_action_favorito" />
+    </LinearLayout>
+
+</LinearLayout>
