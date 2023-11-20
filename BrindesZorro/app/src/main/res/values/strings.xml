@@ -94,5 +94,16 @@
     <string name="buttonConcluirCompra">Conclcuir Compra</string>
     <string name="txtValorTotalCarrinho">Valor Total: €</string>
     <string name="buttonLimparFavoritos">Limpar Favoritos</string>
-    <string name="buttonAdicionarTodosCarrinho">Adicionar todos ao Carrinho</string>/>
+    <string name="buttonAdicionarTodosCarrinho">Adicionar todos ao Carrinho</string>
+    <string name="txtNomeArtigoAvaliacaoComentario">Artigo</string>
+    <string name="ivArtigoAvaliacaoComentario">Artigo</string>
+    <string name="txtReferenciaArtigoAvaliacaoComentario">Referência</string>
+    <string name="txtDesignacaoArtigoAvaliacaoComentario">Designação</string>
+    <string name="txtPreçoArtigoAvaliacaoComentario">Preço</string>
+    <string name="tvMostrarReferenciaArtigoAvaliacaoComentario">ABC123</string>
+    <string name="tvMostrarDesignacaoArtigoAvaliacaoComentario">Porta-chaves</string>
+    <string name="tvMostrarPrecoArtigoAvaliacaoComentario">5.50€</string>
+    <string name="txtClassificacaoArtigoAvaliacaoComentario">Classificação</string>
+    <string name="txtComentarioArtigoAvaliacaoComentario">Comentário</string>
+    <string name="buttonEnviarComentarioAvaliacaoComentario">Enviar</string>/>
 </resources>

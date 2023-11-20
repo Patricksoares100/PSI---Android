@@ -100,11 +100,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent editarDadosPessoais = new Intent(this, EditarDadosPessoaisActivity.class);
             startActivity(editarDadosPessoais);
 
-        } /*else if (item.getItemId() == R.id.navFavoritos) {
+        } else if (item.getItemId() == R.id.navAvaliacoes) {
             setTitle(item.getTitle());
-            Intent editarDadosPessoais = new Intent(this, FavoritosActivity.class);
-            startActivity(editarDadosPessoais);
-        }*/
+            Intent intent = new Intent(this, AvaliacaoComentarioActivity.class);
+            startActivity(intent);
+        }
 
         if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item

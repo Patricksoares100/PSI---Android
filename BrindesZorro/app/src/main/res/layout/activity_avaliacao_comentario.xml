@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AvaliacaoComentarioActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNomeArtigoAvaliacaoComentario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="@string/txtNomeArtigoAvaliacaoComentario"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivArtigoAvaliacaoComentario"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/ivArtigoAvaliacaoComentario"
+                app:srcCompat="@drawable/ic_action_avaliacoes" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider13"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvReferenciaArtigoAvaliacaoComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txtReferenciaArtigoAvaliacaoComentario"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMostrarReferenciaArtigoAvaliacaoComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tvMostrarReferenciaArtigoAvaliacaoComentario" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDesignacaoArtigoAvaliacaoComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txtDesignacaoArtigoAvaliacaoComentario"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMostrarDesignacaoArtigoAvaliacaoComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tvMostrarDesignacaoArtigoAvaliacaoComentario" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPreçoArtigoAvaliacaoComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txtPreçoArtigoAvaliacaoComentario"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMostrarPrecoArtigoAvaliacaoComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tvMostrarPrecoArtigoAvaliacaoComentario" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider10"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvClassificacaoArtigoAvaliacaoComentario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/txtClassificacaoArtigoAvaliacaoComentario"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/ratingBarArtigoAvaliacaoComentario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="2dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider14"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvComentarioArtigoAvaliacaoComentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/txtComentarioArtigoAvaliacaoComentario"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etComentarioArtigoAvaliacaoComentario"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginRight="5dp"
+            android:ems="10"
+            android:gravity="bottom"
+            android:hint="@string/txtComentarioArtigoAvaliacaoComentario"
+            android:inputType="text|textMultiLine"
+            android:lines="8"
+            android:maxLines="10"
+            android:minLines="0"
+            android:scrollbars="vertical"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+        <Button
+            android:id="@+id/buttonEnviarComentarioAvaliacaoComentario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/buttonEnviarComentarioAvaliacaoComentario" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider15"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButtonPerfilAvaliacaoComentario"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_Pessoal"
+            android:src="@drawable/ic_action_pessoal" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCarrinhoAvaliacaoComentario"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_carrinho"
+            android:src="@drawable/ic_action_carrinho" />
+
+        <ImageButton
+            android:id="@+id/imageButtonFavoritosAvaliacaoComentario"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_favoritos"
+            android:src="@drawable/ic_action_favorito" />
+    </LinearLayout>
+
+</LinearLayout>
