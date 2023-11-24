@@ -73,7 +73,8 @@
         android:ems="10"
         android:hint="@string/hintTelefone"
         android:inputType="phone"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:numeric="integer" />
 
     <TextView
         android:id="@+id/tvNifEditarDadosPessoais"
@@ -93,7 +94,8 @@
         android:ems="10"
         android:hint="@string/hintTelefone"
         android:inputType="number"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:numeric="integer" />
 
     <TextView
         android:id="@+id/tvMoradaEditarDadosPessoais"
@@ -133,7 +135,8 @@
         android:ems="10"
         android:hint="@string/hintCodPostal"
         android:inputType="textPostalAddress"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:numeric="integer" />
 
     <TextView
         android:id="@+id/tvLocalidadeEditarDadosPessoais"
@@ -175,6 +178,7 @@
             android:id="@+id/buttonConfirmarEditarDadosPessoais"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClickConfirmarEditarDadosPessoais"
             android:layout_weight="1"
             android:text="@string/textConfirmar" />
     </LinearLayout>
