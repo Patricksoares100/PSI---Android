@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawerLayout); // Obtém a gaveta (drawer)
         navigationView = findViewById(R.id.navView); // Obtém a vista de navegação (navigation view)
 
-        System.out.println("--> Olá");
-
         // Configura o ActionBarDrawerToggle para abrir e fechar a gaveta
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.ndOpen, R.string.ndClose);
         toggle.syncState(); // Sincroniza o estado do ActionBarDrawerToggle

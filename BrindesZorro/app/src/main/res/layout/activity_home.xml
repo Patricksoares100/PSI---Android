@@ -23,6 +23,47 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:contentDescription="@string/txtHorizontalScrollHome">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageCategoria1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/acessorios_homem"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:id="@+id/imageCategoria2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/agenda" />
+
+            <ImageView
+                android:id="@+id/imageCategoria3"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mochila" />
+
+            <ImageView
+                android:id="@+id/imageCategoria4"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/caneta" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <ListView
         android:id="@+id/lvHome"
         android:layout_width="match_parent"

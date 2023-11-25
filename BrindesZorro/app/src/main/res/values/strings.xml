@@ -106,5 +106,6 @@
     <string name="txtClassificacaoArtigoAvaliacaoComentario">Classificação</string>
     <string name="txtComentarioArtigoAvaliacaoComentario">Comentário</string>
     <string name="buttonEnviarComentarioAvaliacaoComentario">Enviar</string>
-    <string name="buttonLogout">Logout</string>/>
+    <string name="buttonLogout">Logout</string>
+    <string name="txtHorizontalScrollHome">Horizontal Scroll Home</string>/>
 </resources>
