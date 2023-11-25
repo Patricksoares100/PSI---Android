@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/fundo"
     tools:context=".RegistarClienteActivity">
 
     <ImageView
         android:id="@+id/ivLogoServidor"
         android:layout_width="match_parent"
-        android:layout_height="142dp"
+        android:layout_height="125dp"
         android:contentDescription="@string/descriptionLogo"
         app:srcCompat="@drawable/welcome" />
 
@@ -169,11 +168,12 @@
             android:onClick="Canceler"/>
 
         <Button
-            android:id="@+id/buttonConfirmarRegistar"
+            android:id="@+id/buttonRegistarCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textConfirmar" />
+            android:onClick="onClickRegistarCliente"
+            android:text="@string/btn_Confirmar" />
 
     </LinearLayout>
 
