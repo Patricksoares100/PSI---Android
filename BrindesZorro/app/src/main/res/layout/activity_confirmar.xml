@@ -28,7 +28,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -71,7 +71,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextPhone2"
+        android:id="@+id/editTextNif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -92,7 +92,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/editTextMorada"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -135,7 +135,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/editTextLocalidade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -177,6 +177,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:onClick="onClickConfirmarPagamento"
         android:text="@string/btn_Confirmar" />
 
     <View
