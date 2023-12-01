@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
+
 public class ConfirmarActivity extends AppCompatActivity {
 
     private EditText editTextName, editTextPhone ,editTextNif, editTextMorada,editTextTextPostalAddress,editTextLocalidade;
@@ -59,7 +61,7 @@ public class ConfirmarActivity extends AppCompatActivity {
             Toast.makeText(this, "Localidade inválida", Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, ListaHomeFragment.class);
         startActivity(intent);
         finish();
 

@@ -31,10 +31,6 @@
             android:name=".DetalhesArtigoActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="false"
-            android:launchMode="singleTop" />
-        <activity
             android:name=".RegistarClienteActivity"
             android:exported="false"
             android:launchMode="singleTop" />
@@ -50,10 +46,6 @@
         <activity
             android:name=".ArtigosActivity"
             android:exported="false" />
-        <activity
-            android:name=".FaturasActivity"
-            android:exported="false"
-            android:launchMode="singleTop" />
         <activity
             android:name=".MainActivity"
             android:exported="false"

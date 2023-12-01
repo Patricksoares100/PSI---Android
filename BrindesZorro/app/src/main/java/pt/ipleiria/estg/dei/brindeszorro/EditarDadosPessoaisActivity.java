@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
+
 public class EditarDadosPessoaisActivity extends AppCompatActivity {
 
     private EditText etNomeEditarDadosPessoais, etTelefoneEditarDadosPessoais,
@@ -85,7 +87,7 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
         }
 
 
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, ListaHomeFragment.class);
         // deve ser para colocar aqui a função de dar um save
         startActivity(intent);
         finish();

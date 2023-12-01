@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFaturasFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFavoritosFragment;
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
 
         if (item.getItemId() == R.id.navHome){
-            Intent home = new Intent(this, HomeActivity.class);
-            startActivity(home);
+            fragment = new ListaHomeFragment();
             setTitle(item.getTitle());
 
         } else if (item.getItemId() == R.id.navCarrinho) {
