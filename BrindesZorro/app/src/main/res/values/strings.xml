@@ -107,5 +107,8 @@
     <string name="txtComentarioArtigoAvaliacaoComentario">Comentário</string>
     <string name="buttonEnviarComentarioAvaliacaoComentario">Enviar</string>
     <string name="buttonLogout">Logout</string>
-    <string name="txtHorizontalScrollHome">Horizontal Scroll Home</string>/>
+    <string name="txtHorizontalScrollHome">Horizontal Scroll Home</string>
+    <string name="tv_lvNomeArtigoAvaliacao">Nome do artigo:</string>
+    <string name="tv_lvComentarioAvaliacao">Comentário:</string>
+    <string name="tv_lvClassificacaoAvaliacao">Classificação:</string>/>
 </resources>

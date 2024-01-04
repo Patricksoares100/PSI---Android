@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivLogoAvaliacao"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:contentDescription="@string/descriptionLogo"
+        android:src="@drawable/ic_action_avaliacoes" />
+
+    <View
+        android:id="@+id/divider16"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <ListView
+        android:id="@+id/lvAvaliacaoLista"
+        android:layout_width="match_parent"
+        android:layout_height="550dp" />
+
+    <View
+        android:id="@+id/divider17"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButtonPerfilAvaliacao"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_Pessoal"
+            android:src="@drawable/ic_action_pessoal" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCarrinhoAvaliacao"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_carrinho"
+            android:src="@drawable/ic_action_carrinho" />
+
+        <ImageButton
+            android:id="@+id/imageButtonFavoritoAvaliacao"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_favoritos"
+            android:src="@drawable/ic_action_favorito" />
+    </LinearLayout>
+
+</LinearLayout>
