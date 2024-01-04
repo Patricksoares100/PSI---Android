@@ -61,4 +61,23 @@ public class Artigo {
         this.referencia = referencia;
     }
 
+    public int getStock_atual() {return stock_atual;}
+
+    public void setStock_atual(int stock_atual) {this.stock_atual = stock_atual;}
+
+    public int getIva_id() {return iva_id;}
+
+    public void setIva_id(int iva_id) {this.iva_id = iva_id;}
+
+    public int getFornecedor_id() {return fornecedor_id;}
+
+    public void setFornecedor_id(int fornecedor_id) {this.fornecedor_id = fornecedor_id;}
+
+    public int getCategoria_id() {return categoria_id;}
+
+    public void setCategoria_id(int categoria_id) {this.categoria_id = categoria_id;}
+
+    public int getPerfil_id() {return perfil_id;}
+
+    public void setPerfil_id(int perfil_id) {this.perfil_id = perfil_id;}
 }

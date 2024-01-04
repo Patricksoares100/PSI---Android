@@ -42,19 +42,7 @@ public class ListaHomeFragment extends Fragment {
         lvArtigos = view.findViewById(R.id.lvHomeArtigos);
         //vai buscar a lista de livros ao singleton
         artigos = SingletonGestorLoja.getInstance(getContext()).getArtigosBD();
-        for (Artigo artigo : artigos) {
-            Log.d("ArtigoDump", "ID: " + artigo.getId());
-            Log.d("ArtigoDump", "Nome: " + artigo.getNome());
-            Log.d("ArtigoDump", "Descrição: " + artigo.getDescricao());
-            Log.d("ArtigoDump", "Referência: " + artigo.getReferencia());
-            Log.d("ArtigoDump", "Preço: " + artigo.getPreco());
-           /* Log.d("ArtigoDump", "Stock Atual: " + artigo.getStockAtual());
-            Log.d("ArtigoDump", "IVA ID: " + artigo.getIvaId());
-            Log.d("ArtigoDump", "Fornecedor ID: " + artigo.getFornecedorId());
-            Log.d("ArtigoDump", "Categoria ID: " + artigo.getCategoriaId());
-            Log.d("ArtigoDump", "Perfil ID: " + artigo.getPerfilId());
-            Log.d("ArtigoDump", "-----------------------");*/
-        }
+
         // DEFINIR ADAPTADOR
         lvArtigos.setAdapter(new ListaArtigosAdaptador(getContext(),artigos));
         //temos que utilizar um listener para saber qual o item que foi selecionado

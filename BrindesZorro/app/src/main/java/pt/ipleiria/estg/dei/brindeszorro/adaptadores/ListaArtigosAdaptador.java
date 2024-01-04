@@ -56,30 +56,29 @@ public class ListaArtigosAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
-        //viewHolderLista.update(artigos.get(position));
+            //Perceber melhor -NAO ESQUECER
+            Artigo artigo = artigos.get(position);
+            viewHolderLista.tvNome.setText(artigo.getNome());
+            viewHolderLista.tvPreco.setText(String.valueOf(artigo.getPreco()));
+
         return convertView;
+
     }
 
     private class ViewHolderLista {
-        private TextView tvId, tvPrecoTotal, tvPrecoUnit, tvNome, tvDescricao, tvAvaliacao;
+        private TextView tvId, tvNome, tvDescricao, tvPreco, tvAvaliacao, tvFornecedor, tvCategoria,tvStock_atual, tvIva_id;
 
         public ViewHolderLista(View view) {
-            tvId = view.findViewById(R.id.tvNomeArtigo);
-            tvPrecoTotal = view.findViewById(R.id.tvValorArtigo);
-            tvPrecoUnit = view.findViewById(R.id.tvValorArtigo);
             tvNome = view.findViewById(R.id.tvNomeArtigo);
-            tvDescricao = view.findViewById(R.id.tvDescricaoDetalhes);
-            tvAvaliacao = view.findViewById(R.id.tvAvaliacaoArtigoDetalhes);
+            tvPreco = view.findViewById(R.id.tvValorArtigo);
+
         }
+
 
 
         /*
         public void update(Artigo artigo) {
-            tvId.setText(""+artigo.getId());
-            tvPreco.setText(""+artigo.getPreco());
-            tvNome.setText(""+artigo.getNome());
-            tvDescricao.setText(""+artigo.getNome());
-            tvReferencia.setText(""+artigo.getReferencia());
+
         }
          */
     }

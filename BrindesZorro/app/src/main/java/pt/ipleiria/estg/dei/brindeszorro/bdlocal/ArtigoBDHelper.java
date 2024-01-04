@@ -34,7 +34,6 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
     public ArtigoBDHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.db = this.getWritableDatabase();
-        //limparBaseDeDados(); descomentar quando queremos limpar a base de dados para já
         inserirArtigoExemplo();
         //Para definir permissões de leitura e escrita na base de dados, teremos de utilizar o método
         //getWritableDatabase(); ficha 08
@@ -62,7 +61,7 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
     }
 
     public void inserirArtigoExemplo() {
-
+        limparBaseDeDados(); //FAZ COM QUE AO CRIAR LIMPE PRIMEIRO
         SQLiteDatabase db = this.getWritableDatabase();
 
 
@@ -130,7 +129,6 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
     public void limparBaseDeDados() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
-        db.close();
     }
 
 
