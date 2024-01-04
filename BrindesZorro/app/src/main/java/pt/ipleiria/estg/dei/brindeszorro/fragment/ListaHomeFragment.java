@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,12 +25,11 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 public class ListaHomeFragment extends Fragment {
 
     private ListView lvArtigos;
+    private ImageView imgView;
     private ArrayList<Artigo> artigos;
     public ListaHomeFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +45,7 @@ public class ListaHomeFragment extends Fragment {
 
         // DEFINIR ADAPTADOR
         lvArtigos.setAdapter(new ListaArtigosAdaptador(getContext(),artigos));
+
         //temos que utilizar um listener para saber qual o item que foi selecionado
         lvArtigos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -54,11 +55,13 @@ public class ListaHomeFragment extends Fragment {
 
                 //agora vamos iniciar uma activity assim como passar o ID do artigo
                 Intent intent = new Intent(getContext(), DetalhesArtigoActivity.class);
-                intent.putExtra(DetalhesArtigoActivity.ID_ARTIGO,(int) position);
+                intent.putExtra(DetalhesArtigoActivity.ID_ARTIGO,(int) id);
                 startActivity(intent);
             }
         });
 
-        return view;
+       return view;
     }
+
+
 }

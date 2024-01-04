@@ -110,5 +110,7 @@
     <string name="txtHorizontalScrollHome">Horizontal Scroll Home</string>
     <string name="tv_lvNomeArtigoAvaliacao">Nome do artigo:</string>
     <string name="tv_lvComentarioAvaliacao">Comentário:</string>
-    <string name="tv_lvClassificacaoAvaliacao">Classificação:</string>/>
+    <string name="tv_lvClassificacaoAvaliacao">Classificação:</string>
+    <string name="txtAdicionarAoCarrinho">Adicionar ao Carrinho</string>
+    <string name="txtFavoritosDetalhesArtigo">Adicionao aos Favoritos</string>/>
 </resources>
