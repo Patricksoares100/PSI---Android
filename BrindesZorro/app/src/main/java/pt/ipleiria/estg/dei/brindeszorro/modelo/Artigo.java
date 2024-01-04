@@ -1,18 +1,25 @@
 package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
 public class Artigo {
-    private int id;
+    private int id, stock_atual, iva_id, fornecedor_id, categoria_id, perfil_id;
+    private String nome,descricao, referencia;
     private double preco;
-    private String nome;
-    private String descricao;
-    private String referencia;
-    public Artigo(int id, double preco, String nome, String descricao, String referencia){
+
+
+    public Artigo(int id, String nome,String descricao, String referencia,double preco, int stock_atual, int fornecedor_id, int categoria_id, int perfil_id){
 
         this.id = id;
-        this.preco = preco;
         this.nome = nome;
         this.descricao = descricao;
         this.referencia = referencia;
+        this.preco = preco;
+        this.stock_atual = stock_atual;
+        this.iva_id = iva_id;
+        this.fornecedor_id = fornecedor_id;
+        this.categoria_id = categoria_id;
+        this.perfil_id = perfil_id;
+
+
     }
     public int getId() {
         return id;
