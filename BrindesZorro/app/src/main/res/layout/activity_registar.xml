@@ -7,174 +7,207 @@
     android:orientation="vertical"
     tools:context=".RegistarClienteActivity">
 
-    <ImageView
-        android:id="@+id/ivLogoServidor"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:contentDescription="@string/descriptionLogo"
-        app:srcCompat="@drawable/welcome" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvNomeRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:hint="@string/txtUserName"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/tvNomeRegistar"
-        android:inputType="text"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvPasswordRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/txtPassword"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etPasswordRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/txtPassword"
-        android:inputType="textPassword"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvEmailRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:hint="@string/tvPedirEmail"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etEmailRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hintEmailBrindesZorro"
-        android:inputType="text"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvTelefoneRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/tvInsiraTelefone"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etTelefoneRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hintTelefone"
-        android:inputType="phone"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvNifRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/textViewInsiraNIF"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etNifRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hintTelefone"
-        android:inputType="number"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvMoradaRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/textViewMorada"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etMoradaRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/hintMorada"
-        android:inputType="textMultiLine"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvCodigoPostalRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/textViewCodPostal"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etCodigoPostalRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:ems="10"
-        android:hint="@string/hintCodPostal"
-        android:inputType="textPostalAddress"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvLocalidadeRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/textViewLocalidade"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etLocalidadeRegistar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hintdescriptionLocalidade"
-        android:inputType="text"
-        android:minHeight="48dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/buttonCancelarRegistar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/textCancelar"
-            android:onClick="Canceler"/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonRegistarCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onClickRegistarCliente"
-            android:text="@string/btn_Confirmar" />
+            <ImageView
+                android:id="@+id/ivLogoServidor"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:contentDescription="@string/descriptionLogo"
+                app:srcCompat="@drawable/welcome" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/txtUserName"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_userName"
+                android:inputType="text"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvPasswordRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/txtPassword"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etPasswordRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/txtPassword"
+                android:inputType="textPassword"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvEmailRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/tvPedirEmail"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etEmailRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hintEmailBrindesZorro"
+                android:inputType="text"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/tvNomeRegistar"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/tvNomeRegistar"
+                android:inputType="text"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvTelefoneRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/tvInsiraTelefone"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etTelefoneRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hintTelefone"
+                android:inputType="phone"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvNifRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/textViewInsiraNIF"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etNifRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hintTelefone"
+                android:inputType="number"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvMoradaRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/textViewMorada"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etMoradaRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/hintMorada"
+                android:inputType="textMultiLine"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvCodigoPostalRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/textViewCodPostal"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etCodigoPostalRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:ems="10"
+                android:hint="@string/hintCodPostal"
+                android:inputType="textPostalAddress"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvLocalidadeRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/textViewLocalidade"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etLocalidadeRegistar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hintdescriptionLocalidade"
+                android:inputType="text"
+                android:minHeight="48dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonCancelarRegistar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Canceler"
+                    android:text="@string/textCancelar"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <Button
+                    android:id="@+id/buttonRegistarCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onClickRegistarCliente"
+                    android:text="@string/btn_Confirmar"
+                    tools:ignore="VisualLintButtonSize" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
