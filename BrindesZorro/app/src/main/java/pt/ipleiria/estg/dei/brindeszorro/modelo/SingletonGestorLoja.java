@@ -5,13 +5,16 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.ArtigoBDHelper;
+import pt.ipleiria.estg.dei.brindeszorro.bdlocal.AvaliacaoBDHelper;
 
 public class SingletonGestorLoja {
 
     private ArrayList<Fatura> faturas;
     private ArrayList<Artigo> artigos;
+    private ArrayList<Avaliacao> avaliacaos;
     private static SingletonGestorLoja instance = null;
-    private ArtigoBDHelper artigoBDHelper = null;
+    private ArtigoBDHelper artigoBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
+    private AvaliacaoBDHelper avaliacaoBDHelper = null;
 
     public static synchronized SingletonGestorLoja getInstance(Context context){
         //corrigir todas as chamadas ao método getInstance() para que passe a receber o contexto
@@ -21,8 +24,11 @@ public class SingletonGestorLoja {
         return instance;
     }
 
+    // Alinea 2.1 Ficha 8 Books - alterar o construtor e receber um parâmetro do tipo Context
+    // Necessário para instanciar a classe da base de dados
     private SingletonGestorLoja(Context context) {
         artigoBDHelper = new ArtigoBDHelper(context);
+        avaliacaoBDHelper = new AvaliacaoBDHelper(context);
 
         //gerarDadosFaturas();
         //gerarDadosArtigos();
@@ -46,9 +52,15 @@ public class SingletonGestorLoja {
     }*/
 
     public ArrayList<Fatura> getFaturas(){ return new ArrayList<>(faturas);}
+
     public ArrayList<Artigo> getArtigosBD(){
         artigos = artigoBDHelper.getAllArtigosBD();
         return  new ArrayList<>(artigos);
+    }
+
+    public ArrayList<Avaliacao> getAvaliacaosBD(){
+        avaliacaos = avaliacaoBDHelper.getAllAvaliacaosBD();
+        return  new ArrayList<>(avaliacaos);
     }
 
     public Artigo getArtigo(int id){  //recebe id por parametro
@@ -59,4 +71,51 @@ public class SingletonGestorLoja {
         }return null;       //caso contrario devolve nulo
     }
 
+    // Alinea 7.2.1 Ficha 5 Books - Para aceder de forma correta a avaliacao selecionada, implementamos o método getAvaliacao(int idAvaliacao)
+    public Avaliacao getAvaliacao(int idAvaliacao){
+
+        for (Avaliacao a : avaliacaos) {
+            if(a.getId() == idAvaliacao)
+                return a;
+        }
+        return null;
+    }
+
+    // region # METODOS AVALIACAOS BD #
+    // Alinea 2.4 Ficha 8 Books - métodos adicionar, remover, editar e get
+
+    public void adicionarAvaliacaosBD(ArrayList<Avaliacao> avaliacaos){
+        avaliacaoBDHelper.removerAllAvaliacaosBD();
+        for (Avaliacao a : avaliacaos){
+            adicionarAvaliacaoBD(a);
+        }
+    }
+
+    public void adicionarAvaliacaoBD(Avaliacao a) {
+        avaliacaoBDHelper.adicionarAvaliacaoBD(a);
+    }
+
+    public void editarAvaliacaoBD(Avaliacao a) {
+        Avaliacao auxAvaliacao = getAvaliacao(a.getId());
+
+        if (auxAvaliacao != null) {
+            if (avaliacaoBDHelper.editarAvaliacaoBD(a)) {
+                auxAvaliacao.setComentario(a.getComentario());
+                auxAvaliacao.setClassificacao(a.getClassificacao());
+                auxAvaliacao.setArtigoId(a.getArtigoId());
+                auxAvaliacao.setPerfilId(a.getPerfilId());
+            }
+        }
+    }
+
+    public void removerAvaliacaoBD(int idAvaliacao) {
+        Avaliacao auxAvaliacao = getAvaliacao(idAvaliacao);
+        if (auxAvaliacao != null) {
+            if (avaliacaoBDHelper.removerAvaliacaoBD(idAvaliacao)) {
+                avaliacaos.remove(auxAvaliacao);
+            }
+        }
+    }
+
+    // endregion
 }
