@@ -4,28 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".FaturaActivity">
 
     <ImageView
-        android:id="@+id/ivLogoFatura"
+        android:id="@+id/ivLogoFaturaFragment"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:contentDescription="@string/descriptionLogo"
         android:src="@drawable/ic_action_faturas" />
 
     <View
-        android:id="@+id/divider3"
+        android:id="@+id/divider18"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
     <ListView
-        android:id="@+id/lvFatura"
+        android:id="@+id/lvFaturaFragment"
         android:layout_width="match_parent"
         android:layout_height="550dp" />
 
     <View
-        android:id="@+id/divider2"
+        android:id="@+id/divider19"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
@@ -36,7 +37,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButtonPerfilFatura"
+            android:id="@+id/imageButtonPerfilFaturaFragment"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -44,7 +45,7 @@
             android:src="@drawable/ic_action_pessoal" />
 
         <ImageButton
-            android:id="@+id/imageButtonCarrinhoFatura"
+            android:id="@+id/imageButtonCarrinhoFaturaFragment"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -52,7 +53,7 @@
             android:src="@drawable/ic_action_carrinho" />
 
         <ImageButton
-            android:id="@+id/imageButtonFavoritoFatura"
+            android:id="@+id/imageButtonFavoritoFaturaFragment"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"

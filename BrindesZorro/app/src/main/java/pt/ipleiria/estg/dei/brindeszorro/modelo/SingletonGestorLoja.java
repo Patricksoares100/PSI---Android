@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.ArtigoBDHelper;
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.AvaliacaoBDHelper;
+import pt.ipleiria.estg.dei.brindeszorro.bdlocal.FaturaBDHelper;
 
 public class SingletonGestorLoja {
 
@@ -15,6 +16,7 @@ public class SingletonGestorLoja {
     private static SingletonGestorLoja instance = null;
     private ArtigoBDHelper artigoBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
     private AvaliacaoBDHelper avaliacaoBDHelper = null;
+    private FaturaBDHelper faturaBDHelper = null;
 
     public static synchronized SingletonGestorLoja getInstance(Context context){
         //corrigir todas as chamadas ao método getInstance() para que passe a receber o contexto
@@ -29,7 +31,7 @@ public class SingletonGestorLoja {
     private SingletonGestorLoja(Context context) {
         artigoBDHelper = new ArtigoBDHelper(context);
         avaliacaoBDHelper = new AvaliacaoBDHelper(context);
-
+        faturaBDHelper = new FaturaBDHelper(context);
         //gerarDadosFaturas();
         //gerarDadosArtigos();
     }
@@ -51,7 +53,9 @@ public class SingletonGestorLoja {
         artigos.add(new Artigo(2, 27, "Artigo 2","Detalhes do artigo 2", "#ART1569" ));
     }*/
 
-    public ArrayList<Fatura> getFaturas(){ return new ArrayList<>(faturas);}
+    public ArrayList<Fatura> getFaturasBD(){
+        faturas = faturaBDHelper.getAllFaturasBD();
+        return new ArrayList<>(faturas);}
 
     public ArrayList<Artigo> getArtigosBD(){
         artigos = artigoBDHelper.getAllArtigosBD();
@@ -77,6 +81,15 @@ public class SingletonGestorLoja {
         for (Avaliacao a : avaliacaos) {
             if(a.getId() == idAvaliacao)
                 return a;
+        }
+        return null;
+    }
+
+    public Fatura getFatura(int idFatura){
+
+        for (Fatura f : faturas) {
+            if(f.getId() == idFatura)
+                return f;
         }
         return null;
     }
@@ -113,6 +126,43 @@ public class SingletonGestorLoja {
         if (auxAvaliacao != null) {
             if (avaliacaoBDHelper.removerAvaliacaoBD(idAvaliacao)) {
                 avaliacaos.remove(auxAvaliacao);
+            }
+        }
+    }
+
+    // endregion
+
+    // region # METODOS FATURAS BD #
+
+    public void adicionarFaturasBD(ArrayList<Fatura> faturas){
+        faturaBDHelper.removerAllFaturasBD();
+        for (Fatura f : faturas){
+            adicionarFaturaBD(f);
+        }
+    }
+
+    public void adicionarFaturaBD(Fatura f) {
+        faturaBDHelper.adicionarFaturaBD(f);
+    }
+
+    public void editarFaturaBD(Fatura f) {
+        Fatura auxFatura = getFatura(f.getId());
+
+        if (auxFatura != null) {
+            if (faturaBDHelper.editarFaturaBD(f)) {
+                auxFatura.setData(f.getData());
+                auxFatura.setValorFatura(f.getValorFatura());
+                auxFatura.setEstado(f.getEstado());
+                auxFatura.setPerfil_id(f.getPerfil_id());
+            }
+        }
+    }
+
+    public void removerFaturaBD(int idFatura) {
+        Fatura auxFatura = getFatura(idFatura);
+        if (auxFatura != null) {
+            if (faturaBDHelper.removerFaturaBD(idFatura)) {
+                faturas.remove(auxFatura);
             }
         }
     }
