@@ -32,7 +32,7 @@ public class ListaArtigosFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_home, container, false);
 
         lvArtigos = view.findViewById(R.id.lvHome);
-        artigos = SingletonGestorLoja.getInstance().getArtigos();
+        artigos = SingletonGestorLoja.getInstance(getContext()).getArtigosBD();
 
         System.out.println("--->" + artigos);
         // DEFINIR ADAPTADOR

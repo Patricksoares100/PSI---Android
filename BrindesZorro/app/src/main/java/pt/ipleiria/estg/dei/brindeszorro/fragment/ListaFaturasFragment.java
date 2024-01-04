@@ -38,7 +38,7 @@ public class ListaFaturasFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_fatura, container, false);
         setHasOptionsMenu(true); // vai chamar o menu
         lvFaturas = view.findViewById(R.id.lvFatura); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
-        faturas = SingletonGestorLoja.getInstance().getFaturas();
+        faturas = SingletonGestorLoja.getInstance(getContext()).getFaturas();
         lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
         return view;
     }
@@ -58,7 +58,7 @@ public class ListaFaturasFragment extends Fragment {
         @Override
         public boolean onQueryTextChange(String newText) {
             ArrayList<Fatura> listaTempFaturas = new ArrayList<>(); // vamos criar uma array list temporaria
-            for (Fatura f : SingletonGestorLoja.getInstance().getFaturas())
+            for (Fatura f : SingletonGestorLoja.getInstance(getContext()).getFaturas())
                 if (f.getEstado().toLowerCase().contains(newText.toLowerCase())) {
                     //vai comparar a nova letra com as que existem no array. Se conter vai adicionar ao array
                     //para comparar com a proxima letra
