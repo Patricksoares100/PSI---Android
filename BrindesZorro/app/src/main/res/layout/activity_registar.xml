@@ -20,11 +20,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="@string/tvNomeRegistar"
+        android:hint="@string/txtUserName"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etNomeRegistar"
+        android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
