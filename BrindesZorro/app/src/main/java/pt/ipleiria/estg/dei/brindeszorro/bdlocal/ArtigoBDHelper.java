@@ -34,6 +34,8 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
     public ArtigoBDHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.db = this.getWritableDatabase();
+        //limparBaseDeDados(); descomentar quando queremos limpar a base de dados para já
+        inserirArtigoExemplo();
         //Para definir permissões de leitura e escrita na base de dados, teremos de utilizar o método
         //getWritableDatabase(); ficha 08
     }
@@ -56,7 +58,7 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
                         PERFIL_ID + " INTEGER NOT NULL " +
                         ");";
         db.execSQL(createArtigoTable);  // Executa o comando SQL para criar a tabela
-        inserirArtigoExemplo();
+        //inserirArtigoExemplo();
     }
 
     public void inserirArtigoExemplo() {
@@ -78,8 +80,6 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, values);
 
-
-        db.close();
     }
 
     @Override
@@ -127,6 +127,11 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
         return artigos;
     }
 
+    public void limparBaseDeDados() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME);
+        db.close();
+    }
 
 
 }

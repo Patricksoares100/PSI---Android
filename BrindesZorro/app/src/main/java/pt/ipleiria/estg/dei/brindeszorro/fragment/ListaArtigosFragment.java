@@ -33,8 +33,13 @@ public class ListaArtigosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("ListaArtigosFragment", "onCreateView called"); // mensagem de erro para ver se entra!!!!
 
+        // Não está a vir para aqui, possivelmente terá de se apagar
+        // esta a ir para o listaHomeFragment
+
+
+
+        Toast.makeText(getContext(), "entrou", Toast.LENGTH_SHORT).show();
 
         // inicia o layout com o activity_home
         View view = inflater.inflate(R.layout.fragment_lista_home, container, false);

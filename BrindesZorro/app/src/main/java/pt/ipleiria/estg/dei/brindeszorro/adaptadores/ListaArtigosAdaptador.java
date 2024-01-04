@@ -64,13 +64,14 @@ public class ListaArtigosAdaptador extends BaseAdapter {
         private TextView tvId, tvPrecoTotal, tvPrecoUnit, tvNome, tvDescricao, tvAvaliacao;
 
         public ViewHolderLista(View view) {
-            tvId = view.findViewById(R.id.tvNomeArtigoDetalhes);
-            tvPrecoTotal = view.findViewById(R.id.tvValorTotalDetalhes);
-            tvPrecoUnit = view.findViewById(R.id.tvValorUnitarioArtigo);
-            tvNome = view.findViewById(R.id.tvNomeArtigoDetalhes);
+            tvId = view.findViewById(R.id.tvNomeArtigo);
+            tvPrecoTotal = view.findViewById(R.id.tvValorArtigo);
+            tvPrecoUnit = view.findViewById(R.id.tvValorArtigo);
+            tvNome = view.findViewById(R.id.tvNomeArtigo);
             tvDescricao = view.findViewById(R.id.tvDescricaoDetalhes);
             tvAvaliacao = view.findViewById(R.id.tvAvaliacaoArtigoDetalhes);
         }
+
 
         /*
         public void update(Artigo artigo) {
