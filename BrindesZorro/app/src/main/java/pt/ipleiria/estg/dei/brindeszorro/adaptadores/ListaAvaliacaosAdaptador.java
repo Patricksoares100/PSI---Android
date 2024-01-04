@@ -16,12 +16,13 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 public class ListaAvaliacaosAdaptador extends BaseAdapter {
 
     // Alinea 4.3 - Ficha Books ListViews
+    // Esta classe usa estes três atributos
     private Context context;
     private LayoutInflater inflater;
-
     private ArrayList<Avaliacao> avaliacaos;
 
     // Alinea 4.4 - Ficha Books ListViews
+    // O construtor deve receber como parâmetros um context e a lista de 'avaliacaos'
     public ListaAvaliacaosAdaptador(Context context, ArrayList<Avaliacao> avaliacaos) {
         this.context = context;
         this.avaliacaos = avaliacaos;
@@ -33,17 +34,17 @@ public class ListaAvaliacaosAdaptador extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return avaliacaos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return avaliacaos.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return avaliacaos.get(position).getId();
     }
 
     // Alinea 4.5.2 - Ficha 5 Books ListViews
@@ -65,16 +66,21 @@ public class ListaAvaliacaosAdaptador extends BaseAdapter {
 
         viewHolderLista.update(avaliacaos.get(position));
 
+        Avaliacao avaliacao = avaliacaos.get(position);
+        viewHolderLista.tvComentarioAvaliacao.setText(avaliacao.getComentario());
+        viewHolderLista.tvClassificacaoAvaliacao.setText(String.valueOf(avaliacao.getClassificacao()));
+
         return convertView;
     }
 
     // Alinea 4.5.1 - Ficha 5 Books ListViews
+    // Para acesso aos componentes visuais
     private class ViewHolderLista {
         private TextView tvNomeArtigoAvaliacao, tvComentarioAvaliacao, tvClassificacaoAvaliacao;
 
         public ViewHolderLista(View view) {
-            tvNomeArtigoAvaliacao = view.findViewById(R.id.tvNomeArtigoAvaliacao);
-            tvComentarioAvaliacao = view.findViewById(R.id.tvComentarioAvaliacao);
+            tvNomeArtigoAvaliacao = view.findViewById(R.id.tvNomeArtigoAvaliacaoApresentado);
+            tvComentarioAvaliacao = view.findViewById(R.id.tvComentarioAvaliacaoApresentado);
             tvClassificacaoAvaliacao = view.findViewById(R.id.tvClassificacaoAvaliacao);
         }
 

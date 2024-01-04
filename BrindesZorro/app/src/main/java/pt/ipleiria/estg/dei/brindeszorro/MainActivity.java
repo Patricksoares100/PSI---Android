@@ -18,6 +18,7 @@ import android.widget.EditText;
 
 import com.google.android.material.navigation.NavigationView;
 
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaAvaliacaosFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFaturasFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFavoritosFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
@@ -99,9 +100,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(editarDadosPessoais);
 
         } else if (item.getItemId() == R.id.navAvaliacoes) {
+            // Alinea 6 Ficha 5 Books - Iniciar o fragment quando se clica nas Avaliacoes da Main
+            fragment = new ListaAvaliacaosFragment();
             setTitle(item.getTitle());
-            Intent intent = new Intent(this, AvaliacaoComentarioActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(this, AvaliacaoComentarioActivity.class);
+            startActivity(intent);*/
         }
 
         if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();

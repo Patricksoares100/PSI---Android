@@ -8,12 +8,21 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+
 public class AvaliacaoComentarioActivity extends AppCompatActivity {
-private EditText etComentarioArtigoAvaliacaoComentario;
+
+    public static final String IDAVALIACAOS = "IDAVALIACAO";
+    Avaliacao avaliacao;
+    private EditText etComentarioArtigoAvaliacaoComentario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avaliacao_comentario);
+
+        int idAvaliacao = getIntent().getIntExtra(IDAVALIACAOS, 0);
+        avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao(idAvaliacao);
 
         etComentarioArtigoAvaliacaoComentario = findViewById(R.id.etComentarioArtigoAvaliacaoComentario);
     }
