@@ -4,6 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
+import pt.ipleiria.estg.dei.brindeszorro.bdlocal.ArtigoBDHelper;
+
 public class SingletonGestorLoja {
 
     private ArrayList<Fatura> faturas;
@@ -20,7 +22,6 @@ public class SingletonGestorLoja {
     }
 
     private SingletonGestorLoja(Context context) {
-        artigos = new ArrayList<>();
         artigoBDHelper = new ArtigoBDHelper(context);
 
         //gerarDadosFaturas();
@@ -48,6 +49,14 @@ public class SingletonGestorLoja {
     public ArrayList<Artigo> getArtigosBD(){
         artigos = artigoBDHelper.getAllArtigosBD();
         return  new ArrayList<>(artigos);
+    }
+
+    public Artigo getArtigo(int id){  //recebe id por parametro
+        for (Artigo art:artigos){   //vai percorrer o array artigo
+            if (art.getId()==id){   //se algum dos artigos for igual ao id do parametro recebido em cima
+                return art;     //vai devolver um objeto artigo
+            }
+        }return null;       //caso contrario devolve nulo
     }
 
 }

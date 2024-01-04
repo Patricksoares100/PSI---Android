@@ -14,12 +14,12 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 
 public class ListaArtigosAdaptador extends BaseAdapter {
 
-    private Context context;
-    private LayoutInflater inflater;
-
-    private ArrayList<Artigo> artigos;
+    private Context context; //é necessário para o adaptador
+    private LayoutInflater inflater; //ter acesso ao layout específico para cada item
+    private ArrayList<Artigo> artigos; // vai guardar a lista de artigos
 
     public ListaArtigosAdaptador(Context context, ArrayList<Artigo> artigos) {
+        // vai receber como parametros um context e a lista de artigos
         this.context = context;
         this.artigos = artigos;
     }
@@ -30,21 +30,21 @@ public class ListaArtigosAdaptador extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return artigos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return artigos.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+    public long getItemId(int position) {return artigos.get(position).getId();}
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
+        // o parâmetro View servirá para reutilizar a view para apresentar o
+        //layout de cada item, em vez de estar sempre a criar uma nova
         if (inflater == null)
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); // autorização a variacvel
         if (convertView == null) {
@@ -56,23 +56,23 @@ public class ListaArtigosAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
-        viewHolderLista.update(artigos.get(position));
+        //viewHolderLista.update(artigos.get(position));
         return convertView;
     }
 
     private class ViewHolderLista {
-        private TextView tvId, tvPreco, tvNome, tvDescricao, tvReferencia;
+        private TextView tvId, tvPrecoTotal, tvPrecoUnit, tvNome, tvDescricao, tvAvaliacao;
 
-        // ELABORAR BEM ESTE METODO CONSOANTE O LAYOUT DO ARTIGO QUE FOR PARA USAR!!!!!
-        // ESTA COMENTADO POIS NEM TODOS OS ID's DE ATRIBUTOS ESTÃO BEM DEFINIDOS NO LAYOUT
         public ViewHolderLista(View view) {
-            //tvId = view.findViewById(R.id.tvIdArtigo);
-            //tvPreco = view.findViewById(R.id.tvPrecoArtigo);
-            //tvNome = view.findViewById(R.id.tvNomeArtigo);
-            //tvDescricao = view.findViewById(R.id.tvDescricao);
-            //tvReferencia = view.findViewById(R.id.tvReferenciaArtigo);
+            tvId = view.findViewById(R.id.tvNomeArtigoDetalhes);
+            tvPrecoTotal = view.findViewById(R.id.tvValorTotalDetalhes);
+            tvPrecoUnit = view.findViewById(R.id.tvValorUnitarioArtigo);
+            tvNome = view.findViewById(R.id.tvNomeArtigoDetalhes);
+            tvDescricao = view.findViewById(R.id.tvDescricaoDetalhes);
+            tvAvaliacao = view.findViewById(R.id.tvAvaliacaoArtigoDetalhes);
         }
 
+        /*
         public void update(Artigo artigo) {
             tvId.setText(""+artigo.getId());
             tvPreco.setText(""+artigo.getPreco());
@@ -80,6 +80,7 @@ public class ListaArtigosAdaptador extends BaseAdapter {
             tvDescricao.setText(""+artigo.getNome());
             tvReferencia.setText(""+artigo.getReferencia());
         }
+         */
     }
 
 }

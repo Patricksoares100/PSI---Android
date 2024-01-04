@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewNomeArtigo"
+                android:id="@+id/tvNomeArtigoDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="TextView" />
@@ -28,19 +28,19 @@
                 android:src="@drawable/brindes" />
 
             <TextView
-                android:id="@+id/textViewValorUnitarioArtigo"
+                android:id="@+id/tvValorUnitarioArtigo"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/textViewDescricao"
+                android:id="@+id/tvDescricaoDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/textViewFornecedorArtigo"
+                android:id="@+id/tvAvaliacaoArtigoDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="TextView" />
@@ -58,7 +58,7 @@
                     android:src="@drawable/ic_action_menos_foreground" />
 
                 <TextView
-                    android:id="@+id/textViewQuantidadeArtigo"
+                    android:id="@+id/tvQuantidadeArtigoDetalhes"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_weight="1"
@@ -80,7 +80,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewValorTotal"
+                    android:id="@+id/tvValorTotalDetalhes"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="TextView" />

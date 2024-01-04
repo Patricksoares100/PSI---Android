@@ -1,5 +1,6 @@
-package pt.ipleiria.estg.dei.brindeszorro.modelo;
+package pt.ipleiria.estg.dei.brindeszorro.bdlocal;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 
 public class ArtigoBDHelper extends SQLiteOpenHelper {
 
@@ -53,6 +56,30 @@ public class ArtigoBDHelper extends SQLiteOpenHelper {
                         PERFIL_ID + " INTEGER NOT NULL " +
                         ");";
         db.execSQL(createArtigoTable);  // Executa o comando SQL para criar a tabela
+        inserirArtigoExemplo();
+    }
+
+    public void inserirArtigoExemplo() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        ContentValues values = new ContentValues();
+        values.put(NOME, "Artigo Exemplo");
+        values.put(DESCRICAO, "Descrição do Artigo Exemplo");
+        values.put(REFERENCIA, "#ART001");
+        values.put(PRECO, 25);
+        values.put(STOCK_ATUAL, 50);
+        values.put(IVA_ID, 1);
+        values.put(FORNECEDOR_ID, 1);
+        values.put(CATEGORIA_ID, 1);
+        values.put(PERFIL_ID, 1);
+
+
+        db.insert(TABLE_NAME, null, values);
+
+
+        db.close();
     }
 
     @Override

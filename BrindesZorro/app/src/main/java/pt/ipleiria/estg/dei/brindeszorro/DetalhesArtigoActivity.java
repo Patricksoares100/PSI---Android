@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 public class DetalhesArtigoActivity extends AppCompatActivity {
 
+    public static final String ID_ARTIGO = "IDARTIGO";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
