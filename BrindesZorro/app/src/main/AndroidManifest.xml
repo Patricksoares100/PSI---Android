@@ -36,6 +36,7 @@
         <activity
             android:name=".RegistarClienteActivity"
             android:exported="false"
+            android:parentActivityName=".LoginActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".ServidorActivity"
