@@ -15,20 +15,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
-import pt.ipleiria.estg.dei.brindeszorro.bdlocal.ArtigoBDHelper;
-import pt.ipleiria.estg.dei.brindeszorro.bdlocal.AvaliacaoBDHelper;
+import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
-import pt.ipleiria.estg.dei.brindeszorro.bdlocal.FaturaBDHelper;
 
 public class SingletonGestorLoja {
 
     private ArrayList<Fatura> faturas;
     private ArrayList<Artigo> artigos;
     private ArrayList<Avaliacao> avaliacaos;
+    private ArrayList<Favorito> favoritos;
     private static SingletonGestorLoja instance = null;
-    private ArtigoBDHelper artigoBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
-    private AvaliacaoBDHelper avaliacaoBDHelper = null;
-    private FaturaBDHelper faturaBDHelper = null;
+    private LojaBDHelper lojaBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
 
     private static RequestQueue volleyQueue = null;
   private static final String mUrlAPI = "http://172.22.21.219/PSI_Web/web/backend/web/api/";//depois concatenas com o resto
@@ -47,9 +44,7 @@ public class SingletonGestorLoja {
     // Alinea 2.1 Ficha 8 Books - alterar o construtor e receber um parâmetro do tipo Context
     // Necessário para instanciar a classe da base de dados
     private SingletonGestorLoja(Context context) {
-        artigoBDHelper = new ArtigoBDHelper(context);
-        avaliacaoBDHelper = new AvaliacaoBDHelper(context);
-        faturaBDHelper = new FaturaBDHelper(context);
+        lojaBDHelper = new LojaBDHelper(context);
         //gerarDadosFaturas();
         //gerarDadosArtigos();
     }
@@ -72,32 +67,38 @@ public class SingletonGestorLoja {
     }*/
 
     public ArrayList<Fatura> getFaturasBD(){
-        faturas = faturaBDHelper.getAllFaturasBD();
+        faturas = lojaBDHelper.getAllFaturasBD();
         return new ArrayList<>(faturas);}
 
     public ArrayList<Artigo> getArtigosBD(){
-        artigos = artigoBDHelper.getAllArtigosBD();
+        artigos = lojaBDHelper.getAllArtigosBD();
         return  new ArrayList<>(artigos);
     }
 
     public ArrayList<Avaliacao> getAvaliacaosBD(){
-        avaliacaos = avaliacaoBDHelper.getAllAvaliacaosBD();
+        avaliacaos = lojaBDHelper.getAllAvaliacaosBD();
         return  new ArrayList<>(avaliacaos);
     }
 
-    public Artigo getArtigo(int id){  //recebe id por parametro
-        for (Artigo art:artigos){   //vai percorrer o array artigo
-            if (art.getId()==id){   //se algum dos artigos for igual ao id do parametro recebido em cima
+    public ArrayList<Favorito> getFavoritosBD() {
+        favoritos = favoritoBDHelper.getAllFavoritosBD();
+        return new ArrayList<>(favoritos);
+    }
+
+    public Artigo getArtigo(int id) {  //recebe id por parametro
+        for (Artigo art : artigos) {   //vai percorrer o array artigo
+            if (art.getId() == id) {   //se algum dos artigos for igual ao id do parametro recebido em cima
                 return art;     //vai devolver um objeto artigo
             }
-        }return null;       //caso contrario devolve nulo
+        }
+        return null;       //caso contrario devolve nulo
     }
 
     // Alinea 7.2.1 Ficha 5 Books - Para aceder de forma correta a avaliacao selecionada, implementamos o método getAvaliacao(int idAvaliacao)
-    public Avaliacao getAvaliacao(int idAvaliacao){
+    public Avaliacao getAvaliacao(int idAvaliacao) {
 
         for (Avaliacao a : avaliacaos) {
-            if(a.getId() == idAvaliacao)
+            if (a.getId() == idAvaliacao)
                 return a;
         }
         return null;
@@ -112,25 +113,32 @@ public class SingletonGestorLoja {
         return null;
     }
 
+    public Favorito getFavoritos(int idFavoritos) {
+        for (Favorito fav : favoritos) {
+            if (fav.getId() == idFavoritos)
+                return fav;
+        }
+        return null;
+    }
     // region # METODOS AVALIACAOS BD #
     // Alinea 2.4 Ficha 8 Books - métodos adicionar, remover, editar e get
 
     public void adicionarAvaliacaosBD(ArrayList<Avaliacao> avaliacaos){
-        avaliacaoBDHelper.removerAllAvaliacaosBD();
+        lojaBDHelper.removerAllAvaliacaosBD();
         for (Avaliacao a : avaliacaos){
             adicionarAvaliacaoBD(a);
         }
     }
 
     public void adicionarAvaliacaoBD(Avaliacao a) {
-        avaliacaoBDHelper.adicionarAvaliacaoBD(a);
+        lojaBDHelper.adicionarAvaliacaoBD(a);
     }
 
     public void editarAvaliacaoBD(Avaliacao a) {
         Avaliacao auxAvaliacao = getAvaliacao(a.getId());
 
         if (auxAvaliacao != null) {
-            if (avaliacaoBDHelper.editarAvaliacaoBD(a)) {
+            if (lojaBDHelper.editarAvaliacaoBD(a)) {
                 auxAvaliacao.setComentario(a.getComentario());
                 auxAvaliacao.setClassificacao(a.getClassificacao());
                 auxAvaliacao.setArtigoId(a.getArtigoId());
@@ -142,7 +150,7 @@ public class SingletonGestorLoja {
     public void removerAvaliacaoBD(int idAvaliacao) {
         Avaliacao auxAvaliacao = getAvaliacao(idAvaliacao);
         if (auxAvaliacao != null) {
-            if (avaliacaoBDHelper.removerAvaliacaoBD(idAvaliacao)) {
+            if (lojaBDHelper.removerAvaliacaoBD(idAvaliacao)) {
                 avaliacaos.remove(auxAvaliacao);
             }
         }
@@ -194,21 +202,21 @@ public class SingletonGestorLoja {
     // region # METODOS FATURAS BD #
 
     public void adicionarFaturasBD(ArrayList<Fatura> faturas){
-        faturaBDHelper.removerAllFaturasBD();
+        lojaBDHelper.removerAllFaturasBD();
         for (Fatura f : faturas){
             adicionarFaturaBD(f);
         }
     }
 
     public void adicionarFaturaBD(Fatura f) {
-        faturaBDHelper.adicionarFaturaBD(f);
+        lojaBDHelper.adicionarFaturaBD(f);
     }
 
     public void editarFaturaBD(Fatura f) {
         Fatura auxFatura = getFatura(f.getId());
 
         if (auxFatura != null) {
-            if (faturaBDHelper.editarFaturaBD(f)) {
+            if (lojaBDHelper.editarFaturaBD(f)) {
                 auxFatura.setData(f.getData());
                 auxFatura.setValorFatura(f.getValorFatura());
                 auxFatura.setEstado(f.getEstado());
@@ -220,7 +228,7 @@ public class SingletonGestorLoja {
     public void removerFaturaBD(int idFatura) {
         Fatura auxFatura = getFatura(idFatura);
         if (auxFatura != null) {
-            if (faturaBDHelper.removerFaturaBD(idFatura)) {
+            if (lojaBDHelper.removerFaturaBD(idFatura)) {
                 faturas.remove(auxFatura);
             }
         }
