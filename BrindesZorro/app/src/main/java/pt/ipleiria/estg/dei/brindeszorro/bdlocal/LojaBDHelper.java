@@ -198,7 +198,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
-                        cursor.getInt(4),
+                        cursor.getDouble(4),
                         cursor.getInt(5),
                         cursor.getInt(6),
                         cursor.getInt(7),

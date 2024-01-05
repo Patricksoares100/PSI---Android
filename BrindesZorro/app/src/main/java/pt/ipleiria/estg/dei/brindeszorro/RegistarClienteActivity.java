@@ -106,7 +106,6 @@ public class RegistarClienteActivity extends AppCompatActivity {
                 Integer.parseInt(nif));
         SingletonGestorLoja.getInstance(getApplicationContext()).signupAPI(signup, getApplicationContext());
 
-        Toast.makeText(this, "Registo Efetuado com Sucesso!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

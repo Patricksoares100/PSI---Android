@@ -6,7 +6,7 @@ public class Artigo {
     private double preco;
 
 
-    public Artigo(int id, String nome,String descricao, String referencia,double preco, int stock_atual, int iva_id, int fornecedor_id, int categoria_id, int perfil_id){
+    public Artigo(int id, String nome, String descricao, String referencia, double preco, int stock_atual, int iva_id, int fornecedor_id, int categoria_id, int perfil_id){
 
         this.id = id;
         this.nome = nome;
