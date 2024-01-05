@@ -174,6 +174,41 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     //endregion
 
     //region # MÉTODOS CRUD DOS ARTIGOS #
+
+    public void adicionarArtigoBD(Artigo a) {
+        ContentValues values = new ContentValues();
+        values.put(ID, a.getId());
+        values.put(NOME, a.getNome());
+        values.put(DESCRICAO, a.getDescricao());
+        values.put(REFERENCIA, a.getReferencia());
+        values.put(PRECO, a.getReferencia());
+        values.put(IVA_ID,a.getIva_id());
+        values.put(FORNECEDOR_ID, a.getFornecedor_id());
+        values.put(CATEGORIA_ID, a.getCategoria_id());
+        values.put(PERFIL_ID,a.getPerfil_id());
+
+        this.db.insert(TABLE_NAME_ARTIGOS, null, values);
+    }
+
+    public boolean editarArtigoBD(Artigo a) {
+        ContentValues values = new ContentValues();
+        values.put(ID, a.getId());
+        values.put(NOME, a.getNome());
+        values.put(DESCRICAO, a.getDescricao());
+        values.put(REFERENCIA, a.getReferencia());
+        values.put(PRECO, a.getReferencia());
+        values.put(IVA_ID,a.getIva_id());
+        values.put(FORNECEDOR_ID, a.getFornecedor_id());
+        values.put(CATEGORIA_ID, a.getCategoria_id());
+        values.put(PERFIL_ID,a.getPerfil_id());
+
+        return this.db.update(TABLE_NAME_ARTIGOS, values, ID + "= ?", new String[]{"" + a.getId()}) > 0;
+    }
+
+    public boolean removerArtigoBD(int id) {
+        return this.db.delete(TABLE_NAME_ARTIGOS, ID + " = ?", new String[]{"" + id}) == 1;
+    }
+
     public ArrayList<Artigo>getAllArtigosBD(){
         ArrayList<Artigo> artigos = new ArrayList<>();
         //Cursor é uma interface que fornece um mecanismo para percorrer e consultar os
