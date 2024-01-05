@@ -31,8 +31,7 @@ public class SingletonGestorLoja {
     private FaturaBDHelper faturaBDHelper = null;
 
     private static RequestQueue volleyQueue = null;
-  private static final String mUrlAPISignup = "http://10.0.0.2/PlataformaSI/ProjetoPSI/PSI_Web/web/backend/web/api/users/registo";
-   // private static final String mUrlAPISignup = "localhost/PlataformaSI/ProjetoPSI/PSI_Web/web/backend/web/api/users/registo";
+  private static final String mUrlAPI = "http://172.22.21.219/PSI_Web/web/backend/web/api/";//depois concatenas com o resto
 
 
     public static synchronized SingletonGestorLoja getInstance(Context context){
@@ -157,17 +156,19 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
 
         }else{
-            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPISignup, new Response.Listener<String>() {
+            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPI +"users/registo", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //add com sucesso?
-                    System.out.println("----> ACERTOU SIGNUP");
-
+                    if(response.contains("sucesso")){
+                        System.out.println("----> SUCESSO Signup "+ response);
+                        Toast.makeText(context, R.string.registo_com_sucesso, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println("----> ERRO Signup" + error.getMessage());
+                    System.out.println("----> ERRO Signup" + error.getMessage() + error);
                 }
             }){
                 protected Map<String, String> getParams(){
