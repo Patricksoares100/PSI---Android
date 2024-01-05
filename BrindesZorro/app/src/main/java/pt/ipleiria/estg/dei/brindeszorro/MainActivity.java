@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
+    public static final int ADD = 100, EDIT = 200, DELETE = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

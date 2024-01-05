@@ -17,9 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.brindeszorro.DetalhesArtigoActivity;
+import pt.ipleiria.estg.dei.brindeszorro.MainActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
 
 public class SingletonGestorLoja {
@@ -32,6 +38,9 @@ public class SingletonGestorLoja {
     private LojaBDHelper lojaBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
     private static RequestQueue volleyQueue = null;
     private ArtigosListener artigosListener;
+    private ArtigoListener artigoListener;
+    private AvaliacaoListener avaliacaoListener;
+    private AvaliacaosListener avaliacaosListener;
 
 
   private static final String mUrlAPI = "http://172.22.21.219:8080/api/";//depois concatenas com o resto - como levou o:8080 retirou-se o .../PSI_Web/backend/web
@@ -53,6 +62,15 @@ public class SingletonGestorLoja {
         lojaBDHelper = new LojaBDHelper(context);
     }
 
+
+    //EX 7.1 FIcha 09
+    public void setArtigosListener(ArtigoListener artigoListener){
+        this.artigoListener = artigoListener;
+    }
+
+    public void setArtigosListener(ArtigosListener artigosListener1){
+        this.artigosListener = artigosListener;
+    }
 
     public ArrayList<Fatura> getFaturasBD(){
         faturas = lojaBDHelper.getAllFaturasBD();
@@ -185,6 +203,46 @@ public class SingletonGestorLoja {
         }
     }
     //endregion
+
+    // region # AVALIACAO API #
+
+    public void adicionarAvaliacaoAPI(final Avaliacao avaliacao, final Context context) {
+        if (!LojaJsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            //aqui temos de ir buscar na base de dados local se nao tiver net
+
+        } else {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
+                @Override
+                public void onResponse(String response) {
+                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response)); // recebe o artigo da base de dados para adicionar à API
+                    if (avaliacaoListener != null) {
+                        avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("---> ERRO adicionarLivroAPI: " + error.getMessage());
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    // possivelmente será puxado aqui o token
+                    params.put("comentario", avaliacao.getComentario());
+                    params.put("classificacao", "" + avaliacao.getClassificacao());
+                    params.put("artigoId", "" + avaliacao.getArtigoId());
+
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+
+    }
+
+    // endregion
+
 
     // region # METODOS FATURAS BD #
 
