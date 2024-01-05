@@ -4,9 +4,13 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
 
 public class LojaJsonParser {
@@ -54,5 +58,33 @@ public class LojaJsonParser {
             e.printStackTrace();
         }
         return auxSignup;
+    }
+
+    public static ArrayList<Artigo> parserJsonArtigos(JSONArray response) {
+        ArrayList<Artigo> artigos = new ArrayList<>();
+
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject artigo = (JSONObject) response.get(i);
+
+                int idArtigo = artigo.getInt("id");
+                String nome = artigo.getString("nome");
+                String descricao = artigo.getString("descricao");
+                String referencia = artigo.getString("referencia");
+                double preco = artigo.getDouble("preco");
+                int stock_atual = artigo.getInt("stock_atual");
+                int iva_id = artigo.getInt("iva_id");
+                int fornecedor_id = artigo.getInt("fornecedor_id");
+                int categoria_id = artigo.getInt("categoria_id");
+                int perfil_id = artigo.getInt("perfil_id");
+
+                Artigo auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual, iva_id, fornecedor_id, categoria_id, perfil_id);
+                artigos.add(auxArtigo);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return artigos;
     }
 }

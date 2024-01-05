@@ -7,8 +7,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +19,7 @@ import java.util.Map;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
 
 public class SingletonGestorLoja {
@@ -26,9 +30,11 @@ public class SingletonGestorLoja {
     private ArrayList<Favorito> favoritos;
     private static SingletonGestorLoja instance = null;
     private LojaBDHelper lojaBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
-
     private static RequestQueue volleyQueue = null;
-  private static final String mUrlAPI = "http://172.22.21.219/PSI_Web/web/backend/web/api/";//depois concatenas com o resto
+    private ArtigosListener artigosListener;
+
+
+  private static final String mUrlAPI = "http://172.22.21.219:8080/api/";//depois concatenas com o resto - como levou o:8080 retirou-se o .../PSI_Web/backend/web
 
 
     public static synchronized SingletonGestorLoja getInstance(Context context){
@@ -78,7 +84,6 @@ public class SingletonGestorLoja {
 
     // Alinea 7.2.1 Ficha 5 Books - Para aceder de forma correta a avaliacao selecionada, implementamos o método getAvaliacao(int idAvaliacao)
     public Avaliacao getAvaliacao(int idAvaliacao) {
-
         for (Avaliacao a : avaliacaos) {
             if (a.getId() == idAvaliacao)
                 return a;
@@ -239,4 +244,51 @@ public class SingletonGestorLoja {
         }
     }
     // endregion
+
+    //region # ARTIGOS BD #
+    public void adicionarArtigosBD(ArrayList<Artigo> artigos){
+        lojaBDHelper.removerAllArtigosBD();
+        for (Artigo a : artigos){
+            adicionarArtigoBD(a);
+        }
+    }
+
+    public void adicionarArtigoBD(Artigo a) {
+        lojaBDHelper.adicionarArtigoBD(a);
+    }
+    //endregion
+
+    //region # METODOS ARTIGOS API #
+    public void getAllArtigosAPI(final Context context) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+
+            if (artigosListener != null){
+                artigosListener.onRefreshListaArtigos(lojaBDHelper.getAllArtigosBD());
+            }
+            //LISTNERS E BUSCAR OS LIVROS A BD SE NAO TIVER NET!!!
+        } else{
+
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response" + response);
+                    artigos = LojaJsonParser.parserJsonArtigos(response);
+                    adicionarArtigosBD(artigos);
+
+                    if(artigosListener != null){
+                        artigosListener.onRefreshListaArtigos(artigos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+    //endregion
 }

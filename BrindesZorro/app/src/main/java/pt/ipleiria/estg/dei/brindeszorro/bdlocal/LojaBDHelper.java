@@ -245,6 +245,11 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         } // quando os campos estão todos preenchidos dá return da lista artigos
         return artigos;
     }
+
+    public void removerAllArtigosBD(){
+        db.delete(TABLE_NAME_AVALIACAOS, null, null);
+    }
+
     //endregion
 
     //region # MÉTODOS CRUD DAS FATURAS #
