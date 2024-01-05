@@ -61,7 +61,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
         viewHolderLista.update(faturas.get(position));
 
         Fatura fatura = faturas.get(position);
-        viewHolderLista.tvValor.setText((int) fatura.getValorFatura());     // POR NO MODELO SER INT ELE FAZ O CAST PARA INT ENTRE PARENTESES
+        viewHolderLista.tvValor.setText(String.format("%.2f", fatura.getValorFatura()));
         viewHolderLista.tvEstado.setText(String.valueOf(fatura.getEstado()));
 
         return convertView;

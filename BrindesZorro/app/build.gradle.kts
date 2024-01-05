@@ -42,6 +42,7 @@ dependencies {
 
     //Adicionar a biblioteca Volley ao projeto para comunicar com api
     implementation ("com.android.volley:volley:1.2.1")
+
     //adicionar glide para as imagens
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
