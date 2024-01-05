@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 
 public class LojaBDHelper extends SQLiteOpenHelper {
 
@@ -21,6 +22,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_AVALIACAOS = "avaliacaos";
     private static final String TABLE_NAME_ARTIGOS = "artigos";
     private static final String TABLE_NAME_FATURAS = "faturas";
+    private static final String TABLE_NAME_FAVORITOS = "favoritos";
     private static final int DB_VERSION = 1;
     //endregion
 
@@ -52,6 +54,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         inserirAvaliacaoExemplo(); //APAGAR NO FIM
         inserirArtigoExemplo();
         inserirFaturaExemplo();
+        inserirFavoritoExemplo();
     }
 
     // region # CREATE TABLES BD #
@@ -92,6 +95,15 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         PERFIL_ID + " INTEGER NOT NULL " +
                         ");";
         db.execSQL(createFaturaTable);
+
+        String createFavoritoTable =
+                "CREATE TABLE " + TABLE_NAME_FAVORITOS +
+                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        ARTIGO_ID + " INTEGER NOT NULL, " +
+                        PERFIL_ID + " INTEGER NOT NULL " +
+                        ");";
+        db.execSQL(createFavoritoTable);
+
     }
     // endregion
 
@@ -102,6 +114,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_AVALIACAOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ARTIGOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FATURAS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FAVORITOS);
         this.onCreate(db);
     }
     //endregion
@@ -189,7 +202,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getInt(5),
                         cursor.getInt(6),
                         cursor.getInt(7),
-                        cursor.getInt(8));
+                        cursor.getInt(8),
+                        cursor.getInt(9));
 
                 artigos.add(auxArtigo);
             } while (cursor.moveToNext());
@@ -252,6 +266,48 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     }
     //endregion
 
+    //region # MÉTODOS CRUD DOS FAVORITOS #
+
+    public void adicionarFavoritoBD(Favorito f) {
+
+        ContentValues values = new ContentValues();
+        values.put(ID, f.getId());
+        values.put(ARTIGO_ID, f.getArtigoId());
+        values.put(PERFIL_ID, f.getPerfilId());
+
+        this.db.insert(TABLE_NAME_FATURAS, null, values);
+    }
+
+    public boolean removerFavoritoBD(int id) {
+        return this.db.delete(TABLE_NAME_FAVORITOS, ID + " = ?", new String[]{"" + id}) == 1;
+    }
+
+    public ArrayList<Favorito>getAllFavoritosBD(){
+        ArrayList<Favorito> favoritos = new ArrayList<>();
+        Cursor cursor = this.db.query(TABLE_NAME_FAVORITOS, new String[]{
+                        ID,
+                        ARTIGO_ID,
+                        PERFIL_ID},
+                null, null, null, null, null); // questionar o porquê destes 5 null?
+
+        if (cursor.moveToFirst()) {
+            do {
+                Favorito auxFavorito = new Favorito(
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2));
+
+                favoritos.add(auxFavorito);
+            } while (cursor.moveToNext());
+        } // quando os campos estão todos preenchidos dá return da lista artigos
+        return favoritos;
+    }
+
+    public void removerAllFavoritos(){
+        db.delete(TABLE_NAME_FAVORITOS, null, null);
+    }
+    //endregion
+
     //region # MÉTODOS DE TESTE (NO FIM APAGAR)#
     public void inserirAvaliacaoExemplo() {
         limparBaseDeDadosAvaliacaos(); //FAZ COM QUE AO CRIAR LIMPE PRIMEIRO
@@ -270,7 +326,6 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         limparBaseDeDadosArtigos(); //FAZ COM QUE AO CRIAR LIMPE PRIMEIRO
         SQLiteDatabase db = this.getWritableDatabase();
 
-
         ContentValues values = new ContentValues();
         values.put(NOME, "Artigo Exemplo");
         values.put(DESCRICAO, "Descrição do Artigo Exemplo");
@@ -282,9 +337,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(CATEGORIA_ID, 1);
         values.put(PERFIL_ID, 1);
 
-
         db.insert(TABLE_NAME_ARTIGOS, null, values);
-
     }
 
     public void inserirFaturaExemplo() {
@@ -299,6 +352,17 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME_FATURAS, null, values);
     }
+
+    public void inserirFavoritoExemplo() { // a remover depois de estar
+        limparBaseDeDadosFavoritos();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ID, 1);
+        values.put(ARTIGO_ID, 2);
+        values.put(PERFIL_ID, 3);
+
+        db.insert(TABLE_NAME_FAVORITOS, null, values);
+    }
     public void limparBaseDeDadosAvaliacaos() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME_AVALIACAOS);
@@ -312,6 +376,11 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     public void limparBaseDeDadosFaturas() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME_FATURAS);
+    }
+
+    public void limparBaseDeDadosFavoritos() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME_FAVORITOS);
     }
     //endregion
 }

@@ -46,26 +46,8 @@ public class SingletonGestorLoja {
     // Necessário para instanciar a classe da base de dados
     private SingletonGestorLoja(Context context) {
         lojaBDHelper = new LojaBDHelper(context);
-        //gerarDadosFaturas();
-        //gerarDadosArtigos();
     }
 
-    /*private void gerarDadosFaturas(){
-        faturas = new ArrayList<>();
-
-        faturas.add(new Fatura(1,35,"paga"));
-        faturas.add(new Fatura(2,40,"paga"));
-        faturas.add(new Fatura(3,50,"não paga"));
-        faturas.add(new Fatura(4,60,"paga"));
-
-    }
-
-    private void gerarDadosArtigos(){
-        artigos = new ArrayList<>();
-
-        artigos.add(new Artigo(1, 10.5, "Artigo 1","Descrição do artigo 1", "#ART0124" ));
-        artigos.add(new Artigo(2, 27, "Artigo 2","Detalhes do artigo 2", "#ART1569" ));
-    }*/
 
     public ArrayList<Fatura> getFaturasBD(){
         faturas = lojaBDHelper.getAllFaturasBD();
@@ -82,7 +64,7 @@ public class SingletonGestorLoja {
     }
 
     public ArrayList<Favorito> getFavoritosBD() {
-        favoritos = favoritoBDHelper.getAllFavoritosBD();
+        favoritos = lojaBDHelper.getAllFavoritosBD();
         return new ArrayList<>(favoritos);
     }
 
@@ -233,5 +215,27 @@ public class SingletonGestorLoja {
         }
     }
 
+    // endregion
+
+    // region # METODOS Favoritos BD #
+
+    public void adicionarFavoritosBD(ArrayList<Favorito> favoritos){
+        lojaBDHelper.removerAllFavoritos();
+        for (Favorito f : favoritos){
+            adicionarFavoritoBD(f);
+        }
+    }
+    public void adicionarFavoritoBD(Favorito f) {
+        lojaBDHelper.adicionarFavoritoBD(f);
+    }
+
+    public void removerFavoritoBD(int idFavorito) {
+        Favorito auxFavorito = getFavoritos(idFavorito);
+        if (auxFavorito != null) {
+            if (lojaBDHelper.removerFaturaBD(idFavorito)) {
+                faturas.remove(auxFavorito);
+            }
+        }
+    }
     // endregion
 }
