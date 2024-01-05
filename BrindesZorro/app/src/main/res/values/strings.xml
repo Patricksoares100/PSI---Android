@@ -112,4 +112,7 @@
     <string name="tv_lvComentarioAvaliacao">Comentário:</string>
     <string name="tv_lvClassificacaoAvaliacao">Classificação:</string>
     <string name="sem_liga_a_internet">Sem Ligação a internet</string>/>
+    <string name="tv_lvClassificacaoAvaliacao">Classificação:</string>
+    <string name="txtAdicionarAoCarrinho">Adicionar ao Carrinho</string>
+    <string name="txtFavoritosDetalhesArtigo">Adicionao aos Favoritos</string>/>
 </resources>

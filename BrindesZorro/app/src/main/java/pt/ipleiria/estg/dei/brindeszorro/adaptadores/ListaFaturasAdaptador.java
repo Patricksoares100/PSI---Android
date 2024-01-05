@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 
 public class ListaFaturasAdaptador extends BaseAdapter {
@@ -58,21 +59,26 @@ public class ListaFaturasAdaptador extends BaseAdapter {
         }
 
         viewHolderLista.update(faturas.get(position));
+
+        Fatura fatura = faturas.get(position);
+        viewHolderLista.tvValor.setText((int) fatura.getValorFatura());     // POR NO MODELO SER INT ELE FAZ O CAST PARA INT ENTRE PARENTESES
+        viewHolderLista.tvEstado.setText(String.valueOf(fatura.getEstado()));
+
         return convertView;
     }
 
     private class ViewHolderLista {
-        private TextView tvId, tvValor, tvEstado;
+        private TextView tvData, tvValor, tvEstado;
 
 
         public ViewHolderLista(View view) {
-            tvId = view.findViewById(R.id.tvDataEmissaoFatura);
+            tvData = view.findViewById(R.id.tvDataEmissaoFatura);
             tvValor = view.findViewById(R.id.tvValorFatura);
             tvEstado = view.findViewById(R.id.tvEstadoFatura);
         }
 
         public void update(Fatura fatura) {
-            tvId.setText(""+fatura.getId());
+            tvData.setText(""+fatura.getData());
             tvValor.setText(""+fatura.getValorFatura());
             tvEstado.setText(""+fatura.getEstado());
         }

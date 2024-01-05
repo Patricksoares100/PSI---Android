@@ -91,85 +91,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvQuantidadeArtigoTitulo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0"
-                    android:text="@string/txtQuantidadeArtigo"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/buttonMenosArtigo"
-                    android:layout_width="50dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="@string/txtMenos"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvQuantidadeArtigo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="0"
-                    android:textAlignment="center" />
-
-                <Button
-                    android:id="@+id/buttonMaisArtigo"
-                    android:layout_width="50dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="@string/txtButtonMaisArtigoCarrinho"
-                    android:textSize="14sp" />
-
-
-                <!--<TextView
-                    android:id="@+id/tvAutorNome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:hint="@string/txtNomeAutor" />-->
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
 
-                <ImageButton
+                <Button
                     android:id="@+id/imageButtonCarrinhoArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:layout_weight="1"
                     android:src="@drawable/ic_action_carrinho" />
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1.7" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/imageButtonFavoritoArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_action_favorito" />
+                    android:backgroundTint="@android:color/white"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/ic_action_favorito"/>
 
             </LinearLayout>
 

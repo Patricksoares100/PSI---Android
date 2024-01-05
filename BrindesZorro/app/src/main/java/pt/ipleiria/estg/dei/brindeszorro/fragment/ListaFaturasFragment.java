@@ -1,24 +1,30 @@
 package pt.ipleiria.estg.dei.brindeszorro.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
 
+import pt.ipleiria.estg.dei.brindeszorro.AvaliacaoComentarioActivity;
+import pt.ipleiria.estg.dei.brindeszorro.FaturaActivity;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaFaturasAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.R;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
@@ -35,11 +41,27 @@ public class ListaFaturasFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fatura, container, false);
+        View view = inflater.inflate(R.layout.fragment_lista_faturas, container, false);
         setHasOptionsMenu(true); // vai chamar o menu
-        lvFaturas = view.findViewById(R.id.lvFatura); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
-        faturas = SingletonGestorLoja.getInstance(getContext()).getFaturas();
+        lvFaturas = view.findViewById(R.id.lvFaturaFragment); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
+        faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
+
+        for (Fatura fatura : faturas) {
+            Log.d("ArtigoDump", "ID: " + fatura.getId());
+            Log.d("ArtigoDump", "Comentario: " + fatura.getData());
+        }
+
         lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
+        lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getContext(), livros.get(position).getTitulo(), Toast.LENGTH_SHORT).show();
+                // Alinea 5.2 Ficha 5 Books - Inicia a atividade com a informação da fatura após clicar
+                Intent intent = new Intent(getContext(), FaturaActivity.class);
+                intent.putExtra(FaturaActivity.IDFATURAS, (int) id);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -58,8 +80,8 @@ public class ListaFaturasFragment extends Fragment {
         @Override
         public boolean onQueryTextChange(String newText) {
             ArrayList<Fatura> listaTempFaturas = new ArrayList<>(); // vamos criar uma array list temporaria
-            for (Fatura f : SingletonGestorLoja.getInstance(getContext()).getFaturas())
-                if (f.getEstado().toLowerCase().contains(newText.toLowerCase())) {
+            for (Fatura f : SingletonGestorLoja.getInstance(getContext()).getFaturasBD())
+                if (f.getEstado().toString().toLowerCase().contains(newText.toLowerCase())) {
                     //vai comparar a nova letra com as que existem no array. Se conter vai adicionar ao array
                     //para comparar com a proxima letra
                     listaTempFaturas.add(f);

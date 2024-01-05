@@ -19,7 +19,7 @@
                 android:id="@+id/tvNomeArtigoDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="TextView" />
+                android:gravity="center" />
 
             <ImageView
                 android:id="@+id/ivDetalhes"
@@ -31,19 +31,19 @@
                 android:id="@+id/tvValorUnitarioArtigo"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="TextView" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvDescricaoDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="TextView" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvAvaliacaoArtigoDetalhes"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="TextView" />
+                android:gravity="center" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:gravity="center" />
 
                 <ImageButton
                     android:id="@+id/imageButtonMaisArtigo"
@@ -83,8 +83,32 @@
                     android:id="@+id/tvValorTotalDetalhes"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:text="TextView" />
+                    android:gravity="center" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/txtFavoritosDetalhesArtigo" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/txtAdicionarAoCarrinho" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
