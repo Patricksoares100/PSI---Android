@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+
 public class RegistarClienteActivity extends AppCompatActivity {
 
     private EditText etUsername, etPasswordRegistar, etEmailRegistar, etNome ,etTelefoneRegistar,
             etNifRegistar, etMoradaRegistar, etCodigoPostalRegistar, etLocalidadeRegistar;
+    Signup signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +101,10 @@ public class RegistarClienteActivity extends AppCompatActivity {
             Toast.makeText(this, "Localidade inválida", Toast.LENGTH_SHORT).show();
             return;
         }
+        signup = new Signup(0,username,email,password,nome,
+                morada,codPostal,localidade,Integer.parseInt(telefone),
+                Integer.parseInt(nif));
+        SingletonGestorLoja.getInstance(getApplicationContext()).signupAPI(signup, getApplicationContext());
 
         Toast.makeText(this, "Registo Efetuado com Sucesso!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, LoginActivity.class);
