@@ -112,5 +112,8 @@
     <string name="tv_lvComentarioAvaliacao">Comentário:</string>
     <string name="tv_lvClassificacaoAvaliacao">Classificação:</string>
     <string name="txtAdicionarAoCarrinho">Adicionar ao Carrinho</string>
-    <string name="txtFavoritosDetalhesArtigo">Adicionao aos Favoritos</string>/>
+    <string name="txtFavoritosDetalhesArtigo">Adicionao aos Favoritos</string>
+    <string name="tv_AdcFav" />
+    <string name="tv_Rmv_Fav">Remover dos Favoritos</string>
+    <string name="tv_Prc_Artigo">Valor do Artigo</string>/>
 </resources>
