@@ -60,6 +60,7 @@ public class LojaJsonParser {
         return auxSignup;
     }
 
+    //region # MÉTODOS ARTIGOS JSON #
     public static ArrayList<Artigo> parserJsonArtigos(JSONArray response) {
         ArrayList<Artigo> artigos = new ArrayList<>();
 
@@ -87,4 +88,31 @@ public class LojaJsonParser {
         }
         return artigos;
     }
+
+    // vai ler o json e criar um objeto Artigo
+    public static Artigo parserJsonArtigo(String response) {
+        Artigo auxArtigo = null;
+
+        try {
+            JSONObject artigo = new JSONObject(response);
+
+            int idArtigo = artigo.getInt("id");
+            String nome = artigo.getString("nome");
+            String descricao = artigo.getString("descricao");
+            String referencia = artigo.getString("referencia");
+            double preco = artigo.getDouble("preco");
+            int stock_atual = artigo.getInt("stock_atual");
+            int iva_id = artigo.getInt("iva_id");
+            int fornecedor_id = artigo.getInt("fornecedor_id");
+            int categoria_id = artigo.getInt("categoria_id");
+            int perfil_id = artigo.getInt("perfil_id");
+
+            auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual,iva_id,fornecedor_id,categoria_id,perfil_id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxArtigo;
+    }
+    //endregion
 }
