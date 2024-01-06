@@ -117,6 +117,9 @@
     <string name="registo_com_sucesso">Registo com sucesso</string>/>
     <string name="tv_AdcFav" />
     <string name="tv_Rmv_Fav">Remover dos Favoritos</string>
-    <string name="tv_Prc_Artigo">Valor do Artigo</string>
     <string name="username_e_ou_password_incorreto">Username e/ou password incorreto.</string>/>
+    <string name="tv_Prc_Artigo">Valor do Artigo</string>
+    <string name="icnHome">Home</string>
+    <string name="icnFavoritos">Favoritos</string>
+    <string name="icnCarTitle">Carrinho</string>/>
 </resources>

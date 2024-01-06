@@ -46,11 +46,6 @@ public class ListaFaturasFragment extends Fragment {
         lvFaturas = view.findViewById(R.id.lvFaturaFragment); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
         faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
 
-        for (Fatura fatura : faturas) {
-            Log.d("ArtigoDump", "ID: " + fatura.getId());
-            Log.d("ArtigoDump", "Comentario: " + fatura.getData());
-        }
-
         lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
         lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
