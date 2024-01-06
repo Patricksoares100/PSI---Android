@@ -327,10 +327,10 @@ public class SingletonGestorLoja {
             //LISTNERS E BUSCAR OS LIVROS A BD SE NAO TIVER NET!!!
         } else{
 
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "artigos", null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
-                    System.out.println("----> response" + response);
+                    System.out.println("----> response ARTIGOS API" + response);
                     artigos = LojaJsonParser.parserJsonArtigos(response);
                     adicionarArtigosBD(artigos);
 
@@ -342,6 +342,7 @@ public class SingletonGestorLoja {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    System.out.println("----> response ERRO ARTIGOS API" + error);
                 }
             });
 

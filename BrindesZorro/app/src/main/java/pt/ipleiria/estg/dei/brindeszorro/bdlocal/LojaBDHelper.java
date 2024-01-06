@@ -43,6 +43,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String DATA = "data";
     private static final String VALOR_FATURA = "valorFatura";
     private static final String ESTADO = "estado";
+    private static final String IMAGEM = "imagem";
     private final SQLiteDatabase db;    // Alinea 1.3 Ficha 8 Books - criação de uma instância da classe SQLiteDatabase
     // endregion
 
@@ -56,6 +57,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         inserirFaturaExemplo();
         inserirFavoritoExemplo();
     }
+
 
     // region # CREATE TABLES BD #
     @Override
@@ -82,8 +84,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         IVA_ID + " INTEGER NOT NULL, " +
                         FORNECEDOR_ID + " INTEGER NOT NULL, " +
                         CATEGORIA_ID + " INTEGER NOT NULL, " +
-                        PERFIL_ID + " INTEGER NOT NULL " +
-                        ");";
+                        PERFIL_ID + " INTEGER NOT NULL, " +
+                        IMAGEM + " TEXT" + ");";
         db.execSQL(createArtigoTable);
 
         String createFaturaTable =
@@ -186,6 +188,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(FORNECEDOR_ID, a.getFornecedor_id());
         values.put(CATEGORIA_ID, a.getCategoria_id());
         values.put(PERFIL_ID,a.getPerfil_id());
+        values.put(IMAGEM,a.getImagem());
 
         this.db.insert(TABLE_NAME_ARTIGOS, null, values);
     }
@@ -223,7 +226,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         IVA_ID,
                         FORNECEDOR_ID,
                         CATEGORIA_ID,
-                        PERFIL_ID},
+                        PERFIL_ID,
+                        IMAGEM},
                 null, null, null, null, null); // questionar o porquê destes 5 null?
 
         if (cursor.moveToFirst()) {
@@ -238,7 +242,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getInt(6),
                         cursor.getInt(7),
                         cursor.getInt(8),
-                        cursor.getInt(9));
+                        cursor.getInt(9),
+                        cursor.getString(10));
 
                 artigos.add(auxArtigo);
             } while (cursor.moveToNext());

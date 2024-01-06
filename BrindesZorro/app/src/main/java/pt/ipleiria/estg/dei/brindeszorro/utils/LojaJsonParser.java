@@ -78,8 +78,9 @@ public class LojaJsonParser {
                 int fornecedor_id = artigo.getInt("fornecedor_id");
                 int categoria_id = artigo.getInt("categoria_id");
                 int perfil_id = artigo.getInt("perfil_id");
+                String  imagem = artigo.getString("imagens");
 
-                Artigo auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual, iva_id, fornecedor_id, categoria_id, perfil_id);
+                Artigo auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual, iva_id, fornecedor_id, categoria_id, perfil_id,imagem);
                 artigos.add(auxArtigo);
             }
 
@@ -106,8 +107,9 @@ public class LojaJsonParser {
             int fornecedor_id = artigo.getInt("fornecedor_id");
             int categoria_id = artigo.getInt("categoria_id");
             int perfil_id = artigo.getInt("perfil_id");
+            String imagem = artigo.getString("imagens");
 
-            auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual,iva_id,fornecedor_id,categoria_id,perfil_id);
+            auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual,iva_id,fornecedor_id,categoria_id,perfil_id,imagem);
 
         } catch (JSONException e) {
             e.printStackTrace();

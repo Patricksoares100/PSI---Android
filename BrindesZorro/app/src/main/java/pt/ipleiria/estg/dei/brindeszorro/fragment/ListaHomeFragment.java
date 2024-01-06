@@ -19,10 +19,11 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.DetalhesArtigoActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaArtigosAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
-public class ListaHomeFragment extends Fragment {
+public class ListaHomeFragment extends Fragment implements ArtigosListener {
 
     private ListView lvArtigos;
     private ImageView imgView;
@@ -60,8 +61,17 @@ public class ListaHomeFragment extends Fragment {
             }
         });
 
+        SingletonGestorLoja.getInstance(getContext()).setArtigosListener(this);
+        SingletonGestorLoja.getInstance(getContext()).getAllArtigosAPI(getContext());
+
        return view;
     }
 
 
+    @Override
+    public void onRefreshListaArtigos(ArrayList<Artigo> artigos) {
+        if(artigos != null){
+            lvArtigos.setAdapter(new ListaArtigosAdaptador(getContext(), artigos));
+        }
+    }
 }

@@ -5,7 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -67,10 +71,16 @@ public class ListaArtigosAdaptador extends BaseAdapter {
 
     private class ViewHolderLista {
         private TextView tvId, tvNome, tvDescricao, tvPreco, tvAvaliacao, tvFornecedor, tvCategoria,tvStock_atual, tvIva_id;
+        private ImageView imagem;
 
         public ViewHolderLista(View view) {
             tvNome = view.findViewById(R.id.tvNomeArtigo);
             tvPreco = view.findViewById(R.id.tvValorArtigo);
+            /*Glide.with(context)
+                    .load(artigo.get())
+                    .placeholder(R.drawable.agenda)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imagem);*/
 
         }
 

@@ -2,11 +2,11 @@ package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
 public class Artigo {
     private int id, stock_atual, iva_id, fornecedor_id, categoria_id, perfil_id;
-    private String nome,descricao, referencia;
+    private String nome,descricao, referencia, imagem;
     private double preco;
 
 
-    public Artigo(int id, String nome, String descricao, String referencia, double preco, int stock_atual, int iva_id, int fornecedor_id, int categoria_id, int perfil_id){
+    public Artigo(int id, String nome, String descricao, String referencia, double preco, int stock_atual, int iva_id, int fornecedor_id, int categoria_id, int perfil_id, String imagem){
 
         this.id = id;
         this.nome = nome;
@@ -18,9 +18,11 @@ public class Artigo {
         this.fornecedor_id = fornecedor_id;
         this.categoria_id = categoria_id;
         this.perfil_id = perfil_id;
+        this.imagem = imagem;
 
 
     }
+
     public int getId() {
         return id;
     }
@@ -78,4 +80,13 @@ public class Artigo {
     public int getPerfil_id() {return perfil_id;}
 
     public void setPerfil_id(int perfil_id) {this.perfil_id = perfil_id;}
+
+
+
+    public String getImagem() { return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 }
