@@ -8,45 +8,46 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etEmail, etPassword;
+    private EditText etUsername, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        etEmail = findViewById(R.id.etEmailLogin);
+        etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPasswordLogin);
 
 
     }
 
     public void onClickLogin(View view) {
-        String email = etEmail.getText().toString();
+        String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
-
-        if(!isEmailValido(email)){
-            etEmail.setError(getString(R.string.etFormatoInvalido));
-            return;
-        }
+        
 
         if(!isPasswordValida(password)){
             etPassword.setError(getString(R.string.etPasswordTextError));
             return;
         }
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        if(!isLoginValido(username, password)){
+            Toast.makeText(this, R.string.username_e_ou_password_incorreto, Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        //SingletonGestorLoja.getInstance(getApplicationContext()).signupAPI(signup, getApplicationContext());
+
+       /* */
     }
-
-
-
-    public boolean isEmailValido(String email) {
-        if (email == null)
-            return false;
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    public boolean isLoginValido(String username, String password){
+        return true;
     }
 
     public boolean isPasswordValida(String password){

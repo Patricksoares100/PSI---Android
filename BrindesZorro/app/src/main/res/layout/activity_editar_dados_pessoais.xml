@@ -36,26 +36,6 @@
         android:minHeight="48dp" />
 
     <TextView
-        android:id="@+id/tvEmailEditarDadosPessoais"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/tvPedirEmail"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etEmailEditarDadosPessoais"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:hint="@string/hintEmailBrindesZorro"
-        android:inputType="text"
-        android:minHeight="48dp" />
-
-    <TextView
         android:id="@+id/tvTelefoneEditarDadosPessoais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

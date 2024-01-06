@@ -21,17 +21,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/hint_userEmail" />
+        android:text="@string/txtUserName" />
 
     <EditText
-        android:id="@+id/etEmailLogin"
+        android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:layout_margin="16dp"
-        android:text="@string/exemploEmail" />
+        android:text="@string/hint_userName" />
 
     <TextView
         android:id="@+id/tvPasswordLogin"

@@ -14,7 +14,7 @@ import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
 public class EditarDadosPessoaisActivity extends AppCompatActivity {
 
     private EditText etNomeEditarDadosPessoais, etTelefoneEditarDadosPessoais,
-            etEmailEditarDadosPessoais,etNifEditarDadosPessoais,etMoradaEditarDadosPessoais,
+            etNifEditarDadosPessoais,etMoradaEditarDadosPessoais,
             etCodigoPostalEditarDadosPessoais,etLocalidadeEditarDadosPessoais;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,6 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editar_dados_pessoais);
 
         etNomeEditarDadosPessoais = findViewById(R.id.etNomeEditarDadosPessoais);
-        etEmailEditarDadosPessoais = findViewById(R.id.etEmailEditarDadosPessoais);
         etTelefoneEditarDadosPessoais = findViewById(R.id.etTelefoneEditarDadosPessoais);
         etNifEditarDadosPessoais = findViewById(R.id.etNifEditarDadosPessoais);
         etMoradaEditarDadosPessoais = findViewById(R.id.etMoradaEditarDadosPessoais);
@@ -40,7 +39,6 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
     public void onClickConfirmarEditarDadosPessoais(View view) {
 
         String nome = etNomeEditarDadosPessoais.getText().toString();
-        String email = etEmailEditarDadosPessoais.getText().toString();
         String nif = etNifEditarDadosPessoais.getText().toString();
         String telefone = etTelefoneEditarDadosPessoais.getText().toString();
         String morada = etMoradaEditarDadosPessoais.getText().toString();
@@ -52,10 +50,7 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
             Toast.makeText(this, "Username inválido", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!isEmailValido(email)){
-            etEmailEditarDadosPessoais.setError(getString(R.string.etFormatoInvalido));
-            return;
-        }
+
         //vi esta validação neste site
         https://copyprogramming.com/howto/pattern-validation-for-mobile-number-in-android
         // o 0 -9 indica que aceita valores no intervalo de 0 a 9 nos {9} numeros seguintes
@@ -92,14 +87,6 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-//função de validação de login usada na aula
-    public boolean isEmailValido(String email) {
-        if (email == null)
-            return false;
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
 
     
     }
