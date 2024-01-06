@@ -83,7 +83,7 @@ public class ListaArtigosAdaptador extends BaseAdapter {
         public void update(Artigo artigo) {
 
             tvNome.setText(artigo.getNome());
-            tvPreco.setText(""+artigo.getPreco());
+            tvPreco.setText(""+artigo.getPreco()+" €");
             Glide.with(context)
                     .load(artigo.getImagem())
                     .placeholder(R.drawable.ipleiria)

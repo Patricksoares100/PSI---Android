@@ -18,26 +18,32 @@
             <TextView
                 android:id="@+id/tvNomeArtigoDetalhes"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center" />
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/ivDetalhes"
                 android:layout_width="match_parent"
-                android:layout_height="261dp"
+                android:layout_height="230dp"
                 android:src="@drawable/brindes" />
-
-            <TextView
-                android:id="@+id/tvValorUnitarioArtigo"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvDescricaoDetalhes"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center" />
+                android:layout_height="98dp"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvValorUnitarioArtigo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -55,20 +61,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:onClick="diminuirQuantidade"
                     android:src="@drawable/ic_action_menos_foreground" />
 
                 <TextView
                     android:id="@+id/tvQuantidadeArtigoDetalhes"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <ImageButton
                     android:id="@+id/imageButtonMaisArtigo"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:onClick="aumentarQuantidade"
                     android:src="@drawable/ic_action_add_foreground" />
 
             </LinearLayout>
@@ -83,7 +94,9 @@
                     android:id="@+id/tvValorTotalDetalhes"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout

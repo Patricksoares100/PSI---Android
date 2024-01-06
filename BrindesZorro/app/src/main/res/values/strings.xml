@@ -69,7 +69,7 @@
     <string name="txtButtonMaisArtigoCarrinho">+</string>/>
     <string name="tvNomeRegistar">Nome Completo:</string>
     <string name="txtQuantidadeArtigo">Quantidade:</string>
-    <string name="txtValorArtigo">"Valor: € "</string>
+    <string name="txtValorArtigo">"Preço: "</string>
     <string name="txtReferenciaArtigo">Referencia:</string>
     <string name="txtPasswordAtual">Insira a sua Password:</string>
     <string name="alterarPasswordInput">12345678</string>
