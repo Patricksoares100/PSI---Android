@@ -3,15 +3,20 @@ package pt.ipleiria.estg.dei.brindeszorro.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,6 +33,7 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
     private ListView lvArtigos;
     private ImageView imgView;
     private ArrayList<Artigo> artigos;
+    private SearchView searchView;
     public ListaHomeFragment() {
         // Required empty public constructor
     }
@@ -40,6 +46,7 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
 
         // inicia o layout com o activity_home
         View view = inflater.inflate(R.layout.fragment_lista_home, container, false);
+        setHasOptionsMenu(true);
         lvArtigos = view.findViewById(R.id.lvHomeArtigos);
         //vai buscar a lista de livros ao singleton
         artigos = SingletonGestorLoja.getInstance(getContext()).getArtigosBD();
@@ -67,6 +74,32 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
        return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_pesquisa,menu);
+        MenuItem itemPesquisa = menu.findItem(R.id.itemPesquisa);
+        searchView = (SearchView) itemPesquisa.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<Artigo> artigoArrayList = new ArrayList<>();
+                for (Artigo art: SingletonGestorLoja.getInstance(getContext()).getArtigosBD())
+                    if (art.getNome().toLowerCase().contains(newText.toLowerCase())) {
+                    //vai comparar a nova letra com as que existem no array. Se conter vai adicionar ao array
+                    //para comparar com a proxima letra
+                    artigoArrayList.add(art);
+                }
+                lvArtigos.setAdapter(new ListaArtigosAdaptador(getContext(),artigoArrayList));
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     @Override
     public void onRefreshListaArtigos(ArrayList<Artigo> artigos) {
