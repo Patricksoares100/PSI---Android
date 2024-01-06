@@ -68,19 +68,18 @@ public class LojaJsonParser {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject artigo = (JSONObject) response.get(i);
 
-                int idArtigo = artigo.getInt("id");
+                int id = artigo.getInt("id");
                 String nome = artigo.getString("nome");
                 String descricao = artigo.getString("descricao");
                 String referencia = artigo.getString("referencia");
                 double preco = artigo.getDouble("preco");
                 int stock_atual = artigo.getInt("stock_atual");
-                int iva_id = artigo.getInt("iva_id");
-                int fornecedor_id = artigo.getInt("fornecedor_id");
-                int categoria_id = artigo.getInt("categoria_id");
-                int perfil_id = artigo.getInt("perfil_id");
-                String  imagem = artigo.getString("imagens");
+                int iva = artigo.getInt("iva");
+                String fornecedor = artigo.getString("fornecedor");
+                String categoria = artigo.getString("categoria");
+                String  imagem = artigo.getString("imagem");
 
-                Artigo auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual, iva_id, fornecedor_id, categoria_id, perfil_id,imagem);
+                Artigo auxArtigo = new Artigo(id, nome, descricao, referencia, preco, stock_atual, iva, fornecedor, categoria,imagem);
                 artigos.add(auxArtigo);
             }
 
@@ -97,19 +96,19 @@ public class LojaJsonParser {
         try {
             JSONObject artigo = new JSONObject(response);
 
-            int idArtigo = artigo.getInt("id");
+            int id = artigo.getInt("id");
             String nome = artigo.getString("nome");
             String descricao = artigo.getString("descricao");
             String referencia = artigo.getString("referencia");
             double preco = artigo.getDouble("preco");
             int stock_atual = artigo.getInt("stock_atual");
-            int iva_id = artigo.getInt("iva_id");
-            int fornecedor_id = artigo.getInt("fornecedor_id");
-            int categoria_id = artigo.getInt("categoria_id");
-            int perfil_id = artigo.getInt("perfil_id");
-            String imagem = artigo.getString("imagens");
+            int iva = artigo.getInt("iva");
+            String fornecedor = artigo.getString("fornecedor");
+            String categoria = artigo.getString("categoria");
+            //String perfil = artigo.getString("perfil");
+            String imagem = artigo.getString("imagem");
 
-            auxArtigo = new Artigo(idArtigo, nome, descricao, referencia, preco, stock_atual,iva_id,fornecedor_id,categoria_id,perfil_id,imagem);
+            auxArtigo = new Artigo(id, nome, descricao, referencia, preco, stock_atual,iva,fornecedor,categoria,imagem);
 
         } catch (JSONException e) {
             e.printStackTrace();

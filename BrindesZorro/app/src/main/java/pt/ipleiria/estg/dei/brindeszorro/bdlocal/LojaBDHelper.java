@@ -37,9 +37,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String REFERENCIA = "referencia";
     private static final String PRECO = "preco";
     private static final String STOCK_ATUAL = "stock_atual";
-    private static final String IVA_ID = "iva_id";
-    private static final String FORNECEDOR_ID = "fornecedor_id";
-    private static final String CATEGORIA_ID = "categoria_id";
+    private static final String IVA = "iva";
+    private static final String FORNECEDOR = "fornecedor";
+    private static final String CATEGORIA = "categoria";
     private static final String DATA = "data";
     private static final String VALOR_FATURA = "valorFatura";
     private static final String ESTADO = "estado";
@@ -80,12 +80,12 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         DESCRICAO + " TEXT NOT NULL, " +
                         REFERENCIA + " TEXT NOT NULL, " +
                         PRECO + " INTEGER NOT NULL, " +
-                        STOCK_ATUAL + " INTEGER NOT NULL," +
-                        IVA_ID + " INTEGER NOT NULL, " +
-                        FORNECEDOR_ID + " INTEGER NOT NULL, " +
-                        CATEGORIA_ID + " INTEGER NOT NULL, " +
-                        PERFIL_ID + " INTEGER NOT NULL, " +
-                        IMAGEM + " TEXT" + ");";
+                        STOCK_ATUAL + " INTEGER NOT NULL, " +
+                        IVA + " INTEGER NOT NULL, " +
+                        FORNECEDOR + " TEXT NOT NULL, " +
+                        CATEGORIA + " TEXT NOT NULL, " +
+                        IMAGEM + " TEXT" +
+                        ");";
         db.execSQL(createArtigoTable);
 
         String createFaturaTable =
@@ -183,12 +183,13 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(NOME, a.getNome());
         values.put(DESCRICAO, a.getDescricao());
         values.put(REFERENCIA, a.getReferencia());
-        values.put(PRECO, a.getReferencia());
-        values.put(IVA_ID,a.getIva_id());
-        values.put(FORNECEDOR_ID, a.getFornecedor_id());
-        values.put(CATEGORIA_ID, a.getCategoria_id());
-        values.put(PERFIL_ID,a.getPerfil_id());
-        values.put(IMAGEM,a.getImagem());
+        values.put(PRECO, a.getPreco());
+        values.put(STOCK_ATUAL, a.getStock_atual());
+        values.put(IVA,a.getIva());
+        values.put(FORNECEDOR, a.getFornecedor());
+        values.put(CATEGORIA, a.getCategoria());
+        //values.put(PERFIL_ID,a.getPerfil());
+        values.put(IMAGEM, a.getImagem());
 
         this.db.insert(TABLE_NAME_ARTIGOS, null, values);
     }
@@ -200,10 +201,11 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(DESCRICAO, a.getDescricao());
         values.put(REFERENCIA, a.getReferencia());
         values.put(PRECO, a.getReferencia());
-        values.put(IVA_ID,a.getIva_id());
-        values.put(FORNECEDOR_ID, a.getFornecedor_id());
-        values.put(CATEGORIA_ID, a.getCategoria_id());
-        values.put(PERFIL_ID,a.getPerfil_id());
+        values.put(IVA,a.getIva());
+        values.put(FORNECEDOR, a.getFornecedor());
+        values.put(CATEGORIA, a.getCategoria());
+        values.put(IMAGEM, a.getImagem());
+        //values.put(PERFIL_ID,a.getPerfil());
 
         return this.db.update(TABLE_NAME_ARTIGOS, values, ID + "= ?", new String[]{"" + a.getId()}) > 0;
     }
@@ -223,10 +225,10 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         REFERENCIA,
                         PRECO,
                         STOCK_ATUAL,
-                        IVA_ID,
-                        FORNECEDOR_ID,
-                        CATEGORIA_ID,
-                        PERFIL_ID,
+                        IVA,
+                        FORNECEDOR,
+                        CATEGORIA,
+                       // PERFIL_ID,
                         IMAGEM},
                 null, null, null, null, null); // questionar o porquê destes 5 null?
 
@@ -240,13 +242,13 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getDouble(4),
                         cursor.getInt(5),
                         cursor.getInt(6),
-                        cursor.getInt(7),
-                        cursor.getInt(8),
-                        cursor.getInt(9),
-                        cursor.getString(10));
+                        cursor.getString(7),
+                        cursor.getString(8),
+                        cursor.getString(9));
 
                 artigos.add(auxArtigo);
             } while (cursor.moveToNext());
+            cursor.close();
         } // quando os campos estão todos preenchidos dá return da lista artigos
         return artigos;
     }
@@ -263,7 +265,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(ID, f.getId());
         values.put(DATA, f.getData());
         values.put(VALOR_FATURA, f.getValorFatura());
-        values.put(ESTADO, f.getEstado().toString());
+        values.put(ESTADO, f.getEstado());
         values.put(PERFIL_ID, f.getPerfil_id());
 
         this.db.insert(TABLE_NAME_FATURAS, null, values);
@@ -274,7 +276,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(ID, f.getId());
         values.put(DATA, f.getData());
         values.put(VALOR_FATURA, f.getValorFatura());
-        values.put(ESTADO, f.getEstado().toString());
+        values.put(ESTADO, f.getEstado());
         values.put(PERFIL_ID, f.getPerfil_id());
 
         return this.db.update(TABLE_NAME_FATURAS, values, ID + "= ?", new String[]{"" + f.getId()}) > 0;
@@ -344,6 +346,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
                 favoritos.add(auxFavorito);
             } while (cursor.moveToNext());
+            cursor.close();
         } // quando os campos estão todos preenchidos dá return da lista artigos
         return favoritos;
     }
@@ -377,10 +380,10 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(REFERENCIA, "#ART001");
         values.put(PRECO, 25);
         values.put(STOCK_ATUAL, 50);
-        values.put(IVA_ID, 1);
-        values.put(FORNECEDOR_ID, 1);
-        values.put(CATEGORIA_ID, 1);
-        values.put(PERFIL_ID, 1);
+        values.put(IVA, 1);
+        values.put(FORNECEDOR, "Fornecedorzorro");
+        values.put(CATEGORIA, "CategoriaZorra");
+        //values.put(PERFIL_ID, 1);
 
         db.insert(TABLE_NAME_ARTIGOS, null, values);
     }

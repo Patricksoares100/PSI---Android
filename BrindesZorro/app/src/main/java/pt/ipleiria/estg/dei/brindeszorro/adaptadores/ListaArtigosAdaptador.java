@@ -28,10 +28,6 @@ public class ListaArtigosAdaptador extends BaseAdapter {
         this.artigos = artigos;
     }
 
-    public ListaArtigosAdaptador() {
-
-    }
-
     @Override
     public int getCount() {
         return artigos.size();
@@ -46,7 +42,7 @@ public class ListaArtigosAdaptador extends BaseAdapter {
     public long getItemId(int position) {return artigos.get(position).getId();}
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         // o parâmetro View servirá para reutilizar a view para apresentar o
         //layout de cada item, em vez de estar sempre a criar uma nova
         if (inflater == null)
@@ -60,11 +56,12 @@ public class ListaArtigosAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
+        viewHolderLista.update(artigos.get(position));
             //Perceber melhor -NAO ESQUECER
-            Artigo artigo = artigos.get(position);
+           /* Artigo artigo = artigos.get(position);
             viewHolderLista.tvNome.setText(artigo.getNome());
             viewHolderLista.tvPreco.setText(String.valueOf(artigo.getPreco()));
-
+*/
         return convertView;
 
     }
@@ -76,21 +73,24 @@ public class ListaArtigosAdaptador extends BaseAdapter {
         public ViewHolderLista(View view) {
             tvNome = view.findViewById(R.id.tvNomeArtigo);
             tvPreco = view.findViewById(R.id.tvValorArtigo);
-            /*Glide.with(context)
-                    .load(artigo.get())
-                    .placeholder(R.drawable.agenda)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imagem);*/
+            imagem = view.findViewById(R.id.ivArtigo);
 
         }
 
 
 
-        /*
+
         public void update(Artigo artigo) {
 
+            tvNome.setText(artigo.getNome());
+            tvPreco.setText(""+artigo.getPreco());
+            Glide.with(context)
+                    .load(artigo.getImagem())
+                    .placeholder(R.drawable.ipleiria)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imagem);
         }
-         */
+
     }
 
 }
