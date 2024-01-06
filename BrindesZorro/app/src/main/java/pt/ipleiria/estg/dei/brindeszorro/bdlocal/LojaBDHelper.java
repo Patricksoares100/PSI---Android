@@ -52,10 +52,10 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
         // Para definir permissões de leitura e escrita na base de dados, teremos de utilizar o método getWritableDatabase() - ficha 08
         this.db = this.getWritableDatabase();
-        inserirAvaliacaoExemplo(); //APAGAR NO FIM
-        inserirArtigoExemplo();
-        inserirFaturaExemplo();
-        inserirFavoritoExemplo();
+        //inserirAvaliacaoExemplo(); //APAGAR NO FIM
+        //inserirArtigoExemplo();
+        //inserirFaturaExemplo();
+        //inserirFavoritoExemplo();
     }
 
 
