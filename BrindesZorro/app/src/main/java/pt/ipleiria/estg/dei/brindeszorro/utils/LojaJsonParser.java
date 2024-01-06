@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Users;
 
 public class LojaJsonParser {
     //vai ser um JsonParser unico
@@ -114,6 +115,61 @@ public class LojaJsonParser {
             e.printStackTrace();
         }
         return auxArtigo;
+    }
+    //endregion
+
+
+    //region # MÉTODOS Users JSON #
+
+    public static ArrayList<Users> parserJsonUsers(JSONArray response) {
+        ArrayList<Users> users = new ArrayList<>();
+
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject user = (JSONObject) response.get(i);
+
+                int id = user.getInt("id");
+                String nome = user.getString("nome");
+                int telefone = user.getInt("telefone");
+                int nif = user.getInt("nif");
+                String morada = user.getString("morada");
+                String codigo_postal = user.getString("codigo_postal");
+                String localidade = user.getString("localidade");
+                String token = user.getString("token");
+
+                Users auxUsers = new Users(id, nome, telefone, nif, morada, codigo_postal, localidade, token);
+                users.add(auxUsers);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+
+    // vai ler o json e criar um objeto User
+    public static Users parserJsonUser(String response) {
+        Users auxUsers = null;
+
+        try {
+            JSONObject user = new JSONObject(response);
+
+            int id = user.getInt("id");
+            String nome = user.getString("nome");
+            int telefone = user.getInt("telefone");
+            int nif = user.getInt("nif");
+            String morada = user.getString("morada");
+            String codigo_postal = user.getString("codigo_postal");
+            String localidade = user.getString("localidade");
+            String token = user.getString("token");
+
+            auxUsers = new Users(id, nome, telefone, nif, morada, codigo_postal, localidade, token);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxUsers;
     }
     //endregion
 }
