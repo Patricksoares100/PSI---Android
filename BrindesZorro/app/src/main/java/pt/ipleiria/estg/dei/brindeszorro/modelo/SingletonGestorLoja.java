@@ -66,6 +66,7 @@ public class SingletonGestorLoja {
     private SingletonGestorLoja(Context context) {
         lojaBDHelper = new LojaBDHelper(context);
         avaliacaos = new ArrayList<>();
+        users = new ArrayList<>();
     }
 
 
@@ -216,7 +217,7 @@ public class SingletonGestorLoja {
                 public void onResponse(JSONArray response) {
                     System.out.println("----> response AVALIACAOS API" + response);
                     // response.re .getString('imagem').replace("\\/", "/");
-                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
+                   // avaliacaos = LojaJsonParser.parserJsonAvaliacao(response);
                     adicionarAvaliacaosBD(avaliacaos);
 
                     if(avaliacaosListener != null){
@@ -558,14 +559,14 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
 
         }else{
-            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPI +"users/login", new Response.Listener<String>() {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, mUrlAPI +"users/login", new Response.Listener<JSONArray>() {
                 @Override
-                public void onResponse(String response) {
+                public void onResponse(JSONArray response) {
                     //add com sucesso?
-                        System.out.println("----> SUCESSO Login "+ response);
-                   /* users = LojaJsonParser.parserJsonUser(response);
-                    adicionarUserBD(users);
-                    if()*/
+                    System.out.println("----> SUCESSO Login "+ response);
+                    // users = LojaJsonParser.parserJsonUser(response);
+                    adicionarUsersBD(users);
+
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -587,5 +588,4 @@ public class SingletonGestorLoja {
     }
 
     //endregion
-
 }
