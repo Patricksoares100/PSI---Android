@@ -406,8 +406,40 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         this.db.insert(TABLE_NAME_USERS, null, values);
     }
 
-    public ArrayList<User> getAllUsersBD() {
-        ArrayList<User> users = new ArrayList<>();
+
+    public ArrayList<User>getAllUsersBD(){
+        ArrayList<User> user = new ArrayList<>();
+        Cursor cursor = this.db.query(TABLE_NAME_USERS, new String[]{
+                        ID,
+                        NOME,
+                        TELEFONE,
+                        NIF,
+                        MORADA,
+                        CODIGO_POSTAL,
+                        LOCALIDADE,
+                        TOKEN},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                User auxUser = new User(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7));
+                user.add(auxUser);
+            } while (cursor.moveToNext());
+            cursor.close();
+        } // quando os campos estão todos preenchidos dá return da lista artigos
+        return user;
+    }
+
+    public User getUserBD() {
+        User auxUser = null;
         Cursor cursor = this.db.query(TABLE_NAME_USERS, new String[]{
                         ID,
                         NOME,
@@ -421,7 +453,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                User auxUser = new User(
+                auxUser = new User(
                         cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getInt(2),
@@ -430,17 +462,13 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getString(5),
                         cursor.getString(6),
                         cursor.getString(7));
-
-                users.add(auxUser);
             } while (cursor.moveToNext());
             cursor.close();
         }
-        return users;
+        return auxUser;
     }
 
-
-
-    public boolean editarUsersBD(User u) {
+    public boolean editarUserBD(User u) {
         ContentValues values = new ContentValues();
         values.put(ID, u.getId());
         values.put(NOME, u.getNome());
@@ -458,6 +486,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME_USERS, null, null);
     }
 
+    public boolean removerUserBD(int id) {
+        return this.db.delete(TABLE_NAME_USERS, ID + " = ?", new String[]{"" + id}) == 1;
+    }
     //endregion
 
     //region # MÉTODOS DE TESTE (NO FIM APAGAR)#

@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         if(!isLoginValido(username, password)){
             Toast.makeText(this, R.string.username_e_ou_password_incorreto, Toast.LENGTH_SHORT).show();
         }else{
+            //SingletonGestorLoja.getInstance(getApplicationContext()).getAllUserAPI();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
