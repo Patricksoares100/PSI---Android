@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +21,10 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
     public static final String ID_ARTIGO = "IDARTIGO";
     private Artigo artigo;
     private ImageView imgDetalhes;
-    private TextView tvNome,tvValorUnitarioArtigo,tvDescricaoDetalhes, tvAvaliacaoArtigoDetalhes, tvValorTotalDetalhes;
+    private TextView tvNome,tvValorUnitarioArtigo,tvDescricaoDetalhes, tvAvaliacaoArtigoDetalhes, tvValorTotalDetalhes, tvQtdClassificacoes;
     private int quantidade = 1;
     private double totalQuantidade = 0;
+    RatingBar ratingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,8 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
         tvDescricaoDetalhes = findViewById(R.id.tvDescricaoDetalhes);
         tvValorTotalDetalhes = findViewById(R.id.tvValorTotalDetalhes);
         imgDetalhes = findViewById(R.id.ivDetalhes);
+        ratingBar = findViewById(R.id.ratingBar);
+        tvQtdClassificacoes = findViewById(R.id.tvQtdClassificacoes);
 
         if (artigo != null) {
             carregarArtigo();
@@ -55,6 +59,10 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
 
         String urlImagem = artigo.getImagem();
         Glide.with(this).load(urlImagem).into(imgDetalhes);
+
+        ratingBar.setRating(artigo.getMedia_avaliacoes());
+        tvQtdClassificacoes.setText(""+artigo.getNum_avaliacoes()+" Avaliações");
+
     }
 
     public void diminuirQuantidade(View view) {
