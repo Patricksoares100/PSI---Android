@@ -1,10 +1,10 @@
 package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
-public class Users {
+public class User {
     private int id,telefone,nif;
     private String nome, morada, codigo_postal, localidade, token;
 
-    public Users(int id, String nome, int telefone, int nif, String morada, String codigo_postal, String localidade, String token) {
+    public User(int id, String nome, int telefone, int nif, String morada, String codigo_postal, String localidade, String token) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;

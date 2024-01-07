@@ -41,10 +41,6 @@ public class ListaAvaliacaosFragment extends Fragment {
         lvAvaliacaos = view.findViewById(R.id.lvAvaliacaoLista);
         // getAvaliacaosBD() função que está no SingletonGestorLoja
         avaliacaos = SingletonGestorLoja.getInstance(getContext()).getAvaliacaosBD();
-        for (Avaliacao avaliacao : avaliacaos) {
-            Log.d("ArtigoDump", "ID: " + avaliacao.getId());
-            Log.d("ArtigoDump", "Comentario: " + avaliacao.getComentario());
-        }
 
         // Alinea 5.1 Ficha 5 Books - Atribuir/definir o adaptador
         lvAvaliacaos.setAdapter(new ListaAvaliacaosAdaptador(getContext(), avaliacaos));

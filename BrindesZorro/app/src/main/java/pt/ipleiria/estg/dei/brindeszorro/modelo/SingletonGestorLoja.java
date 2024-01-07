@@ -17,17 +17,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import pt.ipleiria.estg.dei.brindeszorro.DetalhesArtigoActivity;
 import pt.ipleiria.estg.dei.brindeszorro.MainActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
-import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UserListener;
-import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
 
 public class SingletonGestorLoja {
@@ -36,16 +33,15 @@ public class SingletonGestorLoja {
     private ArrayList<Artigo> artigos;
     private ArrayList<Avaliacao> avaliacaos;
     private ArrayList<Favorito> favoritos;
-    private ArrayList<Users> users;
+    private ArrayList<User> users;
     private static SingletonGestorLoja instance = null;
     private LojaBDHelper lojaBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
     private static RequestQueue volleyQueue = null;
     private ArtigosListener artigosListener;
     private ArtigoListener artigoListener;
-    private UsersListener usersListener;
-    private UserListener userListener;
     private AvaliacaoListener avaliacaoListener;
     private AvaliacaosListener avaliacaosListener;
+    private UserListener userListener;
 
 
   private static final String mUrlAPI = "http://172.22.21.219:8080/api/";//depois concatenas com o resto - como levou o:8080 retirou-se o .../PSI_Web/backend/web
@@ -68,8 +64,9 @@ public class SingletonGestorLoja {
     }
 
 
-    //EX 7.1 FIcha 09
-    public void setArtigosListener(ArtigoListener artigoListener){
+    // region # SET LISTENERS  #
+
+    public void setArtigoListener(ArtigoListener artigoListener){
         this.artigoListener = artigoListener;
     }
 
@@ -77,6 +74,12 @@ public class SingletonGestorLoja {
         this.artigosListener = artigosListener;
     }
 
+    public void setUserListener(UserListener userListener){
+        this.userListener = userListener;
+    }
+    //endregion
+
+    // region # SET ARRAYLISTS  #
     public ArrayList<Fatura> getFaturasBD(){
         faturas = lojaBDHelper.getAllFaturasBD();
         return new ArrayList<>(faturas);}
@@ -95,7 +98,9 @@ public class SingletonGestorLoja {
         favoritos = lojaBDHelper.getAllFavoritosBD();
         return new ArrayList<>(favoritos);
     }
+    //endregion
 
+    // region # GETs #
     public Artigo getArtigo(int id) {  //recebe id por parametro
         for (Artigo art : artigos) {   //vai percorrer o array artigo
             if (art.getId() == id) {   //se algum dos artigos for igual ao id do parametro recebido em cima
@@ -130,6 +135,9 @@ public class SingletonGestorLoja {
         }
         return null;
     }
+    //endregion
+
+
     // region # METODOS AVALIACAOS BD #
     // Alinea 2.4 Ficha 8 Books - métodos adicionar, remover, editar e get
 
@@ -321,11 +329,11 @@ public class SingletonGestorLoja {
     //endregion
 
     //region # METODOS USER BD #
-    public void adicionarUserBD(Users u){
+    public void adicionarUserBD(User u){
         lojaBDHelper.adicionarUserBD(u);
     }
 
-    public void adicionarUsersBD(ArrayList<Users> users){
+    public void adicionarUsersBD(ArrayList<User> users){
         lojaBDHelper.removerAllArtigosBD();
         for (Artigo a : artigos){
             adicionarArtigoBD(a);
@@ -360,7 +368,7 @@ public class SingletonGestorLoja {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     System.out.println("----> response ERRO ARTIGOS API" + error);
                 }
             });
@@ -372,12 +380,12 @@ public class SingletonGestorLoja {
 
     //region # METODOS USERS API #
 
-    public void editUsersAPI(final Context context) {
+    /*public void editUserAPI(final Context context) {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
 
-            if (usersListener != null){
-                usersListener.onRefreshListaUsers(lojaBDHelper.getAllUsersBD());
+            if (userListener!= null){
+                userListener.onRefreshUser(lojaBDHelper.getUserBD());
             }
 
         } else{
@@ -404,7 +412,7 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
-
+*/
 
 
     //endregion

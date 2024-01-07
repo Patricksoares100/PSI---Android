@@ -14,7 +14,7 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
-import pt.ipleiria.estg.dei.brindeszorro.modelo.Users;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 
 public class LojaBDHelper extends SQLiteOpenHelper {
 
@@ -392,7 +392,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
     //region # MÉTODOS CRUD DOS USERS #
 
-    public void adicionarUserBD(Users u) {
+    public void adicionarUserBD(User u) {
         ContentValues values = new ContentValues();
         values.put(ID, u.getId());
         values.put(NOME, u.getNome());
@@ -406,8 +406,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         this.db.insert(TABLE_NAME_USERS, null, values);
     }
 
-    public ArrayList<Users> getAllUsersBD() {
-        ArrayList<Users> users = new ArrayList<>();
+    public ArrayList<User> getAllUsersBD() {
+        ArrayList<User> users = new ArrayList<>();
         Cursor cursor = this.db.query(TABLE_NAME_USERS, new String[]{
                         ID,
                         NOME,
@@ -421,7 +421,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Users auxUsers = new Users(
+                User auxUser = new User(
                         cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getInt(2),
@@ -431,14 +431,16 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getString(6),
                         cursor.getString(7));
 
-                users.add(auxUsers);
+                users.add(auxUser);
             } while (cursor.moveToNext());
             cursor.close();
         }
         return users;
     }
 
-    public boolean editarUsersBD(Users u) {
+
+
+    public boolean editarUsersBD(User u) {
         ContentValues values = new ContentValues();
         values.put(ID, u.getId());
         values.put(NOME, u.getNome());

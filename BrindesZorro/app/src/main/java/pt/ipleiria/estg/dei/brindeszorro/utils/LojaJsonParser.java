@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
-import pt.ipleiria.estg.dei.brindeszorro.modelo.Users;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 
 public class LojaJsonParser {
     //vai ser um JsonParser unico
@@ -123,10 +123,10 @@ public class LojaJsonParser {
     //endregion
 
 
-    //region # MÉTODOS Users JSON #
+    //region # MÉTODOS User JSON #
 
-    public static ArrayList<Users> parserJsonUsers(JSONArray response) {
-        ArrayList<Users> users = new ArrayList<>();
+    public static ArrayList<User> parserJsonUsers(JSONArray response) {
+        ArrayList<User> users = new ArrayList<>();
 
         try {
             for (int i = 0; i < response.length(); i++) {
@@ -141,8 +141,8 @@ public class LojaJsonParser {
                 String localidade = user.getString("localidade");
                 String token = user.getString("token");
 
-                Users auxUsers = new Users(id, nome, telefone, nif, morada, codigo_postal, localidade, token);
-                users.add(auxUsers);
+                User auxUser = new User(id, nome, telefone, nif, morada, codigo_postal, localidade, token);
+                users.add(auxUser);
             }
 
         } catch (JSONException e) {
@@ -153,8 +153,8 @@ public class LojaJsonParser {
 
 
     // vai ler o json e criar um objeto User
-    public static Users parserJsonUser(String response) {
-        Users auxUsers = null;
+    public static User parserJsonUser(String response) {
+        User auxUser = null;
 
         try {
             JSONObject user = new JSONObject(response);
@@ -168,12 +168,12 @@ public class LojaJsonParser {
             String localidade = user.getString("localidade");
             String token = user.getString("token");
 
-            auxUsers = new Users(id, nome, telefone, nif, morada, codigo_postal, localidade, token);
+            auxUser = new User(id, nome, telefone, nif, morada, codigo_postal, localidade, token);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return auxUsers;
+        return auxUser;
     }
     //endregion
 }
