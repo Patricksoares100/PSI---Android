@@ -90,35 +90,35 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="48dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
-
                 <Button
                     android:id="@+id/imageButtonCarrinhoArtigo"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#40000000"
+                    android:drawableLeft="@drawable/ic_action_carrinho"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_action_carrinho" />
+                    android:insetLeft="35dp" />
 
                 <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.7" />
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
 
                 <Button
                     android:id="@+id/imageButtonFavoritoArtigo"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/white"
+                    android:background="#40000000"
+                    android:drawableLeft="@drawable/ic_action_favorito"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/ic_action_favorito"/>
-
+                    android:insetLeft="35dp" />
             </LinearLayout>
 
         </LinearLayout>
