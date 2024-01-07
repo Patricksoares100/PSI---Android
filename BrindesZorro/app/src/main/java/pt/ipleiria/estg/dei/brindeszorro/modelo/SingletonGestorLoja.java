@@ -349,6 +349,7 @@ public class SingletonGestorLoja {
                 @Override
                 public void onResponse(JSONArray response) {
                     System.out.println("----> response ARTIGOS API" + response);
+                   // response.re .getString('imagem').replace("\\/", "/");
                     artigos = LojaJsonParser.parserJsonArtigos(response);
                     adicionarArtigosBD(artigos);
 
@@ -405,6 +406,48 @@ public class SingletonGestorLoja {
     }
 
 
+
+    //endregion
+
+    //region # METODO LOGIN API #
+    public void loginAPI(final Signup signup, final Context context){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
+
+        }else{
+            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPI +"users/registo", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //add com sucesso?
+                    if(response.contains("sucesso")){
+                        System.out.println("----> SUCESSO Signup "+ response);
+                        Toast.makeText(context, R.string.registo_com_sucesso, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO Signup" + error.getMessage() + error);
+                }
+            }){
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("username", signup.getUsername());
+                    params.put("email", signup.getEmail());
+                    params.put("password", signup.getPassword());
+                    params.put("nome", signup.getNome());
+                    params.put("morada", signup.getMorada());
+                    params.put("codigo_postal", signup.getCodigoPostal());
+                    params.put("localidade", signup.getLocalidade());
+                    params.put("telefone", ""+signup.getTelefone());
+                    params.put("nif", ""+signup.getNif());
+                    return params;
+
+                }
+            };
+            volleyQueue.add(request);
+        }
+    }
 
     //endregion
 }

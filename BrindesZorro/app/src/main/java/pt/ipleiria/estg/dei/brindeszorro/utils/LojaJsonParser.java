@@ -78,9 +78,11 @@ public class LojaJsonParser {
                 int iva = artigo.getInt("iva");
                 String fornecedor = artigo.getString("fornecedor");
                 String categoria = artigo.getString("categoria");
+                int media_avaliacoes = artigo.getInt("media_avaliacoes");
+                int num_avaliacoes = artigo.getInt("num_avaliacoes");
                 String  imagem = artigo.getString("imagem");
 
-                Artigo auxArtigo = new Artigo(id, nome, descricao, referencia, preco, stock_atual, iva, fornecedor, categoria,imagem);
+                Artigo auxArtigo = new Artigo(id, nome, descricao, referencia, preco, stock_atual, iva, fornecedor, categoria, media_avaliacoes, num_avaliacoes,imagem);
                 artigos.add(auxArtigo);
             }
 
@@ -107,9 +109,11 @@ public class LojaJsonParser {
             String fornecedor = artigo.getString("fornecedor");
             String categoria = artigo.getString("categoria");
             //String perfil = artigo.getString("perfil");
+            int media_avaliacoes = artigo.getInt("media_avaliacoes");
+            int num_avaliacoes = artigo.getInt("num_avaliacoes");
             String imagem = artigo.getString("imagem");
 
-            auxArtigo = new Artigo(id, nome, descricao, referencia, preco, stock_atual,iva,fornecedor,categoria,imagem);
+            auxArtigo = new Artigo(id, nome, descricao, referencia, preco, stock_atual,iva,fornecedor,categoria,media_avaliacoes, num_avaliacoes,imagem);
 
         } catch (JSONException e) {
             e.printStackTrace();

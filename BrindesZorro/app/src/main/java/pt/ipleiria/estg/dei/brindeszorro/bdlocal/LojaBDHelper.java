@@ -46,6 +46,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String VALOR_FATURA = "valorFatura";
     private static final String ESTADO = "estado";
     private static final String IMAGEM = "imagem";
+    private static final String NUM_AVALIACOES = "num_avaliacoes";
+    private static final String MEDIA_AVALIACOES = "media_avaliacoes";
     private static final String TELEFONE = "telefone";
     private static final String NIF = "nif";
     private static final String MORADA = "morada";
@@ -94,6 +96,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         IVA + " INTEGER NOT NULL, " +
                         FORNECEDOR + " TEXT NOT NULL, " +
                         CATEGORIA + " TEXT NOT NULL, " +
+                        MEDIA_AVALIACOES + " INTEGER NOT NULL, " +
+                        NUM_AVALIACOES + " INTEGER NOT NULL, " +
                         IMAGEM + " TEXT" +
                         ");";
         db.execSQL(createArtigoTable);
@@ -212,7 +216,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(IVA,a.getIva());
         values.put(FORNECEDOR, a.getFornecedor());
         values.put(CATEGORIA, a.getCategoria());
-        //values.put(PERFIL_ID,a.getPerfil());
+        values.put(MEDIA_AVALIACOES,a.getMedia_avaliacoes());
+        values.put(NUM_AVALIACOES,a.getNum_avaliacoes());
         values.put(IMAGEM, a.getImagem());
 
         this.db.insert(TABLE_NAME_ARTIGOS, null, values);
@@ -228,8 +233,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(IVA,a.getIva());
         values.put(FORNECEDOR, a.getFornecedor());
         values.put(CATEGORIA, a.getCategoria());
+        values.put(MEDIA_AVALIACOES,a.getMedia_avaliacoes());
+        values.put(NUM_AVALIACOES,a.getNum_avaliacoes());
         values.put(IMAGEM, a.getImagem());
-        //values.put(PERFIL_ID,a.getPerfil());
 
         return this.db.update(TABLE_NAME_ARTIGOS, values, ID + "= ?", new String[]{"" + a.getId()}) > 0;
     }
@@ -253,6 +259,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         FORNECEDOR,
                         CATEGORIA,
                        // PERFIL_ID,
+                        MEDIA_AVALIACOES,
+                        NUM_AVALIACOES,
                         IMAGEM},
                 null, null, null, null, null); // questionar o porquê destes 5 null?
 
@@ -268,7 +276,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getInt(6),
                         cursor.getString(7),
                         cursor.getString(8),
-                        cursor.getString(9));
+                        cursor.getInt(9),
+                        cursor.getInt(10),
+                        cursor.getString(11));
 
                 artigos.add(auxArtigo);
             } while (cursor.moveToNext());
