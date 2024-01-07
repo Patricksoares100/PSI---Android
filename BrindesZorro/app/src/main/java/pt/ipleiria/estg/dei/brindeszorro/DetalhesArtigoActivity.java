@@ -9,14 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
 public class DetalhesArtigoActivity extends AppCompatActivity {
 
     public static final String ID_ARTIGO = "IDARTIGO";
-    Artigo artigo;
-    private ImageView imgView;
+    private Artigo artigo;
+    private ImageView imgDetalhes;
     private TextView tvNome,tvValorUnitarioArtigo,tvDescricaoDetalhes, tvAvaliacaoArtigoDetalhes, tvValorTotalDetalhes;
     private int quantidade = 1;
     private double totalQuantidade = 0;
@@ -33,7 +36,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
         tvAvaliacaoArtigoDetalhes = findViewById(R.id.tvDescricaoDetalhes);
         tvDescricaoDetalhes = findViewById(R.id.tvDescricaoDetalhes);
         tvValorTotalDetalhes = findViewById(R.id.tvValorTotalDetalhes);
-        imgView = findViewById(R.id.ivDetalhes);
+        imgDetalhes = findViewById(R.id.ivDetalhes);
 
         if (artigo != null) {
             carregarArtigo();
@@ -49,6 +52,9 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
         //falta avaçiação
         tvDescricaoDetalhes.setText(artigo.getDescricao());
         quantidadeAtualizada();
+
+        String urlImagem = artigo.getImagem();
+        Glide.with(this).load(urlImagem).into(imgDetalhes);
     }
 
     public void diminuirQuantidade(View view) {
@@ -77,5 +83,14 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
 
         TextView tvValorTotalDetalhes = findViewById(R.id.tvValorTotalDetalhes);
         tvValorTotalDetalhes.setText(String.format("Valor Total   %.2f €", totalQuantidade));
+    }
+
+    public void adicionarCarrinho(View view) {
+
+    }
+
+    public void adicionarFavoritos(View view) {
+        Favorito favorito = new Favorito(0, Integer.parseInt(ID_ARTIGO), 3);
+        SingletonGestorLoja.getInstance(getApplicationContext()).adicionarFavoritoBD(favorito);
     }
 }

@@ -370,7 +370,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME_AVALIACAOS, null, values);
     }
 
-    public void inserirArtigoExemplo() {
+    /*public void inserirArtigoExemplo() {
         limparBaseDeDadosArtigos(); //FAZ COM QUE AO CRIAR LIMPE PRIMEIRO
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -410,7 +410,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(PERFIL_ID, 3);
 
         db.insert(TABLE_NAME_FAVORITOS, null, values);
-    }
+    }*/
     public void limparBaseDeDadosAvaliacaos() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME_AVALIACAOS);
