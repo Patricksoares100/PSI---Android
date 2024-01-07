@@ -360,7 +360,6 @@ public class SingletonGestorLoja {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     System.out.println("----> response ERRO ARTIGOS API" + error);
                 }
             });
