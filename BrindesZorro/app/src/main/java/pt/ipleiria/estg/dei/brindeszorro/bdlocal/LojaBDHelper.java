@@ -288,7 +288,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     }
 
     public void removerAllArtigosBD(){
-        db.delete(TABLE_NAME_AVALIACAOS, null, null);
+        db.delete(TABLE_NAME_ARTIGOS, null, null);
     }
 
     //endregion
