@@ -31,7 +31,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:text="@string/hint_userName" />
+        android:text="@string/cliente" />
 
     <TextView
         android:id="@+id/tvPasswordLogin"
@@ -44,11 +44,11 @@
         android:id="@+id/etPasswordLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:layout_margin="16dp"
-        android:text="@string/loginInputPassword" />
+        android:text="@string/teste123" />
 
     <Button
         android:id="@+id/buttonLogin"

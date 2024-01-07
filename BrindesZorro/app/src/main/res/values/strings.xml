@@ -121,5 +121,8 @@
     <string name="tv_Prc_Artigo">Valor do Artigo</string>
     <string name="icnHome">Home</string>
     <string name="icnFavoritos">Favoritos</string>
-    <string name="icnCarTitle">Carrinho</string>/>
+    <string name="icnCarTitle">Carrinho</string>
+    <string name="cliente">cliente</string>
+    <string name="teste123">teste123</string>
+    <string name="nome">Nome:</string>/>
 </resources>

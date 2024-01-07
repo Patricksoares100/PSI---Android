@@ -18,7 +18,7 @@
             <TextView
                 android:id="@+id/tvNomeArtigoDetalhes"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -26,13 +26,13 @@
             <ImageView
                 android:id="@+id/ivDetalhes"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="180dp"
                 android:src="@drawable/brindes" />
 
             <TextView
                 android:id="@+id/tvDescricaoDetalhes"
                 android:layout_width="match_parent"
-                android:layout_height="98dp"
+                android:layout_height="20dp"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/tvValorUnitarioArtigo"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -132,8 +132,29 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/lvAvaliacaoDetalheArtigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="45dp" />
+
+            </LinearLayout>
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">-->
+
+            <!--</LinearLayout>-->
+
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

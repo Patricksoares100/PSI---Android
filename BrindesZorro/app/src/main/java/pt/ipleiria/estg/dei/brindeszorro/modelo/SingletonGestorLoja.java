@@ -65,11 +65,14 @@ public class SingletonGestorLoja {
     // Necessário para instanciar a classe da base de dados
     private SingletonGestorLoja(Context context) {
         lojaBDHelper = new LojaBDHelper(context);
+        avaliacaos = new ArrayList<>();
     }
 
 
     // region # SET LISTENERS  #
-
+    public void  setAvaliacaosListener(AvaliacaosListener avaliacaosListener){
+            this.avaliacaosListener = avaliacaosListener;
+    }
     public void setArtigoListener(ArtigoListener artigoListener){
         this.artigoListener = artigoListener;
     }
@@ -199,6 +202,38 @@ public class SingletonGestorLoja {
     }
 
     // endregion
+    // # METODO AVALIACAO API #
+    public void getAllAvaliacoesAPI(final Context context) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+
+            if (avaliacaosListener != null){
+                avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
+            }
+        } else{
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "avaliacaos", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response AVALIACAOS API" + response);
+                    // response.re .getString('imagem').replace("\\/", "/");
+                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
+                    adicionarAvaliacaosBD(avaliacaos);
+
+                    if(avaliacaosListener != null){
+                        avaliacaosListener.onRefreshListaAvaliacaos(avaliacaos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> response ERRO AVALIACAO API" + error);
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+    //endregio
 
     // region # METODOS Favoritos BD #
 
@@ -322,7 +357,7 @@ public class SingletonGestorLoja {
                     //add com sucesso?
                     if(response.contains("sucesso")){
                         System.out.println("----> SUCESSO Signup "+ response);
-                        Toast.makeText(context, R.string.registo_com_sucesso, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, R.string.registo_com_sucesso, Toast.LENGTH_SHORT).show();
                     }
                 }
             }, new Response.ErrorListener() {
@@ -423,6 +458,7 @@ public class SingletonGestorLoja {
     }
     //endregion
 
+
     //region # METODOS USERS API #
 
     public void editUserAPI(final User user, Context context, final String token) {
@@ -517,37 +553,31 @@ public class SingletonGestorLoja {
     //endregion
 
     //region # METODO LOGIN API #
-    public void loginAPI(final Signup signup, final Context context){
+    public void loginAPI(final Login login, final Context context){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
 
         }else{
-            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPI +"users/registo", new Response.Listener<String>() {
+            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPI +"users/login", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //add com sucesso?
-                    if(response.contains("sucesso")){
-                        System.out.println("----> SUCESSO Signup "+ response);
-                        Toast.makeText(context, R.string.registo_com_sucesso, Toast.LENGTH_SHORT).show();
-                    }
+                        System.out.println("----> SUCESSO Login "+ response);
+                   /* users = LojaJsonParser.parserJsonUser(response);
+                    adicionarUserBD(users);
+                    if()*/
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println("----> ERRO Signup" + error.getMessage() + error);
+                    System.out.println("----> ERRO Login" + error.getMessage() + error);
                 }
             }){
                 protected Map<String, String> getParams(){
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("username", signup.getUsername());
-                    params.put("email", signup.getEmail());
-                    params.put("password", signup.getPassword());
-                    params.put("nome", signup.getNome());
-                    params.put("morada", signup.getMorada());
-                    params.put("codigo_postal", signup.getCodigoPostal());
-                    params.put("localidade", signup.getLocalidade());
-                    params.put("telefone", ""+signup.getTelefone());
-                    params.put("nif", ""+signup.getNif());
+                    params.put("username", login.getUsername());
+                    params.put("password", login.getPassword());
+
                     return params;
 
                 }
@@ -557,4 +587,5 @@ public class SingletonGestorLoja {
     }
 
     //endregion
+
 }

@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Login;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
+    Login login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickLogin(View view) {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
+        login = new Login(username,password);
         
 
         if(!isPasswordValida(password)){
@@ -38,7 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         if(!isLoginValido(username, password)){
             Toast.makeText(this, R.string.username_e_ou_password_incorreto, Toast.LENGTH_SHORT).show();
         }else{
-            //SingletonGestorLoja.getInstance(getApplicationContext()).getAllUserAPI();
+
+            SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext());
+
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

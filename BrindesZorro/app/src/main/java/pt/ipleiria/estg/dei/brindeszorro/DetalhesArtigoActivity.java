@@ -6,17 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
+import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaAvaliacaosAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaAvaliacaosArtigoAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
-public class DetalhesArtigoActivity extends AppCompatActivity {
+public class DetalhesArtigoActivity extends AppCompatActivity implements AvaliacaosListener {
 
     public static final String ID_ARTIGO = "IDARTIGO";
     private Artigo artigo;
@@ -25,6 +32,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
     private int quantidade = 1;
     private double totalQuantidade = 0;
     RatingBar ratingBar;
+    private ListView lvAvaliacaoDetalheArtigo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
         imgDetalhes = findViewById(R.id.ivDetalhes);
         ratingBar = findViewById(R.id.ratingBar);
         tvQtdClassificacoes = findViewById(R.id.tvQtdClassificacoes);
+        lvAvaliacaoDetalheArtigo = findViewById(R.id.lvAvaliacaoDetalheArtigo);
 
         if (artigo != null) {
             carregarArtigo();
@@ -62,6 +71,9 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
 
         ratingBar.setRating(artigo.getMedia_avaliacoes());
         tvQtdClassificacoes.setText(""+artigo.getNum_avaliacoes()+" Avaliações");
+
+        SingletonGestorLoja.getInstance(getApplicationContext()).setAvaliacaosListener(this);
+        SingletonGestorLoja.getInstance(getApplicationContext()).getAllAvaliacoesAPI(getApplicationContext());
 
     }
 
@@ -100,5 +112,18 @@ public class DetalhesArtigoActivity extends AppCompatActivity {
     public void adicionarFavoritos(View view) {
         Favorito favorito = new Favorito(0, Integer.parseInt(ID_ARTIGO), 3);
         SingletonGestorLoja.getInstance(getApplicationContext()).adicionarFavoritoBD(favorito);
+    }
+
+    @Override
+    public void onRefreshListaAvaliacaos(ArrayList<Avaliacao> avaliacaos) {
+        if(avaliacaos != null){
+            ArrayList auxAv = new ArrayList<>();
+            for(Avaliacao a : avaliacaos) {
+                if(a.getArtigoId() == artigo.getId()){
+                    auxAv.add(a);
+                }
+            }
+            lvAvaliacaoDetalheArtigo.setAdapter(new ListaAvaliacaosArtigoAdaptador(getApplicationContext(),auxAv));
+        }
     }
 }

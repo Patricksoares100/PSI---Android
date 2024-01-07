@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 
@@ -174,6 +175,52 @@ public class LojaJsonParser {
             e.printStackTrace();
         }
         return auxUser;
+    }
+    //endregion
+
+    //region # MÉTODOS AVALIACAOS JSON #
+    public static ArrayList<Avaliacao> parserJsonAvaliacaos(JSONArray response) {
+        ArrayList<Avaliacao> avaliacaos = new ArrayList<>();
+
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject avaliacao = (JSONObject) response.get(i);
+
+                int id = avaliacao.getInt("id");
+                String comentario = avaliacao.getString("comentario");
+                int classificacao = avaliacao.getInt("classificacao");
+                int artigoId = avaliacao.getInt("artigo_id");
+                int perfilIdd = avaliacao.getInt("perfil_id");
+
+                Avaliacao auxAvaliacao = new Avaliacao(id, comentario, classificacao, artigoId, perfilIdd);
+                avaliacaos.add(auxAvaliacao);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return avaliacaos;
+    }
+
+    // vai ler o json e criar um objeto Avaliacao
+    public static Avaliacao parserJsonAvaliacao(String response) {
+        Avaliacao auxAvaliacao = null;
+
+        try {
+            JSONObject avaliacao = new JSONObject(response);
+
+            int id = avaliacao.getInt("id");
+            String comentario = avaliacao.getString("comentario");
+            int classififcacao = avaliacao.getInt("classififcacao");
+            int artigoId = avaliacao.getInt("artigoId");
+            int perfilId = avaliacao.getInt("perfilId");
+
+            auxAvaliacao = new Avaliacao(id, comentario, classififcacao, artigoId, perfilId);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxAvaliacao;
     }
     //endregion
 }

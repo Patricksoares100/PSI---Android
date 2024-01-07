@@ -70,7 +70,6 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
 
         SingletonGestorLoja.getInstance(getContext()).setArtigosListener(this);
         SingletonGestorLoja.getInstance(getContext()).getAllArtigosAPI(getContext());
-        SingletonGestorLoja.getInstance(getContext()).getAllUserAPI(getContext());
 
        return view;
     }
