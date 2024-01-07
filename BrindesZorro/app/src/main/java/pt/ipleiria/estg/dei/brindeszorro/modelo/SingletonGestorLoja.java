@@ -559,14 +559,13 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
 
         }else{
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, mUrlAPI +"users/login", new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.POST, mUrlAPI +"users/login",null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     //add com sucesso?
                     System.out.println("----> SUCESSO Login "+ response);
                     // users = LojaJsonParser.parserJsonUser(response);
                     adicionarUsersBD(users);
-
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -583,7 +582,7 @@ public class SingletonGestorLoja {
 
                 }
             };
-            volleyQueue.add(request);
+            volleyQueue.add(req);
         }
     }
 
