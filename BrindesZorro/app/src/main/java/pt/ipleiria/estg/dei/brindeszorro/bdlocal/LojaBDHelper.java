@@ -14,6 +14,7 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Users;
 
 public class LojaBDHelper extends SQLiteOpenHelper {
 
@@ -23,6 +24,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_ARTIGOS = "artigos";
     private static final String TABLE_NAME_FATURAS = "faturas";
     private static final String TABLE_NAME_FAVORITOS = "favoritos";
+    private static final String TABLE_NAME_USERS = "users";
     private static final int DB_VERSION = 1;
     //endregion
 
@@ -44,6 +46,14 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String VALOR_FATURA = "valorFatura";
     private static final String ESTADO = "estado";
     private static final String IMAGEM = "imagem";
+    private static final String TELEFONE = "telefone";
+    private static final String NIF = "nif";
+    private static final String MORADA = "morada";
+    private static final String CODIGO_POSTAL = "codigoPostal";
+    private static final String LOCALIDADE = "localidade";
+    private static final String TOKEN = "token";
+
+
     private final SQLiteDatabase db;    // Alinea 1.3 Ficha 8 Books - criação de uma instância da classe SQLiteDatabase
     // endregion
 
@@ -106,6 +116,19 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         ");";
         db.execSQL(createFavoritoTable);
 
+        String createUserTable =
+                "CREATE TABLE " + TABLE_NAME_USERS + "(" +
+                        ID + " INTEGER PRIMARY KEY, " +
+                        NOME + " TEXT NOT NULL, " +
+                        TELEFONE + " INTEGER NOT NULL, " +
+                        NIF + " INTEGER NOT NULL, " +
+                        MORADA + " TEXT NOT NULL, " +
+                        CODIGO_POSTAL + " TEXT NOT NULL, " +
+                        LOCALIDADE + " TEXT NOT NULL, " +
+                        TOKEN + " TEXT" + ");";
+
+        db.execSQL(createUserTable);
+
     }
     // endregion
 
@@ -117,6 +140,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ARTIGOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FATURAS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FAVORITOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USERS);
         this.onCreate(db);
     }
     //endregion
@@ -351,9 +375,77 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         return favoritos;
     }
 
-    public void removerAllFavoritos(){
+    public void removerAllFavoritosBD(){
         db.delete(TABLE_NAME_FAVORITOS, null, null);
     }
+    //endregion
+
+    //region # MÉTODOS CRUD DOS USERS #
+
+    public void adicionarUserBD(Users u) {
+        ContentValues values = new ContentValues();
+        values.put(ID, u.getId());
+        values.put(NOME, u.getNome());
+        values.put(TELEFONE, u.getTelefone());
+        values.put(NIF, u.getNif());
+        values.put(MORADA, u.getMorada());
+        values.put(CODIGO_POSTAL, u.getCodigo_postal());
+        values.put(LOCALIDADE,u.getLocalidade());
+        values.put(TOKEN,u.getToken());
+
+        this.db.insert(TABLE_NAME_USERS, null, values);
+    }
+
+    public ArrayList<Users> getAllUsersBD() {
+        ArrayList<Users> users = new ArrayList<>();
+        Cursor cursor = this.db.query(TABLE_NAME_USERS, new String[]{
+                        ID,
+                        NOME,
+                        TELEFONE,
+                        NIF,
+                        MORADA,
+                        CODIGO_POSTAL,
+                        LOCALIDADE,
+                        TOKEN},
+                null, null, null, null, null); // questionar o porquê destes 5 null?
+
+        if (cursor.moveToFirst()) {
+            do {
+                Users auxUsers = new Users(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7));
+
+                users.add(auxUsers);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return users;
+    }
+
+    public boolean editarUsersBD(Users u) {
+        ContentValues values = new ContentValues();
+        values.put(ID, u.getId());
+        values.put(NOME, u.getNome());
+        values.put(TELEFONE, u.getTelefone());
+        values.put(NIF, u.getNif());
+        values.put(MORADA, u.getMorada());
+        values.put(CODIGO_POSTAL, u.getCodigo_postal());
+        values.put(LOCALIDADE,u.getLocalidade());
+        values.put(TOKEN,u.getToken());
+
+        return this.db.update(TABLE_NAME_USERS, values, ID + "= ?", new String[]{"" + u.getId()}) > 0;
+    }
+
+    public void removerAllUsersBD(){
+        db.delete(TABLE_NAME_USERS, null, null);
+    }
+
     //endregion
 
     //region # MÉTODOS DE TESTE (NO FIM APAGAR)#

@@ -26,6 +26,8 @@ import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.UserListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
 
 public class SingletonGestorLoja {
@@ -34,11 +36,14 @@ public class SingletonGestorLoja {
     private ArrayList<Artigo> artigos;
     private ArrayList<Avaliacao> avaliacaos;
     private ArrayList<Favorito> favoritos;
+    private ArrayList<Users> users;
     private static SingletonGestorLoja instance = null;
     private LojaBDHelper lojaBDHelper = null;   // Alinea 2.2 Ficha 8 Books - criar um atributo (nome)BD do tipo (nomeModelo)BDHelper;
     private static RequestQueue volleyQueue = null;
     private ArtigosListener artigosListener;
     private ArtigoListener artigoListener;
+    private UsersListener usersListener;
+    private UserListener userListener;
     private AvaliacaoListener avaliacaoListener;
     private AvaliacaosListener avaliacaosListener;
 
@@ -215,7 +220,7 @@ public class SingletonGestorLoja {
             StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
                 @Override
                 public void onResponse(String response) {
-                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response)); // recebe o artigo da base de dados para adicionar à API
+                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
                     if (avaliacaoListener != null) {
                         avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
                     }
@@ -242,7 +247,6 @@ public class SingletonGestorLoja {
     }
 
     // endregion
-
 
     // region # METODOS FATURAS BD #
 
@@ -284,7 +288,7 @@ public class SingletonGestorLoja {
     // region # METODOS Favoritos BD #
 
     public void adicionarFavoritosBD(ArrayList<Favorito> favoritos){
-        lojaBDHelper.removerAllFavoritos();
+        lojaBDHelper.removerAllFavoritosBD();
         for (Favorito f : favoritos){
             adicionarFavoritoBD(f);
         }
@@ -314,6 +318,20 @@ public class SingletonGestorLoja {
     public void adicionarArtigoBD(Artigo a) {
         lojaBDHelper.adicionarArtigoBD(a);
     }
+    //endregion
+
+    //region # METODOS USER BD #
+    public void adicionarUserBD(Users u){
+        lojaBDHelper.adicionarUserBD(u);
+    }
+
+    public void adicionarUsersBD(ArrayList<Users> users){
+        lojaBDHelper.removerAllArtigosBD();
+        for (Artigo a : artigos){
+            adicionarArtigoBD(a);
+        }
+    }
+
     //endregion
 
     //region # METODOS ARTIGOS API #
@@ -349,5 +367,44 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
+    //endregion
+
+    //region # METODOS USERS API #
+
+    public void editUsersAPI(final Context context) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+
+            if (usersListener != null){
+                usersListener.onRefreshListaUsers(lojaBDHelper.getAllUsersBD());
+            }
+
+        } else{
+
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.PUT, mUrlAPI + "users", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response USERS API" + response);
+                    users =LojaJsonParser.parserJsonUsers(response);
+                    adicionarUsersBD(users);
+
+                    if(usersListener != null){
+                        usersListener.onRefreshListaUsers(users);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    System.out.println("----> response ERRO USERS API" + error);
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
+
+
     //endregion
 }
