@@ -56,7 +56,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
         }
         String quantidade = ((TextView) findViewById(R.id.tvQuantidadeArtigoDetalhes)).getText().toString();
 
-        Toast.makeText(this, "quantidade" + quantidade, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "quantidade" + quantidade, Toast.LENGTH_SHORT).show();
     }
 
     private void carregarArtigo() {
