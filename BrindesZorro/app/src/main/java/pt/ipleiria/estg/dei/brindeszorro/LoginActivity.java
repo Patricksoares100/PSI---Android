@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext());
             //if logar com sucesso->itent else tosta
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(MainActivity.USERNAME, username);
             startActivity(intent);
             finish();
         }

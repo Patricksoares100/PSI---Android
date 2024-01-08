@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -30,9 +31,9 @@ import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String email;
+    private String email, username;
     private EditText etPassword, etEmail;
-
+    public static final String USERNAME = "username";
     private FragmentManager fragmentManager;
     private Fragment fragment;
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // falta aqui carregar o cabeçalho da gaveta (nome e email do user)
         carregarFragmentoInicial();
+        carregarCabecalho();
 
 
     }
@@ -76,7 +78,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return onNavigationItemSelected(item);
     }
 
+    private void carregarCabecalho() {
+        // Este método deve ser implementado para carregar o cabeçalho da vista de navegação
+        username =getIntent().getStringExtra(USERNAME).toString();
+        if (username != null){
+            View hView= navigationView.getHeaderView(0);
 
+            TextView tvUsername = hView.findViewById(R.id.tvUsernameLogin);
+            tvUsername.setText(username);
+        }
+    }
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Este método é chamado quando um item de menu da vista de navegação é selecionado
         Fragment fragment = null;
