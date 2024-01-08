@@ -31,8 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickLogin(View view) {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
-        login = new Login(username,password);
-        
 
         if(!isPasswordValida(password)){
             etPassword.setError(getString(R.string.etPasswordTextError));
@@ -41,9 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         if(!isLoginValido(username, password)){
             Toast.makeText(this, R.string.username_e_ou_password_incorreto, Toast.LENGTH_SHORT).show();
         }else{
-
+            login = new Login(username,password);
             SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext());
-
+            //if logar com sucesso->itent else tosta
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

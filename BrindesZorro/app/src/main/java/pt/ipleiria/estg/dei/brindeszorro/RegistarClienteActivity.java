@@ -105,7 +105,7 @@ public class RegistarClienteActivity extends AppCompatActivity {
                 morada,codPostal,localidade,Integer.parseInt(telefone),
                 Integer.parseInt(nif));
         SingletonGestorLoja.getInstance(getApplicationContext()).signupAPI(signup, getApplicationContext());
-
+//if registo com sucesso itent else continua na mesma activity
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
