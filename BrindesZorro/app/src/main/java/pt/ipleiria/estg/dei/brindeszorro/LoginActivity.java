@@ -3,15 +3,20 @@ package pt.ipleiria.estg.dei.brindeszorro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Login;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,8 +30,12 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPasswordLogin);
 
-
-    }
+        if(isTokenValido()){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        }
 
     public void onClickLogin(View view) {
         String username = etUsername.getText().toString();
@@ -36,24 +45,36 @@ public class LoginActivity extends AppCompatActivity {
             etPassword.setError(getString(R.string.etPasswordTextError));
             return;
         }
-        if(!isLoginValido(username, password)){
-            Toast.makeText(this, R.string.username_e_ou_password_incorreto, Toast.LENGTH_SHORT).show();
-        }else{
-            login = new Login(username,password);
-            SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext());
-            //if logar com sucesso->itent else tosta
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra(MainActivity.USERNAME, username);
-            startActivity(intent);
-            finish();
+        if(isLoginValido(username, password)){
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra(MainActivity.USERNAME, username);
+                startActivity(intent);
+                finish();
+            }
         }
-        //SingletonGestorLoja.getInstance(getApplicationContext()).signupAPI(signup, getApplicationContext());
 
-       /* */
-    }
+
     public boolean isLoginValido(String username, String password){
-        return true;
+        login = new Login(username,password);
+        SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext());
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        if(sharedPreferences.getString(Public.TOKEN,"TOKEN").matches("TOKEN")){
+            return false;
+        }else{
+            return true;
+        }
     }
+    public boolean isTokenValido(){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        System.out.println(sharedPreferences.getString(Public.TOKEN,"TOKENn"));
+        if(sharedPreferences.getString(Public.TOKEN,"TOKEN").matches("TOKEN")){
+            System.out.println("--->false");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 
     public boolean isPasswordValida(String password){
         if (password == null)

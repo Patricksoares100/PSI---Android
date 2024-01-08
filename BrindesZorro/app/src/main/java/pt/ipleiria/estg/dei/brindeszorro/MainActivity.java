@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaAvaliacaosFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFaturasFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFavoritosFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void carregarCabecalho() {
         // Este método deve ser implementado para carregar o cabeçalho da vista de navegação
-        username =getIntent().getStringExtra(USERNAME).toString();
+//        username =getIntent().getStringExtra(USERNAME).toString();
         if (username != null){
             View hView= navigationView.getHeaderView(0);
 
@@ -136,13 +138,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Remover user na bd
         LojaBDHelper lojaBDHelper = new LojaBDHelper(getApplicationContext());
-        lojaBDHelper.removerUserBD(1);
+        lojaBDHelper.removerAllUsersBD();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Public.TOKEN, "TOKEN");
+        System.out.println("--->>"+ sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+        editor.apply();
+        System.out.println("--->after>"+ sharedPreferences.getString(Public.TOKEN, "TOKEN"));
 
         // Redirecionar para activity de login
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        onDestroy();
-        finish();
+
     }
 
 }

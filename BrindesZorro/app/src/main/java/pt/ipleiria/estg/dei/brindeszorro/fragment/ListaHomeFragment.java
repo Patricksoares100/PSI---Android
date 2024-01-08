@@ -42,7 +42,7 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Toast.makeText(getContext(), "entrou", Toast.LENGTH_SHORT).show();// mensagem de erro para ver se entra!!!!
+        //Toast.makeText(getContext(), "entrou", Toast.LENGTH_SHORT).show();// mensagem de erro para ver se entra!!!!
 
         // inicia o layout com o activity_home
         View view = inflater.inflate(R.layout.fragment_lista_home, container, false);

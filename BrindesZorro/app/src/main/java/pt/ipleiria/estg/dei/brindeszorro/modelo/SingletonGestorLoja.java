@@ -167,7 +167,6 @@ public class SingletonGestorLoja {
         }
         return null;
     }
-
     //endregion
 
     // region # METODOS AVALIACAOS BD #
@@ -568,18 +567,24 @@ public class SingletonGestorLoja {
                 @Override
                 public void onResponse(String response) {
                     //add com sucesso?
-                    System.out.println("----> SUCESSO Login "+ response);
-                    adicionarUserBD(LojaJsonParser.parserJsonUser(response));
+                    System.out.println("----> SUCESSO Login " + response);
                     SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        editor.putString(Public.TOKEN, jsonObject.getString("token"));
+                    if(response.contains("Username e/ou password incorreto.") || response.contains("Acesso Negado")){
+                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                        editor.putString(Public.TOKEN, "TOKEN");
                         editor.apply();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
 
+                    }else {
+                        adicionarUserBD(LojaJsonParser.parserJsonUser(response));
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            editor.putString(Public.TOKEN, jsonObject.getString("token"));
+                            editor.apply();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
