@@ -40,7 +40,8 @@
             app:icon="@drawable/ic_logout_foreground"
             app:iconGravity="end"
             app:iconSize="35dp"
-            app:iconTint="#F44336" />
+            app:iconTint="#F44336"
+            android:onClick="logOut"/>
     </com.google.android.material.navigation.NavigationView>
 
 

@@ -29,9 +29,7 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
         etLocalidadeEditarDadosPessoais = findViewById(R.id.etLocalidadeEditarDadosPessoais);
     }
 
-
-
-    public void Canceler(View view) {
+    public void Cancelar(View view) {
         Intent NavHome = new Intent(this, MainActivity.class);
         startActivity(NavHome);
     }
@@ -88,5 +86,9 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
         finish();
     }
 
-    
+    public void alterarPassword (View view){
+        Intent intent = new Intent(this, AlterarPasswordActivity.class);
+        startActivity(intent);
     }
+
+}
