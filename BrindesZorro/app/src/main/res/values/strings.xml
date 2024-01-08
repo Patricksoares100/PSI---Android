@@ -124,5 +124,6 @@
     <string name="icnCarTitle">Carrinho</string>
     <string name="cliente">cliente</string>
     <string name="teste123">teste123</string>
-    <string name="nome">Nome:</string>/>
+    <string name="nome">Nome:</string>
+    <string name="strAlterarPassword">Alterar Password</string>/>
 </resources>

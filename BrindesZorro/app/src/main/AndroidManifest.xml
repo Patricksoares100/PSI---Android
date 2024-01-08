@@ -29,6 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".CarrinhoActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".FaturaActivity"
@@ -56,6 +57,10 @@
             android:name=".EditarDadosPessoaisActivity"
             android:parentActivityName=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".AlterarPasswordActivity"
+            android:exported="false"
+            android:parentActivityName=".EditarDadosPessoaisActivity"/>
         <activity
             android:name=".ArtigosActivity"
             android:exported="false" />
