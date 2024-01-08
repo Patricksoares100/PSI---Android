@@ -10,9 +10,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 
 public class EditarDadosPessoaisActivity extends AppCompatActivity {
 
+    private User user;
+    public static final String TOKEN = "TOKEN";
     private EditText etNomeEditarDadosPessoais, etTelefoneEditarDadosPessoais,
             etNifEditarDadosPessoais,etMoradaEditarDadosPessoais,
             etCodigoPostalEditarDadosPessoais,etLocalidadeEditarDadosPessoais;
@@ -21,12 +25,23 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_dados_pessoais);
 
+        //int idUser = getIntent()getIntExtra(ID_USER,0);
+        //user = SingletonGestorLoja.getInstance(getApplicationContext()).getUser(idUser);
         etNomeEditarDadosPessoais = findViewById(R.id.etNomeEditarDadosPessoais);
         etTelefoneEditarDadosPessoais = findViewById(R.id.etTelefoneEditarDadosPessoais);
         etNifEditarDadosPessoais = findViewById(R.id.etNifEditarDadosPessoais);
         etMoradaEditarDadosPessoais = findViewById(R.id.etMoradaEditarDadosPessoais);
         etCodigoPostalEditarDadosPessoais = findViewById(R.id.etCodigoPostalEditarDadosPessoais);
         etLocalidadeEditarDadosPessoais = findViewById(R.id.etLocalidadeEditarDadosPessoais);
+    }
+
+    private void carregarDadosPessoais(){
+        etNomeEditarDadosPessoais.setText(user.getNome());
+        etTelefoneEditarDadosPessoais.setText(user.getTelefone());
+        etNifEditarDadosPessoais.setText(user.getNif());
+        etMoradaEditarDadosPessoais.setText(user.getMorada());
+        etCodigoPostalEditarDadosPessoais.setText(user.getCodigo_postal());
+        etLocalidadeEditarDadosPessoais.setText(user.getLocalidade());
     }
 
     public void Cancelar(View view) {
