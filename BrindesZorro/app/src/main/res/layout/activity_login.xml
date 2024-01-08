@@ -8,6 +8,14 @@
     tools:context=".LoginActivity"
     android:background="@drawable/fundo">
 
+    <ImageButton
+        android:id="@+id/imgButtonServidor"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="350dp"
+        android:src="@drawable/ic_launcher_adaptive_fore"
+        android:onClick="irServidor"/>
+
     <ImageView
         android:id="@+id/ivLogoLogin"
         android:layout_width="match_parent"
@@ -61,13 +69,13 @@
     <TextView
         android:id="@+id/clickableText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:minHeight="48dp"
         android:onClick="onClickPassword"
         android:text="Forget Password?"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <FrameLayout
         android:layout_width="match_parent"

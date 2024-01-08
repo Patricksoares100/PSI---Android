@@ -71,4 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent ForgetPassword = new Intent(this, RecuperarPasswordActivity.class);
         startActivity(ForgetPassword);
     }
+
+    public void irServidor(View view) {
+        Intent intent = new Intent(this, ServidorActivity.class);
+        startActivity(intent);
+    }
 }

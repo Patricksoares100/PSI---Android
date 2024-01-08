@@ -203,7 +203,8 @@ public class SingletonGestorLoja {
     }
 
     // endregion
-    // # METODO AVALIACAO API #
+
+    //region # METODO AVALIACAO API #
     public void getAllAvaliacoesAPI(final Context context) {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
@@ -234,7 +235,7 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
-    //endregio
+    //endregion
 
     // region # METODOS Favoritos BD #
 

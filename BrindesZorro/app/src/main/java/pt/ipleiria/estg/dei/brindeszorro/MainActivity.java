@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 
 import com.google.android.material.navigation.NavigationView;
 
+import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaAvaliacaosFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFaturasFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFavoritosFragment;
@@ -120,6 +123,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void logOut(View view){
 
+        // Remover user na bd
+        LojaBDHelper lojaBDHelper = new LojaBDHelper(getApplicationContext());
+        lojaBDHelper.removerUserBD(1);
+
+        // Redirecionar para activity de login
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        onDestroy();
+        finish();
     }
 
 }
