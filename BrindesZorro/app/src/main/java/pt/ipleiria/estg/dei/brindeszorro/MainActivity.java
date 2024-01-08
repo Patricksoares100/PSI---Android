@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EditText etPassword, etEmail;
 
     private FragmentManager fragmentManager;
+    private Fragment fragment;
+
     private NavigationView navigationView;
     private DrawerLayout drawer;
     public static final int ADD = 100, EDIT = 200, DELETE = 300;
@@ -45,15 +47,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawerLayout); // Obtém a gaveta (drawer)
         navigationView = findViewById(R.id.navView); // Obtém a vista de navegação (navigation view)
 
+        navigationView.setNavigationItemSelectedListener(this); // Define a atividade atual como o ouvinte de eventos de navegação
         // Configura o ActionBarDrawerToggle para abrir e fechar a gaveta
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.ndOpen, R.string.ndClose);
         toggle.syncState(); // Sincroniza o estado do ActionBarDrawerToggle
         drawer.addDrawerListener(toggle); // Adiciona o ActionBarDrawerToggle à gaveta
         drawer.closeDrawer(GravityCompat.START); // Adiciona esta linha para fechar a gaveta no início
 
-
-        navigationView.setNavigationItemSelectedListener(this); // Define a atividade atual como o ouvinte de eventos de navegação
         fragmentManager = getSupportFragmentManager();
+
+        fragment = new ListaHomeFragment();
+        fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
 
         // falta aqui carregar o cabeçalho da gaveta (nome e email do user)
         carregarFragmentoInicial();
