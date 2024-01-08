@@ -217,7 +217,7 @@ public class SingletonGestorLoja {
                 public void onResponse(JSONArray response) {
                     System.out.println("----> response AVALIACAOS API" + response);
                     // response.re .getString('imagem').replace("\\/", "/");
-                   // avaliacaos = LojaJsonParser.parserJsonAvaliacao(response);
+                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
                     adicionarAvaliacaosBD(avaliacaos);
 
                     if(avaliacaosListener != null){
