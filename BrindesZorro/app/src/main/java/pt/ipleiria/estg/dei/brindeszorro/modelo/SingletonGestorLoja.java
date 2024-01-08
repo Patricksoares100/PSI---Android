@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -12,6 +13,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +31,7 @@ import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UserListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class SingletonGestorLoja {
 
@@ -565,8 +569,16 @@ public class SingletonGestorLoja {
                 public void onResponse(String response) {
                     //add com sucesso?
                     System.out.println("----> SUCESSO Login "+ response);
-
                     adicionarUserBD(LojaJsonParser.parserJsonUser(response));
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        editor.putString(Public.TOKEN, jsonObject.getString("token"));
+                        editor.apply();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }, new Response.ErrorListener() {
