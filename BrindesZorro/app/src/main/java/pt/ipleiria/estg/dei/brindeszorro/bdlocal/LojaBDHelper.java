@@ -33,6 +33,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String COMENTARIO = "comentario";
     private static final String CLASSIFICACAO = "classificacao";
     private static final String ARTIGO_ID = "artigo_id";
+    private static final String VALOR_ARTIGO = "valor_artigo";
+    private static final String NOME_ARTIGO = "nome_artigo";
     private static final String PERFIL_ID = "perfil_id";
     private static final String NOME = "nome";
     private static final String DESCRICAO = "descricao";
@@ -116,7 +118,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_NAME_FAVORITOS +
                         "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         ARTIGO_ID + " INTEGER NOT NULL, " +
-                        PERFIL_ID + " INTEGER NOT NULL " +
+                        PERFIL_ID + " INTEGER NOT NULL, " +
+                        VALOR_ARTIGO + " INTEGER NOT NULL, " +
+                        NOME_ARTIGO + " TEXT NOT NULL " +
                         ");";
         db.execSQL(createFavoritoTable);
 
@@ -355,8 +359,10 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(ID, f.getId());
         values.put(ARTIGO_ID, f.getArtigoId());
         values.put(PERFIL_ID, f.getPerfilId());
+        values.put(VALOR_ARTIGO, f.getValorArtigo());
+        values.put(NOME_ARTIGO, f.getNomeArtigo());
 
-        this.db.insert(TABLE_NAME_FATURAS, null, values);
+        this.db.insert(TABLE_NAME_FAVORITOS, null, values);
     }
 
     public boolean removerFavoritoBD(int id) {
@@ -364,11 +370,14 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Favorito>getAllFavoritosBD(){
+        System.out.println("---entreiaqui");
         ArrayList<Favorito> favoritos = new ArrayList<>();
         Cursor cursor = this.db.query(TABLE_NAME_FAVORITOS, new String[]{
                         ID,
                         ARTIGO_ID,
-                        PERFIL_ID},
+                        PERFIL_ID,
+                        VALOR_ARTIGO,
+                        NOME_ARTIGO},
                 null, null, null, null, null); // questionar o porquê destes 5 null?
 
         if (cursor.moveToFirst()) {
@@ -376,7 +385,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                 Favorito auxFavorito = new Favorito(
                         cursor.getInt(0),
                         cursor.getInt(1),
-                        cursor.getInt(2));
+                        cursor.getInt(2),
+                        cursor.getDouble(3),
+                        cursor.getString(4));
 
                 favoritos.add(auxFavorito);
             } while (cursor.moveToNext());

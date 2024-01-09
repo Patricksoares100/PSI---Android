@@ -2,13 +2,32 @@ package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
 public class Favorito {
     private int id;
-    private int artigoId;
-    private int perfilId;
+    private int artigoId, perfilId;
+    double valorArtigo;
+   private String nomeArtigo;
 
-    public Favorito(int id, int artigoId, int perfilId) {
+    public Favorito(int id, int artigoId, int perfilId, double valorArtigo, String nomeArtigo) {
         this.id = id;
         this.artigoId = artigoId;
         this.perfilId = perfilId;
+        this.valorArtigo = valorArtigo;
+        this.nomeArtigo = nomeArtigo;
+    }
+
+    public double getValorArtigo() {
+        return valorArtigo;
+    }
+
+    public void setValorArtigo(double valorArtigo) {
+        this.valorArtigo = valorArtigo;
+    }
+
+    public String getNomeArtigo() {
+        return nomeArtigo;
+    }
+
+    public void setNomeArtigo(String nomeArtigo) {
+        this.nomeArtigo = nomeArtigo;
     }
 
     public int getId() {return id;}
