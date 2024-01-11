@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,16 +25,12 @@ public class ListaFavoritosAdaptador extends BaseAdapter {
         this.context = context;
         this.favoritos = favoritos;
     }
-
     @Override
     public int getCount() {return favoritos.size();}
-
     @Override
     public Object getItem(int position) {return favoritos.get(position);}
-
     @Override
     public long getItemId(int position) {return favoritos.get(position).getId();}
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (inflater == null)
@@ -46,22 +43,22 @@ public class ListaFavoritosAdaptador extends BaseAdapter {
             viewHolderLista = new ListaFavoritosAdaptador.ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
         }
-
         viewHolderLista.update(favoritos.get(position));
         return convertView;
-
     }
 
     public class ViewHolderLista {
         private TextView tvNomeArtigo, tvPreco;
+        private ImageView ivCaracol;
         public ViewHolderLista(View view) {
             tvNomeArtigo = view.findViewById(R.id.tvTituloNomeArtigo);
             tvPreco = view.findViewById(R.id.tvValorTotal);
         }
 
         public void update(Favorito favorito){
-            tvNomeArtigo.setText(""+favorito.getArtigoId());
-            tvPreco.setText(""+favorito.getPerfilId()+"€");
+            System.out.println("--->favdavi"+favorito);
+            tvNomeArtigo.setText(favorito.getNomeArtigo());
+            tvPreco.setText(""+favorito.getValorArtigo()+" €");
         }
     }
 }

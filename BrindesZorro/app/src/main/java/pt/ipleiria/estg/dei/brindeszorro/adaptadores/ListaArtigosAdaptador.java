@@ -74,12 +74,7 @@ public class ListaArtigosAdaptador extends BaseAdapter {
             tvNome = view.findViewById(R.id.tvNomeArtigo);
             tvPreco = view.findViewById(R.id.tvValorArtigo);
             imagem = view.findViewById(R.id.ivArtigo);
-
         }
-
-
-
-
         public void update(Artigo artigo) {
 
             tvNome.setText(artigo.getNome());

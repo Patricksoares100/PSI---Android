@@ -2,6 +2,8 @@ package pt.ipleiria.estg.dei.brindeszorro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -22,6 +24,7 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class DetalhesArtigoActivity extends AppCompatActivity implements AvaliacaosListener {
 
@@ -110,8 +113,9 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
     }
 
     public void adicionarFavoritos(View view) {
-        Favorito favorito = new Favorito(0, Integer.parseInt(ID_ARTIGO), 3);
-        SingletonGestorLoja.getInstance(getApplicationContext()).adicionarFavoritoBD(favorito);
+        /*SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        SingletonGestorLoja.getInstance(getApplicationContext()).getAllFavoritosAPI(getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
+*/
     }
 
     @Override

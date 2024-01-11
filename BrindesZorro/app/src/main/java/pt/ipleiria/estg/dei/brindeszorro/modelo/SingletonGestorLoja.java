@@ -28,6 +28,7 @@ import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.FavoritosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UserListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
@@ -50,6 +51,7 @@ public class SingletonGestorLoja {
     private AvaliacaosListener avaliacaosListener;
     private UserListener userListener;
     private UsersListener usersListener;
+    private FavoritosListener favoritosListener;
 
 
   private static final String mUrlAPI = "http://172.22.21.219:8080/api/";//depois concatenas com o resto - como levou o:8080 retirou-se o .../PSI_Web/backend/web
@@ -71,6 +73,7 @@ public class SingletonGestorLoja {
         lojaBDHelper = new LojaBDHelper(context);
         avaliacaos = new ArrayList<>();
         users = new ArrayList<>();
+        favoritos = new ArrayList<>();
     }
 
 
@@ -84,6 +87,9 @@ public class SingletonGestorLoja {
 
     public void setArtigosListener(ArtigosListener artigosListener1){
         this.artigosListener = artigosListener;
+    }
+    public void setFavoritosListener(FavoritosListener favoritosListener1){
+        this.favoritosListener = favoritosListener;
     }
 
     public void setUserListener(UserListener userListener){
@@ -151,9 +157,9 @@ public class SingletonGestorLoja {
         return null;
     }
 
-    public Favorito getFavoritos(int idFavoritos) {
+    public Favorito getFavorito(int id) {
         for (Favorito fav : favoritos) {
-            if (fav.getId() == idFavoritos)
+            if (fav.getId() == id)
                 return fav;
         }
         return null;
@@ -249,14 +255,14 @@ public class SingletonGestorLoja {
         }
     }
     public void adicionarFavoritoBD(Favorito f) {
+
         lojaBDHelper.adicionarFavoritoBD(f);
     }
 
     public void removerFavoritoBD(int idFavorito) {
-        Favorito auxFavorito = getFavoritos(idFavorito);
+        Favorito auxFavorito = getFavorito(idFavorito);
         if (auxFavorito != null) {
-            if (lojaBDHelper.removerFaturaBD(idFavorito)) {
-                faturas.remove(auxFavorito);
+            if (lojaBDHelper.removerFavoritoBD(auxFavorito.getId())) {
             }
         }
     }
@@ -445,6 +451,7 @@ public class SingletonGestorLoja {
                     System.out.println("----> response ARTIGOS API" + response);
                    // response.re .getString('imagem').replace("\\/", "/");
                     artigos = LojaJsonParser.parserJsonArtigos(response);
+                    System.out.println("---"+artigos);
                     adicionarArtigosBD(artigos);
 
                     if(artigosListener != null){
@@ -604,6 +611,41 @@ public class SingletonGestorLoja {
             volleyQueue.add(request);
         }
     }
+
+    //endregion
+
+    // region #METODO FAVORITO API #
+
+    public  void getAllFavoritosAPI(final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+            if(favoritosListener != null){
+                favoritosListener.onRefreshListaFavoritos(lojaBDHelper.getAllFavoritosBD());
+            }
+            //LISTENERS vamos buscar os favoritos a bd local
+        }else {
+            System.out.println("--->"+token.toString()+"<---");
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "favoritos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("---> response Favoritos API:"+ response);
+                    favoritos = LojaJsonParser.parserJsonFavoritos(response);
+                    adicionarFavoritosBD(favoritos);
+                    if(favoritosListener != null){
+                        favoritosListener.onRefreshListaFavoritos(favoritos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("--->Erro favorito" + error.getMessage());
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
 
     //endregion
 }

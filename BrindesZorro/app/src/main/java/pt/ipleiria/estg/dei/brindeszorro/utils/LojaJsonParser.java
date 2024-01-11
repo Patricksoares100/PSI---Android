@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 
@@ -61,7 +62,42 @@ public class LojaJsonParser {
         }
         return auxSignup;
     }
+    //region # METODOS FAVORITOS JSON #
+    public static ArrayList<Favorito> parserJsonFavoritos(JSONArray response) {
+        ArrayList<Favorito> favoritos = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject favorito = (JSONObject) response.get(i);
+                int id = favorito.getInt("id");
+                int artigo_id = favorito.getInt("artigo_id");
+                int perfil_id = favorito.getInt("perfil_id");
+                double valorArtigo = favorito.getDouble("valorArtigo");
+                String nomeArtigo = favorito.getString("nomeArtigo");
+                Favorito auxFavorito = new Favorito(id,artigo_id,perfil_id,valorArtigo,nomeArtigo);
+                favoritos.add(auxFavorito);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return favoritos;
+    }
 
+    public static Favorito parserJsonFavorito(String response)  {
+        Favorito auxFavorito = null;
+        try {
+            JSONObject favorito = new JSONObject(response);
+            int id = favorito.getInt("id");
+            int artigo_id = favorito.getInt("artigo_id");
+            int perfil_id = favorito.getInt("perfil_id");
+            double valorArtigo = favorito.getDouble("valorArtigo");
+            String nomeArtigo = favorito.getString("nomeArtigo");
+            auxFavorito = new Favorito(id,artigo_id,perfil_id,valorArtigo,nomeArtigo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxFavorito;
+    }
+    //region
     //region # MÉTODOS ARTIGOS JSON #
     public static ArrayList<Artigo> parserJsonArtigos(JSONArray response) {
         ArrayList<Artigo> artigos = new ArrayList<>();
