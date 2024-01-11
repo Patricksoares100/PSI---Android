@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
+import pt.ipleiria.estg.dei.brindeszorro.utils.MqttManager;
+
 public class Artigo {
     private int id, stock_atual,iva,media_avaliacoes,num_avaliacoes ;
     private String nome, descricao, referencia, imagem, fornecedor, categoria;
@@ -117,4 +119,8 @@ public class Artigo {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+    MqttManager mqttManager = new MqttManager("tcp://seu-servidor-mosquitto:1883", "seu-client-id");
+    mqttManager.subscribe("seu-topico");
+    mqttManager.publish("seu-topico", "Mensagem a ser publicada");
+
 }

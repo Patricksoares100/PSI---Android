@@ -46,4 +46,7 @@ dependencies {
     //adicionar glide para as imagens
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
+    // mosquitto dependeces
+    implementation ("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5");
+
 }
