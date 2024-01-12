@@ -657,6 +657,7 @@ public class SingletonGestorLoja {
                             Toast.makeText(context, "Já foi adicionado anteriormente aos favoritos!", Toast.LENGTH_SHORT).show();
                         }else{
                             System.out.println("--->Add favorito c/ sucesso"+response.toString());
+                            Toast.makeText(context, "Artigo adicionado aos favoritos!", Toast.LENGTH_SHORT).show();
                             adicionarFavoritoBD(LojaJsonParser.parserJsonFavorito(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
                         }
                      //listener add com  sucesso? falta codigo
