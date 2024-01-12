@@ -56,7 +56,7 @@ public class ListaFavoritosAdaptador extends BaseAdapter {
         }
 
         public void update(Favorito favorito){
-            System.out.println("--->favdavi"+favorito);
+
             tvNomeArtigo.setText(favorito.getNomeArtigo());
             tvPreco.setText(""+favorito.getValorArtigo()+" €");
         }

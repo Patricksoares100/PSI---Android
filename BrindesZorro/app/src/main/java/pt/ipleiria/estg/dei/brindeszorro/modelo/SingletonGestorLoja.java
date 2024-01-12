@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pt.ipleiria.estg.dei.brindeszorro.EditarDadosPessoaisActivity;
+import pt.ipleiria.estg.dei.brindeszorro.FavoritosActivity;
 import pt.ipleiria.estg.dei.brindeszorro.MainActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
@@ -451,7 +452,6 @@ public class SingletonGestorLoja {
                     System.out.println("----> response ARTIGOS API" + response);
                    // response.re .getString('imagem').replace("\\/", "/");
                     artigos = LojaJsonParser.parserJsonArtigos(response);
-                    System.out.println("---"+artigos);
                     adicionarArtigosBD(artigos);
 
                     if(artigosListener != null){
@@ -624,7 +624,6 @@ public class SingletonGestorLoja {
             }
             //LISTENERS vamos buscar os favoritos a bd local
         }else {
-            System.out.println("--->"+token.toString()+"<---");
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "favoritos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
@@ -642,6 +641,42 @@ public class SingletonGestorLoja {
                     //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+            volleyQueue.add(req);
+        }
+    }
+
+    public void adicionarFavoritoAPI(final Artigo artigo, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            StringRequest req = new StringRequest(Request.Method.POST,mUrlAPI + "favoritos/adicionar?token=" + token.toString(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                        if(response.contains("response")){
+                            System.out.println("--->Já está nos favoritos, não vamos adicionar outra vez!");
+                            Toast.makeText(context, "Já foi adicionado anteriormente aos favoritos!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            System.out.println("--->Add favorito c/ sucesso"+response.toString());
+                            adicionarFavoritoBD(LojaJsonParser.parserJsonFavorito(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
+                        }
+                     //listener add com  sucesso? falta codigo
+                    /*if(favoritoListener != null){
+                        livroListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                    }*/
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO adicionar favorito api" + error.getMessage());
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String,String>();
+                    params.put("artigo_id", ""+artigo.getId());// tem q ser uma variavel n pode ser hardcoded
+
+                    return params;
+                }
+            };
             volleyQueue.add(req);
         }
     }

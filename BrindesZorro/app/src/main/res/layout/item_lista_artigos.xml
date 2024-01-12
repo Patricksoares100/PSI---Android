@@ -118,7 +118,8 @@
                     android:drawableLeft="@drawable/ic_action_favorito"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:insetLeft="35dp" />
+                    android:insetLeft="35dp"
+                    android:onClick="onClickAddFavoritos" />
             </LinearLayout>
 
         </LinearLayout>

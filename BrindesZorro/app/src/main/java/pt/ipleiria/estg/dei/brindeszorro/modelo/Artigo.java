@@ -120,7 +120,7 @@ public class Artigo {
         this.preco = preco;
     }
     MqttManager mqttManager = new MqttManager("tcp://seu-servidor-mosquitto:1883", "seu-client-id");
-    mqttManager.subscribe("seu-topico");
-    mqttManager.publish("seu-topico", "Mensagem a ser publicada");
+    //mqttManager.subscribe("seu-topico");
+    //mqttManager.publish("seu-topico", "Mensagem a ser publicada");
 
 }

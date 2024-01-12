@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.brindeszorro;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -113,9 +114,14 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
     }
 
     public void adicionarFavoritos(View view) {
-        /*SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-        SingletonGestorLoja.getInstance(getApplicationContext()).getAllFavoritosAPI(getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
-*/
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        System.out.println("---kl" + artigo.getId());
+        SingletonGestorLoja.getInstance(getApplicationContext()).adicionarFavoritoAPI(artigo, getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
+        System.out.println("--- hummmm");
+        //Intent intent = new Intent(this, AvaliacaosActivity.class);
+        //startActivity(intent);
+
+
     }
 
     @Override
