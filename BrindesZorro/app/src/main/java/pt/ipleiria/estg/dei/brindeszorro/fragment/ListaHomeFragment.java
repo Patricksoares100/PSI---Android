@@ -32,7 +32,7 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
 
     private ListView lvArtigos;
     private ImageView imgView;
-    private ArrayList<Artigo> artigos;
+    private ArrayList<Artigo> artigos = new ArrayList<>();
     private SearchView searchView;
     public ListaHomeFragment() {
         // Required empty public constructor
@@ -43,13 +43,11 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
                              Bundle savedInstanceState) {
 
         //Toast.makeText(getContext(), "entrou", Toast.LENGTH_SHORT).show();// mensagem de erro para ver se entra!!!!
-
         // inicia o layout com o activity_home
         View view = inflater.inflate(R.layout.fragment_lista_home, container, false);
         setHasOptionsMenu(true);
         lvArtigos = view.findViewById(R.id.lvHomeArtigos);
-        //vai buscar a lista de livros ao singleton
-        artigos = SingletonGestorLoja.getInstance(getContext()).getArtigosBD();
+
 
         // DEFINIR ADAPTADOR
         lvArtigos.setAdapter(new ListaArtigosAdaptador(getContext(),artigos));
@@ -67,9 +65,12 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
                 startActivity(intent);
             }
         });
-
         SingletonGestorLoja.getInstance(getContext()).setArtigosListener(this);
+        artigos = SingletonGestorLoja.getInstance(getContext()).getArtigosBD();
+
+       // SingletonGestorLoja.getInstance(getContext()).setArtigosListener(this);
         SingletonGestorLoja.getInstance(getContext()).getAllArtigosAPI(getContext());
+        //vai buscar a lista de livros ao singleton
 
        return view;
     }

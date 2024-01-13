@@ -110,14 +110,14 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
     }
 
     public void adicionarCarrinho(View view) {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        SingletonGestorLoja.getInstance(getApplicationContext()).adicionarCarrinhoAPI(artigo, getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
 
     }
 
     public void adicionarFavoritos(View view) {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-        System.out.println("---kl" + artigo.getId());
         SingletonGestorLoja.getInstance(getApplicationContext()).adicionarFavoritoAPI(artigo, getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
-        System.out.println("--- hummmm");
         //Intent intent = new Intent(this, AvaliacaosActivity.class);
         //startActivity(intent);
 

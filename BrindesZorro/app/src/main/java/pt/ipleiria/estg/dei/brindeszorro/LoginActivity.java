@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Login;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
@@ -45,28 +47,25 @@ public class LoginActivity extends AppCompatActivity {
             etPassword.setError(getString(R.string.etPasswordTextError));
             return;
         }
-        if(isLoginValido(username, password)){
-                Intent intent = new Intent(this, MainActivity.class);
+        login(username, password);
+        }
+
+
+    public void login(String username, String password){
+        login = new Login(username,password);
+        SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext(), new Response.Listener() {
+            @Override
+            public void onResponse(Object response) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra(MainActivity.USERNAME, username);
                 startActivity(intent);
                 finish();
             }
-        }
-
-
-    public boolean isLoginValido(String username, String password){
-        login = new Login(username,password);
-        SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext());
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-        if(sharedPreferences.getString(Public.TOKEN,"TOKEN").matches("TOKEN")){
-            return false;
-        }else{
-            return true;
-        }
+        });
     }
     public boolean isTokenValido(){
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-        System.out.println(sharedPreferences.getString(Public.TOKEN,"TOKENn"));
+        System.out.println(sharedPreferences.getString(Public.TOKEN,"TOKEN"));
         if(sharedPreferences.getString(Public.TOKEN,"TOKEN").matches("TOKEN")){
             System.out.println("--->false");
             return false;

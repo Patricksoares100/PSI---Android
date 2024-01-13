@@ -86,10 +86,10 @@ public class SingletonGestorLoja {
         this.artigoListener = artigoListener;
     }
 
-    public void setArtigosListener(ArtigosListener artigosListener1){
+    public void setArtigosListener(ArtigosListener artigosListener){
         this.artigosListener = artigosListener;
     }
-    public void setFavoritosListener(FavoritosListener favoritosListener1){
+    public void setFavoritosListener(FavoritosListener favoritosListener){
         this.favoritosListener = favoritosListener;
     }
 
@@ -565,7 +565,7 @@ public class SingletonGestorLoja {
     //endregion
 
     //region # METODO LOGIN API #
-    public void loginAPI(final Login login, final Context context){
+    public void loginAPI(final Login login, final Context context, Response.Listener listener){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
 
@@ -577,26 +577,31 @@ public class SingletonGestorLoja {
                     System.out.println("----> SUCESSO Login " + response);
                     SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    if(response.contains("Username e/ou password incorreto.") || response.contains("Acesso Negado")){
-                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
-                        editor.putString(Public.TOKEN, "TOKEN");
-                        editor.apply();
-
-                    }else {
-                        adicionarUserBD(LojaJsonParser.parserJsonUser(response));
+                    adicionarUserBD(LojaJsonParser.parserJsonUser(response));
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             editor.putString(Public.TOKEN, jsonObject.getString("token"));
                             editor.apply();
+                            listener.onResponse(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            listener.onResponse(null);
                         }
-                    }
+
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("----> ERRO Login" + error.getMessage() + error);
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Login Invalido", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                    editor.putString(Public.TOKEN, "TOKEN");
+                    editor.apply();
                 }
             }){
                 protected Map<String, String> getParams(){
@@ -627,6 +632,7 @@ public class SingletonGestorLoja {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "favoritos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
+                    //fazer sub aqui e
                     System.out.println("---> response Favoritos API:"+ response);
                     favoritos = LojaJsonParser.parserJsonFavoritos(response);
                     adicionarFavoritosBD(favoritos);
@@ -652,6 +658,7 @@ public class SingletonGestorLoja {
             StringRequest req = new StringRequest(Request.Method.POST,mUrlAPI + "favoritos/adicionar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    //fazer sub  aqui
                         if(response.contains("response")){
                             System.out.println("--->Já está nos favoritos, não vamos adicionar outra vez!");
                             Toast.makeText(context, "Já foi adicionado anteriormente aos favoritos!", Toast.LENGTH_SHORT).show();
@@ -682,6 +689,41 @@ public class SingletonGestorLoja {
         }
     }
 
+
+    //endregion
+
+    // region # METODO CARRINHO API #
+    public void adicionarCarrinhoAPI(final Artigo artigo, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            StringRequest req = new StringRequest(Request.Method.POST,mUrlAPI + "carrinhos/adicionar?token=" + token.toString(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                        System.out.println("--->Add carrinho c/ sucesso"+response.toString());
+                        Toast.makeText(context, "Artigo adicionado aos carrinho!", Toast.LENGTH_SHORT).show();
+                       // adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
+                    }
+                    //listener add com  sucesso? falta codigo
+                    /*if(favoritoListener != null){
+                        livroListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                    }*/
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO adicionar carrinho api" + error.getMessage());
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String,String>();
+                    params.put("artigo_id", ""+artigo.getId());// tem q ser uma variavel n pode ser hardcoded
+
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
 
     //endregion
 }

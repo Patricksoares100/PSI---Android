@@ -25,6 +25,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_FATURAS = "faturas";
     private static final String TABLE_NAME_FAVORITOS = "favoritos";
     private static final String TABLE_NAME_USERS = "users";
+    private static final String TABLE_NAME_CARRINHOS = "carrinhos";
     private static final int DB_VERSION = 1;
     //endregion
 
@@ -56,6 +57,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String CODIGO_POSTAL = "codigoPostal";
     private static final String LOCALIDADE = "localidade";
     private static final String TOKEN = "token";
+    private static final String QUANTIDADE = "quantidade";
+    private static final String VALORUNITARIO = "valorUnitario";
+
 
 
     private final SQLiteDatabase db;    // Alinea 1.3 Ficha 8 Books - criação de uma instância da classe SQLiteDatabase
@@ -137,6 +141,16 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         db.execSQL(createUserTable);
 
+        String createCarrinhoTable =
+                "CREATE TABLE " + TABLE_NAME_CARRINHOS +
+                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        QUANTIDADE + " INTEGER NOT NULL, " +
+                        VALORUNITARIO + " DOUBLE NOT NULL, " +
+                        NOME + " TEXT NOT NULL, " +
+                        IMAGEM + " TEXT" +
+                        ");";
+        db.execSQL(createCarrinhoTable);
+
     }
     // endregion
 
@@ -149,6 +163,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FATURAS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FAVORITOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CARRINHOS);
         this.onCreate(db);
     }
     //endregion
@@ -400,7 +415,12 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME_FAVORITOS, null, null);
     }
     //endregion
+    // region # CARRINHO #
+    //FAZER CRUD QUANDO VOLTAR DO JANTAR BEIJINHOS <3
 
+
+
+    //endregion
     //region # MÉTODOS CRUD DOS USERS #
 
     public void adicionarUserBD(User u) {
