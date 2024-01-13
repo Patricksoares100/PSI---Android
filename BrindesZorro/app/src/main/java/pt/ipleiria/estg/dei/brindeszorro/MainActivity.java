@@ -25,6 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaAvaliacaosFragment;
+import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaCarrinhoFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFaturasFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaFavoritosFragment;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
@@ -99,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle(item.getTitle());
 
         } else if (item.getItemId() == R.id.navCarrinho) {
-            Intent artigosLoja = new Intent(this, CarrinhoActivity.class);
-            startActivity(artigosLoja);
+            fragment = new ListaCarrinhoFragment();
+            setTitle(item.getTitle());
 
         } else if (item.getItemId() == R.id.navFavoritos) {
             fragment = new ListaFavoritosFragment();

@@ -12,12 +12,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
-import pt.ipleiria.estg.dei.brindeszorro.listeners.CarrinhosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
-import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
+
 
 public class ListaCarrinhosAdaptador extends BaseAdapter {
     private Context context;
@@ -52,6 +50,7 @@ public class ListaCarrinhosAdaptador extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_lista_carrinho, null);
         }
         ViewHolderLista viewHolderLista = (ListaCarrinhosAdaptador.ViewHolderLista) convertView.getTag();
+       // ViewHolderLista viewHolderLista = (ListaCarrinhosAdaptador.ViewHolderLista) convertView.getTag();
         if (viewHolderLista ==null){
             viewHolderLista = new ListaCarrinhosAdaptador.ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
@@ -67,14 +66,16 @@ public class ListaCarrinhosAdaptador extends BaseAdapter {
         public ViewHolderLista(View view){
             tvNomeArtigo = view.findViewById(R.id.idNomeArtigo);
             tvValorUnitario = view.findViewById(R.id.tvPrecoValorUnitCarrinho);
-            tvQuantidade = view.findViewById(R.id.tvQtdValor);
+            tvQuantidade = view.findViewById(R.id.tvNumeroQtd);
             ivCarrinho = view.findViewById(R.id.imageViewCarrinho);
+            tvValorTotal = view.findViewById(R.id.tvPrecoTotalArtigo);
         }
 
         public void update(Carrinho carrinho){
             tvNomeArtigo.setText(carrinho.getNome());
             tvValorUnitario.setText(""+carrinho.getValorUnitario());
             tvQuantidade.setText(""+ carrinho.getQuantidade());
+            tvValorTotal.setText(""+ (carrinho.getValorUnitario() * carrinho.getQuantidade()));
             Glide.with(context)
                     .load(carrinho.getImagem())
                     .placeholder(R.drawable.ipleiria)
