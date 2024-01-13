@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
@@ -261,4 +262,41 @@ public class LojaJsonParser {
         return auxAvaliacao;
     }
     //endregion
+
+    //region # METODOS CARRINHOS JSON #
+    public static ArrayList<Carrinho> parserJsonCarrinhos(JSONArray response) {
+        ArrayList<Carrinho> carrinhos = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject carrinho = (JSONObject) response.get(i);
+                int id = carrinho.getInt("id");
+                int quantidade = carrinho.getInt("quantidade");
+                double valorUnitario = carrinho.getDouble("valorUnitario");
+                String nome = carrinho.getString("nome");
+                String imagem = carrinho.getString("imagem");
+                Carrinho auxCarrinho = new Carrinho(id, quantidade, valorUnitario,nome,imagem);
+                carrinhos.add(auxCarrinho);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return carrinhos;
+    }
+
+    public static Carrinho parserJsonCarrinho(String response)  {
+        Carrinho auxCarrinho = null;
+        try {
+            JSONObject carrinho = new JSONObject(response);
+            int id = carrinho.getInt("id");
+            int quantidade = carrinho.getInt("quantidade");
+            double valorUnitario = carrinho.getDouble("valorUnitario");
+            String nome = carrinho.getString("nome");
+            String imagem = carrinho.getString("imagem");
+            auxCarrinho = new Carrinho(id, quantidade, valorUnitario,nome,imagem);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxCarrinho;
+    }
+    //region
 }

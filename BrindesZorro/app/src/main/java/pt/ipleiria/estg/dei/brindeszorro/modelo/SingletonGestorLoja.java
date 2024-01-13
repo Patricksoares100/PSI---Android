@@ -42,6 +42,7 @@ public class SingletonGestorLoja {
     private ArrayList<Artigo> artigos;
     private ArrayList<Avaliacao> avaliacaos;
     private ArrayList<Favorito> favoritos;
+    private ArrayList<Carrinho> carrinhos;
     private ArrayList<User> users;
     //private User user;
     private static SingletonGestorLoja instance = null;
@@ -76,6 +77,7 @@ public class SingletonGestorLoja {
         avaliacaos = new ArrayList<>();
         users = new ArrayList<>();
         favoritos = new ArrayList<>();
+        carrinhos = new ArrayList<>();
     }
 
 
@@ -163,6 +165,13 @@ public class SingletonGestorLoja {
         for (Favorito fav : favoritos) {
             if (fav.getId() == id)
                 return fav;
+        }
+        return null;
+    }
+    public Carrinho getCarrinho(int id) {
+        for (Carrinho car : carrinhos) {
+            if (car.getId() == id)
+                return car;
         }
         return null;
     }
@@ -269,6 +278,24 @@ public class SingletonGestorLoja {
         }
     }
     // endregion
+    // region # METODOS CARRINHO BD #
+    public void adicionarCarrinhossBD(ArrayList<Carrinho> carrinhos){
+        lojaBDHelper.removerAllCarrinhosBD();
+        for (Carrinho c : carrinhos){
+            adicionarCarrinhoBD(c);
+        }
+    }
+    public void adicionarCarrinhoBD(Carrinho c) {
+        lojaBDHelper.adicionarCarrinhoBD(c);
+    }
+    public void removerCarrinhoBD(int idCarrinho) {
+        Carrinho auxCarrinho = getCarrinho(idCarrinho);
+        if (auxCarrinho != null) {
+            if (lojaBDHelper.removerCarrinhoBD(auxCarrinho.getId())) {
+            }
+        }
+    }
+    //endregio
 
     // region # METODOS FATURAS BD #
 
@@ -695,7 +722,7 @@ public class SingletonGestorLoja {
     //endregion
 
     // region # METODO CARRINHO API #
-    public void adicionarCarrinhoAPI(final Artigo artigo, final Context context, String token){
+    public void adicionarCarrinhoAPI(final Artigo artigo, final Context context, String token, Integer quantidade){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
@@ -705,7 +732,7 @@ public class SingletonGestorLoja {
                     //fazer sub  aqui
                     System.out.println("--->Add carrinho c/ sucesso"+response.toString());
                     Toast.makeText(context, "Artigo adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
-                    //adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
+                    adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
 
                     //listener add com  sucesso? falta codigo
                     /*if(favoritoListener != null){
@@ -726,7 +753,7 @@ public class SingletonGestorLoja {
                 protected Map<String, String> getParams(){
                     Map<String, String> params = new HashMap<String,String>();
                     params.put("artigo_id", ""+artigo.getId());// tem q ser uma variavel n pode ser hardcoded
-
+                    params.put("quantidade", quantidade.toString());
                     return params;
                 }
             };

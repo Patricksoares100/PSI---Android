@@ -111,7 +111,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
 
     public void adicionarCarrinho(View view) {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-        SingletonGestorLoja.getInstance(getApplicationContext()).adicionarCarrinhoAPI(artigo, getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
+        SingletonGestorLoja.getInstance(getApplicationContext()).adicionarCarrinhoAPI(artigo, getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"), quantidade );
 
     }
 

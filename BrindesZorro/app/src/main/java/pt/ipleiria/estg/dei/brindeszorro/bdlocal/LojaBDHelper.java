@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
@@ -421,9 +422,83 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     }
     //endregion
     // region # CARRINHO #
-    //FAZER CRUD QUANDO VOLTAR DO JANTAR BEIJINHOS <3
 
+    public void adicionarCarrinhoBD(Carrinho c) {
+        ContentValues values = new ContentValues();
+        values.put(ID,  c.getId());
+        values.put(QUANTIDADE, c.getQuantidade());
+        values.put(VALORUNITARIO, c.getValorUnitario());
+        values.put(NOME, c.getNome());
+        values.put(IMAGEM, c.getImagem());
 
+        this.db.insert(TABLE_NAME_CARRINHOS, null, values);
+    }
+
+    public ArrayList<Carrinho>getAllCarrinhosBD(){
+        ArrayList<Carrinho> carrinho = new ArrayList<>();
+        Cursor cursor = this.db.query(TABLE_NAME_CARRINHOS, new String[]{
+                        ID,
+                        QUANTIDADE,
+                        VALORUNITARIO,
+                        NOME,
+                        IMAGEM},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Carrinho auxCarrinho = new Carrinho(
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getDouble(2),
+                        cursor.getString(3),
+                        cursor.getString(4));
+                carrinho.add(auxCarrinho);
+            } while (cursor.moveToNext());
+            cursor.close();
+        } // quando os campos estão todos preenchidos dá return da lista artigos
+        return carrinho;
+    }
+
+    public Carrinho getCarrinhoBD() {
+        Carrinho auxCarrinho = null;
+        Cursor cursor = this.db.query(TABLE_NAME_CARRINHOS, new String[]{
+                        ID,
+                        QUANTIDADE,
+                        VALORUNITARIO,
+                        NOME,
+                        IMAGEM},
+                null, null, null, null, null); // questionar o porquê destes 5 null?
+
+        if (cursor.moveToFirst()) {
+            do {
+                auxCarrinho = new Carrinho(
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getDouble(2),
+                        cursor.getString(3),
+                        cursor.getString(4));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return auxCarrinho;
+    }
+    public boolean editarCarrinhoBD(Carrinho c) {
+        ContentValues values = new ContentValues();
+        values.put(ID,  c.getId());
+        values.put(QUANTIDADE, c.getQuantidade());
+        values.put(VALORUNITARIO, c.getValorUnitario());
+        values.put(NOME, c.getNome());
+        values.put(IMAGEM, c.getImagem());
+
+        return this.db.update(TABLE_NAME_CARRINHOS, values, ID + "= ?", new String[]{"" + c.getId()}) > 0;
+    }
+
+    public void removerAllCarrinhosBD(){
+        db.delete(TABLE_NAME_CARRINHOS, null, null);
+    }
+    public boolean removerCarrinhoBD(int id) {
+        return this.db.delete(TABLE_NAME_CARRINHOS, ID + " = ?", new String[]{"" + id}) == 1;
+    }
 
     //endregion
     //region # MÉTODOS CRUD DOS USERS #
