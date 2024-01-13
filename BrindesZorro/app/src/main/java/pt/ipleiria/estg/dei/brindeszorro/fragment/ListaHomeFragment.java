@@ -57,7 +57,7 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // inserir uma toast para ver o nome do artigo clicado
-                Toast.makeText(getContext(),artigos.get(position).getNome(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(),artigos.get(position).getNome(), Toast.LENGTH_SHORT).show();
 
                 //agora vamos iniciar uma activity assim como passar o ID do artigo
                 Intent intent = new Intent(getContext(), DetalhesArtigoActivity.class);

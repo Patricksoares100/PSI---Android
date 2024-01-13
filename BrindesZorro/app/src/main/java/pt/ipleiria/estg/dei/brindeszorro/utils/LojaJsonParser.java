@@ -73,7 +73,8 @@ public class LojaJsonParser {
                 int perfil_id = favorito.getInt("perfil_id");
                 double valorArtigo = favorito.getDouble("valorArtigo");
                 String nomeArtigo = favorito.getString("nomeArtigo");
-                Favorito auxFavorito = new Favorito(id,artigo_id,perfil_id,valorArtigo,nomeArtigo);
+                String imagem = favorito.getString("imagem");
+                Favorito auxFavorito = new Favorito(id,artigo_id,perfil_id,valorArtigo,nomeArtigo, imagem);
                 favoritos.add(auxFavorito);
             }
         } catch (JSONException e) {
@@ -91,7 +92,8 @@ public class LojaJsonParser {
             int perfil_id = favorito.getInt("perfil_id");
             double valorArtigo = favorito.getDouble("valorArtigo");
             String nomeArtigo = favorito.getString("nomeArtigo");
-            auxFavorito = new Favorito(id,artigo_id,perfil_id,valorArtigo,nomeArtigo);
+            String imagem = favorito.getString("imagem");
+            auxFavorito = new Favorito(id,artigo_id,perfil_id,valorArtigo,nomeArtigo, imagem);
         } catch (JSONException e) {
             e.printStackTrace();
         }

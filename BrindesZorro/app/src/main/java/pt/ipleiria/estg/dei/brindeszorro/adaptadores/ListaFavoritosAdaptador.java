@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
@@ -53,12 +56,18 @@ public class ListaFavoritosAdaptador extends BaseAdapter {
         public ViewHolderLista(View view) {
             tvNomeArtigo = view.findViewById(R.id.tvTituloNomeArtigo);
             tvPreco = view.findViewById(R.id.tvValorTotal);
+            ivCaracol = view.findViewById(R.id.imageView3);
         }
 
         public void update(Favorito favorito){
 
             tvNomeArtigo.setText(favorito.getNomeArtigo());
             tvPreco.setText(""+favorito.getValorArtigo()+" €");
+            Glide.with(context)
+                    .load(favorito.getImagem())
+                    .placeholder(R.drawable.ipleiria)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivCaracol);
         }
     }
 }

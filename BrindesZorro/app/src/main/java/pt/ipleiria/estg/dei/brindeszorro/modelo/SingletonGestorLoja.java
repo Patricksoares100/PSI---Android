@@ -38,6 +38,7 @@ import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 public class SingletonGestorLoja {
 
     private ArrayList<Fatura> faturas;
+
     private ArrayList<Artigo> artigos;
     private ArrayList<Avaliacao> avaliacaos;
     private ArrayList<Favorito> favoritos;
@@ -659,14 +660,10 @@ public class SingletonGestorLoja {
                 @Override
                 public void onResponse(String response) {
                     //fazer sub  aqui
-                        if(response.contains("response")){
-                            System.out.println("--->Já está nos favoritos, não vamos adicionar outra vez!");
-                            Toast.makeText(context, "Já foi adicionado anteriormente aos favoritos!", Toast.LENGTH_SHORT).show();
-                        }else{
                             System.out.println("--->Add favorito c/ sucesso"+response.toString());
                             Toast.makeText(context, "Artigo adicionado aos favoritos!", Toast.LENGTH_SHORT).show();
                             adicionarFavoritoBD(LojaJsonParser.parserJsonFavorito(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
-                        }
+
                      //listener add com  sucesso? falta codigo
                     /*if(favoritoListener != null){
                         livroListener.onRefreshDetalhes(MenuMainActivity.ADD);
@@ -675,6 +672,11 @@ public class SingletonGestorLoja {
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
                     System.out.println("----> ERRO adicionar favorito api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Artigo já adicionado aos favoritos", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }){
                 @Override
@@ -697,20 +699,27 @@ public class SingletonGestorLoja {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            StringRequest req = new StringRequest(Request.Method.POST,mUrlAPI + "carrinhos/adicionar?token=" + token.toString(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.POST,mUrlAPI + "carrinho/adicionar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                        System.out.println("--->Add carrinho c/ sucesso"+response.toString());
-                        Toast.makeText(context, "Artigo adicionado aos carrinho!", Toast.LENGTH_SHORT).show();
-                       // adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
-                    }
+                    //fazer sub  aqui
+                    System.out.println("--->Add carrinho c/ sucesso"+response.toString());
+                    Toast.makeText(context, "Artigo adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
+                    //adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
+
                     //listener add com  sucesso? falta codigo
                     /*if(favoritoListener != null){
                         livroListener.onRefreshDetalhes(MenuMainActivity.ADD);
                     }*/
+                }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
                     System.out.println("----> ERRO adicionar carrinho api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Artigo já adicionado ao carrinho", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }){
                 @Override

@@ -124,7 +124,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         ARTIGO_ID + " INTEGER NOT NULL, " +
                         PERFIL_ID + " INTEGER NOT NULL, " +
                         VALOR_ARTIGO + " INTEGER NOT NULL, " +
-                        NOME_ARTIGO + " TEXT NOT NULL " +
+                        NOME_ARTIGO + " TEXT NOT NULL, " +
+                        IMAGEM + " TEXT" +
                         ");";
         db.execSQL(createFavoritoTable);
 
@@ -376,6 +377,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(PERFIL_ID, f.getPerfilId());
         values.put(VALOR_ARTIGO, f.getValorArtigo());
         values.put(NOME_ARTIGO, f.getNomeArtigo());
+        values.put(IMAGEM, f.getImagem());
+
 
         this.db.insert(TABLE_NAME_FAVORITOS, null, values);
     }
@@ -392,7 +395,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         ARTIGO_ID,
                         PERFIL_ID,
                         VALOR_ARTIGO,
-                        NOME_ARTIGO},
+                        NOME_ARTIGO,
+                        IMAGEM},
                 null, null, null, null, null); // questionar o porquê destes 5 null?
 
         if (cursor.moveToFirst()) {
@@ -402,7 +406,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getInt(1),
                         cursor.getInt(2),
                         cursor.getDouble(3),
-                        cursor.getString(4));
+                        cursor.getString(4),
+                        cursor.getString(5));
 
                 favoritos.add(auxFavorito);
             } while (cursor.moveToNext());
