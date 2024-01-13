@@ -29,6 +29,7 @@ import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.CarrinhosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.FavoritosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UserListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
@@ -55,6 +56,7 @@ public class SingletonGestorLoja {
     private UserListener userListener;
     private UsersListener usersListener;
     private FavoritosListener favoritosListener;
+    private CarrinhosListener carrinhosListener;
 
 
   private static final String mUrlAPI = "http://172.22.21.219:8080/api/";//depois concatenas com o resto - como levou o:8080 retirou-se o .../PSI_Web/backend/web
@@ -95,6 +97,9 @@ public class SingletonGestorLoja {
     public void setFavoritosListener(FavoritosListener favoritosListener){
         this.favoritosListener = favoritosListener;
     }
+    public void setCarrinhosListener(CarrinhosListener carrinhosListener){
+        this.carrinhosListener = carrinhosListener;
+    }
 
     public void setUserListener(UserListener userListener){
         this.userListener = userListener;
@@ -125,6 +130,10 @@ public class SingletonGestorLoja {
     public ArrayList<Favorito> getFavoritosBD() {
         favoritos = lojaBDHelper.getAllFavoritosBD();
         return new ArrayList<>(favoritos);
+    }
+    public ArrayList<Carrinho> getCarrinhosBD() {
+        carrinhos = lojaBDHelper.getAllCarrinhosBD();
+        return new ArrayList<>(carrinhos);
     }
 
     public ArrayList<User> getUsersBD(){
@@ -279,7 +288,7 @@ public class SingletonGestorLoja {
     }
     // endregion
     // region # METODOS CARRINHO BD #
-    public void adicionarCarrinhossBD(ArrayList<Carrinho> carrinhos){
+    public void adicionarCarrinhosBD(ArrayList<Carrinho> carrinhos){
         lojaBDHelper.removerAllCarrinhosBD();
         for (Carrinho c : carrinhos){
             adicionarCarrinhoBD(c);
@@ -757,6 +766,36 @@ public class SingletonGestorLoja {
                     return params;
                 }
             };
+            volleyQueue.add(req);
+        }
+    }
+
+    public  void getAllCarrinhosAPI(final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+            if(carrinhosListener != null){
+                carrinhosListener.onRefreshListaCarrinhos(lojaBDHelper.getAllCarrinhosBD());
+            }
+            //LISTENERS vamos buscar os favoritos a bd local
+        }else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "carrinhos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    //fazer sub aqui e
+                    System.out.println("---> response Carrinho API:"+ response);
+                    carrinhos = LojaJsonParser.parserJsonCarrinhos(response);
+                    adicionarCarrinhosBD(carrinhos);
+                    if(carrinhosListener != null){
+                        carrinhosListener.onRefreshListaCarrinhos(carrinhos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("--->Erro carrinho" + error.getMessage());
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
             volleyQueue.add(req);
         }
     }
