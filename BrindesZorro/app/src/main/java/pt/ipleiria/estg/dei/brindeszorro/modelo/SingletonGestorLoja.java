@@ -331,6 +331,14 @@ public class SingletonGestorLoja {
             }
         }
     }
+    public void editarCarrinhoBD(Carrinho c){
+        //como tamos em memoria ele altera diretamente n precisa de dar save
+        Carrinho auxCarrinho = getCarrinho(c.getId());
+        if(auxCarrinho != null){
+            lojaBDHelper.editarCarrinhoBD(c);
+        }
+
+    }
 
     public void removerFaturaBD(int idFatura) {
         Fatura auxFatura = getFatura(idFatura);
@@ -739,20 +747,14 @@ public class SingletonGestorLoja {
                 @Override
                 public void onResponse(String response) {
                     //fazer sub  aqui
-                    System.out.println("--->Add carrinho c/ sucesso"+response.toString());
-                    Toast.makeText(context, "Artigo adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
-                    adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
-
-                    //listener add com  sucesso? falta codigo
-                    /*if(favoritoListener != null){
-                        livroListener.onRefreshDetalhes(MenuMainActivity.ADD);
-                    }*/
+                        System.out.println("--->Add carrinho c/ sucesso"+response.toString());
+                        Toast.makeText(context, "Artigo adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
                     System.out.println("----> ERRO adicionar carrinho api" + error.getMessage());
                     if(error.networkResponse.statusCode == 401){
-                        Toast.makeText(context, "Artigo já adicionado ao carrinho", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Artigo somado ao carrinho", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
                     }
