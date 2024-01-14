@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
 
     private ListView lvCarrinhos;
     private ArrayList<Carrinho> carrinhos;
+    private Button buttonLimparCarrinho;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,16 +36,30 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
         setHasOptionsMenu(true);
         lvCarrinhos = view.findViewById(R.id.lvCarrinhoCompras);//vai add a LV os frags q queremos mostrar
         carrinhos = SingletonGestorLoja.getInstance(getContext()).getCarrinhosBD();
+        buttonLimparCarrinho = (Button) view.findViewById(R.id.buttonLimparCarrinho);
 
         lvCarrinhos.setAdapter(new ListaCarrinhosAdaptador(getContext(), carrinhos));
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         SingletonGestorLoja.getInstance(getContext()).setCarrinhosListener(this);
         SingletonGestorLoja.getInstance(getContext()).getAllCarrinhosAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
 
-
+        buttonLimparCarrinho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickLimparCarrinho(v);
+                favoritosListener.onRefreshListaFavoritos(favoritos);
+            }
+        });
         return view;
     }
 
+
+
+    public void onClickLimparCarrinho(View view) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        SingletonGestorLoja.getInstance(getContext()).removerAllCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
+
+    }
     @Override
     public void onRefreshListaCarrinhos(ArrayList<Carrinho> carrinhos) {
         if(carrinhos != null){

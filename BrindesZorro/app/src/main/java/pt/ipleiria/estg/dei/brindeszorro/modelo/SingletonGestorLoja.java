@@ -801,6 +801,34 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
+    public void removerAllCarrinhoAPI( final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+
+        }else {
+            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "carrinhos/limparcarrinho?token=" + token.toString() ,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            lojaBDHelper.removerAllCarrinhosBD();
+                            System.out.println("--->Carrinho limpo com sucesso"+ response);
+                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                            //remove todos os items do carrinho
+                            //listener por toast com livro removido com sucesso e atualizar a vista
+                            /*if(favoritosListener != null){
+                                favoritosListener.onRefreshDetalhes(MenuMainActivity.DELETE);
+                            }*/
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO remover todos os items do carrinho" + error.getMessage());
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
 
     //endregion
 }
