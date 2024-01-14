@@ -421,7 +421,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME_FAVORITOS, null, null);
     }
     //endregion
-    // region # CARRINHO #
+
+    // region # MÉTODOS CRUD DO CARRINHO #
 
     public void adicionarCarrinhoBD(Carrinho c) {
         ContentValues values = new ContentValues();
@@ -501,6 +502,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     }
 
     //endregion
+
     //region # MÉTODOS CRUD DOS USERS #
 
     public void adicionarUserBD(User u) {

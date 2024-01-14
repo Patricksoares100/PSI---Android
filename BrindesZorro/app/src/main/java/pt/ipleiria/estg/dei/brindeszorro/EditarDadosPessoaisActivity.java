@@ -2,18 +2,25 @@ package pt.ipleiria.estg.dei.brindeszorro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
 import pt.ipleiria.estg.dei.brindeszorro.fragment.ListaHomeFragment;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
-public class EditarDadosPessoaisActivity extends AppCompatActivity {
+public class EditarDadosPessoaisActivity extends AppCompatActivity implements UsersListener {
 
     private User user;
     public static final String TOKEN = "TOKEN";
@@ -24,24 +31,36 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_dados_pessoais);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        SingletonGestorLoja.getInstance(getApplicationContext()).setUsersListener(this);
+        SingletonGestorLoja.getInstance(getApplicationContext()).getUserDataAPI(getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
 
-        //int idUser = getIntent()getIntExtra(ID_USER,0);
-        //user = SingletonGestorLoja.getInstance(getApplicationContext()).getUser(idUser);
+        int idUser = getIntent().getIntExtra(TOKEN,0);
+        user = SingletonGestorLoja.getInstance(getApplicationContext()).getUser(idUser);
+
         etNomeEditarDadosPessoais = findViewById(R.id.etNomeEditarDadosPessoais);
         etTelefoneEditarDadosPessoais = findViewById(R.id.etTelefoneEditarDadosPessoais);
         etNifEditarDadosPessoais = findViewById(R.id.etNifEditarDadosPessoais);
         etMoradaEditarDadosPessoais = findViewById(R.id.etMoradaEditarDadosPessoais);
         etCodigoPostalEditarDadosPessoais = findViewById(R.id.etCodigoPostalEditarDadosPessoais);
         etLocalidadeEditarDadosPessoais = findViewById(R.id.etLocalidadeEditarDadosPessoais);
+
+        carregarDadosPessoais();
+
     }
 
     private void carregarDadosPessoais(){
+
+        user = SingletonGestorLoja.getInstance(getApplicationContext()).getUserBD();
+
+        System.out.println( "---> token editarDados" + user.getNome());
         etNomeEditarDadosPessoais.setText(user.getNome());
-        etTelefoneEditarDadosPessoais.setText(user.getTelefone());
-        etNifEditarDadosPessoais.setText(user.getNif());
+        etTelefoneEditarDadosPessoais.setText("" +user.getTelefone());
+        etNifEditarDadosPessoais.setText(""+user.getNif());
         etMoradaEditarDadosPessoais.setText(user.getMorada());
         etCodigoPostalEditarDadosPessoais.setText(user.getCodigo_postal());
         etLocalidadeEditarDadosPessoais.setText(user.getLocalidade());
+
     }
 
     public void Cancelar(View view) {
@@ -50,6 +69,10 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
     }
 
     public void onClickConfirmarEditarDadosPessoais(View view) {
+
+        Intent intent = new Intent(this, ListaHomeFragment.class);
+        startActivity(intent);
+        finish();
 
         String nome = etNomeEditarDadosPessoais.getText().toString();
         String nif = etNifEditarDadosPessoais.getText().toString();
@@ -93,12 +116,7 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
             Toast.makeText(this, "Localidade inválida", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
-        Intent intent = new Intent(this, ListaHomeFragment.class);
-        // deve ser para colocar aqui a função de dar um save
-        startActivity(intent);
-        finish();
+        
     }
 
     public void alterarPassword (View view){
@@ -106,4 +124,11 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @Override
+    public void onRefreshListaUsers(ArrayList<User> users) {
+        if (users != null){
+            Toast.makeText(this, "Faça login ", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
