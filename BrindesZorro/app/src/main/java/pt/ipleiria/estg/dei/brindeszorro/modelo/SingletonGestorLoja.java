@@ -823,6 +823,11 @@ public class SingletonGestorLoja {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("----> ERRO remover todos os items do carrinho" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Não há itens no carrinho para serem removidos!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             volleyQueue.add(req);
