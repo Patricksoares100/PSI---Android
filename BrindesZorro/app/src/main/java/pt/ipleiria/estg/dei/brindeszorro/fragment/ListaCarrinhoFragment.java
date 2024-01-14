@@ -47,7 +47,6 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
             @Override
             public void onClick(View v) {
                 onClickLimparCarrinho(v);
-                favoritosListener.onRefreshListaFavoritos(favoritos);
             }
         });
         return view;
