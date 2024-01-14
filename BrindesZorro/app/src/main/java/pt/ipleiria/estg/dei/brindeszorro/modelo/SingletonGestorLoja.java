@@ -30,6 +30,7 @@ import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.CarrinhosListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.FaturasListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.FavoritosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UserListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
@@ -57,6 +58,7 @@ public class SingletonGestorLoja {
     private UsersListener usersListener;
     private FavoritosListener favoritosListener;
     private CarrinhosListener carrinhosListener;
+    private FaturasListener faturasListener;
 
 
   private static final String mUrlAPI = "http://172.22.21.219:8080/api/";//depois concatenas com o resto - como levou o:8080 retirou-se o .../PSI_Web/backend/web
@@ -287,6 +289,7 @@ public class SingletonGestorLoja {
         }
     }
     // endregion
+
     // region # METODOS CARRINHO BD #
     public void adicionarCarrinhosBD(ArrayList<Carrinho> carrinhos){
         lojaBDHelper.removerAllCarrinhosBD();
@@ -304,7 +307,7 @@ public class SingletonGestorLoja {
             }
         }
     }
-    //endregio
+    //endregion
 
     // region # METODOS FATURAS BD #
 
@@ -514,7 +517,6 @@ public class SingletonGestorLoja {
         }
     }
     //endregion
-
 
     //region # METODOS USERS API #
 
@@ -839,11 +841,18 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
 
         }else {
+
             StringRequest req = new StringRequest(Request.Method.GET, mUrlAPI + "faturas/comprarcarrinho?token=" + token.toString() ,
+
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             System.out.println("--->Carrinho comprado com sucesso"+ response);
+                            Toast.makeText(context, "Carrinho comprado com sucesso", Toast.LENGTH_SHORT).show();
+                            adicionarFaturaBD(LojaJsonParser.parserJsonFatura(response));
+                            /*if(faturasListener != null){
+                                faturasListener.onRefreshListaFaturas(faturas);
+                            }*/
                         }
                     }, new Response.ErrorListener() {
                 @Override

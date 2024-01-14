@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
@@ -100,7 +101,8 @@ public class LojaJsonParser {
         }
         return auxFavorito;
     }
-    //region
+    //endregion
+
     //region # MÉTODOS ARTIGOS JSON #
     public static ArrayList<Artigo> parserJsonArtigos(JSONArray response) {
         ArrayList<Artigo> artigos = new ArrayList<>();
@@ -161,7 +163,6 @@ public class LojaJsonParser {
         return auxArtigo;
     }
     //endregion
-
 
     //region # MÉTODOS User JSON #
 
@@ -298,5 +299,44 @@ public class LojaJsonParser {
         }
         return auxCarrinho;
     }
-    //region
+    //endregion
+
+    //region # METODOS FATURAS JSON #
+    public static ArrayList<Fatura> parserJsonFaturas(JSONArray response) {
+        ArrayList<Fatura> faturas = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject fatura = (JSONObject) response.get(i);
+                int id = fatura.getInt("fatura_id");
+                String data = fatura.getString("data");
+                double valorFatura = fatura.getDouble("valor_fatura");
+                String estado = fatura.getString("estado");
+                int perfil_id = fatura.getInt("perfil_id");
+
+                Fatura auxFatura = new Fatura(id, data, valorFatura, estado, perfil_id);
+                faturas.add(auxFatura);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return faturas;
+    }
+
+    public static Fatura parserJsonFatura(String response)  {
+        Fatura auxFatura = null;
+        try {
+            JSONObject fatura = new JSONObject(response);
+            int id = fatura.getInt("fatura_id");
+            String data = fatura.getString("data");
+            double valorFatura = fatura.getDouble("valor_fatura");
+            String estado = fatura.getString("estado");
+            int perfil_id = fatura.getInt("perfil_id");
+            auxFatura = new Fatura(id, data, valorFatura, estado, perfil_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxFatura;
+    }
+
+    //endregion
 }
