@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
 
     private ListView lvFavoritos;
     private ArrayList<Favorito> favoritos;
+    private Button buttonLimparFavoritos, buttonAdicionarTodosCarrinho;
 
     public ListaFavoritosFragment() {
         // Required empty public constructor
@@ -40,6 +42,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
         setHasOptionsMenu(true);
         lvFavoritos = view.findViewById(R.id.lvFavoritos); //vai adicionar à lvFavoritos os fragmentos que queremos mostrar
         favoritos = SingletonGestorLoja.getInstance(getContext()).getFavoritosBD();
+        buttonLimparFavoritos = (Button) view.findViewById(R.id.buttonLimparFavoritos);
 
         lvFavoritos.setAdapter(new ListaFavoritosAdaptador(getContext(), favoritos));
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
@@ -56,12 +59,26 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
                 startActivity(intent);
             }
         });
+
+        buttonLimparFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickLimparFavoritos(v);
+            }
+        });
         return view;
+
     }
+
     @Override
     public void onRefreshListaFavoritos(ArrayList<Favorito> favoritos) {
         if(favoritos != null){
             lvFavoritos.setAdapter(new ListaFavoritosAdaptador(getContext(), favoritos));
         }
+    }
+
+    public void onClickLimparFavoritos(View view){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        SingletonGestorLoja.getInstance(getContext()).removerAllFavoritosAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
     }
 }

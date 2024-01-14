@@ -737,6 +737,39 @@ public class SingletonGestorLoja {
         }
     }
 
+    public void removerAllFavoritosAPI( final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+
+        }else {
+            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "favoritos/limparfavoritos?token=" + token.toString() ,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            lojaBDHelper.removerAllFavoritosBD();
+                            System.out.println("--->Favoritos limpo com sucesso"+ response);
+                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                            //remove todos os items do carrinho
+                            //listener por toast com livro removido com sucesso e atualizar a vista
+                            /*if(favoritosListener != null){
+                                favoritosListener.onRefreshDetalhes(MenuMainActivity.DELETE);
+                            }*/
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO remover todos os items dos favoritos" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Não há itens nos favoritos para serem removidos!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
 
     //endregion
 
