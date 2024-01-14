@@ -142,6 +142,11 @@ public class SingletonGestorLoja {
         users = lojaBDHelper.getAllUsersBD();
         return new ArrayList<>(users);
     }
+
+    public User getUserBD(){
+        User user = lojaBDHelper.getUserBD();
+        return user;
+    }
     //endregion
 
     // region # GETs #
@@ -576,7 +581,7 @@ public class SingletonGestorLoja {
         }
     }
 
-    public void getAllUserAPI(final Context context){
+    public void getUserDataAPI(final Context context, String token){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
 
@@ -584,15 +589,13 @@ public class SingletonGestorLoja {
                 usersListener.onRefreshListaUsers(lojaBDHelper.getAllUsersBD());
             }
         } else{
-
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "users/login", null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "users/data?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
 
                     users = LojaJsonParser.parserJsonUsers(response);
                     System.out.println("---> Sucesso - Ver users: " + response);
                     adicionarUsersBD(users);
-
                     if(usersListener != null){
                         usersListener.onRefreshListaUsers(users);
                     }
