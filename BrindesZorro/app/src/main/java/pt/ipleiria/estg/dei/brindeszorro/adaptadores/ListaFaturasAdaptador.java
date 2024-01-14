@@ -61,6 +61,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
         viewHolderLista.update(faturas.get(position));
 
         Fatura fatura = faturas.get(position);
+        viewHolderLista.tvData.setText(String.format(fatura.getData()));
         viewHolderLista.tvValor.setText(String.format("%.2f", fatura.getValorFatura()));
         viewHolderLista.tvEstado.setText(String.valueOf(fatura.getEstado()));
 
