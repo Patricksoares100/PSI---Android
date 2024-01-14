@@ -834,6 +834,32 @@ public class SingletonGestorLoja {
         }
 
     }
+    public void comprarCarrinhoAPI( final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+
+        }else {
+            StringRequest req = new StringRequest(Request.Method.GET, mUrlAPI + "faturas/comprarcarrinho?token=" + token.toString() ,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            System.out.println("--->Carrinho comprado com sucesso"+ response);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO remover todos os items do carrinho" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Não há itens no carrinho para efetuar compra!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
 
     //endregion
 }
