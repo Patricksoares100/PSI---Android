@@ -652,6 +652,36 @@ public class SingletonGestorLoja {
         }
     }
 
+    public void editPassAPI(Context context, final String token, String passAtual, String novaPass) {
+        if (!LojaJsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+        } else {
+            StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "users/atualizarpassword?token=" + token.toString(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    System.out.println("----> resposta Password API" + response);
+                    Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                }
+            },new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse (VolleyError error){
+                    System.out.println("----> response ERRO password API" + error);
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Password Invalida", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }){
+                protected Map<String, String> getParams () {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("atualPassword", passAtual.toString());
+                    params.put("novaPassword", novaPass.toString());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+
     //endregion
 
     //region # METODO LOGIN API #
