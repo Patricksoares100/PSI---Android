@@ -627,13 +627,16 @@ public class SingletonGestorLoja {
             StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "users/atualizarpassword?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    System.out.println("----> SUCESSO password alterada API" + response);
+                    System.out.println("----> resposta Password API" + response);
                     Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                 }
             },new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse (VolleyError error){
                     System.out.println("----> response ERRO password API" + error);
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Password Invalida", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }){
                 protected Map<String, String> getParams () {

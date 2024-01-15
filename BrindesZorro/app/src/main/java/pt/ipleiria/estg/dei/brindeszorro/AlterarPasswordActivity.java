@@ -34,15 +34,18 @@ public class AlterarPasswordActivity extends AppCompatActivity {
         String atualPass = etAtualPassword.getText().toString();
         String novaPassword = etNovaPassword.getText().toString();
         String confirmarPassword = etConfirmarNovaPassword.getText().toString();
+        if(atualPass.length() <8 ){
+            Toast.makeText(this, "Password atual deve conter no minimo 8 caracteres!", Toast.LENGTH_SHORT).show();
+        }
        if (novaPassword.length() < 8 || confirmarPassword.length() < 8){
-            Toast.makeText(this, "Nova password deve conter no minimo 8 catacteres", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nova password deve conter no minimo 8 caracteres!", Toast.LENGTH_SHORT).show();
             return;
         }
-       if(atualPass == novaPassword || atualPass == confirmarPassword){
-           Toast.makeText(this, "Nova password deve ser diferente da atual", Toast.LENGTH_SHORT).show();
+       if(atualPass.toString().matches(novaPassword.toString()) || atualPass.toString().matches(confirmarPassword.toString())){
+           Toast.makeText(this, "Nova password deve ser diferente da atual!", Toast.LENGTH_SHORT).show();
            return;
        }
-        if (novaPassword == confirmarPassword){
+        if (novaPassword.toString().matches(confirmarPassword.toString())){
             SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
             SingletonGestorLoja.getInstance(getApplicationContext()).editPassAPI(getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"),atualPass , novaPassword);
         }
