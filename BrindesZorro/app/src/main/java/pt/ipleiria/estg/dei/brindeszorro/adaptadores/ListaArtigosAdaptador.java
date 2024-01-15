@@ -1,12 +1,17 @@
 package pt.ipleiria.estg.dei.brindeszorro.adaptadores;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -15,12 +20,16 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class ListaArtigosAdaptador extends BaseAdapter {
 
     private Context context; //é necessário para o adaptador
     private LayoutInflater inflater; //ter acesso ao layout específico para cada item
     private ArrayList<Artigo> artigos; // vai guardar a lista de artigos
+    private Artigo artigo;
+    private int quantidade = 1;
 
     public ListaArtigosAdaptador(Context context, ArrayList<Artigo> artigos) {
         // vai receber como parametros um context e a lista de artigos
@@ -55,6 +64,24 @@ public class ListaArtigosAdaptador extends BaseAdapter {
             viewHolderLista = new ListaArtigosAdaptador.ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
         }
+
+        Button ButtonCarrinhoArtigo = convertView.findViewById(R.id.ButtonCarrinhoArtigo);
+        ButtonCarrinhoArtigo.setOnClickListener(v -> {
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+            SingletonGestorLoja.getInstance(context).adicionarCarrinhoAPI(artigos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), quantidade);
+            Toast.makeText(context, "teste Carrinho", Toast.LENGTH_SHORT).show();
+        });
+
+
+        Button ButtonFavoritoArtigo = convertView.findViewById(R.id.ButtonFavoritoArtigo);
+        ButtonFavoritoArtigo.setOnClickListener(v -> {
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+            SingletonGestorLoja.getInstance(context).adicionarFavoritoAPI(artigos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+
+            Toast.makeText(context, "teste Favoritos", Toast.LENGTH_SHORT).show();
+        });
 
         viewHolderLista.update(artigos.get(position));
             //Perceber melhor -NAO ESQUECER
