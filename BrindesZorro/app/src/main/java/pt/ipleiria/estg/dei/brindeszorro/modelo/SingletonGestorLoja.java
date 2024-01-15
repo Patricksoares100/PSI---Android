@@ -271,6 +271,38 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
+
+
+    public void getAvaliacaoAPI(final Context context, String token) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            if (avaliacaosListener != null){
+                avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
+            }
+        } else{
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "avaliacao/byuser?token=" + token.toString(), null,new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response AVALIACAOS API" + response);
+                    // response.re .getString('imagem').replace("\\/", "/");
+                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
+                    adicionarAvaliacaosBD(avaliacaos);
+
+                    if(avaliacaosListener != null){
+                        avaliacaosListener.onRefreshListaAvaliacaos(avaliacaos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> response ERRO AVALIACAO API" + error);
+
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
     //endregion
 
     // region # METODOS Favoritos BD #

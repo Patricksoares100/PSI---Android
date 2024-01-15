@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.brindeszorro.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,9 +19,11 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.AvaliacaoComentarioActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaAvaliacaosAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 
 public class ListaAvaliacaosFragment extends Fragment {
@@ -39,15 +43,19 @@ public class ListaAvaliacaosFragment extends Fragment {
         // VAI FAZER COM QUE O MENU APAREÇA
         setHasOptionsMenu(true);
 
+
         lvAvaliacaos = view.findViewById(R.id.lvAvaliacaoLista);
         // getAvaliacaosBD() função que está no SingletonGestorLoja
         avaliacaos = SingletonGestorLoja.getInstance(getContext()).getAvaliacaosBD();
-
+        System.out.println("---> antes da api "+ avaliacaos);
         // Alinea 5.1 Ficha 5 Books - Atribuir/definir o adaptador
         lvAvaliacaos.setAdapter(new ListaAvaliacaosAdaptador(getContext(), avaliacaos));
 
-       // SingletonGestorLoja.getInstance(getContext()).setAvaliacaosListener();
-        //SingletonGestorLoja.getInstance(getContext()).getAllAvaliacoesAPI(getContext());
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        //SingletonGestorLoja.getInstance(getContext()).setAvaliacaosListener(AvaliacaosListener);
+
+        SingletonGestorLoja.getInstance(getContext()).getAvaliacaoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
+        System.out.println("---> depois  da api ");
 
         // Alinea 5.2 Ficha 5 Books - utilizar um listener para saber qual o item que foi selecionado
         lvAvaliacaos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
