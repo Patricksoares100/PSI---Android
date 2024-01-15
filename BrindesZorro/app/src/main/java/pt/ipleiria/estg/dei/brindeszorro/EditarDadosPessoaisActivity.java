@@ -67,7 +67,6 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
     public void onClickConfirmarEditarDadosPessoais(View view) {
 
         user = SingletonGestorLoja.getInstance(getApplicationContext()).getUserBD();
-        System.out.println("---> sout do user" + user);
 
         String nome = etNomeEditarDadosPessoais.getText().toString();
         String nif = etNifEditarDadosPessoais.getText().toString();
@@ -120,7 +119,6 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
         user.setCodigo_postal(codPostal);
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
-        System.out.println("---> sout do user" + user);
         SingletonGestorLoja.getInstance(getApplicationContext()).setUsersListener(this);
         SingletonGestorLoja.getInstance(getApplicationContext()).editUserAPI(user,getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
 
