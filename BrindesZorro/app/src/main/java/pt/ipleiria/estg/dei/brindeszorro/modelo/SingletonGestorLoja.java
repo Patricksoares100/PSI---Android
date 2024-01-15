@@ -774,6 +774,37 @@ public class SingletonGestorLoja {
 
     }
 
+    public void adicionarFavoritosCarrinhoAPI( Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            StringRequest req = new StringRequest(Request.Method.GET,mUrlAPI + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+            /*JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {*/
+                    //fazer sub  aqui
+                    System.out.println("--->Add favorito ao carrinho c/ sucesso"+response.toString());
+                    Toast.makeText(context, "Artigos adicionados ao carrinho!", Toast.LENGTH_SHORT).show();
+                    //adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
+                    //adicionarCarrinhosBD(LojaJsonParser.parserJsonCarrinhos(response));
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO adicionar favoritos ao carrinho api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Artigos já adicionados ao carrinho", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
     //endregion
 
     // region # METODO CARRINHO API #

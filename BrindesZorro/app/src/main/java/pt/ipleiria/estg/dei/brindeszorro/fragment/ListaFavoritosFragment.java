@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.DetalhesArtigoActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaFavoritosAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.FavoritosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
@@ -43,6 +44,7 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
         lvFavoritos = view.findViewById(R.id.lvFavoritos); //vai adicionar à lvFavoritos os fragmentos que queremos mostrar
         favoritos = SingletonGestorLoja.getInstance(getContext()).getFavoritosBD();
         buttonLimparFavoritos = (Button) view.findViewById(R.id.buttonLimparFavoritos);
+        buttonAdicionarTodosCarrinho = (Button) view.findViewById(R.id.buttonAdicionarTodosCarrinho);
 
         lvFavoritos.setAdapter(new ListaFavoritosAdaptador(getContext(), favoritos));
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
@@ -60,6 +62,12 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
             }
         });
 
+        buttonAdicionarTodosCarrinho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickPassarFavoritosCarrinho(v);
+            }
+        });
         buttonLimparFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +75,6 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
             }
         });
         return view;
-
     }
 
     @Override
@@ -80,5 +87,10 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
     public void onClickLimparFavoritos(View view){
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         SingletonGestorLoja.getInstance(getContext()).removerAllFavoritosAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
+    }
+
+    public void onClickPassarFavoritosCarrinho(View view){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        SingletonGestorLoja.getInstance(getContext()).adicionarFavoritosCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
     }
 }
