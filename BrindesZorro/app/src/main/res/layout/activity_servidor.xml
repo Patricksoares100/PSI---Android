@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="142dp"
         android:contentDescription="@string/descriptionLogo"
-        app:srcCompat="@drawable/conection" />
+        app:srcCompat="@drawable/conection"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/tvServidor"
@@ -20,33 +21,17 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/tv_servidorNome"
-        android:textSize="30dp"
+        android:textSize="48sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvPortoServidor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/tv_portaTitulo"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etPortoServidor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:ems="10"
-        android:hint="@string/hint_porta"
-        android:inputType="text"
-        android:minHeight="48dp" />
 
     <TextView
         android:id="@+id/tvIpServidor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/tv_tituloIp"
+        android:gravity="center"
+        android:text="@string/hint_ip"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
@@ -55,26 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:ems="10"
-        android:hint="@string/hint_ip"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/tvDominioServidor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/tv_dominioTitulo"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etDominioServidor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:ems="10"
-        android:hint="@string/hint_dominio"
-        android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:text="@string/ipServidor" />
 
     <LinearLayout
         android:layout_width="match_parent"
