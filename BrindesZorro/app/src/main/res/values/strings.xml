@@ -127,5 +127,6 @@
     <string name="nome">Nome:</string>
     <string name="strAlterarPassword">Alterar Password</string>
     <string name="onClickLimparCarrinho">onClickLimparCarrinho</string>
-    <string name="zero">0 €</string>/>
+    <string name="zero">0 €</string>
+    <string name="ipServidor">http://172.22.21.219:8080/api/</string>/>
 </resources>

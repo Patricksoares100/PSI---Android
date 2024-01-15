@@ -7,15 +7,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
-import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class AlterarPasswordActivity extends AppCompatActivity {
-    private User user;
+    Button buttonConfirmarPassword;
     private EditText etAtualPassword, etNovaPassword, etConfirmarNovaPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,7 @@ public class AlterarPasswordActivity extends AppCompatActivity {
         etAtualPassword= findViewById(R.id.etAtualPassword);
         etNovaPassword = findViewById(R.id.etNovaPassword);
         etConfirmarNovaPassword = findViewById(R.id.etConfirmarNovaPassword);
-
-
-
+        buttonConfirmarPassword = findViewById(R.id.buttonConfirmarAlterarPassword);
     }
 
     public void isPassNovaValida(View view) {
@@ -41,7 +39,12 @@ public class AlterarPasswordActivity extends AppCompatActivity {
             Toast.makeText(this, "Nova password deve conter no minimo 8 caracteres!", Toast.LENGTH_SHORT).show();
             return;
         }
-       if(atualPass.toString().matches(novaPassword.toString()) || atualPass.toString().matches(confirmarPassword.toString())){
+        if (!novaPassword.equals(confirmarPassword)) {
+            Toast.makeText(this, "As password não coincidem", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(atualPass.toString().matches(novaPassword.toString()) || atualPass.toString().matches(confirmarPassword.toString())){
            Toast.makeText(this, "Nova password deve ser diferente da atual!", Toast.LENGTH_SHORT).show();
            return;
        }
