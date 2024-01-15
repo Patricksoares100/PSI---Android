@@ -529,13 +529,27 @@ public class SingletonGestorLoja {
         if (!LojaJsonParser.isConnectionInternet(context)) {
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
         } else {
-            StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "users/" + user.getId(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "users/editar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    editUserBD(user);
+                    System.out.println("----> SUCESSO Login " + response);
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    adicionarUserBD(LojaJsonParser.parserJsonUser(response));
+                    try {
+                        System.out.println("---> teste try");
+                        JSONObject jsonObject = new JSONObject(response);
+                        editor.putString(Public.TOKEN, jsonObject.getString("token"));
+                        editor.apply();
+                        //listener.onResponse(response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        //listener.onResponse(null);
+                    }
+                 /*   editUserBD(user);
                     if (userListener != null) {
                         userListener.onRefreshUser(MainActivity.EDIT);
-                    }
+                    }*/
                 }
             },new Response.ErrorListener() {
                     @Override
@@ -545,13 +559,12 @@ public class SingletonGestorLoja {
                 }){
                     protected Map<String, String> getParams () {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("token", user.getToken());
                     params.put("nome", user.getNome());
                     params.put("telefone", "" + user.getTelefone());
                     params.put("nif", "" + user.getNif());
-                    params.put("morada", "" + user.getMorada());
-                    params.put("codigo_postas", "" + user.getCodigo_postal());
-                    params.put("localidade", "" + user.getLocalidade());
+                    params.put("morada", user.getMorada());
+                    params.put("codigo_postas", user.getCodigo_postal());
+                    params.put("localidade", user.getLocalidade());
                     return params;
                 }
                 };
@@ -589,22 +602,18 @@ public class SingletonGestorLoja {
                 usersListener.onRefreshListaUsers(lojaBDHelper.getAllUsersBD());
             }
         } else{
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "users/data?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+            StringRequest req = new StringRequest(Request.Method.GET, mUrlAPI + "users/data?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
-                public void onResponse(JSONArray response) {
+                public void onResponse(String response) {
+                    System.out.println("---> Sucesso - Ver user: " + response);
+                    adicionarUserBD(LojaJsonParser.parserJsonUser(response));
 
-                    users = LojaJsonParser.parserJsonUsers(response);
-                    System.out.println("---> Sucesso - Ver users: " + response);
-                    adicionarUsersBD(users);
-                    if(usersListener != null){
-                        usersListener.onRefreshListaUsers(users);
-                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    System.out.println("----> Erro USER API "+ error.getMessage());
+                    System.out.println("----> Erro USER DATA API "+ error.getMessage());
                 }
             });
 

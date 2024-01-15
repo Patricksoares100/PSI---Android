@@ -35,9 +35,6 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
         SingletonGestorLoja.getInstance(getApplicationContext()).setUsersListener(this);
         SingletonGestorLoja.getInstance(getApplicationContext()).getUserDataAPI(getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
 
-        int idUser = getIntent().getIntExtra(TOKEN,0);
-        user = SingletonGestorLoja.getInstance(getApplicationContext()).getUser(idUser);
-
         etNomeEditarDadosPessoais = findViewById(R.id.etNomeEditarDadosPessoais);
         etTelefoneEditarDadosPessoais = findViewById(R.id.etTelefoneEditarDadosPessoais);
         etNifEditarDadosPessoais = findViewById(R.id.etNifEditarDadosPessoais);
@@ -53,7 +50,6 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
 
         user = SingletonGestorLoja.getInstance(getApplicationContext()).getUserBD();
 
-        System.out.println( "---> token editarDados" + user.getNome());
         etNomeEditarDadosPessoais.setText(user.getNome());
         etTelefoneEditarDadosPessoais.setText("" +user.getTelefone());
         etNifEditarDadosPessoais.setText(""+user.getNif());
@@ -70,9 +66,8 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
 
     public void onClickConfirmarEditarDadosPessoais(View view) {
 
-        Intent intent = new Intent(this, ListaHomeFragment.class);
-        startActivity(intent);
-        finish();
+        user = SingletonGestorLoja.getInstance(getApplicationContext()).getUserBD();
+        System.out.println("---> sout do user" + user);
 
         String nome = etNomeEditarDadosPessoais.getText().toString();
         String nif = etNifEditarDadosPessoais.getText().toString();
@@ -81,7 +76,7 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
         String localidade = etLocalidadeEditarDadosPessoais.getText().toString();
         String codPostal = etCodigoPostalEditarDadosPessoais.getText().toString();
 
-       // validações e as verificações mais abixo
+        // validações e as verificações mais abixo
         if(nome.length() <= 4){
             Toast.makeText(this, "Username inválido", Toast.LENGTH_SHORT).show();
             return;
@@ -116,7 +111,25 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
             Toast.makeText(this, "Localidade inválida", Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
+        System.out.println( "---> antes" + user.getNome());
+        user.setNome(nome);
+        user.setNif(Integer.parseInt(nif));
+        user.setTelefone(Integer.parseInt(telefone));
+        user.setMorada(morada);
+        user.setLocalidade(localidade);
+        user.setCodigo_postal(codPostal);
+        System.out.println( "---> depois" + user.getNome());
+
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        System.out.println("---> sout do user" + user);
+        SingletonGestorLoja.getInstance(getApplicationContext()).setUsersListener(this);
+        SingletonGestorLoja.getInstance(getApplicationContext()).editUserAPI(user,getApplicationContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void alterarPassword (View view){

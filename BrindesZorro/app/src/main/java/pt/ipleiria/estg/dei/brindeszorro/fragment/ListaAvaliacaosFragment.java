@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.AvaliacaoComentarioActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaAvaliacaosAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
@@ -44,6 +45,9 @@ public class ListaAvaliacaosFragment extends Fragment {
 
         // Alinea 5.1 Ficha 5 Books - Atribuir/definir o adaptador
         lvAvaliacaos.setAdapter(new ListaAvaliacaosAdaptador(getContext(), avaliacaos));
+
+       // SingletonGestorLoja.getInstance(getContext()).setAvaliacaosListener();
+        //SingletonGestorLoja.getInstance(getContext()).getAllAvaliacoesAPI(getContext());
 
         // Alinea 5.2 Ficha 5 Books - utilizar um listener para saber qual o item que foi selecionado
         lvAvaliacaos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
