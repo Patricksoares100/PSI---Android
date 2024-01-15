@@ -112,15 +112,12 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
             return;
         }
 
-        System.out.println( "---> antes" + user.getNome());
         user.setNome(nome);
         user.setNif(Integer.parseInt(nif));
         user.setTelefone(Integer.parseInt(telefone));
         user.setMorada(morada);
         user.setLocalidade(localidade);
         user.setCodigo_postal(codPostal);
-        System.out.println( "---> depois" + user.getNome());
-
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         System.out.println("---> sout do user" + user);
