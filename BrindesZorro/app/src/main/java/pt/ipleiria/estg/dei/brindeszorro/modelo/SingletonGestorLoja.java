@@ -562,7 +562,7 @@ public class SingletonGestorLoja {
                     params.put("telefone", "" + user.getTelefone());
                     params.put("nif", "" + user.getNif());
                     params.put("morada", user.getMorada());
-                    params.put("codigo_postas", user.getCodigo_postal());
+                    params.put("codigo_postal", user.getCodigo_postal());
                     params.put("localidade", user.getLocalidade());
                     return params;
                 }
