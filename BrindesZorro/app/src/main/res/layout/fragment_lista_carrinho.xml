@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     tools:context=".ListaCarrinhoFragment">
 
     <ImageView
@@ -42,17 +44,21 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/txtValorTotalCarrinho" />
+            android:text="@string/txtValorTotalCarrinho"
+            android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/tvMostrarValorCarrinho"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="right"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
-            android:text="10.5" />
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/zero" />
     </LinearLayout>
 
     <View
@@ -91,17 +97,17 @@
         android:background="?android:attr/listDivider" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:id="@+id/bottomAppBar"
         tools:ignore="BottomAppBar">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bottomNavigationView"
-            app:menu="@menu/bottom_nav_menu"
-            />
+            app:menu="@menu/bottom_nav_menu" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
 </LinearLayout>

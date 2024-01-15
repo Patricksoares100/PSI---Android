@@ -59,6 +59,16 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
                 onClickLimparCarrinho(v);
             }
         });
+        if(carrinhos.isEmpty()){
+           // buttonLimparCarrinho.setEnabled(false);
+            buttonLimparCarrinho.setAlpha(0.5f);
+           // buttonConcluirCompra.setEnabled(false);
+            buttonConcluirCompra.setAlpha(0.5f);
+        }/*else {
+            buttonLimparCarrinho.setVisibility(View.VISIBLE);
+            buttonConcluirCompra.setVisibility(View.VISIBLE);
+        }*/
+
         return view;
     }
 

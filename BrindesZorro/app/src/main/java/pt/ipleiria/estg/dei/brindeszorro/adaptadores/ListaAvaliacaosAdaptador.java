@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class ListaAvaliacaosAdaptador extends BaseAdapter {
 
         Avaliacao avaliacao = avaliacaos.get(position);
         viewHolderLista.tvComentarioAvaliacao.setText(avaliacao.getComentario());
-        viewHolderLista.tvClassificacaoAvaliacao.setText(String.valueOf(avaliacao.getClassificacao()));
+        //viewHolderLista.tvClassificacaoAvaliacao.setText(String.valueOf(avaliacao.getClassificacao()));
 
         return convertView;
     }
@@ -77,17 +78,19 @@ public class ListaAvaliacaosAdaptador extends BaseAdapter {
     // Para acesso aos componentes visuais
     private class ViewHolderLista {
         private TextView tvNomeArtigoAvaliacao, tvComentarioAvaliacao, tvClassificacaoAvaliacao;
-
+        RatingBar ratingClassificacaoAvaliacao;
         public ViewHolderLista(View view) {
             tvNomeArtigoAvaliacao = view.findViewById(R.id.tvNomeArtigoAvaliacaoApresentado);
             tvComentarioAvaliacao = view.findViewById(R.id.tvComentarioAvaliacaoApresentado);
-            tvClassificacaoAvaliacao = view.findViewById(R.id.tvClassificacaoAvaliacao);
+            //tvClassificacaoAvaliacao = view.findViewById(R.id.tvClassificacaoAvaliacao);
+            ratingClassificacaoAvaliacao = view.findViewById(R.id.ratingBarClassificacaoAvaliacao);
         }
 
         public void update(Avaliacao avaliacao) {
             tvNomeArtigoAvaliacao.setText(""+avaliacao.getArtigoId());
             tvComentarioAvaliacao.setText(""+avaliacao.getComentario());
-            tvClassificacaoAvaliacao.setText(""+avaliacao.getClassificacao());
+            //tvClassificacaoAvaliacao.setText(""+avaliacao.getClassificacao());
+            ratingClassificacaoAvaliacao.setRating((float)avaliacao.getClassificacao());
 
         }
     }

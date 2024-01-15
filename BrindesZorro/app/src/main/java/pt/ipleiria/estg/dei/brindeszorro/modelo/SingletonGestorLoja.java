@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -244,7 +245,6 @@ public class SingletonGestorLoja {
     public void getAllAvaliacoesAPI(final Context context) {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
-
             if (avaliacaosListener != null){
                 avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
             }
@@ -494,7 +494,6 @@ public class SingletonGestorLoja {
     public void getAllArtigosAPI(final Context context) {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
-
             if (artigosListener != null){
                 artigosListener.onRefreshListaArtigos(lojaBDHelper.getAllArtigosBD());
             }
@@ -803,7 +802,7 @@ public class SingletonGestorLoja {
                 public void onErrorResponse(VolleyError error){
                     System.out.println("----> ERRO adicionar favoritos ao carrinho api" + error.getMessage());
                     if(error.networkResponse.statusCode == 401){
-                        Toast.makeText(context, "Artigos já adicionados ao carrinho", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Insira um artigo nos favoritos antes de adicionar ao carrinho", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
                     }
@@ -904,6 +903,37 @@ public class SingletonGestorLoja {
                     if(error.networkResponse.statusCode == 401){
                         Toast.makeText(context, "Não há itens no carrinho para serem removidos!", Toast.LENGTH_SHORT).show();
                     }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
+    public void removerLinhaCarrinhoAPI(Carrinho carrinho, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+
+        }else {
+            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "carrinhos/limparlinhacarrinho?token=" + token.toString() +"&id="+ carrinho.getId(),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            lojaBDHelper.removerCarrinhoBD(carrinho.getId());
+                            System.out.println("--->Artigo removido com sucesso"+ response);
+                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                            //remove todos os items do carrinho
+                            //listener por toast com livro removido com sucesso e atualizar a vista
+                            /*if(favoritosListener != null){
+                                favoritosListener.onRefreshDetalhes(MenuMainActivity.DELETE);
+                            }*/
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO remover artigo do carrinho" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
                         Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
                     }
                 }
