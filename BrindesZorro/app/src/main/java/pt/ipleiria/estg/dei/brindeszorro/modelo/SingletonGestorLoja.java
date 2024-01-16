@@ -797,9 +797,9 @@ public class SingletonGestorLoja {
                             adicionarFavoritoBD(LojaJsonParser.parserJsonFavorito(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
 
                      //listener add com  sucesso? falta codigo
-                    /*if(favoritoListener != null){
-                        livroListener.onRefreshDetalhes(MenuMainActivity.ADD);
-                    }*/
+                    if(favoritosListener != null){
+                        favoritosListener.onRefreshListaFavoritos(new ArrayList<>());
+                    }
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
@@ -871,7 +871,9 @@ public class SingletonGestorLoja {
                     System.out.println("--->Add favorito ao carrinho c/ sucesso"+response.toString());
                     Toast.makeText(context, "Artigos adicionados ao carrinho!", Toast.LENGTH_SHORT).show();
                     //adicionarCarrinhosBD(LojaJsonParser.parserJsonCarrinhos(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
-
+                    if(favoritosListener != null){
+                        favoritosListener.onRefreshListaFavoritos(new ArrayList<>());
+                    }
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
@@ -901,6 +903,9 @@ public class SingletonGestorLoja {
                     //fazer sub  aqui
                         System.out.println("--->Add carrinho c/ sucesso"+response.toString());
                         Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    if(carrinhosListener != null){
+                        carrinhosListener.onRefreshListaCarrinhos(new ArrayList<>());
+                    }
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
@@ -967,9 +972,9 @@ public class SingletonGestorLoja {
                             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                             //remove todos os items do carrinho
                             //listener por toast com livro removido com sucesso e atualizar a vista
-                            /*if(favoritosListener != null){
-                                favoritosListener.onRefreshDetalhes(MenuMainActivity.DELETE);
-                            }*/
+                            if(carrinhosListener != null){
+                                carrinhosListener.onRefreshListaCarrinhos(new ArrayList<>());
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -1000,9 +1005,9 @@ public class SingletonGestorLoja {
                             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                             //remove todos os items do carrinho
                             //listener por toast com livro removido com sucesso e atualizar a vista
-                            /*if(favoritosListener != null){
-                                favoritosListener.onRefreshDetalhes(MenuMainActivity.DELETE);
-                            }*/
+                            if(carrinhosListener != null){
+                                carrinhosListener.onRefreshListaCarrinhos(new ArrayList<>());
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -1031,9 +1036,9 @@ public class SingletonGestorLoja {
                             System.out.println("--->Carrinho comprado com sucesso"+ response);
                             Toast.makeText(context, "Carrinho comprado com sucesso", Toast.LENGTH_SHORT).show();
                             adicionarFaturaBD(LojaJsonParser.parserJsonFatura(response));
-                            /*if(faturasListener != null){
-                                faturasListener.onRefreshListaFaturas(faturas);
-                            }*/
+                            if(carrinhosListener != null){
+                                carrinhosListener.onRefreshListaCarrinhos(new ArrayList<>());
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -1052,16 +1057,17 @@ public class SingletonGestorLoja {
     }
 
 
-    /*public void aumentarQuantidadeCarrinhoAPI(final Artigo artigo, final Context context, String token, String sinal){
+    public void aumentarDiminuirQuantidadeCarrinhoAPI(final Carrinho carrinho, final Context context, String token, String sinal){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            StringRequest req = new StringRequest(Request.Method.PUT,mUrlAPI + "carrinho/atualizar?token=" + token.toString(), new Response.Listener<String>() {
+            System.out.println("---> carrinhoazzzz " + carrinho.getId());
+            StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "carrinho/atualizar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //fazer sub  aqui
                     System.out.println("--->Quantidade artigo carrinho atualizada c/ sucesso!"+response.toString());
-                    Toast.makeText(context, "Quantidade atualizada com sucesso!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
@@ -1076,14 +1082,14 @@ public class SingletonGestorLoja {
                 @Override
                 protected Map<String, String> getParams(){
                     Map<String, String> params = new HashMap<String,String>();
-                    params.put("artigo_id", ""+artigo.getId());// tem q ser uma variavel n pode ser hardcoded
+                    params.put("id", "" + carrinho.getId());// tem q ser uma variavel n pode ser hardcoded
                     params.put("sinal", sinal.toString());
                     return params;
                 }
             };
             volleyQueue.add(req);
         }
-    }*/
+    }
 
 
     //endregion
