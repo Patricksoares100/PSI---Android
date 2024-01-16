@@ -1068,8 +1068,8 @@ public class SingletonGestorLoja {
                     //fazer sub  aqui
                     System.out.println("--->Quantidade artigo carrinho atualizada c/ sucesso!"+response.toString());
                     Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
-                    if(carrinhosListener != null){
-                        carrinhosListener.onRefreshListaCarrinhos(carrinhos);
+                    if (carrinhosListener != null){
+                        getAllCarrinhosAPI(context,token.toString());
                     }
                 }
             },new Response.ErrorListener(){
