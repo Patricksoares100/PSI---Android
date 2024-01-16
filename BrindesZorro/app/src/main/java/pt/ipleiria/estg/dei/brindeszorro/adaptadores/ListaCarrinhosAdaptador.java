@@ -71,14 +71,14 @@ public class ListaCarrinhosAdaptador extends BaseAdapter {
         buttonMaisArtigosCarrinho.setOnClickListener(v -> {
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-            SingletonGestorLoja.getInstance(context).aumentarQuantidadeCarrinhoAPI(carrinhos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), "+");
+            SingletonGestorLoja.getInstance(context).aumentarDiminuirQuantidadeCarrinhoAPI(carrinhos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), "+");
         });
 
         Button buttonMenosArtigosCarrinho = convertView.findViewById(R.id.buttonMenosArtigoCarrinho);
         buttonMenosArtigosCarrinho.setOnClickListener(v -> {
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-            SingletonGestorLoja.getInstance(context).aumentarQuantidadeCarrinhoAPI(carrinhos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), "-");
+            SingletonGestorLoja.getInstance(context).aumentarDiminuirQuantidadeCarrinhoAPI(carrinhos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), "-");
         });
 
         viewHolderLista.update(carrinhos.get(position));
