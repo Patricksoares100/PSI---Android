@@ -902,7 +902,7 @@ public class SingletonGestorLoja {
                 public void onResponse(String response) {
                     //fazer sub  aqui
                         System.out.println("--->Add carrinho c/ sucesso"+response.toString());
-                        Toast.makeText(context, "Artigo adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                     if(carrinhosListener != null){
                         carrinhosListener.onRefreshListaCarrinhos(new ArrayList<>());
                     }

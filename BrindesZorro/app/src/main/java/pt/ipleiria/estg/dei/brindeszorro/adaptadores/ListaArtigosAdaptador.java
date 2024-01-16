@@ -70,7 +70,6 @@ public class ListaArtigosAdaptador extends BaseAdapter {
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
             SingletonGestorLoja.getInstance(context).adicionarCarrinhoAPI(artigos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), quantidade);
-            Toast.makeText(context, "teste Carrinho", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -79,8 +78,6 @@ public class ListaArtigosAdaptador extends BaseAdapter {
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
             SingletonGestorLoja.getInstance(context).adicionarFavoritoAPI(artigos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"));
-
-            Toast.makeText(context, "teste Favoritos", Toast.LENGTH_SHORT).show();
         });
 
         viewHolderLista.update(artigos.get(position));
