@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
-                    android:text="@string/txtButtonMenosArtigoCarrinho" />
+                    android:text="@string/txtButtonMenosArtigoCarrinho"/>
 
                 <LinearLayout
                     android:id="@+id/tvQtdValor"
@@ -106,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
-                    android:text="@string/txtButtonMaisArtigoCarrinho" />
+                    android:text="@string/txtButtonMaisArtigoCarrinho"/>
 
             </LinearLayout>
 

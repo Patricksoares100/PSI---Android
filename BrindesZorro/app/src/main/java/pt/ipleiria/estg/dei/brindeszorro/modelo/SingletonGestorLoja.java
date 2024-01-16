@@ -1052,16 +1052,17 @@ public class SingletonGestorLoja {
     }
 
 
-    /*public void aumentarQuantidadeCarrinhoAPI(final Artigo artigo, final Context context, String token, String sinal){
+    public void aumentarQuantidadeCarrinhoAPI(final Carrinho carrinho, final Context context, String token, String sinal){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            StringRequest req = new StringRequest(Request.Method.PUT,mUrlAPI + "carrinho/atualizar?token=" + token.toString(), new Response.Listener<String>() {
+            System.out.println("---> carrinhoazzzz " + carrinho.getId());
+            StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "carrinho/atualizar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //fazer sub  aqui
                     System.out.println("--->Quantidade artigo carrinho atualizada c/ sucesso!"+response.toString());
-                    Toast.makeText(context, "Quantidade atualizada com sucesso!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
@@ -1076,14 +1077,14 @@ public class SingletonGestorLoja {
                 @Override
                 protected Map<String, String> getParams(){
                     Map<String, String> params = new HashMap<String,String>();
-                    params.put("artigo_id", ""+artigo.getId());// tem q ser uma variavel n pode ser hardcoded
+                    params.put("id", "" + carrinho.getId());// tem q ser uma variavel n pode ser hardcoded
                     params.put("sinal", sinal.toString());
                     return params;
                 }
             };
             volleyQueue.add(req);
         }
-    }*/
+    }
 
 
     //endregion
