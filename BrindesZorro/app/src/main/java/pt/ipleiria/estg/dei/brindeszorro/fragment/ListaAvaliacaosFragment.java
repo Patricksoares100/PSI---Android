@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.AvaliacaoComentarioActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaAvaliacaosAdaptador;
+import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaCarrinhosAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaoListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
@@ -26,7 +27,7 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 
-public class ListaAvaliacaosFragment extends Fragment {
+public class ListaAvaliacaosFragment extends Fragment implements AvaliacaosListener {
 
     private ListView lvAvaliacaos;
     private ArrayList<Avaliacao> avaliacaos;
@@ -46,14 +47,14 @@ public class ListaAvaliacaosFragment extends Fragment {
 
         lvAvaliacaos = view.findViewById(R.id.lvAvaliacaoLista);
         // getAvaliacaosBD() função que está no SingletonGestorLoja
-        avaliacaos = SingletonGestorLoja.getInstance(getContext()).getAvaliacaosBD();
+        avaliacaos = SingletonGestorLoja.getInstance(getContext()).getAllAvaliacaosUserBD();
         System.out.println("---> antes da api "+ avaliacaos);
         // Alinea 5.1 Ficha 5 Books - Atribuir/definir o adaptador
         lvAvaliacaos.setAdapter(new ListaAvaliacaosAdaptador(getContext(), avaliacaos));
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         //SingletonGestorLoja.getInstance(getContext()).setAvaliacaosListener(AvaliacaosListener);
-
+        SingletonGestorLoja.getInstance(getContext()).setAvaliacaosListener(this);
         SingletonGestorLoja.getInstance(getContext()).getAvaliacaoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
         System.out.println("---> depois  da api ");
 
@@ -70,5 +71,12 @@ public class ListaAvaliacaosFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onRefreshListaAvaliacaos(ArrayList<Avaliacao> avaliacaos) {
+        if (avaliacaos != null) {
+            lvAvaliacaos.setAdapter(new ListaAvaliacaosAdaptador(getContext(), avaliacaos));
+        }
     }
 }

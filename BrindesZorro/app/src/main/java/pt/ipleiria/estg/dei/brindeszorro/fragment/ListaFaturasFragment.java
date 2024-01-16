@@ -1,7 +1,9 @@
 package pt.ipleiria.estg.dei.brindeszorro.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 
 public class ListaFaturasFragment extends Fragment {
@@ -45,6 +48,10 @@ public class ListaFaturasFragment extends Fragment {
         setHasOptionsMenu(true); // vai chamar o menu
         lvFaturas = view.findViewById(R.id.lvFaturaFragment); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
         faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
+
+        /*SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        SingletonGestorLoja.getInstance(getContext()).setFaturasListener(this);
+        SingletonGestorLoja.getInstance(getContext()).getFaturaAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );*/
 
         lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
         lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
