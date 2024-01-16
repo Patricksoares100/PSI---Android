@@ -197,6 +197,26 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         return this.db.delete(TABLE_NAME_AVALIACAOS, ID + " = ?", new String[]{"" + id}) == 1;
     }
 
+    public ArrayList<Avaliacao> getAllAvaliacaosUserBD(int id){
+        ArrayList<Avaliacao> avaliacaos = new ArrayList<>();
+
+        Cursor cursor = this.db.query(TABLE_NAME_AVALIACAOS, new String[]{ID, COMENTARIO, CLASSIFICACAO, ARTIGO_ID, PERFIL_ID}, PERFIL_ID + "= ?", new String[]{"" + id}, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                // PRESUMO QUE A ORDEM DESTES columnIndex TEM A HAVER COM A ORDEM DOS ATRIBUTOS QUE ESTÁ NO CONSTRUTOR DO MODELO
+                Avaliacao auxAvaliacao = new Avaliacao(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4));
+
+                avaliacaos.add(auxAvaliacao);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return avaliacaos;
+    }
+
     public ArrayList<Avaliacao> getAllAvaliacaosBD() {
         ArrayList<Avaliacao> avaliacaos = new ArrayList<>();
 

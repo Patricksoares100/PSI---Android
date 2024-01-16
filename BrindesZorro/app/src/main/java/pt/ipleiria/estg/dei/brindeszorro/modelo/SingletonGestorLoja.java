@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,6 +45,7 @@ public class SingletonGestorLoja {
 
     private ArrayList<Artigo> artigos;
     private ArrayList<Avaliacao> avaliacaos;
+    private ArrayList<Avaliacao> avaliacaoUser;
     private ArrayList<Favorito> favoritos;
     private ArrayList<Carrinho> carrinhos;
     private ArrayList<User> users;
@@ -83,6 +85,7 @@ public class SingletonGestorLoja {
         users = new ArrayList<>();
         favoritos = new ArrayList<>();
         carrinhos = new ArrayList<>();
+        avaliacaoUser = new ArrayList<>();
     }
 
 
@@ -137,6 +140,11 @@ public class SingletonGestorLoja {
     public ArrayList<Carrinho> getCarrinhosBD() {
         carrinhos = lojaBDHelper.getAllCarrinhosBD();
         return new ArrayList<>(carrinhos);
+    }
+
+    public ArrayList<Avaliacao> getAllAvaliacaosUserBD(){
+        return lojaBDHelper.getAllAvaliacaosUserBD(getUserBD().getId());
+
     }
 
     public ArrayList<User> getUsersBD(){
@@ -824,9 +832,9 @@ public class SingletonGestorLoja {
                             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                             //remove todos os items do carrinho
                             //listener por toast com livro removido com sucesso e atualizar a vista
-                            /*if(favoritosListener != null){
-                                favoritosListener.onRefreshDetalhes(MenuMainActivity.DELETE);
-                            }*/
+                            if(favoritosListener != null){
+                                favoritosListener.onRefreshListaFavoritos(new ArrayList<>());
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -851,14 +859,11 @@ public class SingletonGestorLoja {
             StringRequest req = new StringRequest(Request.Method.GET,mUrlAPI + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-            /*JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {*/
                     //fazer sub  aqui
                     System.out.println("--->Add favorito ao carrinho c/ sucesso"+response.toString());
                     Toast.makeText(context, "Artigos adicionados ao carrinho!", Toast.LENGTH_SHORT).show();
-                    //adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
-                    //adicionarCarrinhosBD(LojaJsonParser.parserJsonCarrinhos(response));
+                    //adicionarCarrinhosBD(LojaJsonParser.parserJsonCarrinhos(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
+
                 }
             },new Response.ErrorListener(){
                 public void onErrorResponse(VolleyError error){
@@ -1037,6 +1042,41 @@ public class SingletonGestorLoja {
         }
 
     }
+
+
+    /*public void aumentarQuantidadeCarrinhoAPI(final Artigo artigo, final Context context, String token, String sinal){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            StringRequest req = new StringRequest(Request.Method.PUT,mUrlAPI + "carrinho/atualizar?token=" + token.toString(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //fazer sub  aqui
+                    System.out.println("--->Quantidade artigo carrinho atualizada c/ sucesso!"+response.toString());
+                    Toast.makeText(context, "Quantidade atualizada com sucesso!", Toast.LENGTH_SHORT).show();
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO atualizar quantidade artigo carrinho api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Nao foi possivel adicionar quantidade ao carrinho!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String,String>();
+                    params.put("artigo_id", ""+artigo.getId());// tem q ser uma variavel n pode ser hardcoded
+                    params.put("sinal", sinal.toString());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }*/
+
 
     //endregion
 }
