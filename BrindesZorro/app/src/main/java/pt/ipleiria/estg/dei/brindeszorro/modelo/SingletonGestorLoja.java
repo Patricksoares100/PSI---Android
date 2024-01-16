@@ -62,7 +62,6 @@ public class SingletonGestorLoja {
     private FaturasListener faturasListener;
 
 
-  private static final String mUrlAPI = "http://172.22.21.219:8080/api/";//depois concatenas com o resto - como levou o:8080 retirou-se o .../PSI_Web/backend/web
 
 
     public static synchronized SingletonGestorLoja getInstance(Context context){
@@ -83,6 +82,10 @@ public class SingletonGestorLoja {
         users = new ArrayList<>();
         favoritos = new ArrayList<>();
         carrinhos = new ArrayList<>();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        String mUrlAPI = sharedPreferences.getString(Public.SERVER_KEY, "http://172.22.21.219:8080/api/");
+        Public.SERVER = mUrlAPI;
+
     }
 
 
@@ -249,7 +252,7 @@ public class SingletonGestorLoja {
                 avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
             }
         } else{
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "avaliacaos", null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "avaliacaos", null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     System.out.println("----> response AVALIACAOS API" + response);
@@ -280,7 +283,7 @@ public class SingletonGestorLoja {
                 avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
             }
         } else{
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "avaliacao/byuser?token=" + token.toString(), null,new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "avaliacao/byuser?token=" + token.toString(), null,new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     System.out.println("----> response AVALIACAOS API" + response);
@@ -448,7 +451,7 @@ public class SingletonGestorLoja {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
         }else{
-            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPI +"users/registo", new Response.Listener<String>() {
+            StringRequest request = new StringRequest(Request.Method.POST, Public.SERVER +"users/registo", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //add com sucesso?
@@ -491,7 +494,7 @@ public class SingletonGestorLoja {
             //aqui temos de ir buscar na base de dados local se nao tiver net
 
         } else {
-            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
+            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
                 @Override
                 public void onResponse(String response) {
                     adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
@@ -530,7 +533,9 @@ public class SingletonGestorLoja {
                 artigosListener.onRefreshListaArtigos(lojaBDHelper.getAllArtigosBD());
             }
         } else{
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "artigos", null, new Response.Listener<JSONArray>() {
+            System.out.println("--->"+Public.SERVER);
+            System.out.println("--->"+Public.SERVER.toString());
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "artigos", null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     System.out.println("----> response ARTIGOS API" + response);
@@ -560,7 +565,7 @@ public class SingletonGestorLoja {
         if (!LojaJsonParser.isConnectionInternet(context)) {
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
         } else {
-            StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "users/editar?token=" + token.toString(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "users/editar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     System.out.println("----> SUCESSO Login " + response);
@@ -607,7 +612,7 @@ public class SingletonGestorLoja {
         if (!LojaJsonParser.isConnectionInternet(context)) {
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
         } else {
-            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "users/" + user.getId(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "users/" + user.getId(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     removerUserBD(user.getId());
@@ -633,7 +638,7 @@ public class SingletonGestorLoja {
                 usersListener.onRefreshListaUsers(lojaBDHelper.getAllUsersBD());
             }
         } else{
-            StringRequest req = new StringRequest(Request.Method.GET, mUrlAPI + "users/data?token=" + token.toString(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.GET, Public.SERVER + "users/data?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     System.out.println("---> Sucesso - Ver user: " + response);
@@ -656,7 +661,7 @@ public class SingletonGestorLoja {
         if (!LojaJsonParser.isConnectionInternet(context)) {
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
         } else {
-            StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "users/atualizarpassword?token=" + token.toString(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "users/atualizarpassword?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     System.out.println("----> resposta Password API" + response);
@@ -690,7 +695,7 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  R.string.sem_liga_a_internet, Toast.LENGTH_SHORT).show();
 
         }else{
-            StringRequest request = new StringRequest(Request.Method.POST, mUrlAPI +"users/login", new Response.Listener<String>() {
+            StringRequest request = new StringRequest(Request.Method.POST, Public.SERVER +"users/login", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //add com sucesso?
@@ -749,7 +754,7 @@ public class SingletonGestorLoja {
             }
             //LISTENERS vamos buscar os favoritos a bd local
         }else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "favoritos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "favoritos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     //fazer sub aqui e
@@ -775,7 +780,7 @@ public class SingletonGestorLoja {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            StringRequest req = new StringRequest(Request.Method.POST,mUrlAPI + "favoritos/adicionar?token=" + token.toString(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.POST,Public.SERVER + "favoritos/adicionar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //fazer sub  aqui
@@ -815,7 +820,7 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
 
         }else {
-            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "favoritos/limparfavoritos?token=" + token.toString() ,
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "favoritos/limparfavoritos?token=" + token.toString() ,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -848,10 +853,10 @@ public class SingletonGestorLoja {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            StringRequest req = new StringRequest(Request.Method.GET,mUrlAPI + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.GET,Public.SERVER + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-            /*JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+            /*JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "favoritos/passarfavoritoscarrinho?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {*/
                     //fazer sub  aqui
@@ -882,7 +887,7 @@ public class SingletonGestorLoja {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            StringRequest req = new StringRequest(Request.Method.POST,mUrlAPI + "carrinho/adicionar?token=" + token.toString(), new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.POST,Public.SERVER + "carrinho/adicionar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //fazer sub  aqui
@@ -919,7 +924,7 @@ public class SingletonGestorLoja {
             }
             //LISTENERS vamos buscar os favoritos a bd local
         }else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "carrinhos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "carrinhos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     //fazer sub aqui e
@@ -945,7 +950,7 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
 
         }else {
-            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "carrinhos/limparcarrinho?token=" + token.toString() ,
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "carrinhos/limparcarrinho?token=" + token.toString() ,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -978,7 +983,7 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
 
         }else {
-            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "carrinhos/limparlinhacarrinho?token=" + token.toString() +"&id="+ carrinho.getId(),
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "carrinhos/limparlinhacarrinho?token=" + token.toString() +"&id="+ carrinho.getId(),
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -1010,7 +1015,7 @@ public class SingletonGestorLoja {
 
         }else {
 
-            StringRequest req = new StringRequest(Request.Method.GET, mUrlAPI + "faturas/comprarcarrinho?token=" + token.toString() ,
+            StringRequest req = new StringRequest(Request.Method.GET, Public.SERVER + "faturas/comprarcarrinho?token=" + token.toString() ,
 
                     new Response.Listener<String>() {
                         @Override

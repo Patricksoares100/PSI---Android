@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.brindeszorro.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaArtigosAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class ListaHomeFragment extends Fragment implements ArtigosListener {
 
@@ -71,7 +74,10 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
        // SingletonGestorLoja.getInstance(getContext()).setArtigosListener(this);
         SingletonGestorLoja.getInstance(getContext()).getAllArtigosAPI(getContext());
         //vai buscar a lista de livros ao singleton
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        String valorArmazenado = sharedPreferences.getString(Public.SERVER_KEY, Public.SERVER);
 
+        System.out.println("--->1 " + valorArmazenado);
        return view;
     }
 

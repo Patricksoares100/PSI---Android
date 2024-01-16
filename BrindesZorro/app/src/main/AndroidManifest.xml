@@ -48,7 +48,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".ServidorActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".RecuperarPasswordActivity"
