@@ -19,6 +19,9 @@ public class ServidorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_servidor);
         etIpServidor = findViewById(R.id.etIpServidor);
 
+
+        etIpServidor.setText(Public.SERVER);
+
     }
 
     public void onClickServidor(View view){
