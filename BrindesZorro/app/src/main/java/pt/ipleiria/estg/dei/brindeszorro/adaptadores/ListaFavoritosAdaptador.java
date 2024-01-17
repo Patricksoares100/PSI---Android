@@ -60,12 +60,12 @@ public class ListaFavoritosAdaptador extends BaseAdapter {
             SingletonGestorLoja.getInstance(context).adicionarFavoritoCarrinhoAPI(favoritos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"));
         });
 
-        /*Button buttonRemoverFavorito = convertView.findViewById(R.id.buttonRemoverFavorito);
+        Button buttonRemoverFavorito = convertView.findViewById(R.id.buttonRemoverFavorito);
         buttonRemoverFavorito.setOnClickListener(v -> {
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-            SingletonGestorLoja.getInstance(context).//funçao por criar(artigos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), quantidade);
-        });*/
+            SingletonGestorLoja.getInstance(context).removerFavoritoAPI(favoritos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+        });
 
         viewHolderLista.update(favoritos.get(position));
         return convertView;

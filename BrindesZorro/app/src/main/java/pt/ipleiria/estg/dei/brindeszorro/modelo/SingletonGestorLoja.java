@@ -938,28 +938,28 @@ public class SingletonGestorLoja {
 
     }
 
-    /*public void removerFavoritoAPI(Favorito favorito, final Context context, String token){
+    public void removerFavoritoAPI(Favorito favorito, final Context context, String token){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
 
         }else {
-            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "favoritos/limparlinhacarrinho?token=" + token.toString() +"&id="+ carrinho.getId(),
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "favoritos/limparfavorito?token=" + token.toString() +"&id="+ favorito.getId(),
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            lojaBDHelper.removerCarrinhoBD(carrinho.getId());
-                            System.out.println("--->Artigo removido com sucesso"+ response);
+                            lojaBDHelper.removerFavoritoBD(favorito.getId());
+                            System.out.println("--->Artigo removido dos favoritos com sucesso"+ response);
                             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                             //remove todos os items do carrinho
                             //listener por toast com livro removido com sucesso e atualizar a vista
-                            if(carrinhosListener != null){
-                                carrinhosListener.onRefreshListaCarrinhos(new ArrayList<>());
+                            if(favoritosListener != null){
+                                favoritosListener.onRefreshListaFavoritos(favoritos);
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println("----> ERRO remover artigo dos favoritos" + error.getMessage());
+                    System.out.println("----> ERRO ao remover artigo dos favoritos" + error.getMessage());
                     if(error.networkResponse.statusCode == 401){
                         Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
                     }
@@ -968,7 +968,7 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
 
-    }*/
+    }
 
     public void adicionarFavoritosCarrinhoAPI( Context context, String token){
         if(!LojaJsonParser.isConnectionInternet(context)){
