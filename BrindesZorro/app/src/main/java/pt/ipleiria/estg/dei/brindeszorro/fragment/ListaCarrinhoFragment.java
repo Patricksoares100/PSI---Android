@@ -39,13 +39,15 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
         setHasOptionsMenu(true);
         lvCarrinhos = view.findViewById(R.id.lvCarrinhoCompras);//vai add a LV os frags q queremos mostrar
         carrinhos = SingletonGestorLoja.getInstance(getContext()).getCarrinhosBD();
+
+        //onRefreshListaCarrinhos(carrinhos);
         buttonLimparCarrinho = (Button) view.findViewById(R.id.buttonLimparCarrinho);
         buttonConcluirCompra = (Button) view.findViewById(R.id.buttonConcluirCompra);
 
         lvCarrinhos.setAdapter(new ListaCarrinhosAdaptador(getContext(), carrinhos));
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         SingletonGestorLoja.getInstance(getContext()).setCarrinhosListener(this);
-        SingletonGestorLoja.getInstance(getContext()).getAllCarrinhosAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
+        SingletonGestorLoja.getInstance(getContext()).getAllCarrinhosAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
 
         buttonConcluirCompra.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,35 +61,24 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
                 onClickLimparCarrinho(v);
             }
         });
-        if(carrinhos.isEmpty()){
-           // buttonLimparCarrinho.setEnabled(false);
+      /*  if(carrinhos.isEmpty()){
             buttonLimparCarrinho.setAlpha(0.5f);
-           // buttonConcluirCompra.setEnabled(false);
             buttonConcluirCompra.setAlpha(0.5f);
-        }/*else {
-            buttonLimparCarrinho.setVisibility(View.VISIBLE);
-            buttonConcluirCompra.setVisibility(View.VISIBLE);
         }*/
 
         return view;
     }
 
     public void onClickConcluirCompra(View view){
+       /* buttonConcluirCompra.setAlpha(0.5f);
+        buttonLimparCarrinho.setAlpha(0.5f);*/
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         SingletonGestorLoja.getInstance(getContext()).comprarCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
-        /*SingletonGestorLoja.getInstance(getContext()).comprarCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"), new Response.Listener(){
-            @Override
-            public void onResponse(Object response) {
-                SingletonGestorLoja.getInstance(getContext()).setCarrinhosListener();
-                SingletonGestorLoja.getInstance(getContext()).getAllCarrinhosAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
-                //onRefreshListaCarrinhos(carrinhos);
-                System.out.println("---> carrinho vazio" + carrinhos);
-            }
-        });*/
-
     }
 
     public void onClickLimparCarrinho(View view) {
+       /* buttonLimparCarrinho.setAlpha(0.5f);
+        buttonConcluirCompra.setAlpha(0.5f);*/
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         SingletonGestorLoja.getInstance(getContext()).removerAllCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
 

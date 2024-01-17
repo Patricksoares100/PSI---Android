@@ -74,12 +74,12 @@ public class ListaFavoritosFragment extends Fragment implements FavoritosListene
                 onClickLimparFavoritos(v);
             }
         });
-        if(favoritos.isEmpty()){
+        /*if(favoritos.isEmpty()){
             // buttonLimparCarrinho.setEnabled(false);
             buttonAdicionarTodosCarrinho.setAlpha(0.5f);
             // buttonConcluirCompra.setEnabled(false);
             buttonLimparFavoritos.setAlpha(0.5f);
-        }
+        }*/
         return view;
     }
 
