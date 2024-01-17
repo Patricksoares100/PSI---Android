@@ -435,45 +435,6 @@ public class SingletonGestorLoja {
     }
     //endregion
 
-    // region # AVALIACAO API #
-
-    public void adicionarAvaliacaoAPI(final Avaliacao avaliacao, final Context context) {
-        if (!LojaJsonParser.isConnectionInternet(context)) {
-            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
-            //aqui temos de ir buscar na base de dados local se nao tiver net
-
-        } else {
-            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
-                @Override
-                public void onResponse(String response) {
-                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
-                    if (avaliacaoListener != null) {
-                        avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("---> ERRO adicionarAvaliacaoAPI: " + error.getMessage());
-                }
-            }) {
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    // possivelmente será puxado aqui o token
-                    params.put("comentario", avaliacao.getComentario());
-                    params.put("classificacao", "" + avaliacao.getClassificacao());
-                    params.put("artigoId", "" + avaliacao.getArtigoId());
-
-                    return params;
-                }
-            };
-            volleyQueue.add(req);
-        }
-
-    }
-
-    // endregion
-
     //region # METODOS ARTIGOS API #
     public void getAllArtigosAPI(final Context context) {
         if(!LojaJsonParser.isConnectionInternet(context)){
@@ -700,6 +661,42 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
+
+    public void adicionarAvaliacaoAPI(final Avaliacao avaliacao, final Context context, String token) {
+        if (!LojaJsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            //aqui temos de ir buscar na base de dados local se nao tiver net
+
+        } else {
+            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
+                @Override
+                public void onResponse(String response) {
+                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
+                    if (avaliacaoListener != null) {
+                        avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("---> ERRO adicionarAvaliacaoAPI: " + error.getMessage());
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    // possivelmente será puxado aqui o token
+                    params.put("comentario", avaliacao.getComentario());
+                    params.put("classificacao", "" + avaliacao.getClassificacao());
+                    params.put("artigoId", "" + avaliacao.getArtigoId());
+
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+
+    }
+
     //endregion
 
     //region # METODO LOGIN API #
@@ -950,6 +947,7 @@ public class SingletonGestorLoja {
                             lojaBDHelper.removerFavoritoBD(favorito.getId());
                             System.out.println("--->Artigo removido dos favoritos com sucesso"+ response);
                             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                            favoritos.remove(favorito);
                             //remove todos os items do carrinho
                             //listener por toast com livro removido com sucesso e atualizar a vista
                             if(favoritosListener != null){
@@ -1015,6 +1013,7 @@ public class SingletonGestorLoja {
                     System.out.println("--->Add favorito c/ sucesso"+response.toString());
                     Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                     removerFavoritoBD(favorito.getId());
+                    favoritos.remove(favorito);
                     //adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
 
                     //listener add com  sucesso? falta codigo

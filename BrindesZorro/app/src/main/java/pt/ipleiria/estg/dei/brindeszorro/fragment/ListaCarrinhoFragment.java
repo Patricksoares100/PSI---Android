@@ -85,6 +85,8 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
     public void onRefreshListaCarrinhos(ArrayList<Carrinho> carrinhos) {
         if(carrinhos != null){
             lvCarrinhos.setAdapter(new ListaCarrinhosAdaptador(getContext(), carrinhos));
+            atualizarTotalCarrinho(carrinhos);
+
         }
     }
 
