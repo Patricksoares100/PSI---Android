@@ -86,12 +86,13 @@
                 android:gravity="center_vertical" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/ButtonFaturaPagar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
                 android:layout_marginRight="12dp"
-                android:text="Button" />
+                android:onClick="pagarFatura"
+                android:layout_weight="0.3"
+                android:text="@string/btn_pagar" />
 
         </LinearLayout>
 

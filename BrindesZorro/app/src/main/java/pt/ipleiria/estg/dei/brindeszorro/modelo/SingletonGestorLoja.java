@@ -790,6 +790,36 @@ public class SingletonGestorLoja {
         }
     }
 
+
+    public void pagarFatura( final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+            if(faturasListener != null){
+                faturasListener.onRefreshListaFaturas(lojaBDHelper.getAllFaturasBD());
+            }
+        }else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "fatura/pagar?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    //fazer sub aqui e
+                    System.out.println("--->PAGOU"+ response);
+                    faturas = LojaJsonParser.parserJsonFaturas(response);
+                    adicionarFaturasBD(faturas);
+                    if(faturasListener != null){
+                        faturasListener.onRefreshListaFaturas(faturas);
+                    }
+                }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO nao pagou!" + error.getMessage());
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
+
     //endregion
 
     // region #METODO FAVORITO API #

@@ -1,10 +1,12 @@
 package pt.ipleiria.estg.dei.brindeszorro.adaptadores;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class ListaFaturasAdaptador extends BaseAdapter {
 
@@ -59,6 +63,12 @@ public class ListaFaturasAdaptador extends BaseAdapter {
         }
 
         viewHolderLista.update(faturas.get(position));
+
+        Button buttonFaturaPagar = convertView.findViewById(R.id.ButtonFaturaPagar);
+        buttonFaturaPagar.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+            SingletonGestorLoja.getInstance(context).pagarFatura(context, sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+        });
 
         /*Fatura fatura = faturas.get(position);
         viewHolderLista.tvData.setText(String.format(fatura.getData()));

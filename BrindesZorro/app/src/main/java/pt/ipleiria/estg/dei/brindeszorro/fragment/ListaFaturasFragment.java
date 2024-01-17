@@ -44,6 +44,7 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
         // Required empty public constructor
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_faturas, container, false);
@@ -55,7 +56,7 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         SingletonGestorLoja.getInstance(getContext()).setFaturasListener(this);
         SingletonGestorLoja.getInstance(getContext()).getFaturasAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
-/*
+
         lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -65,7 +66,7 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
                 intent.putExtra(FaturaActivity.IDFATURAS, (int) id);
                 startActivity(intent);
             }
-        });*/
+        });
         return view;
     }
 
