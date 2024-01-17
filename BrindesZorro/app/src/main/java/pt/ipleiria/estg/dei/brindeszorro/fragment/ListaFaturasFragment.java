@@ -24,15 +24,17 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.AvaliacaoComentarioActivity;
 import pt.ipleiria.estg.dei.brindeszorro.FaturaActivity;
+import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaCarrinhosAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaFaturasAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.R;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.FaturasListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 
-public class ListaFaturasFragment extends Fragment {
+public class ListaFaturasFragment extends Fragment implements FaturasListener {
 
     private ListView lvFaturas;
     private ArrayList<Fatura> faturas;
@@ -49,11 +51,11 @@ public class ListaFaturasFragment extends Fragment {
         lvFaturas = view.findViewById(R.id.lvFaturaFragment); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
         faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
 
-        /*SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(), faturas));
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         SingletonGestorLoja.getInstance(getContext()).setFaturasListener(this);
-        SingletonGestorLoja.getInstance(getContext()).getFaturaAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );*/
-
-        lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(),faturas));
+        SingletonGestorLoja.getInstance(getContext()).getFaturasAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
+/*
         lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -63,9 +65,11 @@ public class ListaFaturasFragment extends Fragment {
                 intent.putExtra(FaturaActivity.IDFATURAS, (int) id);
                 startActivity(intent);
             }
-        });
+        });*/
         return view;
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -96,4 +100,10 @@ public class ListaFaturasFragment extends Fragment {
     super.onCreateOptionsMenu(menu, inflater);
 }
 
+    @Override
+    public void onRefreshListaFaturas(ArrayList<Fatura> faturas) {
+        if(faturas != null){
+            lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(), faturas));
+        }
+    }
 }

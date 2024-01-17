@@ -307,7 +307,7 @@ public class LojaJsonParser {
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject fatura = (JSONObject) response.get(i);
-                int id = fatura.getInt("fatura_id");
+                int id = fatura.getInt("id");
                 String data = fatura.getString("data");
                 double valorFatura = fatura.getDouble("valor_fatura");
                 String estado = fatura.getString("estado");
@@ -326,7 +326,7 @@ public class LojaJsonParser {
         Fatura auxFatura = null;
         try {
             JSONObject fatura = new JSONObject(response);
-            int id = fatura.getInt("fatura_id");
+            int id = fatura.getInt("id");
             String data = fatura.getString("data");
             double valorFatura = fatura.getDouble("valor_fatura");
             String estado = fatura.getString("estado");
