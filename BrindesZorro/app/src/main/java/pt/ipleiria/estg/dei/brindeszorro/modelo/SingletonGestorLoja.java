@@ -10,6 +10,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
@@ -85,6 +86,7 @@ public class SingletonGestorLoja {
         favoritos = new ArrayList<>();
         carrinhos = new ArrayList<>();
         avaliacaoUser = new ArrayList<>();
+        faturas = new ArrayList<>();
         SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         String mUrlAPI = sharedPreferences.getString(Public.SERVER_KEY, "http://172.22.21.219:8080/api/");
         Public.SERVER = mUrlAPI;
@@ -118,6 +120,9 @@ public class SingletonGestorLoja {
         this.usersListener = usersListener;
     }
 
+    public void setFaturasListener(FaturasListener faturasListener){
+        this.faturasListener = faturasListener;
+    }
 
     //endregion
 
@@ -251,70 +256,6 @@ public class SingletonGestorLoja {
     }
 
     // endregion
-
-    //region # METODO AVALIACAO API #
-    public void getAllAvaliacoesAPI(final Context context) {
-        if(!LojaJsonParser.isConnectionInternet(context)){
-            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
-            if (avaliacaosListener != null){
-                avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
-            }
-        } else{
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "avaliacaos", null, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    System.out.println("----> response AVALIACAOS API" + response);
-                    // response.re .getString('imagem').replace("\\/", "/");
-                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
-                    adicionarAvaliacaosBD(avaliacaos);
-
-                    if(avaliacaosListener != null){
-                        avaliacaosListener.onRefreshListaAvaliacaos(avaliacaos);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("----> response ERRO AVALIACAO API" + error);
-                }
-            });
-
-            volleyQueue.add(req);
-        }
-    }
-
-
-    public void getAvaliacaoAPI(final Context context, String token) {
-        if(!LojaJsonParser.isConnectionInternet(context)){
-            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
-            if (avaliacaosListener != null){
-                avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
-            }
-        } else{
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "avaliacao/byuser?token=" + token.toString(), null,new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    System.out.println("----> response AVALIACAOS API" + response);
-                    // response.re .getString('imagem').replace("\\/", "/");
-                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
-                    adicionarAvaliacaosBD(avaliacaos);
-
-                    if(avaliacaosListener != null){
-                        avaliacaosListener.onRefreshListaAvaliacaos(avaliacaos);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("----> response ERRO AVALIACAO API" + error);
-
-                }
-            });
-
-            volleyQueue.add(req);
-        }
-    }
-    //endregion
 
     // region # METODOS Favoritos BD #
 
@@ -697,6 +638,70 @@ public class SingletonGestorLoja {
 
     //endregion
 
+    //region # METODO AVALIACAO API #
+    public void getAllAvaliacoesAPI(final Context context) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            if (avaliacaosListener != null){
+                avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
+            }
+        } else{
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "avaliacaos", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response AVALIACAOS API" + response);
+                    // response.re .getString('imagem').replace("\\/", "/");
+                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
+                    adicionarAvaliacaosBD(avaliacaos);
+
+                    if(avaliacaosListener != null){
+                        avaliacaosListener.onRefreshListaAvaliacaos(avaliacaos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> response ERRO AVALIACAO API" + error);
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+
+
+    public void getAvaliacaoAPI(final Context context, String token) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            if (avaliacaosListener != null){
+                avaliacaosListener.onRefreshListaAvaliacaos(lojaBDHelper.getAllAvaliacaosBD());
+            }
+        } else{
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "avaliacao/byuser?token=" + token.toString(), null,new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response AVALIACAOS API" + response);
+                    // response.re .getString('imagem').replace("\\/", "/");
+                    avaliacaos = LojaJsonParser.parserJsonAvaliacaos(response);
+                    adicionarAvaliacaosBD(avaliacaos);
+
+                    if(avaliacaosListener != null){
+                        avaliacaosListener.onRefreshListaAvaliacaos(avaliacaos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> response ERRO AVALIACAO API" + error);
+
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+    //endregion
+
     //region # METODO LOGIN API #
     public void loginAPI(final Login login, final Context context, Response.Listener listener){
         if(!LojaJsonParser.isConnectionInternet(context)){
@@ -748,6 +753,82 @@ public class SingletonGestorLoja {
             };
             volleyQueue.add(request);
         }
+    }
+
+    //endregion
+
+    // region #METODO fATURAS API
+
+    public  void getFaturasAPI(final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+            if(faturasListener != null){
+                faturasListener.onRefreshListaFaturas(lojaBDHelper.getAllFaturasBD());
+            }
+            //LISTENERS vamos buscar os favoritos a bd local
+        }else {
+
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "fatura/find?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    //fazer sub aqui e
+                    System.out.println("---> response Faturas a ir à API:"+ response);
+                    faturas = LojaJsonParser.parserJsonFaturas(response);
+                    adicionarFaturasBD(faturas);
+                    if(faturasListener != null){
+                        faturasListener.onRefreshListaFaturas(faturas);
+
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("--->Erro faturassssss" + error.getMessage());
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+
+    public void pagarFatura(final Context context, String token, int idFatura){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+            if(faturasListener != null){
+                faturasListener.onRefreshListaFaturas(lojaBDHelper.getAllFaturasBD());
+            }
+        }else {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, Public.SERVER + "fatura/pagar?id=" + idFatura + "&token=" + token, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    // Fazer algo com a fatura recebida do servidor
+                    Fatura fatura = LojaJsonParser.parserJsonFatura(response.toString());
+                    // Adicionar a lógica restante conforme necessário
+                    if (fatura != null) {
+                        System.out.println("--->PAGOU " + fatura);
+                        // Limpar a lista existente e adicionar a nova fatura
+                        faturas.clear();
+                        faturas.add(fatura);
+                        // Atualizar o banco de dados com a nova lista
+                        adicionarFaturasBD(faturas);
+                        if (faturasListener != null) {
+                            faturasListener.onRefreshListaFaturas(faturas);
+                        }
+                    } else {
+                        // Lidar com o caso em que a análise falhou
+                        System.out.println("----> ERRO na análise da fatura!");
+                    }
+                }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO nao pagou!" + error.getMessage());
+                }
+            });
+            volleyQueue.add(req);
+        }
+
     }
 
     //endregion
@@ -1001,6 +1082,7 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
+
 
     public  void getAllCarrinhosAPI(final Context context, String token){
         if(!LojaJsonParser.isConnectionInternet(context)){
