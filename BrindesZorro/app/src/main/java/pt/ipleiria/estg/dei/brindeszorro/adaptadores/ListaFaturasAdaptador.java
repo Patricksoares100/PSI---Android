@@ -62,12 +62,14 @@ public class ListaFaturasAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
-        viewHolderLista.update(faturas.get(position));
+       viewHolderLista.update(faturas.get(position));
 
         Button buttonFaturaPagar = convertView.findViewById(R.id.ButtonFaturaPagar);
         buttonFaturaPagar.setOnClickListener(v -> {
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-            SingletonGestorLoja.getInstance(context).pagarFatura(context, sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+            int idFatura = faturas.get(position).getId();
+            System.out.println("--- o id da fatura é" + idFatura);
+            SingletonGestorLoja.getInstance(context).pagarFatura(context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), idFatura);
         });
 
         /*Fatura fatura = faturas.get(position);
@@ -80,18 +82,25 @@ public class ListaFaturasAdaptador extends BaseAdapter {
 
     private class ViewHolderLista {
         private TextView tvData, tvValor, tvEstado;
-
+        private Button buttonFaturaPagar;
 
         public ViewHolderLista(View view) {
             tvData = view.findViewById(R.id.tvDataEmissaoFatura);
             tvValor = view.findViewById(R.id.tvValorFatura);
             tvEstado = view.findViewById(R.id.tvEstadoFatura);
+            buttonFaturaPagar = view.findViewById(R.id.ButtonFaturaPagar);
         }
 
         public void update(Fatura fatura) {
             tvData.setText(""+fatura.getData());
             tvValor.setText(""+fatura.getValorFatura());
             tvEstado.setText(""+fatura.getEstado());
+            if ("Paga".equals(fatura.getEstado())) {  // tentei com == mas dava erro
+                buttonFaturaPagar.setVisibility(View.GONE);
+            } else {
+                buttonFaturaPagar.setVisibility(View.VISIBLE);
+            }
+        }
+
         }
     }
-}
