@@ -1,10 +1,12 @@
 package pt.ipleiria.estg.dei.brindeszorro.adaptadores;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,13 +18,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
+import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
 public class ListaFavoritosAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Favorito> favoritos;
+    private Artigo artigo;
+    private int quantidade = 1;
 
     public ListaFavoritosAdaptador(Context context, ArrayList<Favorito> favoritos) {
         this.context = context;
@@ -46,6 +53,20 @@ public class ListaFavoritosAdaptador extends BaseAdapter {
             viewHolderLista = new ListaFavoritosAdaptador.ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
         }
+
+        Button buttonAdicionarCarrinhoFavoritos = convertView.findViewById(R.id.buttonAdicionarCarrinhoFavoritos);
+        buttonAdicionarCarrinhoFavoritos.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+            SingletonGestorLoja.getInstance(context).adicionarFavoritoCarrinhoAPI(favoritos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+        });
+
+        /*Button buttonRemoverFavorito = convertView.findViewById(R.id.buttonRemoverFavorito);
+        buttonRemoverFavorito.setOnClickListener(v -> {
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+            SingletonGestorLoja.getInstance(context).//funçao por criar(artigos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), quantidade);
+        });*/
+
         viewHolderLista.update(favoritos.get(position));
         return convertView;
     }
