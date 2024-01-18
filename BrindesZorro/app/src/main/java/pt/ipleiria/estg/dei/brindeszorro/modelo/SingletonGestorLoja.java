@@ -764,7 +764,7 @@ public class SingletonGestorLoja {
             StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER + "avaliacao/create?token=" + token.toString(), new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
                 @Override
                 public void onResponse(String response) {
-                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
+                    adicionarAvaliacaoBD(LojaJsonParser.parserJsonAvaliacao(response));
                     if (avaliacaoListener != null) {
                         avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
                     }
@@ -794,14 +794,14 @@ public class SingletonGestorLoja {
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
 
         }else {
-            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "favoritos/remover?token=" + token.toString() +"&id="+ avaliacao.getId(),
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "avaliacaos/remover?token=" + token.toString() +"&id="+ avaliacao.getId(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        lojaBDHelper.removerFavoritoBD(avaliacao.getId());
+                        lojaBDHelper.removerAvaliacaoBD(avaliacao.getId());
                         System.out.println("--->Avaliação removida com sucesso"+ response);
                         Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-                        favoritos.remove(avaliacao);
+                        avaliacaos.remove(avaliacao);
                         //remove todos os items do carrinho
                         //listener por toast com livro removido com sucesso e atualizar a vista
                         if(avaliacaosListener != null){
