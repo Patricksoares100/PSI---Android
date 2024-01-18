@@ -30,6 +30,7 @@ import pt.ipleiria.estg.dei.brindeszorro.listeners.FaturasListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Empresa;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.LinhaFatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
@@ -73,6 +74,9 @@ public class ListaFaturaDetalhesFragment extends Fragment  {
         SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
         empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresaBD();
         System.out.println("---> EMPRESAAAAAA" + empresa);
+
+
+
 
         //empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresa(empresa.getId()); //se é fragmento fica getContext
 

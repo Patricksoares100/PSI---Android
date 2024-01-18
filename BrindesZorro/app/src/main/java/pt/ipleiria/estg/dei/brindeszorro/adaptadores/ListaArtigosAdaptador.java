@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.LinhaFatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
@@ -28,6 +29,7 @@ public class ListaArtigosAdaptador extends BaseAdapter {
     private Context context; //é necessário para o adaptador
     private LayoutInflater inflater; //ter acesso ao layout específico para cada item
     private ArrayList<Artigo> artigos; // vai guardar a lista de artigos
+    private ArrayList<LinhaFatura> linhaFaturas;
     private Artigo artigo;
     private int quantidade = 1;
 
@@ -70,6 +72,7 @@ public class ListaArtigosAdaptador extends BaseAdapter {
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
             SingletonGestorLoja.getInstance(context).adicionarCarrinhoAPI(artigos.get(position), context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), quantidade);
+
         });
 
 

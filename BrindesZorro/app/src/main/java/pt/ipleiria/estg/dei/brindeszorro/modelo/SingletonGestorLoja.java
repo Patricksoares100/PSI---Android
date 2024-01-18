@@ -37,6 +37,7 @@ import pt.ipleiria.estg.dei.brindeszorro.listeners.AvaliacaosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.CarrinhosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.FaturasListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.FavoritosListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.LinhasFaturasListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UserListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.UsersListener;
 import pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser;
@@ -45,6 +46,7 @@ import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 public class SingletonGestorLoja {
 
     private ArrayList<Fatura> faturas;
+    private ArrayList<LinhaFatura> linhasFaturas;
 
     private ArrayList<Artigo> artigos;
     private ArrayList<Avaliacao> avaliacaos;
@@ -64,11 +66,10 @@ public class SingletonGestorLoja {
     private UsersListener usersListener;
     private FavoritosListener favoritosListener;
     private CarrinhosListener carrinhosListener;
+    private LinhasFaturasListener linhasFaturasListener;
     private FaturasListener faturasListener;
     private ArrayList<Empresa> empresas;
     private Empresa empresa;
-
-
 
 
     public static synchronized SingletonGestorLoja getInstance(Context context){
@@ -211,6 +212,13 @@ public class SingletonGestorLoja {
         }
         return null;
     }
+    public LinhaFatura getLinhaFatura(int idLinhaFatura){
+        for (LinhaFatura l : linhasFaturas){
+            if (l.getId() == idLinhaFatura)
+                return l;
+        }
+        return null;
+    }
 
     public Favorito getFavorito(int id) {
         for (Favorito fav : favoritos) {
@@ -343,6 +351,16 @@ public class SingletonGestorLoja {
             }
         }
     }
+
+    public void editarCarrinhoBD(Carrinho c){
+        //como tamos em memoria ele altera diretamente n precisa de dar save
+        Carrinho auxCarrinho = getCarrinho(c.getId());
+        if(auxCarrinho != null){
+            lojaBDHelper.editarCarrinhoBD(c);
+        }
+
+    }
+
     //endregion
 
     // region # METODOS FATURAS BD #
@@ -370,20 +388,49 @@ public class SingletonGestorLoja {
             }
         }
     }
-    public void editarCarrinhoBD(Carrinho c){
-        //como tamos em memoria ele altera diretamente n precisa de dar save
-        Carrinho auxCarrinho = getCarrinho(c.getId());
-        if(auxCarrinho != null){
-            lojaBDHelper.editarCarrinhoBD(c);
-        }
-
-    }
 
     public void removerFaturaBD(int idFatura) {
         Fatura auxFatura = getFatura(idFatura);
         if (auxFatura != null) {
             if (lojaBDHelper.removerFaturaBD(idFatura)) {
                 faturas.remove(auxFatura);
+            }
+        }
+    }
+
+    // endregion
+
+    // region # METODOS LINHASFATURAS BD #
+
+    public void adicionarlinhasFaturasBD(ArrayList<LinhaFatura> linhaFaturas){
+        lojaBDHelper.removerAllLinhasFaturasBD();
+        for (LinhaFatura l : linhaFaturas){
+            adicionarLinhaFaturaBD(l);
+        }
+    }
+
+    public void adicionarLinhaFaturaBD(LinhaFatura l) {
+        lojaBDHelper.adicionarLinhaFaturaBD(l);
+    }
+
+    public void editarLinhaFaturaBD(LinhaFatura l) {
+        LinhaFatura auxLinhaFatura = getLinhaFatura(l.getId());
+
+        if (auxLinhaFatura != null) {
+            if (lojaBDHelper.editarLinhaFaturaBD(l)) {
+                auxLinhaFatura.setQuantidade(l.getQuantidade());
+                auxLinhaFatura.setValor(l.getValor());
+                auxLinhaFatura.setValor_iva(l.getValor_iva());
+                auxLinhaFatura.setArtigo_id(l.getArtigo_id());
+                auxLinhaFatura.setFatura_id(l.getFatura_id());
+            }
+        }
+    }
+    public void removerLinhaFaturaBD(int idLinhaFatura) {
+        LinhaFatura auxLinhaFatura = getLinhaFatura(idLinhaFatura);
+        if (auxLinhaFatura != null) {
+            if (lojaBDHelper.removerLinhaFaturaBD(idLinhaFatura)) {
+                linhasFaturas.remove(idLinhaFatura);
             }
         }
     }
@@ -1296,6 +1343,110 @@ public class SingletonGestorLoja {
     }
 
 
+    //endregion
+
+    // region # METODO LINHA FATURA API #
+    public void adicionarLinhaFaturaAPI(final LinhaFatura linhaFatura, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            StringRequest req = new StringRequest(Request.Method.POST,Public.SERVER + "linhafatura/create?token=" + token.toString(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //fazer sub  aqui
+                    System.out.println("--->Add LINHA FATURA c/ sucesso"+response.toString());
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    if(linhasFaturasListener != null){
+                        linhasFaturasListener.onRefreshListaLinhasFaturas(new ArrayList<>());
+                    }
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO adicionar carrinho api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Artigo somado ao carrinho", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String,String>();
+                    params.put("quantidade", "" + linhaFatura.getQuantidade());
+                    params.put("valor", "" + linhaFatura.getValor());
+                    params.put("valor_iva", "" + linhaFatura.getValor_iva());
+                    params.put("artigo_id", ""+linhaFatura.getArtigo_id());// tem q ser uma variavel n pode ser hardcoded
+
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+
+    public  void getAllLinhasFaturasAPI(final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+            if(linhasFaturasListener != null){
+                linhasFaturasListener.onRefreshListaLinhasFaturas(lojaBDHelper.getAllLinhasFaturasBD());
+            }
+            //LISTENERS vamos buscar os favoritos a bd local
+        }else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "carrinhos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    //fazer sub aqui e
+                    System.out.println("---> response Carrinho API:"+ response);
+                    carrinhos = LojaJsonParser.parserJsonCarrinhos(response);
+                    adicionarCarrinhosBD(carrinhos);
+                    if(carrinhosListener != null){
+                        carrinhosListener.onRefreshListaCarrinhos(carrinhos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("--->Erro carrinho" + error.getMessage());
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    public void removerLinhaFaturaAPI(LinhaFatura linhaFatura, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+
+        }else {
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "linhafatura/limparlinhasfatura?token=" + token.toString() +"&id="+ linhaFatura.getId(),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            lojaBDHelper.removerFavoritoBD(linhaFatura.getId());
+                            System.out.println("--->Artigo removido dos favoritos com sucesso"+ response);
+                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                            linhasFaturas.remove(linhaFatura);
+                            //remove todos os items do carrinho
+                            //listener por toast com livro removido com sucesso e atualizar a vista
+                            if(linhasFaturasListener != null){
+                                linhasFaturasListener.onRefreshListaLinhasFaturas(linhasFaturas);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO ao remover artigo dos favoritos" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
     //endregion
 
     // region # METODO EMPRESA API #

@@ -16,6 +16,7 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Empresa;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.LinhaFatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 
 public class LojaBDHelper extends SQLiteOpenHelper {
@@ -29,6 +30,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_USERS = "users";
     private static final String TABLE_NAME_CARRINHOS = "carrinhos";
     private static final String TABLE_NAME_EMPRESA = "empresa";
+    private static final String TABLE_NAME_LINHAFATURAS = "linhafaturas";
     private static final int DB_VERSION = 1;
     //endregion
 
@@ -62,6 +64,9 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String TOKEN = "token";
     private static final String QUANTIDADE = "quantidade";
     private static final String EMAIL = "email";
+    private static final String VALOR = "valor";
+    private static final String VALOR_IVA = "valorIva";
+    private static final String FATURA_ID = "fatura_id";
     private static final String VALORUNITARIO = "valorUnitario";
 
 
@@ -160,6 +165,17 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         ");";
         db.execSQL(createEmpresaTable);
 
+        String createLinhaFaturaTable =
+                "CREATE TABLE " + TABLE_NAME_LINHAFATURAS +
+                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        QUANTIDADE + " INTEGER NOT NULL, " +
+                        VALOR + " DOUBLE NOT NULL, " +
+                        VALOR_IVA + " DOUBLE NOT NULL, " +
+                        ARTIGO_ID + " INTEGER NOT NULL, " +
+                        FATURA_ID + " INTEGER NOT NULL " +
+                        ");";
+        db.execSQL(createLinhaFaturaTable);  // EXECUTA O COMANDO SQL PARA CRIAR A TABELA
+
     }
     // endregion
 
@@ -174,6 +190,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CARRINHOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_EMPRESA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_LINHAFATURAS);
         this.onCreate(db);
     }
     //endregion
@@ -371,7 +388,6 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     public void adicionarEmpresaBD(Empresa e) {
 
         ContentValues values = new ContentValues();
-        values.put(ID, e.getId());
         values.put(TELEFONE, e.getTelefone());
         values.put(NOME, e.getNome());
         values.put(EMAIL, e.getEmail());
@@ -396,6 +412,63 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         return this.db.update(TABLE_NAME_EMPRESA, values, ID + "= ?", new String[]{"" + e.getId()}) > 0;
     }
 
+
+    //endregion
+
+    //region # MÉTODOS CRUD DAS LINHASFATURAS #
+    public void adicionarLinhaFaturaBD(LinhaFatura l) {
+        ContentValues values = new ContentValues();
+        values.put(ID, l.getId());
+        values.put(QUANTIDADE, l.getQuantidade());
+        values.put(VALOR, l.getValor());
+        values.put(VALOR_IVA, l.getValor_iva());
+        values.put(ARTIGO_ID, l.getArtigo_id());
+        values.put(FATURA_ID, l.getFatura_id());
+
+        this.db.insert(TABLE_NAME_LINHAFATURAS, null, values);
+    }
+
+    public boolean editarLinhaFaturaBD(LinhaFatura l) {
+        ContentValues values = new ContentValues();
+        values.put(ID, l.getId());
+        values.put(QUANTIDADE, l.getQuantidade());
+        values.put(VALOR, l.getValor());
+        values.put(VALOR_IVA, l.getValor_iva());
+        values.put(ARTIGO_ID, l.getArtigo_id());
+        values.put(FATURA_ID, l.getFatura_id());
+
+        return this.db.update(TABLE_NAME_FATURAS, values, ID + "= ?", new String[]{"" + l.getId()}) > 0;
+
+    }
+    public ArrayList<LinhaFatura> getAllLinhasFaturasBD() {
+        ArrayList<LinhaFatura> linhaFaturas = new ArrayList<>();
+
+        Cursor cursor = this.db.query(TABLE_NAME_LINHAFATURAS, new String[]{ID, QUANTIDADE, VALOR, VALOR_IVA, ARTIGO_ID,FATURA_ID },
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                LinhaFatura auxLinhaFatura = new LinhaFatura
+                        (cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5));
+
+                linhaFaturas.add(auxLinhaFatura);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return linhaFaturas;
+    }
+    public boolean removerLinhaFaturaBD(int id) {
+        return this.db.delete(TABLE_NAME_LINHAFATURAS, ID + " = ?", new String[]{"" + id}) == 1;
+    }
+
+    public void removerAllLinhasFaturasBD(){
+        db.delete(TABLE_NAME_LINHAFATURAS, null, null);
+    }
 
     //endregion
 

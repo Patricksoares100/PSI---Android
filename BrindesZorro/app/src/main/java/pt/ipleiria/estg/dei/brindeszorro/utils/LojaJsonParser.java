@@ -16,6 +16,7 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Empresa;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.LinhaFatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
 
@@ -360,6 +361,48 @@ public class LojaJsonParser {
             e.printStackTrace();
         }
         return auxFatura;
+    }
+
+    //endregion
+
+    //region # METODOS LINHASFATURAS JSON #
+    public static ArrayList<LinhaFatura> parserJsonLinhaFaturas(JSONArray response) {
+        ArrayList<LinhaFatura> linhaFaturas = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject linhaFatura = (JSONObject) response.get(i);
+                int id = linhaFatura.getInt("id");
+                int quantidade = linhaFatura.getInt("quantidade");
+                double valor = linhaFatura.getDouble("valor");
+                double valorIva = linhaFatura.getDouble("valor_iva");
+                int artigo_id = linhaFatura.getInt("artigo_id");
+                int fatura_id = linhaFatura.getInt("fatura_id");
+
+                LinhaFatura auxLinhaFatura = new LinhaFatura(id, quantidade, artigo_id, fatura_id, valor, valorIva);
+                linhaFaturas.add(auxLinhaFatura);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return linhaFaturas;
+    }
+
+   public static LinhaFatura parserJsonLinhaFatura(String response)  {
+        LinhaFatura auxLinhaFatura = null;
+        try {
+            JSONObject linhaFatura = new JSONObject(response);
+            int id = linhaFatura.getInt("id");
+            int quantidade = linhaFatura.getInt("quantidade");
+            double valor = linhaFatura.getDouble("valor");
+            double valorIva = linhaFatura.getDouble("valor_iva");
+            int artigo_id = linhaFatura.getInt("artigo_id");
+            int fatura_id = linhaFatura.getInt("fatura_id");
+
+            auxLinhaFatura = new LinhaFatura(id, quantidade, artigo_id, fatura_id, valor, valorIva);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxLinhaFatura;
     }
 
     //endregion

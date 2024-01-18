@@ -18,6 +18,7 @@ import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaCarrinhosAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.CarrinhosListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.LinhaFatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
@@ -25,6 +26,8 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
 
     private ListView lvCarrinhos;
     private ArrayList<Carrinho> carrinhos;
+    private ArrayList<LinhaFatura> linhaFaturas;
+    private LinhaFatura linhaFatura;
     private Button buttonLimparCarrinho, buttonConcluirCompra;
     private TextView tvMostrarValorCarrinho;
 
@@ -71,6 +74,7 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
         buttonLimparCarrinho.setAlpha(0.5f);*/
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         SingletonGestorLoja.getInstance(getContext()).comprarCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
+        SingletonGestorLoja.getInstance(getContext()).adicionarLinhaFaturaAPI(linhaFatura, getContext(), sharedPreferences.getString(Public.TOKEN, "TOKEN"));
         atualizarTotalCarrinho(carrinhos);
     }
 
