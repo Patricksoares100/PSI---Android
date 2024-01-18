@@ -51,7 +51,7 @@ public class ListaFaturasDetalhesAdaptador extends BaseAdapter {
         ViewHolderLista viewHolderLista;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.fragment_fatura_detalhes, parent, false);
+            convertView = inflater.inflate(R.layout.item_lista_fatura_detalhes, parent, false);
             viewHolderLista = new ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
         } else {
