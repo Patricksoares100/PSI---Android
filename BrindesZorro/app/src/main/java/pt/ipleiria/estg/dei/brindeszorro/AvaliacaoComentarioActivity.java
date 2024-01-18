@@ -35,15 +35,16 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
         if (textoComentario.isEmpty()){
             Toast.makeText(this, "Deixe um comentário antes de enviar", Toast.LENGTH_SHORT).show();
             return;
-        }
-        // fui procurar no stack
-        // https://stackoverflow.com/questions/38417596/how-to-check-if-a-rating-bar-is-has-been-rated-or-not-in-android
-        // defini  android:rating="0.0" no xml para ele perceber qual o valor inicial e ver se continua 0.0
-        if (ratingbar.getRating() == 0.0) {
-            Toast.makeText(this, "Atribua uma pontuação antes de enviar", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        } else {
 
+            // fui procurar no stack
+            // https://stackoverflow.com/questions/38417596/how-to-check-if-a-rating-bar-is-has-been-rated-or-not-in-android
+            // defini  android:rating="0.0" no xml para ele perceber qual o valor inicial e ver se continua 0.0
+            if (ratingbar.getRating() == 0.0) {
+                Toast.makeText(this, "Atribua uma pontuação antes de enviar", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
     }
 }

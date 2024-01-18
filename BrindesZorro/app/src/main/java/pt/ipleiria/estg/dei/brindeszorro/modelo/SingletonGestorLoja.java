@@ -482,45 +482,6 @@ public class SingletonGestorLoja {
     }
     //endregion
 
-    // region # AVALIACAO API #
-
-    public void adicionarAvaliacaoAPI(final Avaliacao avaliacao, final Context context) {
-        if (!LojaJsonParser.isConnectionInternet(context)) {
-            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
-            //aqui temos de ir buscar na base de dados local se nao tiver net
-
-        } else {
-            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
-                @Override
-                public void onResponse(String response) {
-                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
-                    if (avaliacaoListener != null) {
-                        avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("---> ERRO adicionarAvaliacaoAPI: " + error.getMessage());
-                }
-            }) {
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    // possivelmente será puxado aqui o token
-                    params.put("comentario", avaliacao.getComentario());
-                    params.put("classificacao", "" + avaliacao.getClassificacao());
-                    params.put("artigoId", "" + avaliacao.getArtigoId());
-
-                    return params;
-                }
-            };
-            volleyQueue.add(req);
-        }
-
-    }
-
-    // endregion
-
     //region # METODOS ARTIGOS API #
     public void getAllArtigosAPI(final Context context) {
         if(!LojaJsonParser.isConnectionInternet(context)){
@@ -747,6 +708,42 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
+
+    public void adicionarAvaliacaoAPI(final Avaliacao avaliacao, final Context context, String token) {
+        if (!LojaJsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            //aqui temos de ir buscar na base de dados local se nao tiver net
+
+        } else {
+            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
+                @Override
+                public void onResponse(String response) {
+                    adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
+                    if (avaliacaoListener != null) {
+                        avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("---> ERRO adicionarAvaliacaoAPI: " + error.getMessage());
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    // possivelmente será puxado aqui o token
+                    params.put("comentario", avaliacao.getComentario());
+                    params.put("classificacao", "" + avaliacao.getClassificacao());
+                    params.put("artigoId", "" + avaliacao.getArtigoId());
+
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+
+    }
+
     //endregion
 
     //region # METODO LOGIN API #
@@ -985,6 +982,39 @@ public class SingletonGestorLoja {
 
     }
 
+    public void removerFavoritoAPI(Favorito favorito, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+
+        }else {
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "favoritos/limparfavorito?token=" + token.toString() +"&id="+ favorito.getId(),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            lojaBDHelper.removerFavoritoBD(favorito.getId());
+                            System.out.println("--->Artigo removido dos favoritos com sucesso"+ response);
+                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                            favoritos.remove(favorito);
+                            //remove todos os items do carrinho
+                            //listener por toast com livro removido com sucesso e atualizar a vista
+                            if(favoritosListener != null){
+                                favoritosListener.onRefreshListaFavoritos(favoritos);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO ao remover artigo dos favoritos" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
+
     public void adicionarFavoritosCarrinhoAPI( Context context, String token){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
@@ -1014,6 +1044,48 @@ public class SingletonGestorLoja {
                 }
             });
 
+            volleyQueue.add(req);
+        }
+    }
+
+    public void adicionarFavoritoCarrinhoAPI(final Favorito favorito, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            System.out.println("----->" + token.toString());
+            StringRequest req = new StringRequest(Request.Method.GET,Public.SERVER + "favoritos/adicionafavoritocarrinho?token=" + token.toString() + "&id=" + favorito.getId(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //fazer sub  aqui
+                    System.out.println("--->Add favorito c/ sucesso"+response.toString());
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    removerFavoritoBD(favorito.getId());
+                    favoritos.remove(favorito);
+                    //adicionarCarrinhoBD(LojaJsonParser.parserJsonCarrinho(response));//recebe em jason para a dicionar a BD tem que converter atraves do parser
+
+                    //listener add com  sucesso? falta codigo
+                    if(favoritosListener != null){
+                        favoritosListener.onRefreshListaFavoritos(favoritos); // com o (new ArrayList<>()) atualiza toda a lista ao inves de ser apenas um artigo
+                    }
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO adicionar favorito ao carrinho api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Artigo já adicionado aos favoritos", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String,String>();
+                    params.put("favorito_id", "" + favorito.getId());// tem q ser uma variavel n pode ser hardcoded
+
+                    return params;
+                }
+            };
             volleyQueue.add(req);
         }
     }

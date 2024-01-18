@@ -37,6 +37,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
     private double totalQuantidade = 0;
     RatingBar ratingBar;
     private ListView lvAvaliacaoDetalheArtigo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
         String quantidade = ((TextView) findViewById(R.id.tvQuantidadeArtigoDetalhes)).getText().toString();
 
        // Toast.makeText(this, "quantidade" + quantidade, Toast.LENGTH_SHORT).show();
+
     }
 
     private void carregarArtigo() {
