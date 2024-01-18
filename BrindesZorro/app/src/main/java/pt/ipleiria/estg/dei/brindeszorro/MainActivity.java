@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
@@ -69,6 +70,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // falta aqui carregar o cabeçalho da gaveta (nome e email do user)
         carregarFragmentoInicial();
         carregarCabecalho();
+
+
+        // PARA POR OS BOTOES DE BAIXO A FUNCIONA
+        
+        /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.icnHome:
+                        fragment = new ListaHomeFragment();
+                        setTitle(item.getTitle());
+                        return true;
+                    case R.id.icnCarrinho:
+                        fragment = new ListaCarrinhoFragment();
+                        setTitle(item.getTitle());
+                        return true;
+                    case R.id.icnFavoritos:
+                        fragment = new ListaFavoritosFragment();
+                        setTitle(item.getTitle());
+                        return true;
+                }
+                return false;
+            }
+        });*/
 
 
     }
