@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import pt.ipleiria.estg.dei.brindeszorro.AvaliacaoComentarioActivity;
 import pt.ipleiria.estg.dei.brindeszorro.DetalhesArtigoActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaArtigosAdaptador;
@@ -60,8 +61,8 @@ public class ListaFaturaDetalhesFragment extends Fragment  {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(),artigos.get(position).getNome(), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(getContext(), DetalhesArtigoActivity.class);
-                intent.putExtra(DetalhesArtigoActivity.ID_ARTIGO,(int) position);
+                Intent intent = new Intent(getContext(), AvaliacaoComentarioActivity.class);
+                intent.putExtra(AvaliacaoComentarioActivity.IDAVALIACAOS,(int) position);
                 startActivity(intent);
             }
         });

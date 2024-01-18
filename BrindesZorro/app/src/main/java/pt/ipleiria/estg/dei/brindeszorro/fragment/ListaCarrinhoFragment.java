@@ -74,7 +74,7 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
         buttonLimparCarrinho.setAlpha(0.5f);*/
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         SingletonGestorLoja.getInstance(getContext()).comprarCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
-        SingletonGestorLoja.getInstance(getContext()).adicionarLinhaFaturaAPI(linhaFatura, getContext(), sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+        //SingletonGestorLoja.getInstance(getContext()).adicionarLinhaFaturaAPI(linhaFatura, getContext(), sharedPreferences.getString(Public.TOKEN, "TOKEN"));
         atualizarTotalCarrinho(carrinhos);
     }
 

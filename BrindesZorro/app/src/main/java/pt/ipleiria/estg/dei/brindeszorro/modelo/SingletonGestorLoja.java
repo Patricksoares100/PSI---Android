@@ -724,7 +724,6 @@ public class SingletonGestorLoja {
         }
     }
 
-
     public void getAvaliacaoAPI(final Context context, String token) {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
@@ -762,7 +761,7 @@ public class SingletonGestorLoja {
             //aqui temos de ir buscar na base de dados local se nao tiver net
 
         } else {
-            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER, new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
+            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER + "avaliacao/create?token=" + token.toString(), new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
                 @Override
                 public void onResponse(String response) {
                     adicionarArtigoBD(LojaJsonParser.parserJsonArtigo(response));
@@ -781,14 +780,84 @@ public class SingletonGestorLoja {
                     // possivelmente será puxado aqui o token
                     params.put("comentario", avaliacao.getComentario());
                     params.put("classificacao", "" + avaliacao.getClassificacao());
-                    params.put("artigoId", "" + avaliacao.getArtigoId());
+                    params.put("artigo_id", "" + avaliacao.getArtigoId());
 
                     return params;
                 }
             };
             volleyQueue.add(req);
         }
+    }
 
+    public void removerAvaliacaoAPI(Avaliacao avaliacao, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+
+        }else {
+            StringRequest req = new StringRequest(Request.Method.DELETE, Public.SERVER + "favoritos/remover?token=" + token.toString() +"&id="+ avaliacao.getId(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        lojaBDHelper.removerFavoritoBD(avaliacao.getId());
+                        System.out.println("--->Avaliação removida com sucesso"+ response);
+                        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                        favoritos.remove(avaliacao);
+                        //remove todos os items do carrinho
+                        //listener por toast com livro removido com sucesso e atualizar a vista
+                        if(avaliacaosListener != null){
+                            avaliacaosListener.onRefreshListaAvaliacaos(avaliacaos);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> ERRO ao remover avaliação" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            volleyQueue.add(req);
+        }
+
+    }
+
+    public void editarAvaliacaoAPI(final Avaliacao avaliacao, final Context context, String token){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            System.out.println("---> avaliacaoooo editadaaaa " + avaliacao.getId());
+            StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "avaliacaos/editar?token=" + token.toString(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //fazer sub  aqui
+                    System.out.println("--->Avaliação editada c/ sucesso!"+response.toString());
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    if (avaliacaosListener != null){
+                        getAllAvaliacoesAPI(context);
+                    }
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO atualizar avaliação api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Nao foi editar avaliação!!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String,String>();
+                    params.put("comentario", avaliacao.getComentario());
+                    params.put("classificacao", "" + avaliacao.getClassificacao());
+                    params.put("artigo_id", "" + avaliacao.getArtigoId());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
     }
 
     //endregion
@@ -1283,7 +1352,7 @@ public class SingletonGestorLoja {
                         public void onResponse(String response) {
                             System.out.println("--->Carrinho comprado com sucesso"+ response);
                             Toast.makeText(context, "Carrinho comprado com sucesso", Toast.LENGTH_SHORT).show();
-                            adicionarFaturaBD(LojaJsonParser.parserJsonFatura(response));
+                            adicionarFaturasBD(faturas);
                             if(carrinhosListener != null){
                                 carrinhosListener.onRefreshListaCarrinhos(new ArrayList<>());
                             }
@@ -1341,7 +1410,6 @@ public class SingletonGestorLoja {
             volleyQueue.add(req);
         }
     }
-
 
     //endregion
 
