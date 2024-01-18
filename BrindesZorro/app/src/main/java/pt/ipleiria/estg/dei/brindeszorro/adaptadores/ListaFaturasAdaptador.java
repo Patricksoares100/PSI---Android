@@ -80,7 +80,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolderLista {
+    class ViewHolderLista {
         private TextView tvData, tvValor, tvEstado;
         private Button buttonFaturaPagar;
 

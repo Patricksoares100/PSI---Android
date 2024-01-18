@@ -129,5 +129,9 @@
     <string name="onClickLimparCarrinho">onClickLimparCarrinho</string>
     <string name="zero">0 €</string>
     <string name="ipServidor">http://172.22.21.219:8080/api/</string>
-    <string name="btn_pagar">PAGAR</string>/>
+    <string name="btn_pagar">PAGAR</string>
+    <string name="tvEmpresaMoradaStr">Morada</string>
+    <string name="tv_Artigos_list">ARTIGOS</string>
+    <string name="tv_IvaTotal">Iva Total</string>
+    <string name="tv_DataFatura">Data Fatura</string>/>
 </resources>

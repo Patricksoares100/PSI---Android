@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Empresa;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.User;
@@ -27,6 +28,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_FAVORITOS = "favoritos";
     private static final String TABLE_NAME_USERS = "users";
     private static final String TABLE_NAME_CARRINHOS = "carrinhos";
+    private static final String TABLE_NAME_EMPRESA = "empresa";
     private static final int DB_VERSION = 1;
     //endregion
 
@@ -59,8 +61,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String LOCALIDADE = "localidade";
     private static final String TOKEN = "token";
     private static final String QUANTIDADE = "quantidade";
+    private static final String EMAIL = "email";
     private static final String VALORUNITARIO = "valorUnitario";
-
 
 
     private final SQLiteDatabase db;    // Alinea 1.3 Ficha 8 Books - criação de uma instância da classe SQLiteDatabase
@@ -71,12 +73,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
         // Para definir permissões de leitura e escrita na base de dados, teremos de utilizar o método getWritableDatabase() - ficha 08
         this.db = this.getWritableDatabase();
-        //inserirAvaliacaoExemplo(); //APAGAR NO FIM
-        //inserirArtigoExemplo();
-        //inserirFaturaExemplo();
-        //inserirFavoritoExemplo();
     }
-
 
     // region # CREATE TABLES BD #
     @Override
@@ -153,6 +150,16 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         ");";
         db.execSQL(createCarrinhoTable);
 
+        String createEmpresaTable =
+                "CREATE TABLE " + TABLE_NAME_EMPRESA +
+                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        TELEFONE + " INTEGER NOT NULL, " +
+                        NOME + " TEXT NOT NULL, " +
+                        EMAIL + " TEXT NOT NULL, " +
+                        MORADA + " TEXT NOT NULL " +
+                        ");";
+        db.execSQL(createEmpresaTable);
+
     }
     // endregion
 
@@ -166,6 +173,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FAVORITOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CARRINHOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_EMPRESA);
         this.onCreate(db);
     }
     //endregion
@@ -331,6 +339,63 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     public void removerAllArtigosBD(){
         db.delete(TABLE_NAME_ARTIGOS, null, null);
     }
+
+    //endregion
+
+    //region # MÉTODOS CRUD DA EMPRESA #
+
+    public Empresa getEmpresaBD() {
+        Empresa auxEmp = null;
+        Cursor cursor = this.db.query(TABLE_NAME_EMPRESA, new String[]{
+                        ID,
+                        TELEFONE,
+                        NOME,
+                        EMAIL,
+                        MORADA},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                auxEmp = new Empresa(
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return auxEmp;
+    }
+
+    public void adicionarEmpresaBD(Empresa e) {
+
+        ContentValues values = new ContentValues();
+        values.put(ID, e.getId());
+        values.put(TELEFONE, e.getTelefone());
+        values.put(NOME, e.getNome());
+        values.put(EMAIL, e.getEmail());
+        values.put(MORADA, e.getMorada());
+
+
+        this.db.insert(TABLE_NAME_EMPRESA, null, values);
+    }
+
+    public boolean removerEmpresaBD(int id) {
+        return this.db.delete(TABLE_NAME_EMPRESA, ID + " = ?", new String[]{"" + id}) == 1;
+    }
+
+    public boolean editarEmpresaBD(Empresa e) {
+        ContentValues values = new ContentValues();
+        values.put(ID, e.getId());
+        values.put(TELEFONE, e.getTelefone());
+        values.put(NOME, e.getNome());
+        values.put(EMAIL, e.getEmail());
+        values.put(MORADA, e.getMorada());
+
+        return this.db.update(TABLE_NAME_EMPRESA, values, ID + "= ?", new String[]{"" + e.getId()}) > 0;
+    }
+
 
     //endregion
 

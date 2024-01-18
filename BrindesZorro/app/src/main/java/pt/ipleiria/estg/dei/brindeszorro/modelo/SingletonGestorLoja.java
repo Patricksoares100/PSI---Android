@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
+import static pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser.parserJsonEmpresa;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
@@ -63,6 +65,8 @@ public class SingletonGestorLoja {
     private FavoritosListener favoritosListener;
     private CarrinhosListener carrinhosListener;
     private FaturasListener faturasListener;
+    private ArrayList<Empresa> empresas;
+    private Empresa empresa;
 
 
 
@@ -164,6 +168,12 @@ public class SingletonGestorLoja {
         User user = lojaBDHelper.getUserBD();
         return user;
     }
+    public Empresa getEmpresaBD(){
+        Empresa empresa = lojaBDHelper.getEmpresaBD();
+        return empresa;
+    }
+
+
     //endregion
 
     // region # GETs #
@@ -176,6 +186,7 @@ public class SingletonGestorLoja {
         return null;       //caso contrario devolve nulo
     }
 
+
     // Alinea 7.2.1 Ficha 5 Books - Para aceder de forma correta a avaliacao selecionada, implementamos o método getAvaliacao(int idAvaliacao)
     public Avaliacao getAvaliacao(int idAvaliacao) {
         for (Avaliacao a : avaliacaos) {
@@ -185,6 +196,13 @@ public class SingletonGestorLoja {
         return null;
     }
 
+    public Empresa getEmpresa(int idEmpresa) {
+        for (Empresa e : empresas) {
+            if (e.getId() == idEmpresa)
+                return e;
+        }
+        return null;
+    }
     public Fatura getFatura(int idFatura){
 
         for (Fatura f : faturas) {
@@ -256,6 +274,35 @@ public class SingletonGestorLoja {
     }
 
     // endregion
+
+    // region # METODOS Empresa BD #
+    public void adicionarEmpresaBD(Empresa e) {
+        lojaBDHelper.adicionarEmpresaBD(e);
+    }
+
+    public void editarEmpresaBD(Empresa e) {
+        Empresa auxEmpresa = getEmpresa(e.getId());
+
+        if (auxEmpresa != null) {
+            if (lojaBDHelper.editarEmpresaBD(e)) {
+                auxEmpresa.setTelefone(e.getTelefone());
+                auxEmpresa.setNome(e.getNome());
+                auxEmpresa.setEmail(e.getEmail());
+                auxEmpresa.setMorada(e.getMorada());
+            }
+        }
+    }
+
+    public void removerEmpresaBD(int idEmpresa) {
+        Empresa auxEmpresa = getEmpresa(idEmpresa);
+        if (auxEmpresa != null) {
+            if (lojaBDHelper.removerEmpresaBD(idEmpresa)) {
+                avaliacaos.remove(auxEmpresa);
+            }
+        }
+    }
+
+    //endregion
 
     // region # METODOS Favoritos BD #
 
@@ -1177,5 +1224,33 @@ public class SingletonGestorLoja {
     }
 
 
+    //endregion
+
+    // region # METODO EMPRESA API #
+    public  void getEmpresaAPI(final Context context){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+           // return lojaBDHelper.getEmpresaBD();
+
+        }else {
+            System.out.println("----> chama a apiiiiiiiiiiiiiii");
+            //JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "empresa/find", null, new Response.Listener<JSONArray>() {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, Public.SERVER + "empresa/find", null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    System.out.println("---> Sucesso - ver Empresa " + response);
+                    Empresa empresa = parserJsonEmpresa(response.toString());
+                    lojaBDHelper.adicionarEmpresaBD(empresa);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("--->Erro faturassssss" + error.getMessage());
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
     //endregion
 }

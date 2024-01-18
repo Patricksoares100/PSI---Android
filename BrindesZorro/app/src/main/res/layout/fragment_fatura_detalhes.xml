@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AvaliacaoComentarioActivity">
+    tools:context=".FaturaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,6 @@
                 android:layout_marginBottom="2dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
-                android:text="@string/txtNomeArtigoAvaliacaoComentario"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -64,16 +64,15 @@
                     android:id="@+id/tvReferenciaMorada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/txtReferenciaArtigoAvaliacaoComentario"
+                    android:layout_weight="2.5"
+                    android:text="@string/tvEmpresaMoradaStr"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvMoradaEmpresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/tvMostrarReferenciaArtigoAvaliacaoComentario" />
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,16 +87,15 @@
                     android:id="@+id/tvReferenciaEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/txtDesignacaoArtigoAvaliacaoComentario"
+                    android:layout_weight="2.5"
+                    android:text="@string/tvPedirEmail"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvEmailEmpresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/tvMostrarDesignacaoArtigoAvaliacaoComentario" />
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -112,16 +110,15 @@
                     android:id="@+id/tvReferenciaTelefone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/txtPreçoArtigoAvaliacaoComentario"
+                    android:layout_weight="2.5"
+                    android:text="@string/tvInsiraTelefone"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvTelefoneEmpresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/tvMostrarPrecoArtigoAvaliacaoComentario" />
+                    android:layout_weight="1"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -132,6 +129,29 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvDataFatura"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_DataFatura"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDataFaturaValor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,21 +167,39 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/txtClassificacaoArtigoAvaliacaoComentario"
+            android:text="@string/tv_IvaTotal"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <RatingBar
-            android:id="@+id/ratingBarArtigoAvaliacaoComentario"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvValorFaturaDetalhes"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:rating="0.0"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvValorTotalFatura"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="5dp"
-            android:stepSize="1.0"
-            android:layout_marginBottom="2dp" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_ValorT"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View
@@ -176,31 +214,10 @@
         android:layout_margin="5dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvComentarioArtigoAvaliacaoComentario"
+        <ListView
+            android:id="@+id/lvArtigosFatura"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="3dp"
-            android:text="@string/txtComentarioArtigoAvaliacaoComentario"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/etComentarioArtigoAvaliacaoComentario"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_marginRight="5dp"
-            android:ems="10"
-            android:gravity="bottom"
-            android:hint="@string/txtComentarioArtigoAvaliacaoComentario"
-            android:inputType="text|textMultiLine"
-            android:lines="8"
-            android:maxLines="10"
-            android:minLines="0"
-            android:scrollbars="vertical"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            android:layout_height="375dp" />
 
         <Button
             android:id="@+id/buttonVoltarHome"

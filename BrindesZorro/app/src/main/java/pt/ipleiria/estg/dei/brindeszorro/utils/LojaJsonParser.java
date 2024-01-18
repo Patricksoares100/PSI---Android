@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Carrinho;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Empresa;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Favorito;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Signup;
@@ -216,6 +217,29 @@ public class LojaJsonParser {
         }
         return auxUser;
     }
+    //endregion
+
+    //region # MÉTODOS EMPRESA JSON #
+    public static Empresa parserJsonEmpresa(String response) {
+        Empresa auxEmp = null;
+
+        try {
+            JSONObject empresa = new JSONObject(response);
+
+            int id = empresa.getInt("id");
+            String nome = empresa.getString("nome");
+            int telefone = empresa.getInt("telefone");
+            String morada = empresa.getString("morada");
+            String email = empresa.getString("email");
+
+            auxEmp = new Empresa(id, telefone, nome, email, morada);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxEmp;
+    }
+
     //endregion
 
     //region # MÉTODOS AVALIACAOS JSON #

@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +40,9 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
 
     private ListView lvFaturas;
     private ArrayList<Fatura> faturas;
+
+    private FragmentManager fragmentManager;
+    private Fragment fragment;
     private SearchView searchView;
 
     public ListaFaturasFragment() {
@@ -62,9 +67,17 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getContext(), livros.get(position).getTitulo(), Toast.LENGTH_SHORT).show();
                 // Alinea 5.2 Ficha 5 Books - Inicia a atividade com a informação da fatura após clicar
-                Intent intent = new Intent(getContext(), FaturaActivity.class);
-                intent.putExtra(FaturaActivity.IDFATURAS, (int) id);
-                startActivity(intent);
+                SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
+
+                /*fragmentManager = getActivity().getSupportFragmentManager();
+                fragment = new ListaFaturaDetalhesFragment();
+                fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();*/
+
+                // tentei me guiar pelo books no menu do main activity mas continuava a dar erro. Apenas consegui dessa forma
+
+                ListaFaturaDetalhesFragment detalhesFragment = new ListaFaturaDetalhesFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentFragment, detalhesFragment).addToBackStack(null).commit(); // Isto permite ao utilizador voltar ao fragmento anterior
             }
         });
         return view;

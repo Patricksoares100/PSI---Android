@@ -15,7 +15,7 @@ public class FaturaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_lista_faturas);
+        setContentView(R.layout.fragment_fatura_detalhes);
 
         int idFatura = getIntent().getIntExtra(IDFATURAS, 0);
         fatura = SingletonGestorLoja.getInstance(getApplicationContext()).getFatura(idFatura);
