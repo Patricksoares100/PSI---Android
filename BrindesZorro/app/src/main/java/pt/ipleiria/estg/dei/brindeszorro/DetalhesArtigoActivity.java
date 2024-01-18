@@ -1,7 +1,5 @@
 package pt.ipleiria.estg.dei.brindeszorro;
 
-import static java.security.AccessController.getContext;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -40,7 +37,6 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
     private double totalQuantidade = 0;
     RatingBar ratingBar;
     private ListView lvAvaliacaoDetalheArtigo;
-    private Button buttonAvaliarArtigoDetalhes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +62,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
         String quantidade = ((TextView) findViewById(R.id.tvQuantidadeArtigoDetalhes)).getText().toString();
 
        // Toast.makeText(this, "quantidade" + quantidade, Toast.LENGTH_SHORT).show();
-
-        buttonAvaliarArtigoDetalhes = findViewById(R.id.buttonAvaliarArtigoDetalhes);
-        buttonAvaliarArtigoDetalhes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AvaliacaoComentarioActivity.class);
-                startActivity(intent);
-                //startActivityForResult(intent, MenuMainActivity.ADD); // será necessário dar ADD ao fragmento das avaliacoes?
-            }
-        });
+        
     }
 
     private void carregarArtigo() {
