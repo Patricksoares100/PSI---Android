@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvNomeEmpresa"
+                android:id="@+id/tvNomeArtigo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
@@ -61,7 +61,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvReferenciaMorada"
+                    android:id="@+id/tvReferencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -69,7 +69,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvMoradaEmpresa"
+                    android:id="@+id/tvReferenciaArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -85,7 +85,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvReferenciaEmail"
+                    android:id="@+id/tvDesignacao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -93,7 +93,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvEmailEmpresa"
+                    android:id="@+id/tvDesignacaoArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -109,7 +109,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvReferenciaTelefone"
+                    android:id="@+id/tvPreco"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -117,7 +117,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvTelefoneEmpresa"
+                    android:id="@+id/tvPrecoArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -141,7 +141,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tvIvaTotal"
+            android:id="@+id/tvClassificacao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -203,7 +203,7 @@
             tools:ignore="DuplicateSpeakableTextCheck" />
 
         <Button
-            android:id="@+id/buttonVoltarHome"
+            android:id="@+id/buttonEnviarComentario"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:onClick="onClickEnviarComentario"

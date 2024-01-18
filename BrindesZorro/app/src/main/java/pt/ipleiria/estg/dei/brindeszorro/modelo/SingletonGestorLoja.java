@@ -833,6 +833,7 @@ public class SingletonGestorLoja {
                     //fazer sub  aqui
                     System.out.println("--->Avaliação editada c/ sucesso!"+response.toString());
                     Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    adicionarAvaliacaosBD(avaliacaos);
                     if (avaliacaosListener != null){
                         getAllAvaliacoesAPI(context);
                     }
