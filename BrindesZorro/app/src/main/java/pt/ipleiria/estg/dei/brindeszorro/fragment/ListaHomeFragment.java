@@ -73,11 +73,14 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
 
        // SingletonGestorLoja.getInstance(getContext()).setArtigosListener(this);
         SingletonGestorLoja.getInstance(getContext()).getAllArtigosAPI(getContext());
+
         //vai buscar a lista de livros ao singleton
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+
         String valorArmazenado = sharedPreferences.getString(Public.SERVER_KEY, Public.SERVER);
 
        // System.out.println("--->1 " + valorArmazenado);
+
        return view;
     }
 

@@ -40,6 +40,7 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
 
     private ListView lvFaturas;
     private ArrayList<Fatura> faturas;
+    private Fatura faturaSelecionada;
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
@@ -55,17 +56,19 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
         View view = inflater.inflate(R.layout.fragment_lista_faturas, container, false);
         setHasOptionsMenu(true); // vai chamar o menu
         lvFaturas = view.findViewById(R.id.lvFaturaFragment); // vai adicionar à lvHome da activity home os fragmentos que queremos mandar
-        faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
 
-        lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(), faturas));
+        faturaSelecionada  = new Fatura();
+       // lvFaturas.setAdapter(new ListaFaturasAdaptador(getContext(), faturas));
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         SingletonGestorLoja.getInstance(getContext()).setFaturasListener(this);
         SingletonGestorLoja.getInstance(getContext()).getFaturasAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
         SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
+
         lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fatura faturaSelecionada = faturas.get(position);
+                faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
+                faturaSelecionada = faturas.get(position);
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("ID_FATURA", faturaSelecionada.getId());

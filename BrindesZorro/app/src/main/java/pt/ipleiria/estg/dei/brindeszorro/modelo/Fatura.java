@@ -20,6 +20,9 @@ public class Fatura {
         this.perfil_id = perfil_id;
     }
 
+    public Fatura() {
+    }
+
     public enum EstadoFatura {
         PAGA,
         EMITIDA
