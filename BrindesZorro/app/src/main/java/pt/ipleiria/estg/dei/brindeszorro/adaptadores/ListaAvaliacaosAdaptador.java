@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
 public class ListaAvaliacaosAdaptador extends BaseAdapter {
 
@@ -87,9 +88,10 @@ public class ListaAvaliacaosAdaptador extends BaseAdapter {
         }
 
         public void update(Avaliacao avaliacao) {
-            tvNomeArtigoAvaliacao.setText(""+avaliacao.getArtigoId());
+            Artigo artigo = SingletonGestorLoja.getInstance(context).getArtigo(avaliacao.getArtigoId());
+
+            tvNomeArtigoAvaliacao.setText(""+ artigo.getNome());
             tvComentarioAvaliacao.setText(""+avaliacao.getComentario());
-            //tvClassificacaoAvaliacao.setText(""+avaliacao.getClassificacao());
             ratingClassificacaoAvaliacao.setRating((float)avaliacao.getClassificacao());
 
         }
