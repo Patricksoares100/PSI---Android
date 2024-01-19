@@ -77,7 +77,7 @@ public class ListaHomeFragment extends Fragment implements ArtigosListener {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         String valorArmazenado = sharedPreferences.getString(Public.SERVER_KEY, Public.SERVER);
 
-        System.out.println("--->1 " + valorArmazenado);
+       // System.out.println("--->1 " + valorArmazenado);
        return view;
     }
 

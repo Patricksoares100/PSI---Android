@@ -176,9 +176,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Public.TOKEN, "TOKEN");
-        System.out.println("--->>"+ sharedPreferences.getString(Public.TOKEN, "TOKEN"));
         editor.apply();
-        System.out.println("--->after>"+ sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+
 
         // Redirecionar para activity de login
         Intent intent = new Intent(this, LoginActivity.class);
