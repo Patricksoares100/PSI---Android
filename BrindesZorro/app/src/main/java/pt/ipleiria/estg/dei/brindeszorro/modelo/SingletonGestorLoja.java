@@ -1551,4 +1551,39 @@ public class SingletonGestorLoja {
         }
     }
     //endregion
+
+    //region # RECUPERAR PASSWORD #
+    public void recuperarPasswordAPI(final Context context, String email){
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            StringRequest req = new StringRequest(Request.Method.POST,Public.SERVER + "users/passwordreset", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //fazer sub  aqui
+                    System.out.println("--->Add Password reset c/ sucesso"+response.toString());
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+
+                }
+            },new Response.ErrorListener(){
+                public void onErrorResponse(VolleyError error){
+                    System.out.println("----> ERRO password reset api" + error.getMessage());
+                    if(error.networkResponse.statusCode == 401){
+                        Toast.makeText(context, "Dados invalidos!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Pedido não pode ser processado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<String,String>();
+                    params.put("email", email.toString());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+    // endregion
 }

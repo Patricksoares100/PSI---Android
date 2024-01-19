@@ -52,6 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".RecuperarPasswordActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".EditarDadosPessoaisActivity"
