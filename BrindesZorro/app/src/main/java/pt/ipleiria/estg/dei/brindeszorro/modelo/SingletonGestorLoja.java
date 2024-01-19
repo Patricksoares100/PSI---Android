@@ -432,6 +432,7 @@ public class SingletonGestorLoja {
                 auxLinhaFatura.setValor_iva(l.getValor_iva());
                 auxLinhaFatura.setNome(l.getNome());
                 auxLinhaFatura.setPreco(l.getPreco());
+                auxLinhaFatura.setIdArtigo(l.getIdArtigo());
             }
         }
     }

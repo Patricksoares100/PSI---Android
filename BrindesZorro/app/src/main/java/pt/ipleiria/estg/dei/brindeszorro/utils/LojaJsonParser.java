@@ -377,9 +377,11 @@ public class LojaJsonParser {
                 double valorIva = linhaFatura.getDouble("valor_iva");
                 String nome = linhaFatura.getString("nome");
                 double preco = linhaFatura.getDouble("precoUnitario");
+                int idArtigo = linhaFatura.getInt("artigo_id");
                 String imagem = linhaFatura.getString("imagem");
 
-                LinhaFatura auxLinhaFatura = new LinhaFatura(id, quantidade, valor, valorIva, nome, preco, imagem);
+
+                LinhaFatura auxLinhaFatura = new LinhaFatura(id, quantidade, valor, valorIva, nome, preco,idArtigo, imagem);
                 linhaFaturas.add(auxLinhaFatura);
             }
         } catch (JSONException e) {
@@ -398,9 +400,10 @@ public class LojaJsonParser {
             double valorIva = linhaFatura.getDouble("valor_iva");
             String nome = linhaFatura.getString("nome");
             double preco = linhaFatura.getDouble("precoUnitario");
+            int idArtigo = linhaFatura.getInt("artigo_id");
             String imagem = linhaFatura.getString("imagem");
 
-            auxLinhaFatura = new LinhaFatura(id, quantidade, valor, valorIva, nome, preco, imagem);
+            auxLinhaFatura = new LinhaFatura(id, quantidade, valor, valorIva, nome, preco,idArtigo, imagem);
         } catch (JSONException e) {
             e.printStackTrace();
         }

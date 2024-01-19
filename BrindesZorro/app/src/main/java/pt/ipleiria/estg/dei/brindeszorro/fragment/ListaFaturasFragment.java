@@ -75,6 +75,7 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
                 Fatura faturaSelecionada = faturas.get(position);
 
 
+
                 Bundle bundle = new Bundle();
                 bundle.putInt("ID_FATURA", faturaSelecionada.getId());
                 bundle.putDouble("VALOR_TOTAL", faturaSelecionada.getValorFatura());

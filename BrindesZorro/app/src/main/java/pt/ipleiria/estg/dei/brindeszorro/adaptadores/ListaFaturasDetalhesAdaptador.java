@@ -85,7 +85,7 @@ public class ListaFaturasDetalhesAdaptador extends BaseAdapter {
 
         Button buttonAvaliarArtigo = convertView.findViewById(R.id.buttonAvaliarArtigoDetalhesFatura);
         buttonAvaliarArtigo.setOnClickListener(v -> {
-            int idArtigo = linhaFaturas.get(position).getId();
+            int idArtigo = linhaFaturas.get(position).getIdArtigo();
             Intent intent = new Intent(context, AvaliacaoComentarioActivity.class);
             intent.putExtra(DetalhesArtigoActivity.ID_ARTIGO,(int) idArtigo);
             System.out.println("---" + idArtigo);

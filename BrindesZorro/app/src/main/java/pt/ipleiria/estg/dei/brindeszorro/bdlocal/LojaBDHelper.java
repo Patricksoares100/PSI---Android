@@ -172,6 +172,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         VALOR_IVA + " DOUBLE NOT NULL, " +
                         NOME + " TEXT NOT NULL, " +
                         PRECO + " DOUBLE NOT NULL, " +
+                        ARTIGO_ID + " INTEGER NOT NULL, " +
                         IMAGEM + " TEXT" +
                         ");";
         db.execSQL(createLinhaFaturaTable);  // EXECUTA O COMANDO SQL PARA CRIAR A TABELA
@@ -424,6 +425,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(VALOR_IVA, l.getValor_iva());
         values.put(NOME, l.getNome());
         values.put(PRECO, l.getPreco());
+        values.put(ARTIGO_ID, l.getIdArtigo());
         values.put(IMAGEM, l.getImagem());
 
         this.db.insert(TABLE_NAME_LINHAFATURAS, null, values);
@@ -437,6 +439,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(VALOR_IVA, l.getValor_iva());
         values.put(NOME, l.getNome());
         values.put(PRECO, l.getPreco());
+        values.put(ARTIGO_ID, l.getIdArtigo());
         values.put(IMAGEM, l.getImagem());
 
         return this.db.update(TABLE_NAME_FATURAS, values, ID + "= ?", new String[]{"" + l.getId()}) > 0;
@@ -445,7 +448,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     public ArrayList<LinhaFatura> getAllLinhasFaturasBD() {
         ArrayList<LinhaFatura> linhaFaturas = new ArrayList<>();
 
-        Cursor cursor = this.db.query(TABLE_NAME_LINHAFATURAS, new String[]{ID, QUANTIDADE, VALOR, VALOR_IVA, NOME, PRECO , IMAGEM},
+        Cursor cursor = this.db.query(TABLE_NAME_LINHAFATURAS, new String[]{ID, QUANTIDADE, VALOR, VALOR_IVA, NOME, PRECO , ARTIGO_ID, IMAGEM},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -457,7 +460,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         cursor.getDouble(3),
                         cursor.getString(4),
                         cursor.getDouble(5),
-                        cursor.getString(6)
+                        cursor.getInt(6),
+                        cursor.getString(7)
                         );
 
                 linhaFaturas.add(auxLinhaFatura);
