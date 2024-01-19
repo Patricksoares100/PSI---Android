@@ -27,9 +27,9 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
     public static final String IDAVALIACAOS = "IDAVALIACAO";
     private TextView precoArtigo, descricaoArtigo, artigoNome,totalAvaliacaoTV;
     private Artigo artigo;
-    private EditText etComentarioArtigoAvaliacaoComentario;
+    private EditText etComentarioArtigoAvaliacaoComentario, editTextTextMultiLineComentario;
     private ImageView ivImagem;
-    private RatingBar ratingBar;
+    private RatingBar ratingBar, ratingBarArtigoAvaliacaoComentario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,8 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
         totalAvaliacaoTV = findViewById(R.id.tvMediaAva);
         ivImagem = findViewById(R.id.ivArtigoComentario);
         ratingBar = findViewById(R.id.ratingBarTotal);
+        editTextTextMultiLineComentario = findViewById(R.id.editTextTextMultiLineComentario);
+        ratingBarArtigoAvaliacaoComentario = findViewById(R.id.ratingBarArtigoAvaliacaoComentario);
 
 
         carregarDadosArtigo();
@@ -50,14 +52,18 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
 
     private void carregarDadosArtigo(){
 
-        int idArtigo = getIntent().getIntExtra(ID_ARTIGO, 0);
-        artigo = SingletonGestorLoja.getInstance(getApplicationContext()).getArtigo(idArtigo);
+        int idAvaliacao = getIntent().getIntExtra("IDAVALIACAO", 0);
+        Avaliacao avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao(idAvaliacao);
+        artigo = SingletonGestorLoja.getInstance(getApplicationContext()).getArtigo(avaliacao.getArtigoId());
+        //Avaliacao avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao();
 
         precoArtigo.setText(String.format("%.2f €", artigo.getPreco()));
         descricaoArtigo.setText(artigo.getDescricao());
         artigoNome.setText(artigo.getNome());
         totalAvaliacaoTV.setText("" + artigo.getNum_avaliacoes() + " Avaliações");
         ratingBar.setRating(artigo.getMedia_avaliacoes());
+        editTextTextMultiLineComentario.setText(avaliacao.getComentario());
+        ratingBarArtigoAvaliacaoComentario.setRating(avaliacao.getClassificacao());
         Glide.with(getApplicationContext())
                 .load(artigo.getImagem())
                 .placeholder(R.drawable.ipleiria)

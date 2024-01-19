@@ -53,7 +53,6 @@ public class ListaAvaliacaosFragment extends Fragment implements AvaliacaosListe
         lvAvaliacaos.setAdapter(new ListaAvaliacaosAdaptador(getContext(), avaliacaos));
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
-        //SingletonGestorLoja.getInstance(getContext()).setAvaliacaosListener(AvaliacaosListener);
         SingletonGestorLoja.getInstance(getContext()).setAvaliacaosListener(this);
         SingletonGestorLoja.getInstance(getContext()).getAvaliacaoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
         System.out.println("---> depois  da api ");
