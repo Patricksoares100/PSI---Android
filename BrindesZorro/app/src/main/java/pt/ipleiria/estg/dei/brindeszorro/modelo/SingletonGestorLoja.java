@@ -971,15 +971,10 @@ public class SingletonGestorLoja {
             JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, Public.SERVER + "fatura/pagar?id=" + idFatura + "&token=" + token, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    // Fazer algo com a fatura recebida do servidor
                     Fatura fatura = LojaJsonParser.parserJsonFatura(response.toString());
-                    // Adicionar a lógica restante conforme necessário
                     if (fatura != null) {
                         System.out.println("--->PAGOU " + fatura);
-                        // Limpar a lista existente e adicionar a nova fatura
-                        faturas.clear();
                         faturas.add(fatura);
-                        // Atualizar o banco de dados com a nova lista
                         adicionarFaturasBD(faturas);
                         if (faturasListener != null) {
                             faturasListener.onRefreshListaFaturas(faturas);
