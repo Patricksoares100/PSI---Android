@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.dei.brindeszorro.adaptadores;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Empresa;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
+import pt.ipleiria.estg.dei.brindeszorro.modelo.LinhaFatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
@@ -24,59 +27,67 @@ public class ListaFaturasDetalhesAdaptador extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<Artigo> artigos;
     private ArrayList<Fatura> faturas;
+    private ArrayList<LinhaFatura> linhaFaturas;
 
-    public ListaFaturasDetalhesAdaptador(Context context, ArrayList<Fatura> faturas) {
+    public ListaFaturasDetalhesAdaptador(Context context, ArrayList<LinhaFatura> linhaFaturas) {
         this.context = context;
-        this.faturas = faturas;
-        this.inflater = LayoutInflater.from(context);
+        this.linhaFaturas = linhaFaturas;
+        //this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return faturas.size();
+        return linhaFaturas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return faturas.get(position);
+        return linhaFaturas.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return faturas.get(position).getId();
+        return linhaFaturas.get(position).getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolderLista viewHolderLista;
+
+        if (inflater == null)
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); // autorização a variacvel
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_lista_fatura_detalhes, parent, false);
-            viewHolderLista = new ViewHolderLista(convertView);
-            convertView.setTag(viewHolderLista);
-        } else {
-            viewHolderLista = (ViewHolderLista) convertView.getTag();
         }
 
-        viewHolderLista.update((Fatura) getItem(position));
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-        SingletonGestorLoja.getInstance(context).getEmpresaAPI(context);
+        ViewHolderLista viewHolderLista = (ListaFaturasDetalhesAdaptador.ViewHolderLista) convertView.getTag();
+        if (viewHolderLista == null){
+            viewHolderLista = new ListaFaturasDetalhesAdaptador.ViewHolderLista(convertView);
+            convertView.setTag(viewHolderLista);
+        }
+
+        viewHolderLista.update(linhaFaturas.get(position));
 
         return convertView;
     }
 
     private class ViewHolderLista {
-        private TextView tvData, tvValor;
+        private TextView tvArtigo, tvPreco, tvQuantidade, tvIvaTotal, tvValorTotal;
 
         public ViewHolderLista(View view) {
-            tvData = view.findViewById(R.id.tvNomeEmpresa);
-            tvValor = view.findViewById(R.id.tvValorFaturaDetalhes);
+            tvArtigo = view.findViewById(R.id.tvNomeArtigo);
+            tvPreco = view.findViewById(R.id.tvValorArtigoDetalhesFatura);
+            tvQuantidade = view.findViewById(R.id.tvQuantidadeDetalhesFatura);
+            tvIvaTotal = view.findViewById(R.id.tvValorIvaTotalDetalhesFatura);
+            tvValorTotal = view.findViewById(R.id.tvValorTotalDetalhesFatura);
         }
 
-        // Empresa empresa = SingletonGestorLoja.getInstance(context).getEmpresa();
-        public void update(Fatura fatura) {
-            tvData.setText("" + fatura.getData());
-            tvValor.setText("" + fatura.getValorFatura());
+        public void update(LinhaFatura linhaFatura) {
+            tvArtigo.setText("" + linhaFatura.getNome());
+            tvPreco.setText("" + linhaFatura.getPreco());
+            tvQuantidade.setText("" + linhaFatura.getQuantidade());
+            tvIvaTotal.setText("" + linhaFatura.getValor_iva());
+            tvValorTotal.setText("" + linhaFatura.getValor());
 
         }
     }

@@ -373,12 +373,12 @@ public class LojaJsonParser {
                 JSONObject linhaFatura = (JSONObject) response.get(i);
                 int id = linhaFatura.getInt("id");
                 int quantidade = linhaFatura.getInt("quantidade");
-                double valor = linhaFatura.getDouble("valor");
+                double valor = linhaFatura.getDouble("valorTotal");
                 double valorIva = linhaFatura.getDouble("valor_iva");
-                int artigo_id = linhaFatura.getInt("artigo_id");
-                int fatura_id = linhaFatura.getInt("fatura_id");
+                String nome = linhaFatura.getString("nome");
+                double preco = linhaFatura.getDouble("precoUnitario");
 
-                LinhaFatura auxLinhaFatura = new LinhaFatura(id, quantidade, artigo_id, fatura_id, valor, valorIva);
+                LinhaFatura auxLinhaFatura = new LinhaFatura(id, quantidade, valor, valorIva, nome, preco);
                 linhaFaturas.add(auxLinhaFatura);
             }
         } catch (JSONException e) {
@@ -393,12 +393,12 @@ public class LojaJsonParser {
             JSONObject linhaFatura = new JSONObject(response);
             int id = linhaFatura.getInt("id");
             int quantidade = linhaFatura.getInt("quantidade");
-            double valor = linhaFatura.getDouble("valor");
+            double valor = linhaFatura.getDouble("valorTotal");
             double valorIva = linhaFatura.getDouble("valor_iva");
-            int artigo_id = linhaFatura.getInt("artigo_id");
-            int fatura_id = linhaFatura.getInt("fatura_id");
+            String nome = linhaFatura.getString("nome");
+            double preco = linhaFatura.getDouble("precoUnitario");
 
-            auxLinhaFatura = new LinhaFatura(id, quantidade, artigo_id, fatura_id, valor, valorIva);
+            auxLinhaFatura = new LinhaFatura(id, quantidade, valor, valorIva, nome, preco);
         } catch (JSONException e) {
             e.printStackTrace();
         }

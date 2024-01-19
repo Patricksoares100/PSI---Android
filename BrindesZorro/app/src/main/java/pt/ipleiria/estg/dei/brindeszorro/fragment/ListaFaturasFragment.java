@@ -67,7 +67,7 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getContext(), livros.get(position).getTitulo(), Toast.LENGTH_SHORT).show();
                 // Alinea 5.2 Ficha 5 Books - Inicia a atividade com a informação da fatura após clicar
-                SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
+                //SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
 
                 /*fragmentManager = getActivity().getSupportFragmentManager();
                 fragment = new ListaFaturaDetalhesFragment();

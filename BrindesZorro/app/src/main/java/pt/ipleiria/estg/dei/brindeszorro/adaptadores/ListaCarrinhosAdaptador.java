@@ -58,7 +58,7 @@ public class ListaCarrinhosAdaptador extends BaseAdapter {
         if (inflater == null)
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); // autorização a variacvel
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_lista_carrinho, null);
+            convertView = inflater.inflate(R.layout.item_lista_carrinho, parent, false);
         }
         ViewHolderLista viewHolderLista = (ListaCarrinhosAdaptador.ViewHolderLista) convertView.getTag();
         if (viewHolderLista ==null){

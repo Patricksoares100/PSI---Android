@@ -28,6 +28,7 @@ import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaCarrinhosAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.adaptadores.ListaFaturasDetalhesAdaptador;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.ArtigosListener;
 import pt.ipleiria.estg.dei.brindeszorro.listeners.FaturasListener;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.LinhasFaturasListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Empresa;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
@@ -35,13 +36,12 @@ import pt.ipleiria.estg.dei.brindeszorro.modelo.LinhaFatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 import pt.ipleiria.estg.dei.brindeszorro.utils.Public;
 
-public class ListaFaturaDetalhesFragment extends Fragment  {
+public class ListaFaturaDetalhesFragment extends Fragment implements LinhasFaturasListener {
 
     private ListView lvFaturasDetalhes;
     private Empresa empresa;
-    private TextView tvMorada,tvEmail,tvTelefone,tvNomeEmpresa;
-    private ArrayList<Artigo> artigos;
-    private ArrayList<Fatura> faturas = new ArrayList<>();
+    private TextView tvMorada, tvEmail, tvTelefone, tvNomeEmpresa, tvData, tvIvaTotal, tvValorToral;
+    private ArrayList<LinhaFatura> linhaFaturas;
 
     public ListaFaturaDetalhesFragment(){
 
@@ -53,31 +53,42 @@ public class ListaFaturaDetalhesFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_fatura_detalhes, container, false);
         setHasOptionsMenu(true);
         lvFaturasDetalhes = view.findViewById(R.id.lvArtigosFatura);
-        artigos = SingletonGestorLoja.getInstance(getContext()).getArtigosBD();
 
-        lvFaturasDetalhes.setAdapter(new ListaFaturasDetalhesAdaptador(getContext(), faturas));
         lvFaturasDetalhes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(),artigos.get(position).getNome(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),linhaFaturas.get(position).getId(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getContext(), AvaliacaoComentarioActivity.class);
                 intent.putExtra(AvaliacaoComentarioActivity.IDAVALIACAOS,(int) position);
                 startActivity(intent);
             }
+
         });
+
+        linhaFaturas = SingletonGestorLoja.getInstance(getContext()).getLinhaFaturasBD();
+
+        lvFaturasDetalhes.setAdapter(new ListaFaturasDetalhesAdaptador(getContext(), linhaFaturas));
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        SingletonGestorLoja.getInstance(getContext()).setLinhasFaturasListener(this);
+        //SingletonGestorLoja.getInstance(getContext()).getAllLinhasFaturasAPI(getContext(), fatura.getId() );
+        System.out.println("---> Lista faturas detalhes fragment" + linhaFaturas);
+
+        SingletonGestorLoja.getInstance(getContext()).setLinhasFaturasListener(this);
+        //SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        //SingletonGestorLoja.getInstance(getContext()).getAllLinhasFaturasAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"), );
 
         tvMorada = view.findViewById(R.id.tvMoradaEmpresa);
         tvEmail = view.findViewById(R.id.tvEmailEmpresa);
         tvTelefone = view.findViewById(R.id.tvTelefoneEmpresa);
-        tvNomeEmpresa = view.findViewById(R.id.tvNomeEmpresa);
+        tvNomeEmpresa = view.findViewById(R.id.tvNomeEmpresaFatura);
+        tvData = view.findViewById(R.id.tvDataFaturaValor);
 
         SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
+        SingletonGestorLoja.getInstance(getContext()).getFaturasAPI(getContext(), sharedPreferences.getString(Public.TOKEN,"TOKEN"));
         empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresaBD();
+        faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
         System.out.println("---> EMPRESAAAAAA" + empresa);
-
-
-
 
         //empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresa(empresa.getId()); //se é fragmento fica getContext
 
@@ -85,9 +96,18 @@ public class ListaFaturaDetalhesFragment extends Fragment  {
         tvEmail.setText("" + empresa.getEmail());
         tvTelefone.setText("" + empresa.getTelefone());
         tvNomeEmpresa.setText("" + empresa.getNome());
-
+        //tvData.setText("" + fatura.getData());
+        //tvIvaTotal.setText("" + fatura.get);
+        //tvValorToral.setText("" + fatura.getValorFatura());
 
         return view;
     }
 
+    @Override
+    public void onRefreshListaLinhasFaturas(ArrayList<LinhaFatura> linhaFaturas) {
+        if(linhaFaturas != null){
+            lvFaturasDetalhes.setAdapter(new ListaFaturasDetalhesAdaptador(getContext(), linhaFaturas));
+
+        }
+    }
 }

@@ -66,7 +66,6 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     private static final String EMAIL = "email";
     private static final String VALOR = "valor";
     private static final String VALOR_IVA = "valorIva";
-    private static final String FATURA_ID = "fatura_id";
     private static final String VALORUNITARIO = "valorUnitario";
 
 
@@ -171,8 +170,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                         QUANTIDADE + " INTEGER NOT NULL, " +
                         VALOR + " DOUBLE NOT NULL, " +
                         VALOR_IVA + " DOUBLE NOT NULL, " +
-                        ARTIGO_ID + " INTEGER NOT NULL, " +
-                        FATURA_ID + " INTEGER NOT NULL " +
+                        NOME + " TEXT NOT NULL, " +
+                        PRECO + " DOUBLE NOT NULL " +
                         ");";
         db.execSQL(createLinhaFaturaTable);  // EXECUTA O COMANDO SQL PARA CRIAR A TABELA
 
@@ -422,8 +421,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(QUANTIDADE, l.getQuantidade());
         values.put(VALOR, l.getValor());
         values.put(VALOR_IVA, l.getValor_iva());
-        values.put(ARTIGO_ID, l.getArtigo_id());
-        values.put(FATURA_ID, l.getFatura_id());
+        values.put(NOME, l.getNome());
+        values.put(PRECO, l.getPreco());
 
         this.db.insert(TABLE_NAME_LINHAFATURAS, null, values);
     }
@@ -434,8 +433,8 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         values.put(QUANTIDADE, l.getQuantidade());
         values.put(VALOR, l.getValor());
         values.put(VALOR_IVA, l.getValor_iva());
-        values.put(ARTIGO_ID, l.getArtigo_id());
-        values.put(FATURA_ID, l.getFatura_id());
+        values.put(NOME, l.getNome());
+        values.put(PRECO, l.getPreco());
 
         return this.db.update(TABLE_NAME_FATURAS, values, ID + "= ?", new String[]{"" + l.getId()}) > 0;
 
@@ -443,7 +442,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
     public ArrayList<LinhaFatura> getAllLinhasFaturasBD() {
         ArrayList<LinhaFatura> linhaFaturas = new ArrayList<>();
 
-        Cursor cursor = this.db.query(TABLE_NAME_LINHAFATURAS, new String[]{ID, QUANTIDADE, VALOR, VALOR_IVA, ARTIGO_ID,FATURA_ID },
+        Cursor cursor = this.db.query(TABLE_NAME_LINHAFATURAS, new String[]{ID, QUANTIDADE, VALOR, VALOR_IVA, NOME, PRECO },
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -451,10 +450,11 @@ public class LojaBDHelper extends SQLiteOpenHelper {
                 LinhaFatura auxLinhaFatura = new LinhaFatura
                         (cursor.getInt(0),
                         cursor.getInt(1),
-                        cursor.getInt(2),
-                        cursor.getInt(3),
-                        cursor.getInt(4),
-                        cursor.getInt(5));
+                        cursor.getDouble(2),
+                        cursor.getDouble(3),
+                        cursor.getString(4),
+                        cursor.getDouble(5)
+                        );
 
                 linhaFaturas.add(auxLinhaFatura);
             }while (cursor.moveToNext());

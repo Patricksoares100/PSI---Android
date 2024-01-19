@@ -129,6 +129,10 @@ public class SingletonGestorLoja {
         this.faturasListener = faturasListener;
     }
 
+    public void setLinhasFaturasListener(LinhasFaturasListener linhasFaturasListener){
+        this.linhasFaturasListener = linhasFaturasListener;
+    }
+
     //endregion
 
     // region # SET ARRAYLISTS  #
@@ -153,6 +157,11 @@ public class SingletonGestorLoja {
     public ArrayList<Carrinho> getCarrinhosBD() {
         carrinhos = lojaBDHelper.getAllCarrinhosBD();
         return new ArrayList<>(carrinhos);
+    }
+
+    public ArrayList<LinhaFatura> getLinhaFaturasBD() {
+        linhasFaturas = lojaBDHelper.getAllLinhasFaturasBD();
+        return new ArrayList<>(linhasFaturas);
     }
 
     public ArrayList<Avaliacao> getAllAvaliacaosUserBD(){
@@ -421,8 +430,8 @@ public class SingletonGestorLoja {
                 auxLinhaFatura.setQuantidade(l.getQuantidade());
                 auxLinhaFatura.setValor(l.getValor());
                 auxLinhaFatura.setValor_iva(l.getValor_iva());
-                auxLinhaFatura.setArtigo_id(l.getArtigo_id());
-                auxLinhaFatura.setFatura_id(l.getFatura_id());
+                auxLinhaFatura.setNome(l.getNome());
+                auxLinhaFatura.setPreco(l.getPreco());
             }
         }
     }
@@ -1445,8 +1454,8 @@ public class SingletonGestorLoja {
                     params.put("quantidade", "" + linhaFatura.getQuantidade());
                     params.put("valor", "" + linhaFatura.getValor());
                     params.put("valor_iva", "" + linhaFatura.getValor_iva());
-                    params.put("artigo_id", ""+linhaFatura.getArtigo_id());// tem q ser uma variavel n pode ser hardcoded
-
+                    //params.put("artigo_id", ""+linhaFatura.getArtigoId());// tem q ser uma variavel n pode ser hardcoded
+                    //params.put("fatura_id", ""+linhaFatura.getFaturaId());
                     return params;
                 }
             };
@@ -1454,7 +1463,7 @@ public class SingletonGestorLoja {
         }
     }
 
-    public  void getAllLinhasFaturasAPI(final Context context, String token){
+    public  void getAllLinhasFaturasAPI(final Context context, int idFatura){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
             if(linhasFaturasListener != null){
@@ -1462,21 +1471,21 @@ public class SingletonGestorLoja {
             }
             //LISTENERS vamos buscar os favoritos a bd local
         }else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "carrinhos/byuser?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "linhasfaturas/index?id=" + idFatura, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     //fazer sub aqui e
-                    System.out.println("---> response Carrinho API:"+ response);
-                    carrinhos = LojaJsonParser.parserJsonCarrinhos(response);
-                    adicionarCarrinhosBD(carrinhos);
-                    if(carrinhosListener != null){
-                        carrinhosListener.onRefreshListaCarrinhos(carrinhos);
+                    System.out.println("---> response Linhas Fatura API"+ response);
+                    linhasFaturas = LojaJsonParser.parserJsonLinhaFaturas(response);
+                    adicionarlinhasFaturasBD(linhasFaturas);
+                    if(linhasFaturasListener != null){
+                        linhasFaturasListener.onRefreshListaLinhasFaturas(linhasFaturas);
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println("--->Erro carrinho" + error.getMessage());
+                    System.out.println("--->Erro linhas fatura" + error.getMessage());
                     //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });

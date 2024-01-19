@@ -2,16 +2,17 @@ package pt.ipleiria.estg.dei.brindeszorro.modelo;
 
 public class LinhaFatura {
 
-    private int id, quantidade, artigo_id, fatura_id;
-    private double valor, valor_iva;
+    private int id, quantidade;
+    private String nome;
+    private double valor, valor_iva, preco;
 
-    public LinhaFatura(int id, int quantidade, int artigo_id, int fatura_id, double valor, double valor_iva) {
+    public LinhaFatura(int id, int quantidade,  double valor,  double valor_iva, String nome, double preco) {
         this.id = id;
         this.quantidade = quantidade;
-        this.artigo_id = artigo_id;
-        this.fatura_id = fatura_id;
+        this.nome = nome;
         this.valor = valor;
         this.valor_iva = valor_iva;
+        this.preco = preco;
     }
 
     public int getId() {
@@ -30,20 +31,12 @@ public class LinhaFatura {
         this.quantidade = quantidade;
     }
 
-    public int getArtigo_id() {
-        return artigo_id;
+    public String getNome() {
+        return nome;
     }
 
-    public void setArtigo_id(int artigo_id) {
-        this.artigo_id = artigo_id;
-    }
-
-    public int getFatura_id() {
-        return fatura_id;
-    }
-
-    public void setFatura_id(int fatura_id) {
-        this.fatura_id = fatura_id;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getValor() {
@@ -60,5 +53,13 @@ public class LinhaFatura {
 
     public void setValor_iva(double valor_iva) {
         this.valor_iva = valor_iva;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 }
