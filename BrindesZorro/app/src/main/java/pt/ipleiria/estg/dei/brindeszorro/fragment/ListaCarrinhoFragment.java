@@ -26,8 +26,6 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
 
     private ListView lvCarrinhos;
     private ArrayList<Carrinho> carrinhos;
-    private ArrayList<LinhaFatura> linhaFaturas;
-    private LinhaFatura linhaFatura;
     private Button buttonLimparCarrinho, buttonConcluirCompra;
     private TextView tvMostrarValorCarrinho;
 

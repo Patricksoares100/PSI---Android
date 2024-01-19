@@ -1471,7 +1471,7 @@ public class SingletonGestorLoja {
             }
             //LISTENERS vamos buscar os favoritos a bd local
         }else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "linhasfaturas/index?id=" + idFatura, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "linhafaturas/index?id=" + idFatura, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     //fazer sub aqui e
@@ -1531,22 +1531,19 @@ public class SingletonGestorLoja {
     public  void getEmpresaAPI(final Context context){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
-           // return lojaBDHelper.getEmpresaBD();
-
         }else {
-            System.out.println("----> chama a apiiiiiiiiiiiiiii");
-            //JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "empresa/find", null, new Response.Listener<JSONArray>() {
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, Public.SERVER + "empresa/find", null, new Response.Listener<JSONObject>() {
+            System.out.println("----> chamar get empresa API");
+            StringRequest req = new StringRequest(Request.Method.GET, Public.SERVER + "empresa/find", new Response.Listener<String>() {
                 @Override
-                public void onResponse(JSONObject response) {
-                    System.out.println("---> Sucesso - ver Empresa " + response);
-                    Empresa empresa = parserJsonEmpresa(response.toString());
+                public void onResponse(String response) {
+                    System.out.println("---> Sucesso - ver Empresa API" + response);
+                    empresa = parserJsonEmpresa(response);
                     lojaBDHelper.adicionarEmpresaBD(empresa);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println("--->Erro faturassssss" + error.getMessage());
+                    System.out.println("--->Erro EMPRESA API" + error.getMessage());
                     //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });

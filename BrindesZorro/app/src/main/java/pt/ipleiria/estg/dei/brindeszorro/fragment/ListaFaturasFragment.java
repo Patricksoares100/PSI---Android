@@ -61,21 +61,23 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
         SingletonGestorLoja.getInstance(getContext()).setFaturasListener(this);
         SingletonGestorLoja.getInstance(getContext()).getFaturasAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN") );
-
+        SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
         lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getContext(), livros.get(position).getTitulo(), Toast.LENGTH_SHORT).show();
                 // Alinea 5.2 Ficha 5 Books - Inicia a atividade com a informação da fatura após clicar
-                //SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
-
                 /*fragmentManager = getActivity().getSupportFragmentManager();
                 fragment = new ListaFaturaDetalhesFragment();
                 fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();*/
 
                 // tentei me guiar pelo books no menu do main activity mas continuava a dar erro. Apenas consegui dessa forma
-
+                Fatura faturaSelecionada = faturas.get(position);
+                int idFatura = faturaSelecionada.getId();
+                Bundle bundle = new Bundle();
+                bundle.putInt("ID_FATURA", idFatura);
                 ListaFaturaDetalhesFragment detalhesFragment = new ListaFaturaDetalhesFragment();
+                detalhesFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentFragment, detalhesFragment).addToBackStack(null).commit(); // Isto permite ao utilizador voltar ao fragmento anterior
             }

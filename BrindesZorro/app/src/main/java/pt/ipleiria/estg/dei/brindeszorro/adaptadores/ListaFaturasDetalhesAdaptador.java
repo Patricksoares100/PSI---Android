@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -73,6 +77,7 @@ public class ListaFaturasDetalhesAdaptador extends BaseAdapter {
 
     private class ViewHolderLista {
         private TextView tvArtigo, tvPreco, tvQuantidade, tvIvaTotal, tvValorTotal;
+        ImageView ivArtigo;
 
         public ViewHolderLista(View view) {
             tvArtigo = view.findViewById(R.id.tvNomeArtigo);
@@ -80,14 +85,20 @@ public class ListaFaturasDetalhesAdaptador extends BaseAdapter {
             tvQuantidade = view.findViewById(R.id.tvQuantidadeDetalhesFatura);
             tvIvaTotal = view.findViewById(R.id.tvValorIvaTotalDetalhesFatura);
             tvValorTotal = view.findViewById(R.id.tvValorTotalDetalhesFatura);
+            ivArtigo = view.findViewById(R.id.ivArtigoDetalhesFatura);
         }
 
         public void update(LinhaFatura linhaFatura) {
             tvArtigo.setText("" + linhaFatura.getNome());
-            tvPreco.setText("" + linhaFatura.getPreco());
+            tvPreco.setText("" + linhaFatura.getPreco()+ " €");
             tvQuantidade.setText("" + linhaFatura.getQuantidade());
-            tvIvaTotal.setText("" + linhaFatura.getValor_iva());
-            tvValorTotal.setText("" + linhaFatura.getValor());
+            tvIvaTotal.setText("" + linhaFatura.getValor_iva()+ " €");
+            tvValorTotal.setText("" + linhaFatura.getValor()+ " €");
+            Glide.with(context)
+                    .load(linhaFatura.getImagem())
+                    .placeholder(R.drawable.ipleiria)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivArtigo);
 
         }
     }

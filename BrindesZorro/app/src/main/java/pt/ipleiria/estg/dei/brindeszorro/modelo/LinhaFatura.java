@@ -3,16 +3,25 @@ package pt.ipleiria.estg.dei.brindeszorro.modelo;
 public class LinhaFatura {
 
     private int id, quantidade;
-    private String nome;
+    private String nome, imagem;
     private double valor, valor_iva, preco;
 
-    public LinhaFatura(int id, int quantidade,  double valor,  double valor_iva, String nome, double preco) {
+    public LinhaFatura(int id, int quantidade,  double valor,  double valor_iva, String nome, double preco, String imagem) {
         this.id = id;
         this.quantidade = quantidade;
         this.nome = nome;
         this.valor = valor;
         this.valor_iva = valor_iva;
         this.preco = preco;
+        this.imagem = imagem;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public int getId() {

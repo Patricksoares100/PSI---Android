@@ -156,32 +156,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginEnd="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvIvaTotal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/tv_IvaTotal"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvIvaTotalFatura"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
@@ -219,12 +193,6 @@
             android:layout_width="match_parent"
             android:layout_height="375dp" />
 
-        <Button
-            android:id="@+id/buttonVoltarHome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="onClickEnviarComentario"
-            android:text="@string/buttonEnviarComentarioAvaliacaoComentario" />
     </LinearLayout>
 
     <View

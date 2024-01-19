@@ -47,7 +47,7 @@
     <string name="tv_ValorTitulo">Valor Unitário</string>
     <string name="tv_valorEuros">€</string>
     <string name="tv_Qtd">Qtd.</string>
-    <string name="tv_ValorT">Valor Total</string>
+    <string name="tv_ValorT">Valor Total:</string>
     <string name="tv_AdcCar">Adicionar ao carrinho</string>
     <string name="tv_servidorNome">Servidor</string>
     <string name="tv_portaTitulo">Porta:</string>
@@ -133,7 +133,7 @@
     <string name="tvEmpresaMoradaStr">Morada</string>
     <string name="tv_Artigos_list">ARTIGOS</string>
     <string name="tv_IvaTotal">Iva Total</string>
-    <string name="tv_DataFatura">Data Fatura</string>
+    <string name="tv_DataFatura">Data Emissão:</string>
     <string name="txtQuantidadeArtigoFaturaDetalhes">Quantidade</string>
     <string name="txtIvaTotalDetalhesFatura">Iva Total:</string>
     <string name="btn_avaliarArtigo">AVALIAR ARTIGO</string>/>

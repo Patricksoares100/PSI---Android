@@ -52,9 +52,32 @@ public class ListaFaturaDetalhesFragment extends Fragment implements LinhasFatur
 
         View view = inflater.inflate(R.layout.fragment_fatura_detalhes, container, false);
         setHasOptionsMenu(true);
-        lvFaturasDetalhes = view.findViewById(R.id.lvArtigosFatura);
+        // Recuperar o ID da fatura do Bundle
+        Bundle bundle = getArguments();
 
-        lvFaturasDetalhes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        int idFatura = bundle.getInt("ID_FATURA", -1);
+
+        lvFaturasDetalhes = view.findViewById(R.id.lvArtigosFatura);
+        //empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresaBD();
+        linhaFaturas = SingletonGestorLoja.getInstance(getContext()).getLinhaFaturasBD();
+
+
+        tvMorada = view.findViewById(R.id.tvMoradaEmpresa);
+        tvEmail = view.findViewById(R.id.tvEmailEmpresa);
+        tvTelefone = view.findViewById(R.id.tvTelefoneEmpresa);
+        tvNomeEmpresa = view.findViewById(R.id.tvNomeEmpresaFatura);
+        tvData = view.findViewById(R.id.tvDataFaturaValor);
+
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
+        SingletonGestorLoja.getInstance(getContext()).setLinhasFaturasListener(this);
+        SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
+        SingletonGestorLoja.getInstance(getContext()).getAllLinhasFaturasAPI(getContext(),idFatura);
+       // SingletonGestorLoja.getInstance(getContext()).getFaturasAPI(getContext(), sharedPreferences.getString(Public.TOKEN,"TOKEN"));
+
+       // linhaFaturas = SingletonGestorLoja.getInstance(getContext()).getLinhaFaturasBD();
+
+        /*lvFaturasDetalhes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(),linhaFaturas.get(position).getId(), Toast.LENGTH_SHORT).show();
@@ -64,31 +87,11 @@ public class ListaFaturaDetalhesFragment extends Fragment implements LinhasFatur
                 startActivity(intent);
             }
 
-        });
+        });*/
 
+        empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresaBD();
         linhaFaturas = SingletonGestorLoja.getInstance(getContext()).getLinhaFaturasBD();
 
-        lvFaturasDetalhes.setAdapter(new ListaFaturasDetalhesAdaptador(getContext(), linhaFaturas));
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
-        SingletonGestorLoja.getInstance(getContext()).setLinhasFaturasListener(this);
-        //SingletonGestorLoja.getInstance(getContext()).getAllLinhasFaturasAPI(getContext(), fatura.getId() );
-        System.out.println("---> Lista faturas detalhes fragment" + linhaFaturas);
-
-        SingletonGestorLoja.getInstance(getContext()).setLinhasFaturasListener(this);
-        //SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
-        //SingletonGestorLoja.getInstance(getContext()).getAllLinhasFaturasAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"), );
-
-        tvMorada = view.findViewById(R.id.tvMoradaEmpresa);
-        tvEmail = view.findViewById(R.id.tvEmailEmpresa);
-        tvTelefone = view.findViewById(R.id.tvTelefoneEmpresa);
-        tvNomeEmpresa = view.findViewById(R.id.tvNomeEmpresaFatura);
-        tvData = view.findViewById(R.id.tvDataFaturaValor);
-
-        SingletonGestorLoja.getInstance(getContext()).getEmpresaAPI(getContext());
-        SingletonGestorLoja.getInstance(getContext()).getFaturasAPI(getContext(), sharedPreferences.getString(Public.TOKEN,"TOKEN"));
-        empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresaBD();
-        faturas = SingletonGestorLoja.getInstance(getContext()).getFaturasBD();
-        System.out.println("---> EMPRESAAAAAA" + empresa);
 
         //empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresa(empresa.getId()); //se é fragmento fica getContext
 
