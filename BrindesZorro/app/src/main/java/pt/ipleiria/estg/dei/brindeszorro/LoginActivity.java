@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         System.out.println(sharedPreferences.getString(Public.TOKEN,"TOKEN"));
         if(sharedPreferences.getString(Public.TOKEN,"TOKEN").matches("TOKEN")){
-            System.out.println("--->false");
+            System.out.println("--->token invalido, não faz login automatico");
             return false;
         }else{
             return true;

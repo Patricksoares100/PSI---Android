@@ -34,12 +34,6 @@ public class ListaArtigosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Não está a vir para aqui, possivelmente terá de se apagar
-        // esta a ir para o listaHomeFragment
-
-
-
-        //Toast.makeText(getContext(), "entrouooooo", Toast.LENGTH_SHORT).show();
 
         // inicia o layout com o activity_home
         View view = inflater.inflate(R.layout.fragment_lista_home, container, false);

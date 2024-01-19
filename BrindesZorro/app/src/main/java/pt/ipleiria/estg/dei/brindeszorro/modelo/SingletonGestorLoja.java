@@ -4,7 +4,6 @@ import static pt.ipleiria.estg.dei.brindeszorro.utils.LojaJsonParser.parserJsonE
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -15,7 +14,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,8 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import pt.ipleiria.estg.dei.brindeszorro.EditarDadosPessoaisActivity;
-import pt.ipleiria.estg.dei.brindeszorro.FavoritosActivity;
 import pt.ipleiria.estg.dei.brindeszorro.MainActivity;
 import pt.ipleiria.estg.dei.brindeszorro.R;
 import pt.ipleiria.estg.dei.brindeszorro.bdlocal.LojaBDHelper;
@@ -547,8 +543,6 @@ public class SingletonGestorLoja {
                 artigosListener.onRefreshListaArtigos(lojaBDHelper.getAllArtigosBD());
             }
         } else{
-            System.out.println("--->"+Public.SERVER);
-            System.out.println("--->"+Public.SERVER.toString());
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "artigos", null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
@@ -1172,7 +1166,6 @@ public class SingletonGestorLoja {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            System.out.println("----->" + token.toString());
             StringRequest req = new StringRequest(Request.Method.GET,Public.SERVER + "favoritos/adicionafavoritocarrinho?token=" + token.toString() + "&id=" + favorito.getId(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -1382,7 +1375,6 @@ public class SingletonGestorLoja {
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            System.out.println("---> carrinhoazzzz " + carrinho.getId());
             StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "carrinho/atualizar?token=" + token.toString(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
