@@ -83,7 +83,8 @@ public class ListaFavoritosAdaptador extends BaseAdapter {
         public void update(Favorito favorito){
 
             tvNomeArtigo.setText(favorito.getNomeArtigo());
-            tvPreco.setText(""+favorito.getValorArtigo()+" €");
+            tvPreco.setText(String.format("%.2f",favorito.getValorArtigo())+" €");
+
             Glide.with(context)
                     .load(favorito.getImagem())
                     .placeholder(R.drawable.ipleiria)

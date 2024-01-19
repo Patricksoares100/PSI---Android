@@ -100,7 +100,7 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
 
             total += quantidade * valorArtigo;
         }
-        tvMostrarValorCarrinho.setText("" + total);
+        tvMostrarValorCarrinho.setText(String.format("%.2f", total)+ " €");
         return total;
     }
 }

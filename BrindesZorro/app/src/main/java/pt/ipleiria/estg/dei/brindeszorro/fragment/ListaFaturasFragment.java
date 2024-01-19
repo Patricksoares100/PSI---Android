@@ -73,9 +73,12 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
 
                 // tentei me guiar pelo books no menu do main activity mas continuava a dar erro. Apenas consegui dessa forma
                 Fatura faturaSelecionada = faturas.get(position);
-                int idFatura = faturaSelecionada.getId();
+
+
                 Bundle bundle = new Bundle();
-                bundle.putInt("ID_FATURA", idFatura);
+                bundle.putInt("ID_FATURA", faturaSelecionada.getId());
+                bundle.putDouble("VALOR_TOTAL", faturaSelecionada.getValorFatura());
+                bundle.putString("DATA", faturaSelecionada.getData());
                 ListaFaturaDetalhesFragment detalhesFragment = new ListaFaturaDetalhesFragment();
                 detalhesFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();

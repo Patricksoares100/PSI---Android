@@ -99,9 +99,9 @@ public class ListaCarrinhosAdaptador extends BaseAdapter {
 
         public void update(Carrinho carrinho){
             tvNomeArtigo.setText(carrinho.getNome());
-            tvValorUnitario.setText(""+carrinho.getValorUnitario() + " €");
+            tvValorUnitario.setText(String.format("%.2f",carrinho.getValorUnitario()) + " €");
             tvQuantidade.setText(""+ carrinho.getQuantidade());
-            tvValorTotal.setText(""+ (carrinho.getValorUnitario() * carrinho.getQuantidade())+ " €");
+            tvValorTotal.setText(String.format("%.2f",(carrinho.getValorUnitario() * carrinho.getQuantidade()))+ " €");
             Glide.with(context)
                     .load(carrinho.getImagem())
                     .placeholder(R.drawable.ipleiria)

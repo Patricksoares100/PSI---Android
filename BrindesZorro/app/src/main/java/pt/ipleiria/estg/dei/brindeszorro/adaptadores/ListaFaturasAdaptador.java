@@ -93,7 +93,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
 
         public void update(Fatura fatura) {
             tvData.setText(""+fatura.getData());
-            tvValor.setText(""+fatura.getValorFatura());
+            tvValor.setText(String.format("%.2f",fatura.getValorFatura())+ " €");
             tvEstado.setText(""+fatura.getEstado());
             if ("Paga".equals(fatura.getEstado())) {  // tentei com == mas dava erro
                 buttonFaturaPagar.setVisibility(View.GONE);

@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.AvaliacaoComentarioActivity;
@@ -40,7 +41,7 @@ public class ListaFaturaDetalhesFragment extends Fragment implements LinhasFatur
 
     private ListView lvFaturasDetalhes;
     private Empresa empresa;
-    private TextView tvMorada, tvEmail, tvTelefone, tvNomeEmpresa, tvData, tvIvaTotal, tvValorToral;
+    private TextView tvMorada, tvEmail, tvTelefone, tvNomeEmpresa, tvData, tvIvaTotal, tvValorToTal;
     private ArrayList<LinhaFatura> linhaFaturas;
 
     public ListaFaturaDetalhesFragment(){
@@ -57,6 +58,7 @@ public class ListaFaturaDetalhesFragment extends Fragment implements LinhasFatur
 
         int idFatura = bundle.getInt("ID_FATURA", -1);
 
+
         lvFaturasDetalhes = view.findViewById(R.id.lvArtigosFatura);
         //empresa = SingletonGestorLoja.getInstance(getContext()).getEmpresaBD();
         linhaFaturas = SingletonGestorLoja.getInstance(getContext()).getLinhaFaturasBD();
@@ -67,6 +69,7 @@ public class ListaFaturaDetalhesFragment extends Fragment implements LinhasFatur
         tvTelefone = view.findViewById(R.id.tvTelefoneEmpresa);
         tvNomeEmpresa = view.findViewById(R.id.tvNomeEmpresaFatura);
         tvData = view.findViewById(R.id.tvDataFaturaValor);
+        tvValorToTal = view.findViewById(R.id.tvValorTotalFaturaDetalhes);
 
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);//alem disso fazer o implements la em cima
@@ -99,9 +102,10 @@ public class ListaFaturaDetalhesFragment extends Fragment implements LinhasFatur
         tvEmail.setText("" + empresa.getEmail());
         tvTelefone.setText("" + empresa.getTelefone());
         tvNomeEmpresa.setText("" + empresa.getNome());
-        //tvData.setText("" + fatura.getData());
+        tvData.setText("" + bundle.getString("DATA"));
         //tvIvaTotal.setText("" + fatura.get);
-        //tvValorToral.setText("" + fatura.getValorFatura());
+        tvValorToTal.setText(String.format("%.2f",bundle.getDouble("VALOR_TOTAL"))+" €");
+
 
         return view;
     }

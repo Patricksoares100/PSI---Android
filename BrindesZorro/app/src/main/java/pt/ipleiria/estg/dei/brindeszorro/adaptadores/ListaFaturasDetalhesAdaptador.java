@@ -89,11 +89,13 @@ public class ListaFaturasDetalhesAdaptador extends BaseAdapter {
         }
 
         public void update(LinhaFatura linhaFatura) {
+
+
             tvArtigo.setText("" + linhaFatura.getNome());
-            tvPreco.setText("" + linhaFatura.getPreco()+ " €");
+            tvPreco.setText(String.format("%.2f",linhaFatura.getPreco())+ " €");
             tvQuantidade.setText("" + linhaFatura.getQuantidade());
-            tvIvaTotal.setText("" + linhaFatura.getValor_iva()+ " €");
-            tvValorTotal.setText("" + linhaFatura.getValor()+ " €");
+            tvIvaTotal.setText(String.format("%.2f",linhaFatura.getValor_iva())+ " €");
+            tvValorTotal.setText(String.format("%.2f",linhaFatura.getValor())+ " €");
             Glide.with(context)
                     .load(linhaFatura.getImagem())
                     .placeholder(R.drawable.ipleiria)
