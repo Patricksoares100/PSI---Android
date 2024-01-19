@@ -1,13 +1,17 @@
 package pt.ipleiria.estg.dei.brindeszorro;
 
+import static pt.ipleiria.estg.dei.brindeszorro.DetalhesArtigoActivity.ID_ARTIGO;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
 
@@ -15,17 +19,39 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
 
     public static final String IDAVALIACAOS = "IDAVALIACAO";
     Avaliacao avaliacao;
+    private TextView precoArtigo, descricaoArtigo, artigoNome,totalAvaliacaoTV;
+    private Artigo artigo;
     private EditText etComentarioArtigoAvaliacaoComentario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avaliacao_comentario);
 
-        int idAvaliacao = getIntent().getIntExtra(IDAVALIACAOS, 0);
-        avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao(idAvaliacao);
-
         etComentarioArtigoAvaliacaoComentario = findViewById(R.id.etComentarioArtigoAvaliacaoComentario);
+        precoArtigo = findViewById(R.id.tvPrecoArtigo);
+        descricaoArtigo = findViewById(R.id.tvDesignacaoArtigo);
+        artigoNome = findViewById(R.id.tvNomeArtigo);
+        totalAvaliacaoTV = findViewById(R.id.tvMediaAva);
+
+
+        carregarDadosArtigo();
+
     }
+
+    private void carregarDadosArtigo(){
+
+        int idArtigo = getIntent().getIntExtra(ID_ARTIGO, 0);
+        artigo = SingletonGestorLoja.getInstance(getApplicationContext()).getArtigo(idArtigo);
+
+        precoArtigo.setText(String.format("%.2f €", artigo.getPreco()));
+        descricaoArtigo.setText(artigo.getDescricao());
+        artigoNome.setText(artigo.getNome());
+        totalAvaliacaoTV.setText("" + artigo.getNum_avaliacoes() + " Avaliações");
+
+
+
+    }
+
 
     public void onClickEnviarComentario(View view) {
 
