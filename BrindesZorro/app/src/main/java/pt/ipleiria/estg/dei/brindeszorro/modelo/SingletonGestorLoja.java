@@ -928,7 +928,7 @@ public class SingletonGestorLoja {
             if(faturasListener != null){
                 faturasListener.onRefreshListaFaturas(lojaBDHelper.getAllFaturasBD());
             }
-            //LISTENERS vamos buscar os favoritos a bd local
+            //LISTENERS vamos buscar as faturas a bd local
         }else {
 
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "fatura/find?token=" + token.toString(), null, new Response.Listener<JSONArray>() {
