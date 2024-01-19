@@ -765,24 +765,22 @@ public class SingletonGestorLoja {
         }
     }
 
-    public void adicionarAvaliacaoAPI(final Avaliacao avaliacao, final Context context, String token) {
+    public void adicionarAvaliacaoAPI(final Avaliacao avaliacao, final Context context) {
         if (!LojaJsonParser.isConnectionInternet(context)) {
             Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
             //aqui temos de ir buscar na base de dados local se nao tiver net
 
         } else {
-            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER + "avaliacao/create?token=" + token.toString(), new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
+            StringRequest req = new StringRequest(Request.Method.POST, Public.SERVER + "avaliacao/criar", new Response.Listener<String>() { //requisição por http, com a nssa configuração de link acima
                 @Override
                 public void onResponse(String response) {
-                    adicionarAvaliacaoBD(LojaJsonParser.parserJsonAvaliacao(response));
-                    if (avaliacaoListener != null) {
-                        avaliacaoListener.onRefreshAvaliacao(MainActivity.ADD);
-                    }
+                    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("---> ERRO adicionarAvaliacaoAPI: " + error.getMessage());
+                    Toast.makeText(context, "Erro ao submeter a avaliação", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 protected Map<String, String> getParams() {
@@ -791,7 +789,7 @@ public class SingletonGestorLoja {
                     params.put("comentario", avaliacao.getComentario());
                     params.put("classificacao", "" + avaliacao.getClassificacao());
                     params.put("artigo_id", "" + avaliacao.getArtigoId());
-
+                    params.put("perfil_id", "" + avaliacao.getPerfilId());
                     return params;
                 }
             };

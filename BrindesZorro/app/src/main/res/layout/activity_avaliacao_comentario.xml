@@ -171,7 +171,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="2dp"
-            android:rating="0.0"
+            android:rating="5.0"
             android:stepSize="1.0" />
     </LinearLayout>
 
@@ -199,19 +199,19 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etComentarioArtigoAvaliacaoComentario"
+            android:id="@+id/editTextTextMultiLineComentario"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content"
             android:ems="10"
-            android:gravity="bottom"
-            android:hint="@string/txtComentarioArtigoAvaliacaoComentario"
-            android:inputType="text|textMultiLine"
-            android:lines="8"
-            android:maxLines="10"
-            android:minLines="0"
-            android:scrollbars="vertical"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:maxLength="254"
+            android:maxLines="3"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="270dp" />
 
         <Button
             android:id="@+id/buttonEnviarComentario"

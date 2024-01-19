@@ -85,7 +85,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
         // CRIAR TABELA NA BASE DE DADOS
         String createAvaliacaoTable =
                 "CREATE TABLE " + TABLE_NAME_AVALIACAOS +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(" + ID + " INTEGER PRIMARY KEY, " +
                         COMENTARIO + " TEXT NOT NULL, " +
                         CLASSIFICACAO + " INTEGER NOT NULL, " +
                         ARTIGO_ID + " INTEGER NOT NULL, " +
@@ -95,7 +95,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         String createArtigoTable =
                 "CREATE TABLE " + TABLE_NAME_ARTIGOS +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(" + ID + " INTEGER PRIMARY KEY, " +
                         NOME + " TEXT NOT NULL, " +
                         DESCRICAO + " TEXT NOT NULL, " +
                         REFERENCIA + " TEXT NOT NULL, " +
@@ -112,7 +112,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         String createFaturaTable =
                 "CREATE TABLE " + TABLE_NAME_FATURAS +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(" + ID + " INTEGER PRIMARY KEY, " +
                         DATA + " TEXT NOT NULL, " +
                         VALOR_FATURA + " DOUBLE NOT NULL, " +
                         ESTADO + " TEXT NOT NULL, " +
@@ -122,7 +122,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         String createFavoritoTable =
                 "CREATE TABLE " + TABLE_NAME_FAVORITOS +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(" + ID + " INTEGER PRIMARY KEY, " +
                         ARTIGO_ID + " INTEGER NOT NULL, " +
                         PERFIL_ID + " INTEGER NOT NULL, " +
                         VALOR_ARTIGO + " INTEGER NOT NULL, " +
@@ -146,7 +146,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         String createCarrinhoTable =
                 "CREATE TABLE " + TABLE_NAME_CARRINHOS +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(" + ID + " INTEGER PRIMARY KEY, " +
                         QUANTIDADE + " INTEGER NOT NULL, " +
                         VALORUNITARIO + " DOUBLE NOT NULL, " +
                         NOME + " TEXT NOT NULL, " +
@@ -156,7 +156,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         String createEmpresaTable =
                 "CREATE TABLE " + TABLE_NAME_EMPRESA +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(" + ID + " INTEGER PRIMARY KEY, " +
                         TELEFONE + " INTEGER NOT NULL, " +
                         NOME + " TEXT NOT NULL, " +
                         EMAIL + " TEXT NOT NULL, " +
@@ -166,7 +166,7 @@ public class LojaBDHelper extends SQLiteOpenHelper {
 
         String createLinhaFaturaTable =
                 "CREATE TABLE " + TABLE_NAME_LINHAFATURAS +
-                        "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(" + ID + " INTEGER PRIMARY KEY, " +
                         QUANTIDADE + " INTEGER NOT NULL, " +
                         VALOR + " DOUBLE NOT NULL, " +
                         VALOR_IVA + " DOUBLE NOT NULL, " +

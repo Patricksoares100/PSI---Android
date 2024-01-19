@@ -65,16 +65,7 @@ public class ListaFaturasFragment extends Fragment implements FaturasListener {
         lvFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(getContext(), livros.get(position).getTitulo(), Toast.LENGTH_SHORT).show();
-                // Alinea 5.2 Ficha 5 Books - Inicia a atividade com a informação da fatura após clicar
-                /*fragmentManager = getActivity().getSupportFragmentManager();
-                fragment = new ListaFaturaDetalhesFragment();
-                fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();*/
-
-                // tentei me guiar pelo books no menu do main activity mas continuava a dar erro. Apenas consegui dessa forma
                 Fatura faturaSelecionada = faturas.get(position);
-
-
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("ID_FATURA", faturaSelecionada.getId());
