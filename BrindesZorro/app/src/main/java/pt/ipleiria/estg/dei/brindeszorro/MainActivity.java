@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EditText etPassword, etEmail;
     public static final String USERNAME = "username";
     private FragmentManager fragmentManager;
+    private String buscarUsername;
     private Fragment fragment;
-
     private NavigationView navigationView;
     private DrawerLayout drawer;
     public static final int ADD = 100, EDIT = 200, DELETE = 300;
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = findViewById(R.id.toolBar); // Configura a barra de ferramentas (toolbar)
         setSupportActionBar(toolbar); // Define a barra de ferramentas como a barra de apoio da atividade
         drawer = findViewById(R.id.drawerLayout); // Obtém a gaveta (drawer)
@@ -70,33 +69,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // falta aqui carregar o cabeçalho da gaveta (nome e email do user)
         carregarFragmentoInicial();
         carregarCabecalho();
-
-
-        // PARA POR OS BOTOES DE BAIXO A FUNCIONA
-        
-        /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.icnHome:
-                        fragment = new ListaHomeFragment();
-                        setTitle(item.getTitle());
-                        return true;
-                    case R.id.icnCarrinho:
-                        fragment = new ListaCarrinhoFragment();
-                        setTitle(item.getTitle());
-                        return true;
-                    case R.id.icnFavoritos:
-                        fragment = new ListaFavoritosFragment();
-                        setTitle(item.getTitle());
-                        return true;
-                }
-                return false;
-            }
-        });*/
-
-
     }
 
     private boolean carregarFragmentoInicial(){
@@ -108,14 +80,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void carregarCabecalho() {
-        // Este método deve ser implementado para carregar o cabeçalho da vista de navegação
-//        username =getIntent().getStringExtra(USERNAME).toString();
-        if (username != null){
-            View hView= navigationView.getHeaderView(0);
+        buscarUsername = getIntent().getStringExtra(USERNAME);
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
-            TextView tvUsername = hView.findViewById(R.id.tvUsernameLogin);
-            tvUsername.setText(username);
-        }
+            SharedPreferences.Editor editorShared = sharedPreferences.edit();
+
+            editorShared.putString(Public.USERNAME, buscarUsername);
+            editorShared.apply();
+
+        View hView = navigationView.getHeaderView(0);
+        TextView tvUsername = hView.findViewById(R.id.tvUsernameLogin);
+        tvUsername.setText(buscarUsername);
     }
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Este método é chamado quando um item de menu da vista de navegação é selecionado

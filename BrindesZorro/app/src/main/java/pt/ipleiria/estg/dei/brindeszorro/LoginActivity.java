@@ -33,7 +33,14 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPasswordLogin);
 
         if(isTokenValido()){
-            Intent intent = new Intent(this, MainActivity.class);
+
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(Public.USERNAME, "teste");
+            editor.apply();
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra(MainActivity.USERNAME, sharedPreferences.getString(Public.USERNAME, "TESTE"));
             startActivity(intent);
             finish();
         }
@@ -56,13 +63,19 @@ public class LoginActivity extends AppCompatActivity {
         SingletonGestorLoja.getInstance(getApplicationContext()).loginAPI(login, getApplicationContext(), new Response.Listener() {
             @Override
             public void onResponse(Object response) {
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(Public.USERNAME, username);
+                editor.apply();
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra(MainActivity.USERNAME, username);
+                intent.putExtra(MainActivity.USERNAME, sharedPreferences.getString(Public.USERNAME, "TESTE"));
                 startActivity(intent);
                 finish();
             }
         });
     }
+
     public boolean isTokenValido(){
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
         System.out.println(sharedPreferences.getString(Public.TOKEN,"TOKEN"));
