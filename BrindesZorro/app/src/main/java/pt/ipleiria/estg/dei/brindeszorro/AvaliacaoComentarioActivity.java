@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Artigo;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
@@ -22,6 +26,8 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
     private TextView precoArtigo, descricaoArtigo, artigoNome,totalAvaliacaoTV;
     private Artigo artigo;
     private EditText etComentarioArtigoAvaliacaoComentario;
+    private ImageView ivImagem;
+    private RatingBar ratingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +38,8 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
         descricaoArtigo = findViewById(R.id.tvDesignacaoArtigo);
         artigoNome = findViewById(R.id.tvNomeArtigo);
         totalAvaliacaoTV = findViewById(R.id.tvMediaAva);
+        ivImagem = findViewById(R.id.ivArtigoComentario);
+        ratingBar = findViewById(R.id.ratingBarTotal);
 
 
         carregarDadosArtigo();
@@ -47,7 +55,12 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
         descricaoArtigo.setText(artigo.getDescricao());
         artigoNome.setText(artigo.getNome());
         totalAvaliacaoTV.setText("" + artigo.getNum_avaliacoes() + " Avaliações");
-
+        ratingBar.setRating(artigo.getMedia_avaliacoes());
+        Glide.with(getApplicationContext())
+                .load(artigo.getImagem())
+                .placeholder(R.drawable.ipleiria)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(ivImagem);
 
 
     }

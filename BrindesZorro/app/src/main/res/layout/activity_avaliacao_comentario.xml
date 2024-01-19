@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:layout_weight="0.09"
             android:orientation="vertical">
 
             <TextView
@@ -31,7 +32,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/ivEmpresaLogo"
+                android:id="@+id/ivArtigoComentario"
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="2dp"
@@ -75,10 +76,12 @@
                         android:gravity="center" />
 
                     <RatingBar
-                        android:id="@+id/ratingBar2"
+                        android:id="@+id/ratingBarTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2" />
+                        android:layout_weight="1.5"
+                        android:isIndicator="true"
+                        android:stepSize="1" />
 
                 </LinearLayout>
 
@@ -155,7 +158,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/txtClassificacaoArtigoAvaliacaoComentario"
+            android:text="@string/Insira_classificacao"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -163,13 +166,13 @@
             android:id="@+id/ratingBarArtigoAvaliacaoComentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:rating="0.0"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
             android:layout_marginRight="5dp"
-            android:stepSize="1.0"
-            android:layout_marginBottom="2dp" />
+            android:layout_marginBottom="2dp"
+            android:rating="0.0"
+            android:stepSize="1.0" />
     </LinearLayout>
 
     <View
@@ -225,17 +228,17 @@
         android:background="?android:attr/listDivider" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:id="@+id/bottomAppBar"
         tools:ignore="BottomAppBar">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bottomNavigationView"
-            app:menu="@menu/bottom_nav_menu"
-            />
+            app:menu="@menu/bottom_nav_menu" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
 </LinearLayout>

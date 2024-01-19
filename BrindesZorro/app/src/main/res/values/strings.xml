@@ -136,5 +136,6 @@
     <string name="tv_DataFatura">Data Emissão:</string>
     <string name="txtQuantidadeArtigoFaturaDetalhes">Quantidade</string>
     <string name="txtIvaTotalDetalhesFatura">Iva Total:</string>
-    <string name="btn_avaliarArtigo">AVALIAR ARTIGO</string>/>
+    <string name="btn_avaliarArtigo">AVALIAR ARTIGO</string>
+    <string name="Insira_classificacao">Insira a sua Classificação: </string>/>
 </resources>

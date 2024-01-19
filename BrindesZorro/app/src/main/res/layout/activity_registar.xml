@@ -188,15 +188,6 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/buttonCancelarRegistar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="Cancelar"
-                    android:text="@string/textCancelar"
-                    tools:ignore="VisualLintButtonSize" />
-
-                <Button
                     android:id="@+id/buttonRegistarCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
