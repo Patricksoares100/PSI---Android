@@ -148,19 +148,5 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:id="@+id/bottomAppBar"
-        tools:ignore="BottomAppBar">
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bottomNavigationView"
-            app:menu="@menu/bottom_nav_menu"
-            />
-    </com.google.android.material.bottomappbar.BottomAppBar>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
