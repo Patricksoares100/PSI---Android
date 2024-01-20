@@ -70,7 +70,8 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:onClick="diminuirQuantidade"
-                    android:src="@drawable/ic_action_menos_foreground" />
+                    android:src="@drawable/ic_action_menos_foreground"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:id="@+id/tvQuantidadeArtigoDetalhes"
@@ -88,7 +89,8 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:onClick="aumentarQuantidade"
-                    android:src="@drawable/ic_action_add_foreground" />
+                    android:src="@drawable/ic_action_add_foreground"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
             </LinearLayout>
 
@@ -140,7 +142,7 @@
                 <ListView
                     android:id="@+id/lvAvaliacaoDetalheArtigo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="142dp"
                     android:layout_marginBottom="45dp" />
 
             </LinearLayout>
