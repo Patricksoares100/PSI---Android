@@ -25,7 +25,7 @@
     <ListView
         android:id="@+id/lvCarrinhoCompras"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="478dp" />
 
     <View
         android:id="@+id/divider7"
@@ -69,31 +69,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="76dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonLimparCarrinho"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="@string/buttonLimparCarrinho" />
 
         <Button
             android:id="@+id/buttonConcluirCompra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:onClick="onClickConfirmarCompra"
             android:text="@string/buttonConcluirCompra" />
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider8"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

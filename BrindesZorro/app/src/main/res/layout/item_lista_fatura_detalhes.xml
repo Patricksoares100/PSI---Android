@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="195dp"
+        android:layout_height="210dp"
         android:layout_weight="0.7"
         android:gravity="center"
         android:orientation="horizontal"
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:layout_weight="0.3"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/img_artigo"
             app:srcCompat="@drawable/agenda"
             tools:ignore="NestedWeights" />
 
@@ -142,7 +142,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -168,7 +168,7 @@
             <Button
                 android:id="@+id/buttonAvaliarArtigoDetalhesFatura"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:minHeight="48dp"

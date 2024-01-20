@@ -10,11 +10,12 @@
 
     <ImageButton
         android:id="@+id/imgButtonServidor"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="350dp"
+        android:onClick="irServidor"
         android:src="@drawable/ic_launcher_adaptive_fore"
-        android:onClick="irServidor"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/ivLogoLogin"

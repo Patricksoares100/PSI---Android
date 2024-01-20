@@ -57,7 +57,8 @@
         android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="phone"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewNifconfirmar"
@@ -78,7 +79,8 @@
         android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="phone"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewMoradaConfirmar"
@@ -121,7 +123,8 @@
         android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewLocalidadeConfirmar"
@@ -154,20 +157,20 @@
         <RadioButton
             android:id="@+id/radioButtonMBWay"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:checked="true"
             android:text="@string/txtMBWay" />
 
         <RadioButton
             android:id="@+id/radioButtonMultibanco"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:text="@string/txtMultibanco" />
 
         <RadioButton
             android:id="@+id/radioButtonTransferencia"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:text="@string/txtTransferencia" />
     </RadioGroup>
 

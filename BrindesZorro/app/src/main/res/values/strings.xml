@@ -163,5 +163,6 @@
     <string name="nif_dever_conter_9_digitos">Nif deverá conter 9 digitos</string>
     <string name="telefone_dever_conter_9_digitos">Telefone deverá conter 9 digitos</string>
     <string name="forget_pass">Forget Password?</string>
+    <string name="img_artigo">Imagem do Artigo</string>
     />
 </resources>
