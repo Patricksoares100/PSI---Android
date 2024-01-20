@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.brindeszorro.R;
+import pt.ipleiria.estg.dei.brindeszorro.listeners.FaturasListener;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Avaliacao;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.Fatura;
 import pt.ipleiria.estg.dei.brindeszorro.modelo.SingletonGestorLoja;
@@ -22,6 +23,7 @@ public class ListaFaturasAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
+    private FaturasListener faturasListener;
 
     private ArrayList<Fatura> faturas;
 
@@ -71,9 +73,9 @@ public class ListaFaturasAdaptador extends BaseAdapter {
             int idFatura = faturas.get(position).getId();
             SingletonGestorLoja.getInstance(context).pagarFatura(context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), idFatura);
 
-            /*if(faturasListener != null){
-                faturasListener.onRefreshListaFaturas(lojaBDHelper.getAllFaturasBD());
-            }*/
+            if(faturasListener != null){
+                faturasListener.onRefreshListaFaturas(faturas);
+            }
         });
 
         /*Fatura fatura = faturas.get(position);

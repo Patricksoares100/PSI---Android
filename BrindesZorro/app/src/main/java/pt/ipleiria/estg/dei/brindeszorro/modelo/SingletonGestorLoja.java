@@ -969,7 +969,7 @@ public class SingletonGestorLoja {
                     if (fatura != null) {
                         System.out.println("--->PAGOU " + fatura);
                         faturas.add(fatura);
-                        adicionarFaturasBD(faturas);
+                        editarFaturaBD(fatura);
                         if (faturasListener != null) {
                             faturasListener.onRefreshListaFaturas(faturas);
                         }
