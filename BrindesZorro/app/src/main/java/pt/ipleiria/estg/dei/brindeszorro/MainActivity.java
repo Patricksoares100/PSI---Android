@@ -129,14 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle(item.getTitle());
             /*Intent intent = new Intent(this, AvaliacaoComentarioActivity.class);
             startActivity(intent);*/
-        }else if (item.getItemId() == R.id.navEmail) {
-        setTitle(item.getTitle());
-            // depois vou chamar aqui a função do email 
-    }
-
-
-
-
+        }
         if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item
 
