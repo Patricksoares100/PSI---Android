@@ -85,29 +85,29 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
         https://copyprogramming.com/howto/pattern-validation-for-mobile-number-in-android
         // o 0 -9 indica que aceita valores no intervalo de 0 a 9 nos {9} numeros seguintes
         if(!nif.matches("[0-9]{9}")){
-            Toast.makeText(this, "Nif deverá conter 9 caracteres", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nif_dever_conter_9_caracteres, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(!telefone.matches("[0-9]{9}")){
-            Toast.makeText(this, "Telemovel deverá conter 9 caracteres", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.telemovel_dever_conter_9_caracteres, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(morada.length() == 0) {
-            Toast.makeText(this, "Morada inválida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.morada_inv_lida, Toast.LENGTH_SHORT).show();
             return;
         }
 
 
         // aqui a mesma questão separado por um -
         if(!codPostal.matches("[0-9]{4}-[0-9]{3}")){
-            Toast.makeText(this, "Formato de código postal inválido (____-___)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.formato_de_c_digo_postal_inv_lido, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(localidade.length() == 0) {
-            Toast.makeText(this, "Localidade inválida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.localidade_inv_lida, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -136,7 +136,7 @@ public class EditarDadosPessoaisActivity extends AppCompatActivity implements Us
     @Override
     public void onRefreshListaUsers(ArrayList<User> users) {
         if (users != null){
-            Toast.makeText(this, "Faça login ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.fa_a_login, Toast.LENGTH_SHORT).show();
         }
     }
 }

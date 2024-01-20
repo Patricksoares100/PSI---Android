@@ -101,7 +101,7 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
 
 
         if (textoComentario.isEmpty()){
-            Toast.makeText(this, "Deixe um comentário antes de enviar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.deixe_um_coment_rio_antes_de_enviar, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -110,7 +110,7 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
         // defini  android:rating="0.0" no xml para ele perceber qual o valor inicial e ver se continua 0.0
         //alterei para 5.0 no xml para assim estar logo a 5 e caso o user queira ele baixa
         if (ratingbar.getRating() == 0.0) {
-            Toast.makeText(this, "Atribua uma pontuação antes de enviar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.atribua_uma_pontua_o_antes_de_enviar, Toast.LENGTH_SHORT).show();
             return;
         }
         
@@ -136,7 +136,7 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
             }
 
         } else {
-            Toast.makeText(this, "Comentário não pode ter menos de 4 caracteres!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.coment_rio_n_o_pode_ter_menos_de_4_caracteres, Toast.LENGTH_SHORT).show();
         }
 
 

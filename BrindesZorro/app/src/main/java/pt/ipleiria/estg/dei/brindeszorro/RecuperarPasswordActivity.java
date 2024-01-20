@@ -28,16 +28,16 @@ public class RecuperarPasswordActivity extends AppCompatActivity {
         String email = etemail.getText().toString();
 
         if(email.isEmpty()){
-            Toast.makeText(this, "Preencha o email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.preencha_o_email, Toast.LENGTH_SHORT).show();
             return;
         }
         if (email.length() <= 4) {
-            Toast.makeText(this, "Email invalido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.email_invalido, Toast.LENGTH_SHORT).show();
             return;
         }
         if (!email.contains("@")) {
             etemail.setError(getString(R.string.etFormatoInvalido));
-            Toast.makeText(this, "Email em formato inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.email_em_formato_inv_lido, Toast.LENGTH_SHORT).show();
             return;
         }
 

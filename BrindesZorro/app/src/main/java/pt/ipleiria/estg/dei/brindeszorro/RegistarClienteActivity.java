@@ -57,48 +57,48 @@ public class RegistarClienteActivity extends AppCompatActivity {
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() ||
                 nome.isEmpty() || nif.isEmpty() || telefone.isEmpty() ||
                 morada.isEmpty() || localidade.isEmpty() || codPostal.isEmpty()) {
-            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.preencha_todos_os_campos, Toast.LENGTH_SHORT).show();
             return;
         }
         if (username.length() <= 4) {
-            Toast.makeText(this, "Username inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.username_inv_lido, Toast.LENGTH_SHORT).show();
             return;
         }
         if (!isEmailValido(email)) {
             etEmailRegistar.setError(getString(R.string.etFormatoInvalido));
-            Toast.makeText(this, "Email em formato inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.email_em_formato_inv_lido, Toast.LENGTH_SHORT).show();
             return;
         }
         if (nome.length() <= 2) {
-            Toast.makeText(this, "Nome inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nome_inv_lido, Toast.LENGTH_SHORT).show();
             return;
         }
         if (password.length() < 8) {
-            Toast.makeText(this, "Password deve conter min 8 caracteres", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.password_deve_conter_min_8_caracteres, Toast.LENGTH_SHORT).show();
             return;
         }
         if (!nif.matches("[0-9]{9}")) {
-            Toast.makeText(this, "Nif deverá conter 9 digitos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nif_dever_conter_9_digitos, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!telefone.matches("[0-9]{9}")) {
-            Toast.makeText(this, "Telefone deverá conter 9 digitos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.telefone_dever_conter_9_digitos, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (morada.length() == 0) {
-            Toast.makeText(this, "Morada inválida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.morada_inv_lida, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!codPostal.matches("[0-9]{4}-[0-9]{3}")) {
-            Toast.makeText(this, "Formato de código postal inválido (____-___)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  R.string.formato_de_c_digo_postal_inv_lido, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (localidade.length() == 0) {
-            Toast.makeText(this, "Localidade inválida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  R.string.localidade_inv_lida, Toast.LENGTH_SHORT).show();
             return;
         }
         signup = new Signup(0,username,email,password,nome,

@@ -73,7 +73,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:onClick="onClickPassword"
-        android:text="Forget Password?"
+        android:text="@string/forget_pass"
         android:textStyle="bold"
         tools:ignore="TouchTargetSizeCheck" />
 

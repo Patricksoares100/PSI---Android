@@ -85,7 +85,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
 
     public void diminuirQuantidade(View view) {
         if (!(quantidade > 1 && quantidade <= artigo.getStock_atual())) {
-            Toast.makeText(this, "A quantidade não pode ser inferior a 1.", Toast.LENGTH_LONG).show();;
+            Toast.makeText(this, R.string.a_quantidade_n_o_pode_ser_inferior_a_1, Toast.LENGTH_LONG).show();;
         } else {
             quantidade--;
             quantidadeAtualizada();
@@ -94,7 +94,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Avaliac
 
     public void aumentarQuantidade(View view) {
         if (!(quantidade >= 1 && quantidade < artigo.getStock_atual())) {
-            Toast.makeText(this, "Quantidade máxima de stock selecionada.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.quantidade_m_xima_de_stock_selecionada, Toast.LENGTH_SHORT).show();
         } else {
             quantidade++;
             quantidadeAtualizada();

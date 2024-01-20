@@ -33,24 +33,24 @@ public class AlterarPasswordActivity extends AppCompatActivity {
         String novaPassword = etNovaPassword.getText().toString();
         String confirmarPassword = etConfirmarNovaPassword.getText().toString();
         if(atualPass.isEmpty() || novaPassword.isEmpty() || confirmarPassword.isEmpty()){
-            Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.preencha_todos_os_campos, Toast.LENGTH_SHORT).show();
             return;
         }
         if(atualPass.length() <8 ){
-            Toast.makeText(this, "Password atual deve conter no minimo 8 caracteres!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.password_atual_deve_conter_no_minimo_8_caracteres, Toast.LENGTH_SHORT).show();
             return;
         }
        if (novaPassword.length() < 8 || confirmarPassword.length() < 8){
-            Toast.makeText(this, "Nova password deve conter no minimo 8 caracteres!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nova_password_deve_conter_no_minimo_8_caracteres, Toast.LENGTH_SHORT).show();
             return;
         }
         if (!novaPassword.equals(confirmarPassword)) {
-            Toast.makeText(this, "As password não coincidem", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.as_password_n_o_coincidem, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(atualPass.toString().matches(novaPassword.toString()) || atualPass.toString().matches(confirmarPassword.toString())){
-           Toast.makeText(this, "Nova password deve ser diferente da atual!", Toast.LENGTH_SHORT).show();
+           Toast.makeText(this, R.string.nova_password_deve_ser_diferente_da_atual, Toast.LENGTH_SHORT).show();
            return;
        }
         if (novaPassword.toString().matches(confirmarPassword.toString())){

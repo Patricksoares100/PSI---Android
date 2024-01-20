@@ -137,5 +137,31 @@
     <string name="txtQuantidadeArtigoFaturaDetalhes">Quantidade</string>
     <string name="txtIvaTotalDetalhesFatura">Iva Total:</string>
     <string name="btn_avaliarArtigo">AVALIAR ARTIGO</string>
-    <string name="Insira_classificacao">Insira a sua Classificação: </string>/>
+    <string name="Insira_classificacao">Insira a sua Classificação: </string>
+    <string name="preencha_todos_os_campos">Preencha todos os campos!</string>
+    <string name="password_atual_deve_conter_no_minimo_8_caracteres">Password atual deve conter no minimo 8 caracteres!</string>
+    <string name="nova_password_deve_conter_no_minimo_8_caracteres">Nova password deve conter no minimo 8 caracteres!</string>
+    <string name="as_password_n_o_coincidem">As password não coincidem</string>
+    <string name="nova_password_deve_ser_diferente_da_atual">Nova password deve ser diferente da atual!</string>
+    <string name="deixe_um_coment_rio_antes_de_enviar">Deixe um comentário antes de enviar</string>
+    <string name="atribua_uma_pontua_o_antes_de_enviar">Atribua uma pontuação antes de enviar</string>
+    <string name="coment_rio_n_o_pode_ter_menos_de_4_caracteres">Comentário não pode ter menos de 4 caracteres!</string>
+    <string name="a_quantidade_n_o_pode_ser_inferior_a_1">A quantidade não pode ser inferior a 1.</string>
+    <string name="quantidade_m_xima_de_stock_selecionada">Quantidade máxima de stock selecionada.</string>
+    <string name="nif_dever_conter_9_caracteres">Nif deverá conter 9 caracteres</string>
+    <string name="telemovel_dever_conter_9_caracteres">Telemovel deverá conter 9 caracteres</string>
+    <string name="morada_inv_lida">Morada inválida</string>
+    <string name="formato_de_c_digo_postal_inv_lido">Formato de código postal inválido (____-___)</string>
+    <string name="localidade_inv_lida">Localidade inválida</string>
+    <string name="fa_a_login">"Faça login "</string>
+    <string name="preencha_o_email">Preencha o email</string>
+    <string name="email_invalido">Email invalido</string>
+    <string name="email_em_formato_inv_lido">Email em formato inválido</string>
+    <string name="username_inv_lido">Username inválido</string>
+    <string name="nome_inv_lido">Nome inválido</string>
+    <string name="password_deve_conter_min_8_caracteres">Password deve conter min 8 caracteres</string>
+    <string name="nif_dever_conter_9_digitos">Nif deverá conter 9 digitos</string>
+    <string name="telefone_dever_conter_9_digitos">Telefone deverá conter 9 digitos</string>
+    <string name="forget_pass">Forget Password?</string>
+    />
 </resources>
