@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.brindeszorro.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -70,9 +73,11 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
     public void onClickConcluirCompra(View view){
        /* buttonConcluirCompra.setAlpha(0.5f);
         buttonLimparCarrinho.setAlpha(0.5f);*/
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
-        SingletonGestorLoja.getInstance(getContext()).comprarCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
+        //SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+        //SingletonGestorLoja.getInstance(getContext()).comprarCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
         //SingletonGestorLoja.getInstance(getContext()).adicionarLinhaFaturaAPI(linhaFatura, getContext(), sharedPreferences.getString(Public.TOKEN, "TOKEN"));
+        dialogRemover();
+
         atualizarTotalCarrinho(carrinhos);
     }
 
@@ -102,5 +107,29 @@ public class ListaCarrinhoFragment extends Fragment implements CarrinhosListener
         }
         tvMostrarValorCarrinho.setText(String.format("%.2f", total)+ " €");
         return total;
+    }
+
+    private void dialogRemover() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Finalizar compra!").setMessage("Pretende mesmo concluir a compra?").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences sharedPreferences = getContext().getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
+                        SingletonGestorLoja.getInstance(getContext()).comprarCarrinhoAPI(getContext(),sharedPreferences.getString(Public.TOKEN,"TOKEN"));
+
+                       /* Intent intent = new Intent();
+                        intent.putExtra(MenuMainActivity.OP_CODE, MenuMainActivity.DELETE);
+                        setResult(RESULT_OK, intent);
+                        finish();*/
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_input_add)
+                .show();
     }
 }
