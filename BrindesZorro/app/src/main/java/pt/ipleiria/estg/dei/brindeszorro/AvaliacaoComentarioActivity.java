@@ -4,7 +4,9 @@ import static pt.ipleiria.estg.dei.brindeszorro.DetalhesArtigoActivity.ID_ARTIGO
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -52,23 +54,41 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
 
     private void carregarDadosArtigo(){
 
-        int idAvaliacao = getIntent().getIntExtra("IDAVALIACAO", 0);
-        Avaliacao avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao(idAvaliacao);
-        artigo = SingletonGestorLoja.getInstance(getApplicationContext()).getArtigo(avaliacao.getArtigoId());
-        //Avaliacao avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao();
+        if (getIntent().getIntExtra("IDAVALIACAO", 0) > 0){
+            int idAvaliacao = getIntent().getIntExtra("IDAVALIACAO", 0);
+            Avaliacao avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao(idAvaliacao);
+            artigo = SingletonGestorLoja.getInstance(getApplicationContext()).getArtigo(avaliacao.getArtigoId());
+            //Avaliacao avaliacao = SingletonGestorLoja.getInstance(getApplicationContext()).getAvaliacao();
 
-        precoArtigo.setText(String.format("%.2f €", artigo.getPreco()));
-        descricaoArtigo.setText(artigo.getDescricao());
-        artigoNome.setText(artigo.getNome());
-        totalAvaliacaoTV.setText("" + artigo.getNum_avaliacoes() + " Avaliações");
-        ratingBar.setRating(artigo.getMedia_avaliacoes());
-        editTextTextMultiLineComentario.setText(avaliacao.getComentario());
-        ratingBarArtigoAvaliacaoComentario.setRating(avaliacao.getClassificacao());
-        Glide.with(getApplicationContext())
-                .load(artigo.getImagem())
-                .placeholder(R.drawable.ipleiria)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(ivImagem);
+            precoArtigo.setText(String.format("%.2f €", artigo.getPreco()));
+            descricaoArtigo.setText(artigo.getDescricao());
+            artigoNome.setText(artigo.getNome());
+            totalAvaliacaoTV.setText("" + artigo.getNum_avaliacoes() + " Avaliações");
+            ratingBar.setRating(artigo.getMedia_avaliacoes());
+            editTextTextMultiLineComentario.setText(avaliacao.getComentario());
+            ratingBarArtigoAvaliacaoComentario.setRating(avaliacao.getClassificacao());
+            Glide.with(getApplicationContext())
+                    .load(artigo.getImagem())
+                    .placeholder(R.drawable.ipleiria)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivImagem);
+        } else {
+            int idArtigo = getIntent().getIntExtra("IDARTIGO", 0);
+            artigo = SingletonGestorLoja.getInstance(getApplicationContext()).getArtigo(idArtigo);
+
+            precoArtigo.setText(String.format("%.2f €", artigo.getPreco()));
+            descricaoArtigo.setText(artigo.getDescricao());
+            artigoNome.setText(artigo.getNome());
+            totalAvaliacaoTV.setText("" + artigo.getNum_avaliacoes() + " Avaliações");
+            ratingBar.setRating(artigo.getMedia_avaliacoes());
+            Glide.with(getApplicationContext())
+                    .load(artigo.getImagem())
+                    .placeholder(R.drawable.ipleiria)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivImagem);
+
+        }
+
 
 
     }
@@ -93,16 +113,30 @@ public class AvaliacaoComentarioActivity extends AppCompatActivity {
             Toast.makeText(this, "Atribua uma pontuação antes de enviar", Toast.LENGTH_SHORT).show();
             return;
         }
+        
         if(textoComentario.length() >= 4 ){
+            if (getIntent().getIntExtra("IDAVALIACAO", 0) > 0){
+                //quero editar
+                User user = SingletonGestorLoja.getInstance(getApplicationContext()).getUserBD();
+                Avaliacao avaliacao = new Avaliacao(getIntent().getIntExtra("IDAVALIACAO", 0),textoComentario,(int)ratingbar.getRating(), artigo.getId(),user.getId());
+                SingletonGestorLoja.getInstance(getApplicationContext()).editarAvaliacaoAPI(avaliacao, getApplicationContext());
+                Intent intent = new Intent(this, DetalhesArtigoActivity.class);
+                intent.putExtra(DetalhesArtigoActivity.ID_ARTIGO, avaliacao.getArtigoId());
+                startActivity(intent);
+                finish();
+            } else {
+                // criar
+                User user = SingletonGestorLoja.getInstance(getApplicationContext()).getUserBD();
 
-            User user = SingletonGestorLoja.getInstance(getApplicationContext()).getUserBD();
+                Avaliacao avaliacao = new Avaliacao(0,textoComentario,(int)ratingbar.getRating(), artigo.getId(),user.getId());
+                SingletonGestorLoja.getInstance(getApplicationContext()).adicionarAvaliacaoAPI(avaliacao,getApplicationContext());
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
 
-            Avaliacao avaliacao = new Avaliacao(0,textoComentario,(int)ratingbar.getRating(), artigo.getId(),user.getId());
-            SingletonGestorLoja.getInstance(getApplicationContext()).adicionarAvaliacaoAPI(avaliacao,getApplicationContext());
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-
+        } else {
+            Toast.makeText(this, "Comentário não pode ter menos de 4 caracteres!", Toast.LENGTH_SHORT).show();
         }
 
 

@@ -824,12 +824,12 @@ public class SingletonGestorLoja {
 
     }
 
-    public void editarAvaliacaoAPI(final Avaliacao avaliacao, final Context context, String token){
+    public void editarAvaliacaoAPI(final Avaliacao avaliacao, final Context context){
         if(!LojaJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,  context.getString(R.string.sem_liga_a_internet), Toast.LENGTH_SHORT).show();
         }else {
-            System.out.println("---> avaliacaoooo editadaaaa " + avaliacao.getId());
-            StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "avaliacaos/editar?token=" + token.toString(), new Response.Listener<String>() {
+            System.out.println("---> Edita Avaliacao API " + avaliacao.getId());
+            StringRequest req = new StringRequest(Request.Method.PUT, Public.SERVER + "avaliacaos/editar?id=" + avaliacao.getId(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //fazer sub  aqui

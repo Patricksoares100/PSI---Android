@@ -70,6 +70,10 @@ public class ListaFaturasAdaptador extends BaseAdapter {
             SharedPreferences sharedPreferences = context.getSharedPreferences(Public.DADOS_USER, Context.MODE_PRIVATE);
             int idFatura = faturas.get(position).getId();
             SingletonGestorLoja.getInstance(context).pagarFatura(context, sharedPreferences.getString(Public.TOKEN, "TOKEN"), idFatura);
+
+            /*if(faturasListener != null){
+                faturasListener.onRefreshListaFaturas(lojaBDHelper.getAllFaturasBD());
+            }*/
         });
 
         /*Fatura fatura = faturas.get(position);
