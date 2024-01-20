@@ -968,7 +968,7 @@ public class SingletonGestorLoja {
                     Fatura fatura = LojaJsonParser.parserJsonFatura(response.toString());
                     if (fatura != null) {
                         System.out.println("--->PAGOU " + fatura);
-                        faturas.add(fatura);
+                       // faturas.add(fatura);
                         editarFaturaBD(fatura);
                         if (faturasListener != null) {
                             faturasListener.onRefreshListaFaturas(faturas);
