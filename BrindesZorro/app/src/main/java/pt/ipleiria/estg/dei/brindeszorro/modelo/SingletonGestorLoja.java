@@ -66,6 +66,7 @@ public class SingletonGestorLoja {
     private FaturasListener faturasListener;
     private ArrayList<Empresa> empresas;
     private Empresa empresa;
+    private Artigo auxAtigo = new Artigo();
 
 
     public static synchronized SingletonGestorLoja getInstance(Context context){
@@ -191,6 +192,8 @@ public class SingletonGestorLoja {
         }
         return null;       //caso contrario devolve nulo
     }
+
+
 
 
     // Alinea 7.2.1 Ficha 5 Books - Para aceder de forma correta a avaliacao selecionada, implementamos o método getAvaliacao(int idAvaliacao)
@@ -489,6 +492,18 @@ public class SingletonGestorLoja {
             adicionarArtigoBD(a);
         }
     }
+    public double  artigoMaisBaixo(ArrayList<Artigo> artigos){
+        Artigo auxAtigo = new Artigo();
+        auxAtigo.setPreco(1000);
+
+        for (Artigo a : artigos){
+            System.out.println(a.getPreco() + "--->" + auxAtigo.getPreco());
+            if(auxAtigo.getPreco()> a.getPreco() ){
+                auxAtigo.setPreco(a.getPreco());
+            }
+        }
+        return auxAtigo.getPreco();
+    }
 
     public void adicionarArtigoBD(Artigo a) {
         lojaBDHelper.adicionarArtigoBD(a);
@@ -564,6 +579,78 @@ public class SingletonGestorLoja {
 
             volleyQueue.add(req);
         }
+    }
+    public void getAllArtigosOralAPI(final Context context) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            if (artigosListener != null){
+                artigosListener.onRefreshListaArtigos(lojaBDHelper.getAllArtigosBD());
+            }
+        } else{
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "artigos", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response ARTIGOS API" + response);
+                    // response.re .getString('imagem').replace("\\/", "/");
+                    artigos = LojaJsonParser.parserJsonArtigos(response);
+
+                    adicionarArtigosBD(artigos);
+
+                    if(artigosListener != null){
+                        artigosListener.onRefreshListaArtigos(artigos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> response ERRO ARTIGOS API" + error);
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+    }
+    public double getArtigoMaisBaixoOralAPI(final Context context) {
+        if(!LojaJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.sem_liga_a_internet, Toast.LENGTH_LONG).show();
+            if (artigosListener != null){
+                artigosListener.onRefreshListaArtigos(lojaBDHelper.getAllArtigosBD());
+            }
+        } else{
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, Public.SERVER + "artigos", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    System.out.println("----> response ARTIGOS API" + response);
+                    // response.re .getString('imagem').replace("\\/", "/");
+                    artigos = LojaJsonParser.parserJsonArtigos(response);
+
+                    adicionarArtigosBD(artigos);
+
+                    if(artigosListener != null){
+                        artigosListener.onRefreshListaArtigos(artigos);
+                    }
+
+                    auxAtigo.setPreco(1000);
+
+                    for (Artigo a : artigos){
+                        System.out.println(a.getPreco() + "--->" + auxAtigo.getPreco());
+                        if(auxAtigo.getPreco()> a.getPreco() ){
+                            auxAtigo.setPreco(a.getPreco());
+                        }
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("----> response ERRO ARTIGOS API" + error);
+                }
+            });
+
+            volleyQueue.add(req);
+        }
+        return auxAtigo.getPreco();
     }
     //endregion
 

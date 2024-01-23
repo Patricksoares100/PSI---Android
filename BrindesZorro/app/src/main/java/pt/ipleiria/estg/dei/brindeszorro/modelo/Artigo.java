@@ -7,6 +7,9 @@ public class Artigo {
     private String nome, descricao, referencia, imagem, fornecedor, categoria;
     private double preco;
 
+    public Artigo() {
+
+    }
 
     public Artigo(int id, String nome, String descricao, String referencia, double preco, int stock_atual, int iva, String fornecedor, String categoria, int media_avaliacoes, int num_avaliacoes, String imagem) {
         this.id = id;
