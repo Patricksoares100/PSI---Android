@@ -132,13 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle(item.getTitle());
             /*Intent intent = new Intent(this, AvaliacaoComentarioActivity.class);
             startActivity(intent);*/
-        }else if (item.getItemId() == R.id.navOral) {
-            setTitle(item.getTitle());
-            Intent oral = new Intent(this, ProvaOraIPL.class);
-            startActivity(oral);
-
         }
-
         if (fragment != null) fragmentManager.beginTransaction().replace(R.id.contentFragment,fragment).commit();
         drawer.closeDrawer(GravityCompat.START); // Fecha a gaveta após a seleção do item
 

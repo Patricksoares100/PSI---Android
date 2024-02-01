@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- permite ver as conecções de rede/ver se o 3g e wifi estao ligados -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permite conectar a internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--permite ver as conecções de rede/ver se o 3g e wifi estao ligados-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Permite conectar a internet-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--Caso o servidor não contenha HTTPS devem adicionar o usesCleartextTraffic="true" -->
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/oraltitulo"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BrindesZorro"
-        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".ProvaOraIPL"
-            android:exported="false" />
         <activity
             android:name=".AvaliacaosActivity"
             android:exported="false" />
         <activity
             android:name=".AvaliacaoComentarioActivity"
-            android:exported="false"
-            android:parentActivityName=".FaturaActivity" />
+            android:parentActivityName=".FaturaActivity"
+            android:exported="false" />
         <activity
             android:name=".FavoritosActivity"
             android:exported="false" />
         <activity
             android:name=".CarrinhoActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".FaturaActivity"
             android:exported="false" />
@@ -41,29 +40,29 @@
             android:exported="false" />
         <activity
             android:name=".DetalhesArtigoActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".RegistarClienteActivity"
             android:exported="false"
-            android:launchMode="singleTop"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".LoginActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ServidorActivity"
-            android:exported="false"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".RecuperarPasswordActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".EditarDadosPessoaisActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".AlterarPasswordActivity"
             android:exported="false"
-            android:parentActivityName=".EditarDadosPessoaisActivity" />
+            android:parentActivityName=".EditarDadosPessoaisActivity"/>
         <activity
             android:name=".ArtigosActivity"
             android:exported="false" />
