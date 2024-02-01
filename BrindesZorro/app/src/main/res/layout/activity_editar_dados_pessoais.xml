@@ -21,6 +21,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/tvInsiraNome"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -32,7 +33,8 @@
         android:ems="10"
         android:hint="@string/hintNomeBrindeszorro"
         android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvTelefoneEditarDadosPessoais"
@@ -41,6 +43,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/tvInsiraTelefone"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -53,7 +56,8 @@
         android:hint="@string/hintTelefone"
         android:inputType="phone"
         android:minHeight="48dp"
-        android:numeric="integer" />
+        android:numeric="integer"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvNifEditarDadosPessoais"
@@ -62,6 +66,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/txtNif"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -74,7 +79,8 @@
         android:hint="@string/hintTelefone"
         android:inputType="number"
         android:minHeight="48dp"
-        android:numeric="integer" />
+        android:numeric="integer"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvMoradaEditarDadosPessoais"
@@ -83,6 +89,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/txtMorada"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -94,7 +101,8 @@
         android:ems="10"
         android:hint="@string/hintMorada"
         android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvCodigoPostalEditarDadosPessoais"
@@ -103,6 +111,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/textViewCodPostal"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -115,7 +124,8 @@
         android:hint="@string/hintCodPostal"
         android:inputType="textPostalAddress"
         android:minHeight="48dp"
-        android:numeric="integer" />
+        android:numeric="integer"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvLocalidadeEditarDadosPessoais"
@@ -124,6 +134,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/textViewLocalidade"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -135,7 +146,8 @@
         android:ems="10"
         android:hint="@string/hintdescriptionLocalidade"
         android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

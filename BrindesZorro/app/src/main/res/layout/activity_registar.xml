@@ -19,7 +19,7 @@
             <ImageView
                 android:id="@+id/ivLogoServidor"
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="90dp"
                 android:contentDescription="@string/descriptionLogo"
                 app:srcCompat="@drawable/welcome" />
 
@@ -30,6 +30,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="@string/txtUserName"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -39,7 +40,8 @@
                 android:ems="10"
                 android:hint="@string/hint_userName"
                 android:inputType="text"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvPasswordRegistar"
@@ -47,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/txtPassword"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -56,7 +59,8 @@
                 android:ems="10"
                 android:hint="@string/txtPassword"
                 android:inputType="textPassword"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvEmailRegistar"
@@ -65,6 +69,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="@string/tvPedirEmail"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -74,7 +79,8 @@
                 android:ems="10"
                 android:hint="@string/hintEmailBrindesZorro"
                 android:inputType="text"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvNome"
@@ -83,6 +89,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="@string/tvNomeRegistar"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -92,7 +99,8 @@
                 android:ems="10"
                 android:hint="@string/tvNomeRegistar"
                 android:inputType="text"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvTelefoneRegistar"
@@ -100,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/tvInsiraTelefone"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -109,7 +118,8 @@
                 android:ems="10"
                 android:hint="@string/hintTelefone"
                 android:inputType="phone"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvNifRegistar"
@@ -117,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/textViewInsiraNIF"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -126,7 +137,8 @@
                 android:ems="10"
                 android:hint="@string/hintTelefone"
                 android:inputType="number"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvMoradaRegistar"
@@ -134,6 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/textViewMorada"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -144,7 +157,8 @@
                 android:gravity="start|top"
                 android:hint="@string/hintMorada"
                 android:inputType="textMultiLine"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvCodigoPostalRegistar"
@@ -152,6 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/textViewCodPostal"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -162,7 +177,8 @@
                 android:ems="10"
                 android:hint="@string/hintCodPostal"
                 android:inputType="textPostalAddress"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvLocalidadeRegistar"
@@ -170,6 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/textViewLocalidade"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -179,7 +196,8 @@
                 android:ems="10"
                 android:hint="@string/hintdescriptionLocalidade"
                 android:inputType="text"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

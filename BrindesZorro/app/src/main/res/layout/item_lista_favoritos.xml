@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:orientation="vertical">
@@ -49,13 +49,16 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/tv_TituloNomeArtigo" />
+                        android:text="@string/tv_TituloNomeArtigo"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvTituloNomeArtigo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -68,7 +71,9 @@
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/tv_Prc_Artigo" />
+                        android:text="@string/tv_Prc_Artigo"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvValorTotal"
@@ -76,6 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
                         android:gravity="center"
+                        android:textStyle="bold"
                         tools:text="@string/tv_valorEuros" />
 
                 </LinearLayout>

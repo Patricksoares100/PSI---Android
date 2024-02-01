@@ -25,6 +25,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="2dp"
         android:text="@string/txtUserName"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -36,7 +37,8 @@
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
-        android:text="Name" />
+        android:text="Name"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewTelefone"
@@ -47,6 +49,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="2dp"
         android:text="@string/tvInsiraTelefone"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -58,6 +61,7 @@
         android:ems="10"
         android:inputType="phone"
         android:minHeight="48dp"
+        android:textSize="16sp"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -69,6 +73,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="2dp"
         android:text="@string/txtNif"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -80,6 +85,7 @@
         android:ems="10"
         android:inputType="phone"
         android:minHeight="48dp"
+        android:textSize="16sp"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -91,6 +97,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="2dp"
         android:text="@string/txtMorada"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -102,7 +109,8 @@
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
-        android:text="Name" />
+        android:text="Name"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewCodPostalConfirmar"
@@ -113,6 +121,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="2dp"
         android:text="@string/textViewCodPostal"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -124,6 +133,7 @@
         android:ems="10"
         android:inputType="textPostalAddress"
         android:minHeight="48dp"
+        android:textSize="16sp"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -135,6 +145,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="2dp"
         android:text="@string/textViewLocalidade"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
@@ -146,7 +157,8 @@
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
-        android:text="Name" />
+        android:text="Name"
+        android:textSize="16sp" />
 
     <RadioGroup
         android:layout_width="match_parent"

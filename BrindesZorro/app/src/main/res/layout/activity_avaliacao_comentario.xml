@@ -102,13 +102,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/txtDesignacaoArtigoAvaliacaoComentario"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvDesignacaoArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -126,13 +128,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/txtPreçoArtigoAvaliacaoComentario"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPrecoArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
@@ -159,7 +163,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/Insira_classificacao"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <RatingBar
@@ -195,7 +199,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="3dp"
             android:text="@string/txtComentarioArtigoAvaliacaoComentario"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
@@ -207,6 +211,7 @@
             android:inputType="textMultiLine"
             android:maxLength="254"
             android:maxLines="3"
+            android:textSize="16sp"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <Space

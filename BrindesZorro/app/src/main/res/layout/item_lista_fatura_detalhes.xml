@@ -48,7 +48,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0"
                     android:text="@string/tv_TituloNomeArtigo"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -57,7 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -74,7 +75,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0"
                     android:text="@string/txtValorArtigo"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -83,7 +84,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -100,7 +102,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0"
                     android:text="@string/txtQuantidadeArtigo"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -109,7 +111,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -126,7 +129,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0"
                     android:text="@string/txtIvaTotalDetalhesFatura"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -135,7 +138,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -152,7 +156,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0"
                     android:text="@string/txtValorTotalCarrinho"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -161,7 +165,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

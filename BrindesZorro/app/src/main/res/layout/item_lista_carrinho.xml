@@ -49,6 +49,7 @@
                     android:layout_margin="10dp"
                     android:gravity="center"
                     android:text="@string/tv_TituloNomeArtigo"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -56,15 +57,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="@string/txtValorUnitarioCarrinho" />
+                    android:text="@string/txtValorUnitarioCarrinho"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPrecoValorUnitCarrinho"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/txtPrecoValorCarrinho" />
+                    android:text="@string/txtPrecoValorCarrinho"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -91,7 +94,8 @@
                         android:id="@+id/tvQtd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txtQtd" />
+                        android:text="@string/txtQtd"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvNumeroQtd"
@@ -120,15 +124,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="@string/txtValorTotalArtigoCarrinho" />
+                    android:text="@string/txtValorTotalArtigoCarrinho"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPrecoTotalArtigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/txtPrecoTotalArtigo" />
+                    android:text="@string/txtPrecoTotalArtigo"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

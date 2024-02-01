@@ -28,13 +28,15 @@
                 android:layout_margin="16dp"
                 android:gravity="center"
                 android:text="@string/tv_lvComentarioAvaliacao"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvComentarioUserAvaliacaoApresentado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -52,6 +54,7 @@
                 android:layout_margin="16dp"
                 android:gravity="center"
                 android:text="@string/tv_lvClassificacaoAvaliacao"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <RatingBar
