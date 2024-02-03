@@ -46,11 +46,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     public static final int ADD = 100, EDIT = 200, DELETE = 300;
 
+    MqttManager mqttManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MqttManager mqttManager = new MqttManager(this,"tcp://172.22.21.219:1883", "cliente");
+        mqttManager = new MqttManager(this,"tcp://172.22.21.219:1883", "cliente");
 
         Toolbar toolbar = findViewById(R.id.toolBar); // Configura a barra de ferramentas (toolbar)
         setSupportActionBar(toolbar); // Define a barra de ferramentas como a barra de apoio da atividade
